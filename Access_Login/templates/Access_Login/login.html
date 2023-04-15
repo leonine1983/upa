@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/login_style_g.css' %}">
+    <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/message.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/footer1.css' %}">
+    <title>LOGIN:UPA</title>
+</head>
+<body>
+    <main class="  ">
+        <div class=''>
+            {% include 'global/message.html' %}
+            
+            <div class="box-login">
+                <div class="login-login">                    
+                    <div class="login">
+                        <div class="login-title" method="post">                            
+                        <span>Prefeitura Municipal de Vera Cruz</span></div>
+                        <!--<form action="{% url 'Access_Login:login_create' %}">
+                            {{form}}
+                            <button type="submit">ENTRAR</button>    
+                        </form>-->
+                        <form action=" {% url 'Access_Login:login_create' %}" method='POST'>
+                            {% csrf_token %}
+                                {% for field in form  %}
+                                    <div>
+                                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                                        {{field}}
+                                        {% if field.help_text %}                
+                                            <p class="help-text">{{field.help_text}}</p>                
+                                        {% endif %}
+                                        {{field.errors}}
+                                    </div>            
+                                {% endfor %}        
+                                <button type="submit">Salvar</button>
+                                {% if form.errors %}
+                                <div class="message-error">
+                                    Corrija os erros no seu formulario, antes de continuar
+                                </div>
+                                {% endif %}
+                            </form>
+                        
+                    </div>
+                </div>
+                <div class="login-brasao alinhar-horizontalment"><img src="https://seeklogo.com/images/B/brasao-municipio-de-vera-cruz-logo-D2B7893430-seeklogo.com.png" alt=""></div>
+            </div>
+           
+        </div>        
+    </main>    
+    <!--{% include 'global/footer.html' %}-->
+</body>
+</html>
+
+
+
+
+
+ 
+
+      
+  </body>
+</html>

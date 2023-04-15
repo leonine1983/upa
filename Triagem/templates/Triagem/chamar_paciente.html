@@ -1,0 +1,14 @@
+{% extends 'global/template_geral.html' %}
+{% block title_login %}ENFERMARIA > Triagem {% endblock title_login %}
+{% block titulo_ %}Triagem{% endblock titulo_ %} 
+{% block body_title %}
+    {% if not object_list %} 
+        Cadastro
+    {% else %}
+        Listagem
+{% endif %}de classificação de emergência{% endblock body_title %}
+
+{% block body_login %}
+{{data_triagem}}
+
+{% endblock body_login %}

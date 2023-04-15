@@ -1,0 +1,32 @@
+.menu-vertical-medico{
+  position: absolute;
+  z-index: 5;
+  right: 1rem;
+}
+.menu-vertical-medico ul{
+  list-style: none;
+}
+.menu-vertical-medico ul li{
+  list-style: none;
+}
+
+.menu-vertical-medico ul li a{
+  text-decoration: none;
+  display: block;
+  color: rgb(221, 31, 31);  
+  width: 13rem;
+  border-bottom:0.1rem solid aqua;
+  padding: 0.5rem;
+  transition: all ease-in-out 500ms;
+  
+  
+  background-color: rgb(219, 235, 199);
+}
+.menu-vertical-medico ul li a:hover{
+  margin-left: -1rem;
+  border-radius: 0.5rem;
+  
+  display: block;
+  background-color: aquamarine;
+}
+

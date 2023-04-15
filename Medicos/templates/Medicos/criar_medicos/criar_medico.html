@@ -1,0 +1,128 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block body_login %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'global/css/message.css' %}">
+    <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">   
+    <link rel="stylesheet" href="{% static 'global/css/form.css' %}"> 
+    <style>
+        .Tabela-user{
+            margin:auto;
+        }
+
+        .Tabela-user tr th{          
+            background-color: aquamarine;
+            padding: 0.2rem;
+           
+        }
+        .Tabela-user tr td {            
+            background-color: #ebf0f7;
+            padding: 0.3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border: 0.01rem solid aquamarine;
+        }
+        .Tabela-user tr td:hover {            
+            background-color: #bbd0eb;
+        }
+        .class_form{
+            width:90%;
+            margin:1rem auto;
+            padding:1rem;
+            box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+            
+            
+        }
+       
+    </style>
+{% endblock css %}
+    {% include 'global/message.html' %}    
+    <table class="Tabela-user" cellspacing="0">
+        <tr>
+            <th>Nome Completo</th>
+            <th>Usuário (Login)</th> 
+            <th>Email</th>
+            <th>Telefone</th>
+            <!--<th>Data Nascimento</th>
+            <th>Endereço</th>
+            <th>Grupo</th>-->
+            <th>CRM</th>
+            <th>Ações</th>
+        </tr>
+        {% for groups in users %}
+        <tr>
+            <td>{{groups.user__first_name}} {{groups.user__last_name}}</td>
+            <td>{{groups.user__username}}</td>            
+            <td>{{groups.user__email}}</td>  
+            <td>{{groups.telefone}}</td>   
+            <!--<td>{{groups.data_nascimento}}</td>       
+            <td>{{groups.endereco}}</td>
+            <td>{{groups.user__groups__name}}</td>-->
+            <td>{{groups.crm}}</td>
+            <td><a href="{% url 'Medicos:medico_signup_atualiza' groups.user__id %}" title='Edita as informações de ACESSO AO SISTEMA do usuario'><span><i class="fa-solid fa-user-pen"></i></span></a> | <a title='Edita as informações PESSOAIS do usuario' href="{% url 'Medicos:medico_signup_atualiza_extras' groups.id %}"><span><i class="fa-solid fa-file-pen"></i></span></a> | <a href='#' title='Exclui o usuario do sistema'><span><i class="fa-solid fa-user-xmark"></i></span></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+<p>&nbsp;</p>
+<div class='flex' style="box-shadow: var(--shadow); padding: 0.5rem;">
+    {% if user_edit %}<h2> <i class="fa-solid fa-user-pen"> </i> Atualizando dados de login de <b class='uppercase'>{% for n in user_update %}{{n.first_name}} {{n.last_name}}{% endfor %}</b></h2> {% endif %}    
+    {% if custom %}<h2> <i class="fa-solid fa-file-pen"></i> Atualizando informações pessoais de <b class='uppercase'>{% for n in user_update %}{{n.user.first_name}} {{n.user.last_name}}{% endfor %}</b></h2>{% endif %}
+    
+</div>
+{% if form.instance.pk %}
+
+{% else %}
+<h2>Cadastrar Médicos</h2>
+{% endif %}
+<form method="post" class='class_form grid'>
+    {% csrf_token %}
+    <div>
+        {{ form.as_p }}
+    </div>
+    <button type="submit">Sign up</button>
+</form>
+
+{% if form.errors %}
+    <ul>
+        {% for field_errors in form.errors.values %}
+            {% for error in field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!--SCRIPTS DO SISTEMA-->
+{% block script %}
+    <script src='{% static 'global/js/jquery.mask.min.js' %}'></script>
+        <script>
+        $(document).ready(function(){
+            $("#id_data_nascimento").mask("00/00/0000")
+        })
+        $(document).ready(function(){
+            $("#id_telefone").mask("00 0 0000-0000")
+        })
+        $(document).ready(function(){
+            $("#id_CPF").mask("000.000.000-00")
+        })
+        $(document).ready(function(){
+            $("#id_RG").mask("000.000.00-00")
+        })
+        
+        $(document).ready(function(){
+            $("#id_crm").mask("AAA/AA 000000")
+        })
+    </script>
+{% endblock script %}
+{% endblock body_login %}

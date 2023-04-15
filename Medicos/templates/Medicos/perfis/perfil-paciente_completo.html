@@ -1,0 +1,117 @@
+{% extends 'global/template_geral.html' %}
+<!-- titulo Web da pagina-->
+{% block title_login %} Informação Pessoal {% endblock title_login %}
+{% load static %}
+{% load tz %}
+<!--CSS local-->
+{% block css %} 
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--menu em giro-->
+    <link rel="stylesheet" href=" {% static 'global/css/abas_verticais.css' %} "> 
+{% endblock css %}   
+
+<!--Titulo da Pagina-->
+{% block body_title %}  
+    <div class='flex'>
+        <div style='width: 78.95%;' >
+            Informações Pessoais d{% if  paciente_sexo == 2 %}a{% else %}o{% endif %} Paciente: 
+            <b class='uppercase'>{{paciente_nome}}</b>  
+        </div>
+        <div style='
+        margin-top:-1rem;
+padding: 1.15rem;
+        margin-right: -1.8rem;
+        font-size: 1.2rem;
+        background-color: rgba(255, 255, 255, 0.2);'> 
+        {% if pkK == 0 %} 
+        <a  href=" ">
+            <i class="fa-solid fa-user-doctor"></i> Ainda não tem histórico</a> 
+        {% else %}  
+            {% if data_t == 0 %}
+                <a  href="{% url 'Medicos:dados do paciente' pkK %}  ">
+                <i class="fa-solid fa-user-doctor"></i> Retornar ao Atendimento</a>
+                {% else %}
+                <i class="fa-solid fa-user-doctor"></i> Não está em Atendimento</a>            
+            {% endif %}    
+        {% endif %}  
+        </div> 
+        
+
+
+    </div>
+    
+{% endblock body_title %}
+
+<!--Inicio do perfil-->
+{% block body_login %} 
+<div class="perfil-user">     
+    <div class='flex uppercase' style='height:2.8rem; background:#d0d1d3; margin: -2rem -2rem 1rem;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; ' >
+        <div style='background:#d0d1d3; height:2rem; padding: 1rem; width: 80%;transform:skew(-10deg); text-align:center; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'><i class="fa-solid fa-person-breastfeeding"></i> Dados Pessoais do paciente</div>
+        <div style='background:#bfbfbf; border-bottom: 0.5rem solid #d0d1d3; height:1.5rem; padding: 1rem; width: 30%;transform:skew(-10deg);text-align:center; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;'class='uppercase' >
+            {% if pkK == 0 %}
+                <a href=""><i class="fa-solid fa-hospital-user"></i>  Ainda não tem histórico</a></div>
+            {% else %}
+                <a href="{% url 'Medicos:perfil_completo_segunda_parte' pkK %}"><i class="fa-solid fa-hospital-user"></i> Histórico Hospitalar</a></div>
+            {% endif %}
+    </div>
+    <p>&nbsp;</p>   
+    <div class="dados-pessoais">
+        <div class="info-pessoal">
+            <div>
+                <p class="nome_social">{{paciente_nome}}</p>
+                <p>&nbsp</p>
+                <p><b>Idade: </b> {{paciente_idade}} anos </p>
+                <p><b>Data de Nascimento: </b>{{paciente_nascimento}}</p>
+                <p><b>Sexo: </b>{{paciente_sexo_str}}</p>
+                <p><b>Nº RG: </b>{{paciente_rg}}</p>
+                <p><b>Nº CPF: </b>{{paciente_cpf}}</p>
+                <p><b>Nacionalidade: </b>{{paciente_nacio}}</p>
+                <p>&nbsp</p>                
+                <p><b>Nº de Registro do cartão SUS:</b> {{paciente_sus}}</p>
+                <p>{{paciente_id}}</p>
+            </div>
+            <div class="foto">  
+                <!--Usar if para alterna a imagem entre homem e mulher-->
+                {% if  paciente_sexo == 2 %}
+                <img src=" {% static 'foto-woman.jpg' %} " alt="">
+                {% else %}
+                <img src=" {% static 'foto-man.jpg' %} " alt="">{% endif %} 
+            </div>
+        </div>
+        <p>&nbsp</p>
+        <div class="info">
+            <div>
+                <b>ENDEREÇO</b>
+                <hr>
+                <p><b>Rua: </b> {{paciente_rua}} </p> 
+                <p><b>Bairro: </b>{{paciente_bairro}}</p>
+                <p><b>Cidade: </b>{{paciente_cidade}}</p>
+                <p><b>Estado: </b>{{paciente_estado}}</p>
+                <p><b>CEP: </b>{{paciente_cep}}</p>
+                <p>&nbsp</p>
+            </div>
+            <div>
+                <b>INFORMAÇÕES ADICIONAIS</b>
+                <hr>
+                <p><b>Nome da Mãe: </b>{{paciente_mae}}</p>
+                <p><b>Nome do Acompanhante: </b>{{paciente_resp}}</p>
+                <p><b>Telefone:</b>{{paciente_tel}}</p>   
+              <div style='color:red; font-size:1.2rem'> 
+
+                {% for n in retorno  %}
+                    {{n}}
+                {% endfor %}
+            </div>                                 
+        </div>            
+        <p><b>Data em que foi realizado o cadastro do paciente nesse sistema:</b></p>
+        <p>&nbsp;&nbsp;<i class="fa-regular fa-calendar-check"></i> {{paciente_data_cadast}}  <b>|</b>&nbsp;&nbsp;<i class="fa-regular fa-clock"></i> {{paciente_horari_cadast}}  </p>
+        <p>&nbsp;&nbsp;</p>
+    </div>
+    <hr>
+        
+            
+               
+            
+     
+</div>    
+{% endblock body_login %}

@@ -1,0 +1,122 @@
+
+/*Tabela*/
+.style-tabela{
+    width: 90%;
+    margin: 0 auto;
+    display: block !important;
+}
+.style-tabela h1{ font-size: 1.2rem; text-transform: uppercase;  }
+.style-tabela table{ float:left; border:1px solid #ccc; border-bottom:0; border-right:0; font-size:1em;  }
+.style-tabela table tr td  { padding:0.5em; border:1px solid #ccc; border-top:0; border-left:0; ;}
+.style-tabela table td.top { background-color:#00bcc4; color:#fff; font-size:1.2em;}
+.style-tabela table td.top.center {text-align: center}
+.style-tabela table td.total { text-align:left; font-weight: bold;}
+.style-tabela table td.top-toltip{ background-color:#207d97; height:25px;  color:#fff; font-size:16px;}
+.style-tabela tbody tr td    {padding:0.3em; border:1px solid #ccc; border-top:0; border-left:0; }
+.style-tabela tbody tr  a {color: 0;}
+.style-tabela tbody tr  a     {
+    color:rgb(31, 21, 21); }
+.style-tabela tbody tr{
+    transition: all ease-in-out 600ms;
+}
+.style-tabela tbody tr:hover {background-color:#f59090; color:#021414; }
+ 
+
+.style-tabela tbody tr td .editar  { color:#00d549; font-size:1.2em; font-weight:bold; display:inline; text-decoration:none;} 
+.style-tabela tbody tr td .deletar { color:#bf303c; font-size:1.2em; font-weight:bold; display:inline; text-decoration:none; }
+
+
+.style-tabela tbody tr.mensagemAlerta { }
+
+
+.controle_tabela{
+    text-align: center;
+}
+.controle_tabela  a{
+    display: block;
+    color: white;
+    background-color: #207d97;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-left: 0.2rem solid #162d34;
+    border-right: 0.2rem solid #162d34;
+}
+.border-ocorrencia, .cadastrar-top, .cadastrar-top-festa{
+    height: 50%;
+    box-shadow: var( --shadow);
+    padding: 0.5rem;
+    width: 95%;
+}
+.border-ocorrencia .top, .cadastrar-top, .ocorrencia-texto button{
+    background-color: #bf303c !important;
+    color: white;
+}
+
+.ocorrencia-texto{
+    background-color:  #be9b9e;
+    font-size: 1.2rem;
+    font-style:normal !important; 
+    font-weight: bolder; 
+}
+.ocorrencia-texto select{
+    width: 15rem;
+    background-color:white;
+    padding: 0.5rem;
+}
+.ocorrencia-texto button{    
+}
+.cadastrar-top{
+    padding: 0.8rem;
+    text-align: center;
+    height: 1rem;
+    width: 12rem;
+    color: antiquewhite;
+    transition: all ease-in-out 500ms;
+}
+.cadastrar-top:hover{
+    background-color: chocolate !important;
+    color: #fff;
+}
+.cadastrar-top:active{
+    background-color: #fff !important;
+    box-shadow:inset var(--shadow);
+    color: #162d34;
+    margin-left: 0.5rem;
+}
+.cadastrar-top-festa{ 
+    padding: 0.8rem;
+    text-align: center;
+    height: 1rem;
+    width: auto;
+    color: midnightblue !important;
+    transition: all ease-in-out 500ms;
+    margin-right: 1rem;
+}
+.cadastrar-top-festa:hover{
+    background-color: #be9b9e !important;
+    font-size: 1.1rem;
+ }
+
+.a{
+    padding: 0.5rem;
+    display: block;
+    text-transform: capitalize;
+    font-size: 1.2rem;
+ }
+ .a:hover{
+    scale: 1.2;
+ }
+
+ .menu-festa{
+    display: flex;
+ }
+
+
+
+.border-ocorrencia, .cadastrar-top, .ocorrencia-texto select, .cadastrar-top-festa {
+    border-radius: var(--radiaus-border);
+}
+.festa .top, .cadastrar-top-festa{
+    background-color:olive !important;
+    
+}

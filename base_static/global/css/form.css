@@ -1,0 +1,145 @@
+/** --------------------------------------FORM-----------------------------------------*/
+form {
+    background: var(--backgroud-form) ;
+    border-radius: var(--radiaus-border);
+    box-shadow: var(--shadow);   
+    padding: 0.5rem;
+    margin-top: 1rem; 
+}
+
+form div{
+    margin: 0.5rem;
+    text-transform: uppercase;
+}
+
+form label{
+    display: block;
+    height: 1.4rem;
+    margin-right: 0.1rem;
+}
+form div input{
+    background: white;
+    padding: 0.5rem;
+    width: calc(100% - 1rem);
+    border-radius: var(--radiaus-border);
+    transition: all ease-in-out 1000ms;
+}
+form div input:hover, form div input:focus{
+    background: rgb(238, 197, 183);
+    box-shadow: var(--shadow);
+}
+
+form button{
+    text-align:center;
+    width: 75%;
+    display: block;
+    margin: 1rem auto;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    border-radius: var(--radiaus-border);
+    background-color: darksalmon;
+    border:  darksalmon;
+    color: rgb(60, 42, 19);
+    font-size: larger;
+    transition:all ease 300ms ;
+}
+form button:hover{
+    scale: 1.02;
+}
+
+.help-text, .errorlist{
+    font-size: 0.8rem;
+    padding-left: 1rem;
+    margin: 0.4rem;    
+    display: block;
+    text-transform: lowercase;
+}
+.errorlist{
+    color: rgb(211, 12, 52);
+    font-size: 1rem;
+    list-style: none;
+    text-transform: uppercase;
+    transition: all ease-in-out 400ms;
+}
+
+.errorlist:hover{
+    scale: 1.2
+}
+
+.message-error{
+    color: rgb(215, 162, 162);
+    padding: 1rem;
+    width:calc(100% - 3rem);
+    background-color: rgb(165, 42, 42);
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all ease-in-out 400ms;
+}
+.message-error:hover{
+    scale: 1.6;
+}
+
+/** CLASS FORM - usado no cadastro de medicos e enfermeiros*/
+
+.class_form{
+    width:90%;
+    margin:1rem auto;
+    padding:1rem;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background-color: rgb(174, 215, 216);
+    padding: 1rem;
+    
+    
+}
+.class_form div{
+    display: grid;    
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));  
+}
+.class_form div p label, .class_form p input{
+    display: block;
+    width:90%;
+    padding:0.5rem;
+    margin:0 1rem;
+}
+.class_form div p input{
+    border:none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;            
+    transition: all ease-in-out 100ms;
+}
+.class_form div p input:hover{
+    background:#E6E6FA
+}
+.class_form div .helptext{
+    font-size:0.8rem;
+    color: red
+}
+.class_form button{
+    margin: 1rem;
+    padding:1rem;
+    width:30%;
+}
+.class_form .radio_div{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-align:center; 
+    margin: 0.5rem auto;
+    margin-top: 2.5rem;
+    padding:0.5rem;
+    border-radius:0.8rem; 
+    box-shadow:inset var(--shadow);
+    width: 50%;
+
+}
+.class_form .radio_label{
+    text-transform: uppercase;
+    color:darkslategrey;
+
+}
+.class_form .radio{
+    scale: 2;
+    margin: 1rem;
+}
+.class_form .radio:hover{
+    scale: 3;
+    
+}

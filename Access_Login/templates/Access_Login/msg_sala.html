@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/login_style_g.css' %}">
+    <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/message.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/footer1.css' %}">
+    <title>LOGIN:UPA</title>
+</head>
+<body>
+    <main class="  ">
+      <div class="modal fade" id="escolherSalaModal" tabindex="-1" aria-labelledby="escolherSalaModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="escolherSalaModalLabel">Escolha uma sala de atendimento</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="nome_sala" class="form-label">Nome da Sala:</label>
+                  <input type="text" class="form-control" id="nome_sala" name="nome_sala" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+</div>
+</div>
+
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    {% if messages %}
+    $("#escolherSalaModal").modal("show");
+    {% endif %}
+  });
+</script>
+    </main>    
+    <!--{% include 'global/footer.html' %}-->
+</body>
+</html>
+
+
+
+
+      
+  </body>
+</html>

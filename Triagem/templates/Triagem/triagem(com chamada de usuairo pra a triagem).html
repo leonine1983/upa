@@ -1,0 +1,209 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block title_login %}ENFERMARIA > Triagem {% endblock title_login %}
+{% block titulo_ %}Triagem{% endblock titulo_ %} 
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/enfermagem-mulher.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block body_title %} TRIAGEM DE PACIENTES{% endblock body_title %}
+
+{% block css %}
+  <!-- Incluindo o JavaScript do Bootstrap e o seu código -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+{% endblock css %}
+
+{% block body_login %}
+<!-- Modal para exibir a mensagem -->
+ 
+<div class="top-info">    
+    <div>
+        <form action="" method='POST'>    
+            {% csrf_token %}
+            <div class="form-body"> 
+                <div>
+                    <label for="id_paciente_triagem">Paciente:</label>
+                    <select class='uppercase' style='width: 19.8rem; font-size:1.2rem; padding: 0.5rem;' name="paciente_triagem" id="id_paciente_triagem">
+                        {% for n in envio_triagem %}
+                            <option  value="{{n.id}}" {% if n.paciente_envio_triagem %}data-nome="{{n.paciente_envio_triagem}}" {% endif %}>{{n.paciente_envio_triagem}}</option>
+                        {% endfor %}
+                    </select>                    
+                </div> 
+                <div>    
+                    <label for="id_pressao_arterial_PA">Pressao arterial PA:</label> 
+                    <input type="text" name="pressao_arterial_PA" maxlength="11" required="" id="id_pressao_arterial_PA">
+                </div>
+                <div>    
+                    <label for="id_frequencia_cardiaca_FC">Frequencia cardiaca FC:</label>  
+                    <input type="text" name="frequencia_cardiaca_FC" maxlength="7" required="" id="id_frequencia_cardiaca_FC">                                    
+                </div>
+                <div>    
+                    <label for="id_frequencia_respiratoria_FR">Frequencia respiratoria FR:</label> 
+                    <input type="text" name="frequencia_respiratoria_FR" maxlength="6" required="" id="id_frequencia_respiratoria_FR"> 
+                </div>
+                <div>    
+                    <label for="id_saturacao_de_oxigenio_SPO2">Saturacao de oxigenio SPO2:</label>                    
+                    <input type="text" name="saturacao_de_oxigenio_SPO2" maxlength="3" required="" id="id_saturacao_de_oxigenio_SPO2"> 
+                </div>
+                <div>    
+                    <label for="id_hemoglicoteste_HGT">Hemoglicoteste HGT:</label>
+                    <input type="text" name="hemoglicoteste_HGT" maxlength="9" required="" id="id_hemoglicoteste_HGT">   
+                </div>
+                <div>
+                    <label for="id_temperatura_TEMP">Temperatura TEMP:</label>          
+                    <input type="text" name="temperatura_TEMP" maxlength="7" required="" id="id_temperatura_TEMP">
+                </div>
+                <div>    
+                    <label for="id_peso">Peso:</label>  
+                    <input type="text" name="peso" maxlength="6" required="" id="id_peso">
+                </div>                
+                <div>    
+                    <label class='uppercase' for="id_observacao">Sitomas relatados pelo paciente:</label>    
+                    <textarea style='width:100%; height:12rem; padding:0.5rem'  name="observacao" cols="40" rows="10" maxlength="700" required="" id="id_observacao"></textarea>  
+                </div> 
+                <div>    
+                    <label for="id_classifica_tipo">Classificação de Emergência:</label>  
+                    <select name="classifica_tipo" required="" id="id_classifica_tipo">
+                        <option value="" selected="">---------</option>
+                        <option value="1">Vermelho</option>
+                        <option value="2">Laranja</option>
+                        <option value="3">Verde</option>                        
+                        <option value="4">Azul</option>
+                    </select>                     
+                </div> 
+                <div>
+                    <div>
+                        <label for="id_alergias">Alergias:</label>
+                        <select name="alergias" required="" id="id_alergias">
+                            <option value="" selected="">---------</option>                    
+                            <option value="1">Sim</option>                    
+                            <option value="0">Não</option>                    
+                        </select>
+                    </div>
+                    <div>    
+                        <p><label for="id_alergias_content">Descreva as alergias do paciente:</label></p>
+                        <textarea style='padding:0.5rem' name="alergias_content" cols="40" rows="10" maxlength="700" required="" id="id_alergias_content" disabled>O paciente não possui alergias. (Esse é um texto padrão, exibido quando o paciente não confirma à enfermagem que possui alergias. Duvidas, consultar o profissional que o atendeu durante a triagem.
+                        </textarea>
+                    </div>
+                </div>
+                                                
+            </div>             
+            <button class='button-salvar' type="submit">Salvar <i class="fa-solid fa-plus"></i></button>         
+        </form>
+        <p>No campo <b>Paciente</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
+        <div>&nbsp;</div> 
+        <div>&nbsp;</div> 
+    </div>
+   </div>     
+   <!-- Modal para chamar o paciente para a triagem -->
+
+  <div class="modal fade" id="modalChamarPaciente" tabindex="-1" role="dialog" aria-labelledby="modalChamarPacienteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalChamarPacienteLabel">Chamar Paciente para Triagem</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Deseja chamar o paciente <span id="nomePaciente"></span> para a triagem?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCancelar">Não</button>
+          <button type="button" class="btn btn-primary" id="btnChamar">Chamar Paciente</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+{% block script %}  
+
+  
+  <!-- Inclua jQuery e Bootstrap JS no final da página -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Código JavaScript para exibir a mensagem modal -->
+  <script>
+    $(function() {
+      $('#id_paciente_triagem').on('change', function() {
+        var nomePaciente = $(this).find(':selected').data('nome');
+        if (nomePaciente) {
+          setTimeout(function() {
+            $('#modalChamarPaciente').modal('show');
+            $('#nomePaciente').text(nomePaciente);
+          }, 500); // espera 2 segundos antes de exibir a mensagem
+        }
+      });
+  
+      $('#btnCancelar').on('click', function() {
+        $('#modalChamarPaciente').modal('hide');
+      });
+  
+      $('#btnChamar').on('click', function() {
+        var pacienteId = $('#id_paciente_triagem').val();
+        var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+        var nomePaciente = $('#id_paciente_triagem').find(':selected').data('nome');
+  
+        enviarPacienteParaTriagem(pacienteId, nomePaciente, csrfToken);
+      });
+  
+      // Verifica se a opção foi selecionada e exibe a mensagem se for o caso
+      $('#id_paciente_triagem').trigger('change');
+      if ($('#id_paciente_triagem').val()) {
+        var nomePaciente = $('#id_paciente_triagem').find(':selected').data('nome');
+        setTimeout(function() {
+          $('#modalChamarPaciente').modal('show');
+          $('#nomePaciente').text(nomePaciente);
+        }, 500); // espera 2 segundos antes de exibir a mensagem
+      }
+    });
+  
+    function enviarPacienteParaTriagem(pacienteId, nomePaciente, csrfToken) {
+      $.ajax({
+        url: '{% url 'Triagem:chamar_paciente_triagem'%}',
+        type: 'POST',
+        data: {
+          paciente_id: pacienteId,
+          nome_paciente: nomePaciente,
+          csrfmiddlewaretoken: csrfToken
+        },
+        success: function(response) {
+          // exibir mensagem informando que o paciente foi chamado para a triagem
+          alert('Paciente chamado para a triagem com sucesso!');
+          $('#modalChamarPaciente').modal('hide');
+        },
+        error: function(xhr, status, error) {
+          alert('Ocorreu um erro ao enviar o paciente para triagem!');
+        }
+      });
+    }
+  </script>
+  
+
+    
+    
+ 
+  <script>
+    var alergiasField = document.getElementById("id_alergias");
+    var alergiasContentField = document.getElementById("id_alergias_content");
+
+    // desabilita o campo "alergias_content" quando a página é carregada
+    alergiasContentField.disabled = true;
+
+    // habilita ou desabilita o campo "alergias_content" quando o usuário seleciona uma opção diferente
+    alergiasField.addEventListener("change", function() {
+        if (alergiasField.value == "1") {
+            alergiasContentField.disabled = false;
+        } else {
+            alergiasContentField.disabled = true;
+        }
+    });
+</script>
+{% endblock script %}
+
+{% endblock body_login %}

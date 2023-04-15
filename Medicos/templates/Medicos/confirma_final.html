@@ -1,0 +1,69 @@
+{% extends 'global/template_geral.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/menu/menu.giro.css' %}">
+
+<style> {% for dados in paciente_triagem  %} 
+              {% if dados.classifica_tipo.id == 1 %}
+              .dados-preatendimento ul li span{
+                     color: #AA0000;
+                     font-size: 1.3rem;
+              }
+              {% elif dados.classifica_tipo.id == 2  %}
+              .dados-preatendimento ul li span{
+                     color: #ff6600;
+                     font-size: 1.3rem;
+              {% elif dados.classifica_tipo.id == 3  %}
+              .dados-preatendimento ul li span{
+                     color:  #008200;
+                     font-size: 1.3rem;
+              {% elif dados.classifica_tipo.id == 4  %}
+              .dados-preatendimento ul li span{
+                     color: #008dc0;
+                     font-size: 1.3rem;
+              {% endif %}  
+       {% endfor %}      
+</style>
+
+{% endblock css %}  
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block title_login %}ÁREA MÉDICA {% endblock title_login %}
+{% block titulo_ %} 
+       ÁREA MÉDICA - Paciente: {{triagem}}
+
+{% endblock titulo_ %} 
+{% block body_title %}
+{% include 'global/partials_template/menu-lateral/menu-giro.html' %}
+       ÁREA MÉDICA - Paciente: {{triagem}}
+{% endblock body_title %}
+{% block body_login %}
+<div  class='dados-preatendimento'>       
+       <p>&nbsp:</p>
+       <h1>Final de Atendimento</h1>
+       <hr>
+       <form method='POST'>
+              {% csrf_token %}              
+              <div style="text-align:center;margin:auto; border: 0.1rem solid #666; background: #d3d3d3; width: 50%; height: 8rem; padding: 1rem;"> 
+                     <label  for="id_final_triagem">Confirmo a finalização do Atendimento ao paciente 
+                            <p><b class='uppercase'>{{triagem}}</b></p>
+                     </label>
+                     <div>&nbsp;</div>
+                     <input  style="scale:5" type="checkbox" name="final_medico_atendimento" value="1" maxlength="3" required="" id="id_final_medico_atendimento">                               
+              </div> 
+              <div>
+                     <b>Observação:</b>
+                     <p>Após confirmar a finalização do atendimento ao paciente {{triagem}},
+                            o nome dessa pessoa não irá mais aparecer na página <b>Pacientes aguardando atendimento</b>.
+                            Para o que o nome desse paciente volte aparecer na página de pacientes aguardando atendimento
+                            será necessário esse mesmo pacienta passar novamente pela <b>Fila de Triagem</b> e logo em 
+                            seguida, passar pela <b>Triagem</b>.
+                     </p>
+              </div>
+              <button class='button-salvar' type="submit">Finalizar atendimento</button>
+              
+       </form>       
+</div>
+{% endblock body_login %}

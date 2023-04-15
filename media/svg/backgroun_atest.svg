@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="46.4852mm" height="60.9598mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 4648.52 6095.98"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#4B4B4D}
+    .fil0 {fill:#00AFEF}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <rect x="77.3" y="498.78" width="901.45" height="283.97"/>
+    </clipPath>
+    <clipPath id="id1">
+     <rect x="3856.71" y="445.94" width="727.95" height="375.33"/>
+    </clipPath>
+   <clipPath id="id2">
+    <rect x="4271.76" y="5734.38" width="262.96" height="297.7"/>
+   </clipPath>
+ </defs>
+ <g id="Camada_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2629725474624">
+   <path class="fil0" d="M1966.3 4.58l224.56 0 767.06 841.03 -224.6 0 -767.02 -841.03zm698.15 841.03l-226.53 0 -767.05 -841.03 226.31 0 767.27 841.03z"/>
+   <polygon class="fil1" points="-14.88,423.11 1940.55,423.11 2323.16,845.61 -14.88,845.61 "/>
+   <polygon class="fil1" points="4633.68,425.48 2678.25,425.48 2295.64,2.98 4633.68,2.98 "/>
+   <g style="clip-path:url(#id0)">
+    <image id="upa24.jfif" x="77.3" y="498.78" width="901.44" height="283.97" xlink:href="backgroun_atest_Images\backgroun_atest_ImgID1.png"/>
+   </g>
+   <g>
+    <polygon class="fil0" points="2054.87,6088.4 1670.87,5667.36 1897.18,5667.36 2280.99,6088.06 "/>
+    <polygon class="fil0" points="2350.16,6088.25 1966.31,5667.36 2190.86,5667.36 2574.35,6087.83 "/>
+    <polygon class="fil1" points="4633.68,6088.26 2678.26,6088.26 2295.65,5665.76 4633.68,5665.76 "/>
+   </g>
+   <g style="clip-path:url(#id1)">
+    <image id="sus.fw.png" x="3856.71" y="445.95" width="727.95" height="375.32" xlink:href="backgroun_atest_Images\backgroun_atest_ImgID2.png"/>
+   </g>
+  </g>
+  <g style="clip-path:url(#id2)">
+   <image id="brasao-veracruz.png" x="4271.76" y="5734.39" width="262.95" height="297.69" xlink:href="backgroun_atest_Images\backgroun_atest_ImgID3.png"/>
+  </g>
+ </g>
+</svg>

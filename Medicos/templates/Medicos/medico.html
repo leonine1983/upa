@@ -1,0 +1,73 @@
+{% extends 'global/template_geral.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+{% endblock css %}  
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block title_login %}ÁREA MÉDICA {% endblock title_login %}
+{% block titulo_ %} ÁREA MÉDICA - Pacientes aguardando atendimento {% endblock titulo_ %} 
+{% block body_title %}ÁREA MÉDICA: Pacientes aguardando atendimento{% endblock body_title %}
+{% block body_login %}
+<div>
+    
+    {{triage_rel}}
+    <h3>Até o presente momento, temos <b>{{n_pacientes_triagem}}</b> pacientes aguardando atendimento.</h3>
+    <ul>
+        <li>Na tabela abaixo, temos um dos pacientes aguardando atendimento.</li>
+        <li>À medida que o atendimento a um paciente for finalizado, o nome do próximo paciente é exibido na tabela abaixo.</li>
+        <li>O nome de cada paciente é exibido de acordo com a classificação de risco, atribuido a ele durante o processo de TRIAGEM.</li>
+        <li> Para iniciar o atendimento, clique no botão PROSSEGUIR></li>
+    </ul>
+</div>
+
+<div class='style-tabela'>
+
+<table  id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%">                
+    <thead>
+        <tr>
+        <td class="top center"><strong>Nome</strong></td>
+        <td class="top center"><strong>Classificação de Emergência</strong></td>
+        <td class="top center"><strong>Atendimento</strong></td>
+        </tr>
+    </thead>       
+    <tbody> 
+        
+        {% for campo in object_list %}  
+       {{campo.idade}}
+        <tr> 
+            <td><a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk  %}"><span>{{campo.paciente_triagem}}</span></a></td>                                                        
+            <td align="center" class=' {% if campo.classifica_tipo.id == 1 %}
+                                            prosseguir-red
+                                            {% elif campo.classifica_tipo.id == 2  %}
+                                            prosseguir-laranja
+                                            {% elif campo.classifica_tipo.id == 3  %}
+                                            prosseguir-green                                            
+                                            {% elif campo.classifica_tipo.id == 4  %}
+                                            prosseguir-azul
+                                        {% endif %}' href=""> {{campo.classifica_tipo}}</td>   
+            <td align="center" href=""><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}} <span class='prosseguir  {% if campo.classifica_tipo.id == 1 %}
+                prosseguir-red
+                {% elif campo.classifica_tipo.id == 2  %}
+                prosseguir-laranja
+                {% elif campo.classifica_tipo.id == 3  %}
+                prosseguir-green                                            
+                {% elif campo.classifica_tipo.id == 4  %}
+                prosseguir-azul
+            {% endif %}'> Seguir com o atendimento <i class="fa-regular fa-paper-plane"></i> </span></a></td>   
+                            
+          
+        </tr>       
+        
+        {% empty%}
+            <tr>
+                <td colspan='7'>Nenhum registro informado</td>        
+            </tr>                       
+        {% endfor %}
+    </tbody>                
+</table>  
+<div></div>
+
+</div>
+{% endblock body_login %}

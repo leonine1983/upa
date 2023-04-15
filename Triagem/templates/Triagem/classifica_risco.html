@@ -1,0 +1,61 @@
+{% extends 'global/template_geral.html' %}
+{% block title_login %}ENFERMARIA > Triagem {% endblock title_login %}
+{% block titulo_ %}Triagem{% endblock titulo_ %} 
+{% block body_title %}
+    {% if not object_list %} 
+        Cadastro
+    {% else %}
+        Listagem
+{% endif %}de classificação de emergência{% endblock body_title %}
+
+{% block body_login %}
+
+<div class="top-info top-info-risco">  
+    {% for risco in object_list  %}    
+        <div class='
+        {% if risco.classifica_tipo == 'Vermelho' %}
+            risco-vermelho risco
+        {% elif risco.classifica_tipo == 'Laranja' %}
+            risco-laranja risco
+        {% elif risco.classifica_tipo == 'Verde' %}
+            risco-verde risco
+        {% elif risco.classifica_tipo == 'Verde' %}
+            risco-azul risco
+        {% endif %}'>{{risco.classifica_tipo}}     
+        
+        <div class='            
+        {% if risco.classifica_tipo == 'Vermelho' %}
+            risco-vermelho risco
+        {% elif risco.classifica_tipo == 'Laranja' %}
+            risco-laranja risco
+        {% elif risco.classifica_tipo == 'Verde' %}
+            risco-verde risco
+        {% elif risco.classifica_tipo == 'Verde' %}
+            risco-azul risco
+        {% endif %}
+            '>{{risco.descri}}
+        <div align='right'>
+            <p>&nbsp;</p>
+            <p><a href="{% url 'Triagem:classifica-risco-Update' risco.pk %}"><i class="fa-regular fa-pen-to-square"></i></a></p>
+        </div>
+        </div>     
+        </div>
+         
+        
+    {% endfor %}
+    {% if not object_list %}  
+    <div>
+        <form action="" method='POST'>
+            {% csrf_token %}
+            <div class="form-body">    
+                {{form.as_div}} 
+            </div>               
+            <button class='button-salvar' type="submit">Salvar <i class="fa-solid fa-plus"></i></button>
+            <a href=" {% url 'Triagem:classifica-risco-lista'%} ">::  Lista de Classificação de Emergência::</a>
+        </form>
+        <p>Utilize essa página para personalizar as CORES  de classificação de emergência  </p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock body_login %}

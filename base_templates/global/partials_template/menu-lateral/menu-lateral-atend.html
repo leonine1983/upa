@@ -1,0 +1,112 @@
+
+<div class="area"></div><nav class="main-menu">
+    <ul>
+        <li>
+            <a href="http://justinfarrow.com">
+                <i class="fa fa-solid fa-hospital fa-2x barra-top "></i><i class=""></i>
+                <span class="nav-text barra-top "></span>
+            </a>              
+        </li>
+        <li>
+            <a href="{% url 'Atendimento:pagina-inicial' %}">
+                <i class="fa fa-home fa-2x "></i>
+                <span class="nav-text">
+                    Página Inicial
+                </span>
+            </a>              
+        </li>
+        <li>
+            <a href="{% url 'Atendimento:painel' %}">
+                <i class="fa fa-display fa-2x "></i>
+                <span class="nav-text">
+                    Painel de Espera
+                </span>
+            </a>              
+        </li>
+        <hr>
+        <!--Visto por Admin, por Enfermagem, por Tecnico em infermagem-->
+        {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' or grupo_usuario == 'group_Tec_Enfermagem' %}
+            <li class="has-subnav">
+                <a href="{% url 'Atendimento:lista-paciente' %}">
+                    <i class="fa fa-universal-access fa-2x "></i>
+                    <span class="nav-text">
+                        Registros de Pacientes
+                    </span>
+                </a>
+                
+            </li>  
+            <li class="has-subnav">
+                <a href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} ">
+                <i class="fa fa-solid fa-people-arrows fa-2x "></i>
+                    <span class="nav-text">
+                        Fila de Triagem <i class="fa-thin fa-user-nurse"></i>
+                    </span>
+                </a>
+            </li>
+            <hr> 
+        {% endif %}   
+        <!--Visto por Admin, por Enfermagem-->
+        {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' %}      
+            <li class="has-subnav">
+                <a href=" {% url 'Triagem:triagem-enfermaria' %} ">
+                <i class="fa fa-solid fa-brands fa-uncharted fa-rotate-90  fa-2x shadow"></i>
+                    <span class="nav-text">
+                        Triagem 
+                    </span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href=" {% url 'Triagem:user_create' %} ">
+                    
+                <i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i>
+                    <span class="nav-text">
+                        Cadastrar Enfe e Tec
+                    </span>
+                </a>
+            </li>
+            <hr> 
+        {% endif %}
+        <!--Visto por Admin, por Medicos-->
+        {% if  grupo_usuario == 'group_Medicos' or grupo_usuario == 'group_UPA-Admin' %}
+            <li class="has-subnav">
+                <a href=" {% url 'Medicos:medico_prontuario'  %} ">
+                <i class="fa fa-solid fa-thin  fa-stethoscope fa-2x "></i>
+                <i class="fa-solid "></i>
+                    <span class="nav-text">
+                        Atendimento Médico 
+                    </span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href=" {% url 'Medicos:lista_paciente_medico'  %} ">
+                    <i class="fa-solid "></i>
+                    <i class="fa fa-solid fa-thin fa-hospital-user fa-2x"></i>
+                    <i class="fa-solid "></i>
+                    <span class="nav-text">
+                        Lista de Pacientes
+                    </span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href=" {% url 'Medicos:medico_signup'  %} ">
+                    <i class="fa-solid "></i>
+                    <i class="fa fa-solid fa-thin fa-user-doctor fa-2x"></i>
+                    <i class="fa-solid "></i>
+                    <span class="nav-text">
+                        Cadastra Medicos
+                    </span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+    <ul class="logout">
+        <li>
+           <a href="{% url 'Access_Login:logout_upa' %}">
+                 <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Logout
+                </span>
+            </a>
+        </li>  
+    </ul>
+</nav>

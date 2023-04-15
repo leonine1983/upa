@@ -1,0 +1,47 @@
+{% include 'global/partials_template/head/head_top.html' %}
+{% load static %}
+{% block css %}{% endblock css %}    
+    <title>.:UPA - {% block title_login %} {% endblock title_login %}</title>    
+{% include 'global/partials_template/head/head_botton.html' %} 
+<div class="vetor-img-aereo">{% block vetor-img-aereo %}{% endblock vetor-img-aereo %}</div>
+
+<div class='conteiner'>
+    <!--Menu lateral-->
+    {% include 'global/partials_template/menu-lateral/menu-lateral-atend.html' %}
+    <!--Fim Menu lateral-->
+    <div class="conteiner-body">
+        <div class='barra-titulo-page barra-top flex'>
+            <span>UPA - UNIDADE DE PRONTO ATENDIMENTO:
+                {% block titulo_ %}
+                    
+                {% endblock titulo_ %} 
+            </span>
+            <!--Informações de Login e Senha-->
+            <div class="flex" style="margin-left: 48%;">
+                <div>
+                    <div class="flex">
+                        <a href="{% url 'Access_Login:logout_upa' %}"><i class="fa-solid fa-door-open"  style=" padding: 0.5rem; "></i> <span style="padding-top:0.08rem">  Sair </a></span>
+                        <i class="fa-solid fa-user" style="border-radius: 100%; border:solid #fff 0.1rem; padding: 0.5rem; margin-right: 0.25rem;margin-left: 1rem;"></i>&nbsp;
+                        <strong  class="uppercase" style="padding-top:0.25rem">{{request.user}}</strong>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+<!--Menu Horizontal-->
+<div class="menu-horizontal">
+    {% include 'global/partials_template/menu-lateral/menu-horizontal-global.html' %}    
+</div>
+<!--End Menu Horizontal-->
+
+<main>
+    {% include 'global/partials_template/header/header.html' %}
+    <div class="main-header-title">{% block body_title %}  {% endblock body_title %}</div>
+    {% block body_login %}{% endblock body_login %}
+</main>
+
+{% include 'global/partials_template/footer/footer.html' %}
+{% block script %}{% endblock script %}
+</body>
+</html>

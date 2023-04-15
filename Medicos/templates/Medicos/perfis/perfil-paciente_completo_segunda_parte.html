@@ -1,0 +1,202 @@
+{% extends 'global/template_geral.html' %}
+<!-- titulo Web da pagina-->
+{% block title_login %} Informação Pessoal {% endblock title_login %}
+{% load static %}
+{% load tz %}
+<!--CSS local-->
+{% block css %} 
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--menu em giro-->
+    <link rel="stylesheet" href=" {% static 'global/css/abas_verticais.css' %} "> 
+{% endblock css %}   
+
+<!--Titulo da Pagina-->
+{% block body_title %}  
+    <div class='flex'>
+        <div style='width: 78.95%;' >
+            Informações Pessoais d{% if  paciente_sexo == 2 %}a{% else %}o{% endif %} Paciente: 
+            <b class='uppercase'>{{paciente_nome}}</b>  
+        </div>
+        <div style='
+        margin-top:-1rem;
+padding: 1.15rem;
+        margin-right: -1.8rem;
+        font-size: 1.2rem;
+        background-color: rgba(255, 255, 255, 0.2);'>
+        <a  href="{% url 'Medicos:dados do paciente' pkK %}  ">
+            <i class="fa-solid fa-user-doctor"></i> Retornar ao Atendimento</a>
+        </div>   
+
+
+    </div>
+    
+{% endblock body_title %}
+
+<!--Inicio do perfil-->
+{% block body_login %} 
+<div class="perfil-user" style='height: 70rem;box-shadow:none; '> 
+    <div class='flex uppercase' style='height:2.8rem; background:#d0d1d3; margin: -2rem -2rem 2rem;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; ' >
+        <div style='background:#d0d1d3; height:2rem; padding: 1rem; width: 75%;transform:skew(-10deg); text-align:center; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'><i class="fa-solid fa-hospital-user"></i> Histórico Hospitalar</div>
+        <div style='background:#bfbfbf; border-bottom: 0.5rem solid #d0d1d3; height:1.5rem; padding: 1rem; width: 30%;transform:skew(-10deg);text-align:center; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;'class='uppercase' ><a href="{% url 'Medicos:perfil_completo_paciente' pkK %}"><i class="fa-solid fa-person-breastfeeding"></i> Dados Pessoais do paciente</a></div>
+    </div>    
+    <p>&nbsp;</p>   
+    <div class="dados-pessoais">
+            {% if link_medico %}
+                {% for medico_atendimento in link_medico %}                
+                    <!--atributo for | model medico | model triagem | field do model envio triagem --> 
+                   
+                    <div class="aba_vertical" style='margin-top:-2rem; '>   
+                                                                 
+                        <div class="botao_abavertical  ">
+                            <input type="radio" id="{{medico_atendimento.id}}" name="tab-group-1" checked>
+                            <label class=''  for="{{medico_atendimento.id}}">
+                                <div class='
+                                
+                                {% if medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 1 %}
+                                prosseguir-red
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 2  %}
+                                prosseguir-laranja
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 3  %}
+                                prosseguir-green                                            
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 4  %}
+                                prosseguir-azul
+                                {% endif %}' style='margin:-0.7rem; padding: 0.8rem; border-bottom-left-radius: 1rem;border: 0.1rem solid #666'>
+                                 
+                                {{medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem}}
+                                </div>
+                            </label>           
+                            <div class="abavertical_conteudo prosseguir-laranja ">  
+                                <h1 style='margin:-1.25rem -1.25rem 1rem;padding: 0.55rem;' class='uppercase
+                                
+                                {% if medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 1 %}
+                                prosseguir-red
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 2  %}
+                                prosseguir-laranja
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 3  %}
+                                prosseguir-green                                            
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 4  %}
+                                prosseguir-azul
+                                {% endif %}
+                                
+                                
+                                
+                                
+                                
+                                '>{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem}}</h1>
+                                <div><strong>Data e horário em que o paciente passou pela Recepção: </strong><span>{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem}} | {{medico_atendimento.paciente_medico_atendimento.paciente_triagem.horario_triagem}}h</span></div>
+                                <div><strong>Data e horário em que o paciente passou pelo pré-atendimento (Triagem): </strong><span>{{medico_atendimento.paciente_medico_atendimento.data_triagem}} | {{medico_atendimento.paciente_medico_atendimento.hora_triagem}}h</span></div>
+                                <div><strong>Data e horário em que o paciente foi atendido pelo médico: </strong><span>{{medico_atendimento.data_medico}} | {{medico_atendimento.hora_medico}}h</span></div>
+                                <div><strong>Classificação de Risco Atribuída no pré-atendimento: </strong><span class='uppercase'>{{medico_atendimento.paciente_medico_atendimento.classifica_tipo}}</span></div>
+                                
+                                {% load tz %}
+
+                                {% timezone "UTC" %}
+                                    Cria o metodo para calcular tempo em espera {{ medico_atendimento.paciente_medico_atendimento.paciente_triagem.horario_triagem|time:"H:i" }}
+                                {% endtimezone %} 
+
+                                <h3 class='
+                                
+                                {% if medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 1 %}
+                                prosseguir-red
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 2  %}
+                                prosseguir-laranja
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 3  %}
+                                prosseguir-green                                            
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 4  %}
+                                prosseguir-azul
+                                {% endif %}'     
+                                
+                                
+                                style="padding: 0.5rem; ">Informações do Pré-atendimento:</h3>
+                                <div class="flex " >
+                                    <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
+                                        <div><strong>Pressão Arterial (PA): </strong>{{campo.pressao_arterial_PA}}</div>
+                                        
+                                        <div><strong>Frequência Cardiaca (FC): </strong>{{campo.frequencia_cardiaca_FC}}</div>
+                                        
+                                        <div><strong>Frequência Respiratória (FR): </strong>{{campo.frequencia_respiratoria_FR}}</div>                                    
+                                    </div>
+                                    <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
+                                        <div><strong>Saturação de Oxigênio (SPO²): </strong>{{campo.saturacao_de_oxigenio_SPO2}}</div>
+                                        <div><strong>Hemiglicoteste (HGT): </strong>{{campo.hemoglicoteste_HGT}}</div>                                    
+                                    </div>                                
+                                    <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
+                                        <div><strong>Temperatura (C°): </strong>{{campo.temperatura_TEMP}}</div>
+                                        <div><strong>Peso (Kg): </strong>{{campo.temperatura_TEMP}}</div>
+                                    </div>
+                                    <div style="margin:0 1.5; border-right: 0.1rem; padding: 1rem;">
+                                        <div><strong>Sitomas relatados pelo paciente: </strong></div>
+                                        {{campo.observacao}}
+                                    </div>
+                                </div>                    
+                                <div>&nbsp;</div>
+                                <h3
+                                class='
+
+                                {% if medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 1 %}
+                                prosseguir-red
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 2  %}
+                                prosseguir-laranja
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 3  %}
+                                prosseguir-green                                            
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 4  %}
+                                prosseguir-azul
+                                {% endif %}'  
+                                
+                                style="padding: 0.5rem;">Informações Médica:</h3>
+                                <div>
+                                    
+                                    {% if not medico_atendimento.historico_doenca_atual_HDA == 'Não se aplica' %}
+                                        <div style="margin:0 1.5;  padding: 1rem;">
+                                            <span class='uppercase'><strong>Histórico da Doença Atual (HDA):</strong></span>                     
+                                            <p href="">{{medico_atendimento.hemorragia_digestiva_alta_HDA}}</p>                                                          
+                                        </div>
+                                    {% endif %}
+                                    {% if not medico_atendimento.exame_fisico == 'Não se aplica' %}
+                                    <div style="margin:0 1.5;  padding: 1rem;">
+                                        <span class='uppercase'><strong>Exame Físico:</strong></span>                     
+                                        <p href="">{{medico_atendimento.exame_fisico}}</p>                                                          
+                                    </div>
+                                    {% endif %}
+                                    {% if not medico_atendimento.Diagnostico == 'Não se aplica' %}
+                                        <div style="margin:0 1.5;  padding: 1rem;">
+                                            <span class='uppercase'><strong>Diagnóstico:</strong></span>                     
+                                            <p href="">{{medico_atendimento.Diagnostico}}</p>                                                          
+                                        </div>
+                                    {% endif %}
+                                    {% if not medico_atendimento.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                        <div style="margin:0 1.5;  padding: 1rem;">
+                                            <span class='uppercase'><strong>CID - Classificação Internacional de Doenças:</strong></span>                     
+                                            <p href="">{{medico_atendimento.classificacao_internacional_doenca_CID}}</p>                                                          
+                                        </div>
+                                    {% endif %}
+                                    {% if not medico_atendimento.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                        <div style="margin:0 1.5;  padding: 1rem;">
+                                            <span class='uppercase'><strong>Conduta:</strong></span>                     
+                                            <p href="">{{medico_atendimento.conduta}}</p>                                                          
+                                        </div>
+                                    {% endif %}
+                                    {% if not medico_atendimento.paciente_medico_atendimento.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %}
+                                        <div style="margin:0 1.5;  padding: 1rem;">
+                                            <hr>
+                                            <span class='uppercase'><strong>Medicamento receitado pelo médico:</strong></span>                     
+                                            <p href="">{{medico_atendimento.paciente_medico_atendimento.preescrever_medicamento_medico}}</p>                                                          
+                                        </div>
+                                    {% endif %}                            
+                                    <div style="margin:0 1.5rem;  padding: 1rem;">
+                                        <span class='uppercase'><strong>Médico que fez o atendimento:</strong></span>                     
+                                        <p href="">{{medico_atendimento.medico_nome}}</p>                                                          
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                        <hr  >                       
+                {% endfor %}       
+            {% else %}
+            <h1 style='padding:1rem;margin:1rem; background:#ffbfaa'>O paciente ainda não tem histórico de consulta nesse sistema</h1>
+        {% endif %}
+        </div> 
+    </div>  
+</div>    
+
+{% endblock body_login %}

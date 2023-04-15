@@ -1,0 +1,97 @@
+<h1 class='uppercase'>{% for dados_pessoais in db  %}{{dados_pessoais.nome_social}}{% endfor %}</h1> 
+
+    <div class="aba_vertical">
+        {% for dados_pessoais in db  %}
+            {% for cet in envio_triagem %} 
+                {% for campo in triagem  %}
+                    {% for at_med in atendimento_medico  %}
+                    <div class="botao_abavertical">
+                        <input type="radio" id="{{cet.id}}" name="tab-group-1" checked>
+                        <label for="{{cet.id}}">{{cet.data_envio_triagem}} </label>            
+                        <div class="abavertical_conteudo">
+                            <div><strong>horário em que o paciente deu entrada na recepção: </strong><span>{{cet.horario_triagem}}h</span></div>
+                            <div><strong>Data e horário em que o paciente passou pelo pré-atendimento (Triagem): </strong><span>{{campo.data_triagem}} | {{campo.hora_triagem}}h</span></div>
+                            <div><strong>Classificação de Risco Atribuída no pré-atendimento: </strong><span class='uppercase'>{{campo.classifica_tipo}}</span></div>
+                            
+                            <h3 style="padding: 0.5rem; background:rgb(209, 207, 207)">Informações do Pré-atendimento:</h3>
+                            <div class="flex" >
+                                <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
+                                    <div><strong>Pressão Arterial (PA): </strong>{{campo.pressao_arterial_PA}}</div>
+                                    <div><strong>Frequência Cardiaca (FC): </strong>{{campo.frequencia_cardiaca_FC}}</div>
+                                    <div><strong>Frequência Respiratória (FR): </strong>{{campo.frequencia_respiratoria_FR}}</div>                                    
+                                </div>
+                                <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
+                                    <div><strong>Saturação de Oxigênio (SPO²): </strong>{{campo.saturacao_de_oxigenio_SPO2}}</div>
+                                    <div><strong>Hemiglicoteste (HGT): </strong>{{campo.hemoglicoteste_HGT}}</div>                                    
+                                </div>                                
+                                <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
+                                    <div><strong>Temperatura (C°): </strong>{{campo.temperatura_TEMP}}</div>
+                                    <div><strong>Peso (Kg): </strong>{{campo.temperatura_TEMP}}</div>
+                                </div>
+                                <div style="margin:0 1.5; border-right: 0.1rem; padding: 1rem;">
+                                    <div><strong>Sitomas relatados pelo paciente: </strong></div>
+                                    {{campo.observacao}}
+                                </div>
+                            </div>                    
+                            <div>&nbsp;</div>
+                            <h3 style="padding: 0.5rem; background:rgb(209, 207, 207)">Informações Médica:</h3>
+                            <div>
+                                {% if not at_med.comorbidades == 'Não se aplica' %}
+                                    <div style="margin:0 1.5;  padding: 1rem;">
+                                        <span class='uppercase'><strong>Comorbidades:</strong></span>                     
+                                        <p href="">{{at_med.comorbidades}}</p>                                                          
+                                    </div>
+                                {% endif %}
+                                {% if not at_med.hemorragia_digestiva_alta_HDA == 'Não se aplica' %}
+                                    <div style="margin:0 1.5;  padding: 1rem;">
+                                        <span class='uppercase'><strong>Hemorragia Digestiva (HDA):</strong></span>                     
+                                        <p href="">{{at_med.hemorragia_digestiva_alta_HDA}}</p>                                                          
+                                    </div>
+                                {% endif %}
+                                {% if not at_med.exame_fisico == 'Não se aplica' %}
+                                <div style="margin:0 1.5;  padding: 1rem;">
+                                    <span class='uppercase'><strong>Exame Físico:</strong></span>                     
+                                    <p href="">{{at_med.exame_fisico}}</p>                                                          
+                                </div>
+                                {% endif %}
+                                {% if not at_med.Diagnostico == 'Não se aplica' %}
+                                    <div style="margin:0 1.5;  padding: 1rem;">
+                                        <span class='uppercase'><strong>Diagnóstico:</strong></span>                     
+                                        <p href="">{{at_med.Diagnostico}}</p>                                                          
+                                    </div>
+                                {% endif %}
+                                {% if not at_med.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                    <div style="margin:0 1.5;  padding: 1rem;">
+                                        <span class='uppercase'><strong>CID - Classificação Internacional de Doenças:</strong></span>                     
+                                        <p href="">{{at_med.classificacao_internacional_doenca_CID}}</p>                                                          
+                                    </div>
+                                {% endif %}
+                                {% if not at_med.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                    <div style="margin:0 1.5;  padding: 1rem;">
+                                        <span class='uppercase'><strong>Conduta:</strong></span>                     
+                                        <p href="">{{at_med.conduta}}</p>                                                          
+                                    </div>
+                                {% endif %}
+                                {% if at_med.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                    <div style="margin:0 1.5;  padding: 1rem;">
+                                        <span class='uppercase'><strong>Medicamento receitado pelo médico:</strong></span>                     
+                                        <p href="">{{campo.preescrever_medicamento_medico}}</p>                                                          
+                                    </div>
+                                {% endif %}                            
+                                <div style="margin:0 1.5;  padding: 1rem;">
+                                    <span class='uppercase'><strong>Médico que fez o atendimento:</strong></span>                     
+                                    <p href="">{{at_med.medico_nome}}</p>                                                          
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}              
+    </div>
+       
+
+    
+    

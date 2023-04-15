@@ -1,0 +1,172 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block title_login %}FILA DE TRIAGEM {% endblock title_login %}
+{% block css %}
+    <!--Css do Select2-->    
+    <link rel="stylesheet" href=" {% static 'global/css/tabela-div.css' %}">
+{% endblock css %}    
+{% block script %}
+    <!--Script do Select2-->
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('#id_paciente_envio_triagem').select2();
+});
+</script>
+
+{% endblock script %}
+{% block body_title %}Fila de Triagem ::. {% endblock body_title %}
+
+{% block body_login %}
+<!--Botão adicionar a lista de triagem-->
+{% if lista_db %}
+<a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='button-salvar' >Adicionar a paciente a lista de triagem <i class="fa-solid fa-plus"></i></a>
+{% endif %}
+<!-- FIM Botão adicionar a lista de triagem-->
+<table class='tabela-div'>
+    <tr>
+        <th class='linha-titulo'>Nome do Paciente</th>
+        <th class='linha-titulo'>Data de entrada na fila de triagem</th>
+        <th class='linha-titulo'>Horário de entrada na fila de triagem</th>
+        <th class='linha-titulo'>Excluir paciente da fila de triagem</th>
+    </tr>
+    {% for db in lista_db %}
+    {% if lista_db %}
+
+{% endif %}
+    <tr>
+        <td class>
+            <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>                                                      
+        </td>
+        <td>
+            <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.data_envio_triagem}} </span></a>                                                      
+        </td>
+        <td>
+            <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.horario_triagem}} </span></a>                                                      
+        </td>
+        <td>
+            <a href="{% url 'Atendimento:delete_de_paciente_na_triagem' db.id %}" class="fa fa-times-circle" title="Deletar"></a> 
+        </td>
+    </tr>
+    {% empty%} 
+    {% endfor %}
+</table>
+<div class="bloco flex">
+    <div class="calendario">
+        {% if  url == 'Atendimento:envio_paciente_a_triagem'%}   
+        <form>
+            <label for="start_date" >::CALENDÁRIO::</label>
+            <div>Utilize o calendário para acompanhar os lançamentos na
+                <b>Fila de Triagem</b> de datas anteriores à atual            
+            </div>  
+            <p>&nbsp;</p>          
+            <p><input type="date" name='start_date'>
+            <button type="submit">ok</button></p>
+        </form>
+        {% endif %}
+    </div>   
+
+    <div class="">  
+        {% if not lista_db %}   
+        <div>         
+            <form action="" method='POST'>      
+                    {% csrf_token %}
+                    <input type="text" valu>
+                    {% for n in get_id  %}
+                    <select name="paciente_envio_triagem" required="" id="id_paciente_envio_triagem" data-select2-id="select2-data-id_paciente_envio_triagem" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                        <option value="" selected="" data-select2-id="select2-data-2-onon">---------</option>
+                      
+                        <option value="16">joana angelica</option>
+                      
+                        <option value="17">albert</option>
+                      
+                        <option value="18">maria</option>
+                      
+                        <option value="19">maria</option>
+                      
+                        <option value="20">maria</option>
+                      
+                        <option value="21">maria</option>
+                      
+                        <option value="15">Guilherme de Souza</option>
+                      
+                        <option value="14">Maria aparecida</option>
+                      
+                        <option value="13">paulo</option>
+                      
+                        <option value="12">michele</option>
+                      
+                        <option value="10">adelson</option>
+                      
+                        <option value="11">joana da silva borges</option>
+                      
+                        <option value="9">Suzana</option>
+                      
+                        <option value="5">Cintia Teixeira Lins</option>
+                      
+                        <option value="6">enzzo</option>
+                      
+                        <option value="7">Caio</option>
+                      
+                        <option value="8">michele</option>
+                      
+                        <option value="3">Rogerio Cerqueira da Silva</option>
+                      
+                        <option value="4">jurubel</option>
+                      
+                      </select>
+
+
+
+
+
+                {% if not url == 'Atendimento:envio_paciente_a_triagem'%}                          
+                <button class='button-salvar' type="submit">
+                    Salvar Paciente na Fila de triagem 
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+                {% else %}
+                <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='button-salvar' >Adicionar a paciente a lista de triagem <i class="fa-solid fa-plus"></i></a>                   
+                {% endif %}                
+            </form>        
+            <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastrar Paciente</a>
+            <p>Utilize o sistema de busca no campo <b>Busca paciente</b> 
+                para pequisar o cadastro do paciente no sistema e em seguida envia-lo à fila de triagem. Caso não encontre o nome do paciente, clique no link 
+                <b>Cadastrar Paciente</b> para ir para a página de cadastro de paciente para lançá-lo no sistema. Em seguida, 
+                    retorne a essa página para adicioná-lo à fila de triagem. </p>
+        </div>
+        {% endif %}
+    </div>
+
+
+<!--TABELA COM RELAÇÃO DE PACIENTES NA TRIAGEM-->
+{% if lista_db %}
+
+
+    <div class="top-info">
+        Na tabela acima está listado todos os pacientes que estão aguardando para passar
+        pela etapa de TRIAGEM. Se houver necessidade de excluir algum nome, basta clicar no botão com um X.
+    </div>
+</div>  
+<div class="style-tabela">
+    
+    <a href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}">Voltar <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>
+
+
+
+
+
+<!--tabela-->
+{% endif %}
+<div class="controle_tabela">
+    {% if page_obj.has_previous %}
+        <a class="" href="?page={{page_obj.previous_page_number}}"><i class="fa-solid fa-angles-left"></i> Voltar</a>    
+                        
+    {% endif %}
+    {% if page_obj.has_next %}               
+        <a href="?page={{ page_obj.next_page_number }}">Próxima página <i class="fa-solid fa-angles-right"></i></a>    
+    {% endif %}
+</div>
+<p>&nbsp;</p>
+
+{% endblock body_login %}

@@ -1,0 +1,3 @@
+> Usar Navegador Google Chrome:
+    >> Instalar a extensão AutoplayStopper:
+        >> Ensencial para utilização do painel

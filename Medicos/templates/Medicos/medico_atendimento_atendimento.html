@@ -1,0 +1,243 @@
+{% extends 'global/template_geral.html' %}
+{% block css %}
+{% load static %}
+<!-- Adicione isso ao head do seu arquivo HTML -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<!--
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="{% static 'global/css/modal.css' %}">
+<link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/menu/menu.giro.css' %}">
+
+<link rel="stylesheet" href="{% static 'global/css/menu/menu-vertical-medico.css' %}">
+
+<style> {% for dados in paciente_triagem  %} 
+              {% if dados.classifica_tipo.id == 1 %}
+              .dados-preatendimento ul li span{
+                     color: #AA0000;
+                     font-size: 1.3rem;
+              }
+              {% elif dados.classifica_tipo.id == 2  %}
+              .dados-preatendimento ul li span{
+                     color: #ff6600;
+                     font-size: 1.3rem;}
+              {% elif dados.classifica_tipo.id == 3  %}
+              .dados-preatendimento ul li span{
+                     color:  #008200;
+                     font-size: 1.3rem;}
+              {% elif dados.classifica_tipo.id == 4  %}
+              .dados-preatendimento ul li span{
+                     color: #008dc0;
+                     font-size: 1.3rem;}
+              {% endif %}  
+       {% endfor %}      
+</style>
+<!--Select2-->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+       // In your Javascript (external .js resource or <script> tag)
+              
+   $(document).ready(function() {
+       $('#id_classificacao_internacional_doenca_CID').select2();
+   });
+   </script>
+   <!--end Select2-->
+
+
+
+{% endblock css %}  
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block title_login %}ÁREA MÉDICA {% endblock title_login %}
+{% block titulo_ %} 
+       ÁREA MÉDICA - Paciente:
+       {% for dados in triagem  %}       
+              {{dados}}
+       {% endfor %}
+{% endblock titulo_ %} 
+{% block body_title %}
+       ÁREA MÉDICA - Paciente:
+       {% for dados in triagem  %}       
+              {{dados}}
+       {% endfor %}
+{% endblock body_title %}
+{% block body_login %}
+<div  class='dados-preatendimento'>
+       <!--Informações da Triagem-->
+       {% for dados in triagem  %} 
+               
+              <!--END Link para o perfil do paciente-->
+              <div class="flex info-triagem 
+                     {% if dados.classifica_tipo.id == 1 %}
+                            prosseguir-red
+                     {% elif dados.classifica_tipo.id == 2  %}
+                            prosseguir-laranja
+                     {% elif dados.classifica_tipo.id == 3  %}
+                            prosseguir-green                                            
+                     {% elif dados.classifica_tipo.id == 4  %}
+                            prosseguir-azul
+                     {% endif %}      
+              ">
+                     <div  style='width: 69.95%;'> CLASSIFICAÇÃO DE RISCO <span class='uppercase'>{{dados.classifica_tipo}} </span></div>
+                     <!--Link para o perfil do paciente-->                
+                     <div style=' padding: 2rem;margin: -1.8rem; font-size: 1.2rem;
+                     background-color: rgba(255, 255, 255, 0.2);'><a  href=" {% url 'Medicos:perfil_completo_paciente' dados.pk %}"><i class="fa-solid fa-address-card"></i> Perfil do paciente | Histórico Hospitalar</a></div>   
+              </div>
+              <p><i class="fa-regular fa-calendar-check"></i>&nbsp;{{dados.data_triagem}} &nbsp; | &nbsp; <i class="fa-solid fa-clock"></i>&nbsp;{{dados.hora_triagem}} &nbsp; | &nbsp; Informações do Pré-atendimento (Triagem) da paciente:</p>
+              <hr>
+              <div style='color:rgba(10, 30, 50, 0.8) ;padding:1rem; box-shadow:inset 0 4px 8px 0 rgba(0, 0, 0, 0.2),inset 0 6px 20px 0 rgba(0, 0, 0, 0.19);' >
+                     
+                     <div><b>Nome Completo:</b> <span  class='uppercase'> {{dados}} </span></div>
+                     
+                     <div class='flex'>                     
+                            <ul>                            
+                                   <li><b>PA - Pressão Arterial:</b> <span> {{dados.pressao_arterial_PA}} mmHg</span></li>
+                                   <li><b>FC - Frequência Cardiaca:</b><span> {{dados.frequencia_cardiaca_FC}} bpm</span> </li>
+                                   <li><b>FR - frequencia_respiratoria_FR:</b><span> {{dados.frequencia_cardiaca_FC}} bpm </span></li>
+                                   <li><b>SPO² - Saturação de Oxigênio :</b> <span> {{dados.saturacao_de_oxigenio_SPO2}}% </span> </li>
+                                   <li><b>HGT - Hemigloteste :</b><span> {{dados.hemoglicoteste_HGT}} mg/dL </span></li>
+                                   <li><b>TEMP - Temperatura:</b> <span> {{dados.temperatura_TEMP}} °C </span></li>
+                            </ul>
+                            <ul>
+                                   <li><b>Peso:</b> <span> {{dados.peso}} </span></li>
+                                   <li><b>Data do atendimento:</b><span> {{dados.data_triagem}} </span> </li>
+                                   <li>TEMPO DE ESPERA:
+                                          <ul>
+                                                 {% for envio_triagem in dados_triagem %}
+                                                        <li><b>Horário em que o paciente passou pela recepção:</b><span> 
+                                                               {{envio_triagem.horario_triagem}} Hm
+                                                               </span></li>
+                                                        <li><b>Horário em que o paciente foi chamado para a triagem:</b><span> {{dados.hora_triagem}} Hm </span></li>
+                                                        {% comment "" %}<li><b>Tempo de espera do paciente até o atendimento:</b><span> {{tempo}} </span></li>{% endcomment %}
+                                                 {% endfor %}
+                                          </ul>
+                                   </li>                            
+                                   <li><b>Classificação de risco atual desse paciente:</b> <span> {{dados.classifica_tipo}}  </span></li>                            
+                                   
+                            </ul>
+                     </div> 
+                     <div>
+                            <b><h3> Sitomas relatados pelo paciente durante a triagem: </h3></b>
+                            <div style='font-size: 1.3rem; padding: 1.4rem; border: 0.1rem solid #666; background:#f5f5dc'>
+                                   {{dados.observacao}}
+                            </div>                            
+                     </div>
+              </div>             
+                   
+       {% endfor %}
+       <!--End Informações da Triagem-->
+       <p>&nbsp;</p>
+       <div class='flex'>
+              <h1>Diagnóstico Médico:</h1>
+              <div style='padding:0.2rem 1rem; font-size:1.5rem' class='uppercase'><i class="fa-solid fa-user-doctor"></i> Dr(a) {{request.user}}</div>
+       </div>
+       <hr>
+
+
+<form method='POST'>    
+       <div class="form-body">
+           {% csrf_token %}
+           <div class='form-div'  style=''>
+                     <div>
+                            {% for dados  in triagem %}
+                                   <label for="id_paciente_medico_atendimento">Paciente</label>             
+                                   <select class='uppercase' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
+                                          <option value="{{dados.id}}" selected="{{dados.id}}">{{dados}}</option>                                    
+                                   </select>
+                            {% endfor %}
+                     </div>               
+                     <div>
+                            <p><label for="id_hemorragia_digestiva_alta_HDA">Histórico da Doença Atual (HDA):</label></p>
+                            {{form.historico_doenca_atual_HDA}}
+                     </div>
+                     <div>
+                            <p><label for="id_exame_fisico">Exame fisico:</label></p>
+                            {{form.exame_fisico}}
+                     </div>
+                     <div>
+                            <p><label for="id_Diagnostico">Diagnóstico:</label></p>
+                            {{form.Diagnostico}}
+                     </div>
+                     <div>
+                            <p><label for="id_classificação_internacional_doenca_CID">Classificação internacional doença CID:</label></p>
+                            {{form.classificacao_internacional_doenca_CID}}
+                     </div>
+                     <div>
+                            <p><label for="id_classificação_internacional_doenca_CID">Conduta:</label></p>
+                            {{form.conduta}}
+                     </div>
+              </div>
+       </div>
+       <div class='flex' style='margin-top:-4rem'>
+              <div class='item-oculto'>
+                     <div class='descricao'>Ao clicar em cancelar, você será redirecionado para área de espera por atendimento. Entranto, o paciente continuará aguardando atendimento do médico</div>
+                     <a  style="background:red; margin-left:20rem" class='button-salvar' href="{% url 'Medicos:medico_prontuario' %}">Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a></div>       
+              <button class='button-salvar' type="submit" style="margin-right:12rem">Salvar</button>              
+       </div>
+       <div>&nbsp;</div>
+   </form> 
+   
+   
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="chamarPacienteModal" tabindex="-1" role="dialog" aria-labelledby="chamarPacienteModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="chamarPacienteModalLabel"><h1>Chamar Paciente</h1></h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+              <b>{{request.user.first_name}}</b>, você deseja chamar o paciente <span class='uppercase' id="nomePacienteModal"></span> para o atendimento?
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+             <button type="button" class="btn btn-primary" id="confirmarChamadaBtn">Confirmar</button>
+           </div>
+         </div>
+       </div>
+     </div>
+     
+     
+{% block script %}
+
+<script>
+       $(document).ready(function() {
+         var confirmado = false; // variável booleana para verificar se o botão foi clicado
+         setTimeout(function() {
+           var nomeCompleto = "{{ triagem.0 }}"; // Assumindo que há apenas um paciente na triagem
+           $('#nomePacienteModal').text(nomeCompleto);
+           $('#chamarPacienteModal').modal('show');
+           $('#confirmarChamadaBtn').off('click').click(function() {
+              var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+              console.log('clicou no botão confirmar');
+            
+              $.ajax({
+                url: "{% url 'Medicos:cadastrar_chamada' %}",
+                type: "POST",
+                data: {
+                  nome: nomeCompleto,
+                  csrfmiddlewaretoken: csrftoken
+                },
+                success: function() {
+                  alert("Chamada registrada com sucesso!");
+                  $('#chamarPacienteModal').modal('hide');
+                }
+              });
+            });             
+         }, 2000); // 2 segundos
+       });
+     </script>
+     
+
+     
+     
+{% endblock script %}
+{% endblock body_login %}

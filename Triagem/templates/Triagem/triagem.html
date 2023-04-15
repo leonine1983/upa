@@ -1,0 +1,51 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block title_login %}ENFERMARIA > Triagem {% endblock title_login %}
+{% block titulo_ %}Triagem{% endblock titulo_ %} 
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/enfermagem-mulher.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block body_title %} TRIAGEM DE PACIENTES{% endblock body_title %}
+
+{% block css %}{% endblock css %}
+
+{% block body_login %}
+<!-- Modal para exibir a mensagem -->
+ 
+<div class="top-info">    
+    <div>
+        <form action="" method='POST'>    
+            {% csrf_token %}
+            <div class="form-body"> 
+                {{form.as_div}}
+                                                
+            </div>             
+            <button class='button-salvar' type="submit">Salvar <i class="fa-solid fa-plus"></i></button>         
+        </form>
+        <p>No campo <b>Paciente</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
+        <div>&nbsp;</div> 
+        <div>&nbsp;</div> 
+    </div>
+   </div>   
+   
+
+{% block script %}   
+  <script>
+    var alergiasField = document.getElementById("id_alergias");
+    var alergiasContentField = document.getElementById("id_alergias_content");
+
+    // desabilita o campo "alergias_content" quando a página é carregada
+    alergiasContentField.disabled = true;
+
+    // habilita ou desabilita o campo "alergias_content" quando o usuário seleciona uma opção diferente
+    alergiasField.addEventListener("change", function() {
+        if (alergiasField.value == "1") {
+            alergiasContentField.disabled = false;
+        } else {
+            alergiasContentField.disabled = true;
+        }
+    });
+</script>
+{% endblock script %}
+
+{% endblock body_login %}

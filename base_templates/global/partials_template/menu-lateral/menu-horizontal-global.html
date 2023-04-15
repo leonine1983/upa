@@ -1,0 +1,75 @@
+      
+      
+<div class="menu-wrapper menu-gray">
+    <ul class="menu">            
+        <li>
+            <a href=""><i class="fas  fa-solid fa-wrench"></i> Configurações</a>            
+        </li>
+        <!--Parametros-->
+        <li>
+            <a href=""><i class="fas fa-solid fa-compass-drafting"></i> Parâmetros</a>
+            <ul>
+                <li>
+                    <a href=""><i class="fab fa-amazon"></i> Classificação de Emergência</a>
+                    <ul>
+                        <li><a href="{% url 'Triagem:classifica-risco'%}"><i class="fas fa-user"></i> Cadastro </a></li>
+                        <li><a href="{% url 'Triagem:classifica-risco-lista'%}"><i class="fas fa-user-tie"></i> Listagem </a></li>                            
+                    </ul>
+                </li> 
+                <li>
+                    <a href="{% url 'Medicos:importa_csv'%}"><i class="fab fa-amazon"></i> Importar tabela cid-10</a>
+                </li>                              
+                <li>
+                    <a href=""><i class="fab fa-amazon"></i> Configura Painel</a>
+                    <ul>
+                        <li>
+                            <a href="{% url 'configUPA:upload_video_painel'%}"><i class="fab fa-amazon"></i>Background em video</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'configUPA:letreiroCreate'%}"><i class="fab fa-amazon"></i> Configura Letreiro</a>
+                        </li>  
+                    </ul>
+                </li>  
+            </ul>
+        </li>
+        <!--Pacientes-->
+        <li>
+            <a href=""><i class="fas fa-solid  fa-universal-access"></i> Pacientes</a>
+            <ul>
+                <li>
+                    <a href="{% url 'Atendimento:lista-paciente' %}"><i class="fab fa-amazon"></i> Listagem</a>
+                    <a href="{% url 'Atendimento:registro-paciente' %}"><i class="fab fa-amazon"></i> Cadastro</a>
+                </li>                
+            </ul>
+        </li>
+        <!--Fila de Triagem-->
+        <li>
+            <a href=""><i class="fas fa-solid  fa-people-arrows"></i> Fila de Triagem</a>
+            <ul>
+                <li>
+                    <a href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}"><i class="fab fa-amazon"></i> Fila de triagem por data</a>
+                    <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}"><i class="fab fa-amazon"></i> Enviar paciente à fila de triagem</a>
+                </li>                
+            </ul>
+        </li>
+        <li>
+            <a href=""><i class="fas fa-solid  fa-person-shelter"></i> Salas</a>
+            <ul>
+                <li><i class=""></i>
+                    <a href="{% url 'Medicos:salas' %}"><i class="fas fa-solid  fa-person-shelter"></i> Salas</a>
+                    <a href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Cadastro de Salas</a>
+                    <a href="{% url 'Medicos:salasProfissionalCreate' %}"><i class="fa-solid fa-people-roof"></i> Vincula Profissional à Sala</a>
+                </li>                
+            </ul>
+        </li>
+        <li>
+            <a href=""><i class="fas fa-solid  fa-flag"></i> Relatórios</a>
+            <ul>
+                <li><i class=""></i>
+                    <a href="{% url 'Medicos:salas' %}"><i class="fas fa-solid  fa-flag"></i> Nº de pacientes no sistema</a>
+                </li>                
+            </ul>
+        </li>
+       
+    </ul>
+</div>

@@ -1,0 +1,22 @@
+
+/*informações de desenvolvimento*/
+footer{
+    height: 8rem;
+    display: flex;
+}
+.info-developer {
+    padding: 0;
+    border-right: 0.1rem solid #fff;
+    width: 33rem;
+  
+  }
+  .info-developer div{
+    margin-left: 1.5rem;
+    margin-top: -0.4rem;
+    border-left: 0.1rem solid #fff;
+    padding-left: 0.5rem;
+  }
+.uppercase{
+    text-transform: uppercase;
+}
+  

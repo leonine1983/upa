@@ -1,0 +1,31 @@
+
+/*TABELA DIV*/
+.tabela-div{
+    display: grid;
+    width: 98%;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    text-align: center;    
+    border-collapse: collapse;
+    margin-bottom: 5rem;
+}
+.tabela-div tr th{
+    width: 16.5rem;
+    padding: 10px;
+    color: white;
+    background: var(--cor-background-titulo);    
+    border: 0.1rem solid var(--cor-background-titulo);
+}
+.tabela-div tr td{
+    border: 0.1rem solid var(--cor-background-titulo);
+    font-size: 1.2rem;
+    
+}
+.tabela-div tr td a{
+    color: black;
+    
+}
+.tabela-div tr:hover{
+    background-color: cadetblue;
+   
+}
+

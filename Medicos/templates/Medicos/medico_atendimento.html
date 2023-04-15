@@ -1,0 +1,133 @@
+{% extends 'global/template_geral.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+
+<style> {% for dados in paciente_triagem  %} 
+              {% if dados.classifica_tipo.id == 1 %}
+              .dados-preatendimento ul li span{
+                     color: #AA0000;
+                     font-size: 1.3rem;
+              }
+              {% elif dados.classifica_tipo.id == 2  %}
+              .dados-preatendimento ul li span{
+                     color: #ff6600;
+                     font-size: 1.3rem;
+              {% elif dados.classifica_tipo.id == 3  %}
+              .dados-preatendimento ul li span{
+                     color:  #008200;
+                     font-size: 1.3rem;
+              {% elif dados.classifica_tipo.id == 4  %}
+              .dados-preatendimento ul li span{
+                     color: #008dc0;
+                     font-size: 1.3rem;
+              {% endif %}  
+       {% endfor %}  
+       
+       .style_triagem ul {
+              font-size:0.9rem;
+              margin-left:2.5rem       }
+</style>
+
+}
+{% endblock css %}  
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block title_login %}ÁREA MÉDICA {% endblock title_login %}
+{% block titulo_ %} 
+       ÁREA MÉDICA - Paciente:
+       {% for dados in ficha_atendimento  %}       
+              {{dados.nome_social}}
+       {% endfor %}
+
+{% endblock titulo_ %} 
+{% block body_title %}
+       ÁREA MÉDICA - Paciente:
+       {% for dados in ficha_atendimento  %}       
+              {{dados.nome_social}}
+       {% endfor %}
+{% endblock body_title %}
+{% block body_login %}
+<div class='dados-preatendimento'>{% for dados in paciente_triagem  %}     
+       {% for dados_registro in ficha_atendimento  %}     
+              <div class="info-triagem 
+                     {% if dados.classifica_tipo.id == 1 %}
+                            prosseguir-red
+                     {% elif dados.classifica_tipo.id == 2  %}
+                            prosseguir-laranja
+                     {% elif dados.classifica_tipo.id == 3  %}
+                            prosseguir-green                                            
+                     {% elif dados.classifica_tipo.id == 4  %}
+                            prosseguir-azul
+                     {% endif %}      
+              ">
+              CLASSIFICAÇÃO DE RISCO <span class='uppercase'>{{dados.classifica_tipo}} </span> 
+              </div>
+              <p><i class="fa-regular fa-calendar-check"></i>&nbsp;{{dados.data_triagem}} &nbsp; | &nbsp; <i class="fa-solid fa-clock"></i>&nbsp;{{dados.hora_triagem}} &nbsp; | &nbsp; Informações do Pré-atendimento (Triagem) da paciente: <b class='uppercase'>{{dados_registro.nome_social}} </b> </p>
+              <hr>
+              <div class='style_triagem'>
+                     <div class='flex '>
+                     <ul>
+                            <li><b>Nome Completo:</b> <p class='uppercase'><span> {{dados_registro.nome_social}} </span></p></li>
+                            <li><b>PA - Pressão Arterial:</b><p class='uppercase'> <span> {{dados.pressao_arterial_PA}} mmHg</span></p></li>
+                            <li><b>FC - Frequência Cardiaca:</b><p class='uppercase'><span> {{dados.frequencia_cardiaca_FC}} bpm</span></p></li>
+                            <li><b>FR - frequencia_respiratoria_FR:</b><p class='uppercase'><span> {{dados.frequencia_cardiaca_FC}} bpm </span></p></li>
+                            
+                     </ul>
+                     <ul>   
+                            
+                            <li><b>SPO² - Saturação de Oxigênio :</b><p class='uppercase'> <span> {{dados.saturacao_de_oxigenio_SPO2}}% </span> </p></li> 
+                            <li><b>HGT - Hemigloteste :</b><p class='uppercase'><span> {{dados.hemoglicoteste_HGT}} mg/dL </span></p></li>
+                            <li><b>TEMP - Temperatura:</b><p class='uppercase'> <span> {{dados.temperatura_TEMP}} °C </span></p></li></p>                        
+                            <li><b>Peso:</b><p class='uppercase'> <span> {{dados.peso}} kg</span></p></li>
+                            
+                                                       
+                             
+                                                  
+                     </ul>
+                     <ul>
+                            <li><b>Data do atendimento:</b><p class='uppercase'><span> {{dados.data_triagem}} </span> </p></li>
+                            <li>TEMPO DE ESPERA:
+                                   <ul>
+                                          {% for envio_triagem in dados_triagem %}
+                                                 <li><b>Horário em que o paciente passou pela recepção:</b><p class='uppercase'><span> 
+                                                        {{envio_triagem.horario_triagem}} Hm
+                                                        </span></p></li>
+                                                 <li><b>Horário em que o paciente foi chamado para a triagem:</b><p class='uppercase'><span> {{dados.hora_triagem}} Hm </span></p></li>
+                                                 {% comment "" %}<li><b>Tempo de espera do paciente até o atendimento:</b><span> {{tempo}} </span></li>{% endcomment %}
+                                          {% endfor %}
+                                   </ul>
+                            </li> 
+                            <li><b>Classificação de risco atual desse paciente:</b><p class='uppercase'> <span> {{dados.classifica_tipo}}  </span></p></li>                              
+                            
+                     </ul>
+                     </div>
+                     <div><b>Sitomas relatados pelo paciente durante a triagem: </b>
+                            <div style='font-size: 1.3rem; padding: 1.4rem; border: 0.1rem solid #666'>
+                                   {{dados.observacao}}
+                            </div>                            
+                     </div> 
+              </div>
+       {% endfor %}
+       <hr>
+       <a style='text-align: center' href="{% url 'Medicos:dados do paciente' dados.pk %}"> {{dados.paciente_envio_triagem_id}} <span class='prosseguir 
+              {% if dados.classifica_tipo.id == 1 %}
+              prosseguir-red
+              {% elif dados.classifica_tipo.id == 2  %}
+              prosseguir-laranja
+              {% elif dados.classifica_tipo.id == 3  %}
+              prosseguir-green                                            
+              {% elif dados.classifica_tipo.id == 4  %}
+              prosseguir-azul
+          {% endif %}'> Seguir com o atendimento <i class="fa-regular fa-paper-plane"></i> </span></a>
+
+
+
+
+
+
+          {% endfor %}
+
+</div>
+{% endblock body_login %}

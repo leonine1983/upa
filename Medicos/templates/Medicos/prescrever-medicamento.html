@@ -1,0 +1,121 @@
+{% extends 'global/template_geral.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/abas_horizontais.css' %}">
+
+<style> {% for dados in paciente_triagem  %} 
+              {% if dados.classifica_tipo.id == 1 %}
+              .dados-preatendimento ul li span{
+                     color: #AA0000;
+                     font-size: 1.3rem;
+              }
+              {% elif dados.classifica_tipo.id == 2  %}
+              .dados-preatendimento ul li span{
+                     color: #ff6600;
+                     font-size: 1.3rem;
+              {% elif dados.classifica_tipo.id == 3  %}
+              .dados-preatendimento ul li span{
+                     color:  #008200;
+                     font-size: 1.3rem;
+              {% elif dados.classifica_tipo.id == 4  %}
+              .dados-preatendimento ul li span{
+                     color: #008dc0;
+                     font-size: 1.3rem;
+              {% endif %}  
+       {% endfor %} 
+       form div textarea{
+              width: 100%;
+              padding: 1rem;
+       } 
+       form div select{
+              width:10rem;
+              height: 3rem;
+              padding: 1rem;
+              color: #000
+       }   
+       
+      
+       .prescricao{
+              background:#bbb39b;
+              padding:1rem;
+       }
+       .encaminhamento{
+              background-color:#DAC8B3;              
+       }
+       .encaminhamento textarea, .atestado textarea, .exames textarea{
+              width:97%;
+              border:none;
+              background:none;
+              
+       }
+       .exames{
+              background:#d8bfd8;
+              padding:1rem;
+       }
+       .atestado{
+              background:#97d3c4;
+              padding:1rem;
+       }
+       #id_preescrever_medicamento_medico{
+              background:transparent;
+              width:95%;
+       }
+       .border-radius{              
+              border-top-left-radius: 1rem;
+              
+       }
+</style>
+
+{% endblock css %}  
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block title_login %}ÁREA MÉDICA {% endblock title_login %}
+{% block titulo_ %} 
+       ÁREA MÉDICA 
+
+{% endblock titulo_ %} 
+{% block body_title %}
+       ÁREA MÉDICA 
+       
+{% endblock body_title %}
+{% block body_login %}
+<div  class='dados-preatendimento'>  
+       <!--ABAS - exibe as opções de preenchimento de documento do medico-->       
+       <form  method="post" class='flex'>
+              {% csrf_token %}
+                     
+              <div style='width:70%'>
+                     <ul class="menu-abas ">
+                            <li class='prescricao border-radius'><a href="#tab1">&nbsp;&nbsp;Preescrever Medicamento <i class="fa-solid fa-capsules"></i>&nbsp;&nbsp;</a></li>
+                            <li class='encaminhamento'><a href="#tab2">&nbsp;&nbsp;Encaminhamentos <i class="fa-regular fa-paste"></i>&nbsp;&nbsp;</a></li>                            
+                            <li class='exames'><a href="#tab3">&nbsp;&nbsp;Exames <i class="fa-solid fa-notes-medical"></i>&nbsp;&nbsp;</a></li>
+                            <li class='atestado'><a href="#tab4">&nbsp;&nbsp;Atestados <i class="fa-solid fa-file-contract"></i></i>&nbsp;&nbsp;</a></li>
+                     </ul>
+                     
+                     <article>                     
+                            <section class='prescricao' id="tab1" class="active">                                  
+                                   {{form.preescrever_medicamento_medico}}                                   
+                            </section>
+                     
+                            <section style='width:93.5%' class='encaminhamento' id="tab2">
+                                   {{form.encaminhamento}}
+                            </section>
+                     
+                            <section class='exames' id="tab3">
+                                   {{form.exames}}
+                            </section>  
+                            <section class='atestado' id="tab4">
+                                   {{form.atestado}}
+                            </section>             
+                     </article> 
+              </div> 
+              <div style='width:30%; text-align: center;'>
+                     <h3>Enviar o paciente para o ambulatório:</h3>
+                     {{form.enviar_ambulatorio}}              
+                     <button style='width: 90%;' type="submit" class='button-salvar'>Salvar Formulário</button>
+              </div>             
+       </form>
+</div>
+{% endblock body_login %}

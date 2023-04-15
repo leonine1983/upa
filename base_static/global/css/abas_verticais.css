@@ -1,0 +1,47 @@
+.aba_vertical {
+    position: relative;   
+    min-height: 200px; /* This part sucks */
+    clear: both;
+    margin: 25px 0;
+  }
+  .botao_abavertical {
+    float: left;  
+    clear: both;
+    width: 87px;
+    height: 32px;
+  }
+  .botao_abavertical label {
+    background: #eee; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    margin-left: -1px; 
+    font-size: 10px;
+    position: relative;
+    left: 1px;   
+        width: 100px;
+    display: inline-block;
+    height: 1.2rem;
+  }
+  .botao_abavertical [type=radio] {
+    display: none;   
+  }
+  .abavertical_conteudo {
+    position: absolute;
+    top: 0;
+    left: 122px;
+    background: white;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc; 
+    height: 60rem;
+    display: block;
+  }
+  [type=radio]:checked ~ label {
+    background: white;
+    border-bottom: 1px solid #2825ca;
+    z-index: 2;
+  }
+  [type=radio]:checked ~ label ~ .abavertical_conteudo {
+    z-index: 1;
+  }

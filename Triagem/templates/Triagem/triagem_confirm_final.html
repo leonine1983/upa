@@ -1,0 +1,34 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block title_login %}ENFERMARIA > Triagem {% endblock title_login %}
+{% block titulo_ %}Triagem{% endblock titulo_ %} 
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/enfermagem-mulher.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block body_title %} FINAL DA TRIAGEM DO PACIENTE <b class='uppercase'>{{envio_triagem}}</b>{% endblock body_title %}
+{% block body_login %}
+
+    
+<div class="top-info">    
+    <div style="margin:auto;  width: 100%;">
+        <form action="" method='POST'>    
+            {% csrf_token %}
+            <div class="form-body" style="" > 
+                <div > 
+                    <div style="text-align:center;margin:auto; border: 0.1rem solid #666; background: #d3d3d3; width: 50%; height: 8rem; padding: 1rem;"> 
+                        <label  for="id_final_triagem">Confirmo a finalização do pré-atendimento do paciente 
+                            <p><b class='uppercase'>{{envio_triagem}}</b></p>
+                        </label>
+                        <div>&nbsp;</div>
+                        <input type='checkbox' style="scale:5" name="triagem_concluida" required="" id="id_triagem_concluida" value='1'>                             
+                    </div>
+                </div>         
+            </div>                           
+            <button class='button-salvar' type="submit">Salvar <i class="fa-solid fa-plus"></i></button>
+            <a class='button-salvar' style='background:cornflowerblue' href=" {% url 'Triagem:triagem-enfermaria' %} ">:: CANCELAR <i class="fa-regular fa-rectangle-xmark"></i></a>
+        </form>
+        
+    </div>
+   
+</div> 
+{% endblock body_login %}

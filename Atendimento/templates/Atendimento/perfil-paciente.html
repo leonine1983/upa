@@ -1,0 +1,234 @@
+{% extends 'global/template_geral.html' %}
+<!-- titulo Web da pagina-->
+{% block title_login %} Informação Pessoal {% endblock title_login %}
+{% load static %}
+<!--CSS local-->
+{% block css %} 
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--menu em giro-->
+    
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
+{% endblock css %}   
+<!--Titulo da Pagina-->
+{% block body_title %}   Informações Pessoais do Paciente::   {% endblock body_title %}
+{% block body_login %}
+<div class='menu-local-top' style='margin-top:-1rem ; border-right-bottom-radius:10rem'>
+    <ul style='border-bottom-right-radius: 1rem;  '>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}">Listagem</a></li>
+        <li> <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastro</a></li>
+        {% for dados_pessoais in db  %} 
+        <li style='width:40%'> <a class='flex' href=" {% url 'Atendimento:envio_paciente_a_triagem_2' dados_pessoais.pk %} ">
+            <b style='padding:0.15rem 0.8rem; display:block'><i class="fa-solid fa-angles-right"></i> Enviar {{dados_pessoais.nome_social}}  para a fila de triagem </b> <i class=" fa-solid fa-people-arrows fa-2x "></i></a></li>   
+        {% endfor %}
+    </ul>            
+</div>
+<p>&nbsp;</p> 
+<p>&nbsp;</p> 
+<p>&nbsp;</p>  
+
+{% for dados_pessoais in db  %}    
+    <div class="perfil-user">       
+        {% if envio_triagem %}
+        <h1 class='uppercase'>{{dados_pessoais.nome_social}}</h1>
+        <p>&nbsp;</p>   
+
+
+        <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%">                
+            <thead>
+                
+                <tr>                
+                    <td colspan='2' class="top center"><strong>Passagem do paciente pela recepção</strong></td>
+                </tr>
+                <tr>                
+                    <td><strong>Data</strong></td>
+                    <td><strong>Horário</strong></td>
+                </tr>
+            </thead>       
+            <tbody> 
+                {% for campo in envio_triagem %}  
+                <tr>                     
+                    <td href="">{{campo.data_envio_triagem}}</td>
+                    <td >{{campo.horario_triagem}}</td>                                      
+                </tr> 
+                {% empty%}
+                    <tr>
+                        <td colspan='2'>Nenhum registro informado</td>        
+                    </tr>                       
+                {% endfor %}
+            </tbody> 
+        </table>
+        <!--Triagem-->
+        <p>&nbsp;</p>
+        <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%">                
+            <thead>
+                
+                <tr>                
+                    <td colspan='2' class="top center"><strong>Passagem do paciente pela TRIAGEM</strong></td>
+                </tr>
+                <tr>                
+                    <td><strong>Data</strong></td>
+                    <td><strong>Horário</strong></td>                    
+                    <td><strong>Classificação de Risco</strong></td>
+                    <td><strong>Info. pré-atendimento</strong></td>
+                </tr>
+            </thead>       
+            <tbody> 
+                {% for campo in envio_triagem %}
+                    {% for campo in triagem  %}
+                <tr>                     
+                    <td href="">{{campo.data_triagem}}</td>
+                    <td >{{campo.hora_triagem}}</td>
+                    <td >{{campo.classifica_tipo}}</td>
+                    <td>
+                        <p><span>Pressão Arterial (PA):</span> {{campo.pressao_arterial_PA}}</p>
+                        <p><span>Frequência Cardiaca (FC):</span> {{campo.frequencia_cardiaca_FC}}</p>
+                        <p><span>Frequência Respiratória (FR):</span> {{campo.frequencia_respiratoria_FR}}</p>
+                        <p><span>Saturação de Oxigênio (SPO²):</span> {{campo.saturacao_de_oxigenio_SPO2}}</p>
+                        <p><span>Hemiglicoteste (HGT):</span> {{campo.hemoglicoteste_HGT}}</p>
+                        <p><span>Temperatura (C°):</span> {{campo.temperatura_TEMP}}</p>
+                        <p><span>Peso (Kg):</span> {{campo.peso}}</p>                       
+                    </td>                                                         
+                </tr>
+                <tr colspan=4>
+                    <td >
+                        <strong>Sitomas relatados pelo paciente:</strong>
+                        <div style='padding:0 5rem;'>
+                            {{campo.observacao}}
+                        </div>                        
+                    </td> 
+                </tr>
+                    {% endfor %}
+                {% empty%}
+                    <tr>
+                        <td colspan='2'>Nenhum registro informado</td>        
+                    </tr>                       
+                {% endfor %}
+            </tbody> 
+        </table>
+        <!--Atendimento Medico-->
+        <p>&nbsp;</p>
+        <h3>Informações do Atendimento Médico</h3>
+        {% for campo in envio_triagem %}
+            {% for campo in triagem  %}
+                        {% for at_med in atendimento_medico  %}
+                        <div class='grid'>
+                            {% if not at_med.comorbidades == 'Não se aplica' %}
+                                <div>
+                                    <span class='uppercase'><strong>Comorbidades:</strong></span>                     
+                                    <p href="">{{at_med.comorbidades}}</p>                                                          
+                                </div>
+                            {% endif %}
+                            {% if not at_med.hemorragia_digestiva_alta_HDA == 'Não se aplica' %}
+                                <div>
+                                    <span class='uppercase'><strong>Hemorragia Digestiva (HDA):</strong></span>                     
+                                    <p href="">{{at_med.hemorragia_digestiva_alta_HDA}}</p>                                                          
+                                </div>
+                            {% endif %}
+                            {% if not at_med.exame_fisico == 'Não se aplica' %}
+                            <div>
+                                <span class='uppercase'><strong>Exame Físico:</strong></span>                     
+                                <p href="">{{at_med.exame_fisico}}</p>                                                          
+                            </div>
+                            {% endif %}
+                            {% if not at_med.Diagnostico == 'Não se aplica' %}
+                                <div>
+                                    <span class='uppercase'><strong>Diagnóstico:</strong></span>                     
+                                    <p href="">{{at_med.Diagnostico}}</p>                                                          
+                                </div>
+                            {% endif %}
+                            {% if not at_med.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                <div>
+                                    <span class='uppercase'><strong>CID - Classificação Internacional de Doenças:</strong></span>                     
+                                    <p href="">{{at_med.classificacao_internacional_doenca_CID}}</p>                                                          
+                                </div>
+                            {% endif %}
+                            {% if not at_med.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                <div>
+                                    <span class='uppercase'><strong>Conduta:</strong></span>                     
+                                    <p href="">{{at_med.conduta}}</p>                                                          
+                                </div>
+                            {% endif %}
+                            {% if at_med.classificacao_internacional_doenca_CID == 'Não se aplica' %}
+                                <div>
+                                    <span class='uppercase'><strong>Medicamento receitado pelo médico:</strong></span>                     
+                                    <p href="">{{campo.preescrever_medicamento_medico}}</p>                                                          
+                                </div>
+                            {% endif %}                            
+                            <div>
+                                <span class='uppercase'><strong>Médico que fez o atendimento:</strong></span>                     
+                                <p href="">{{at_med.medico_nome}}</p>                                                          
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+            {% empty%}
+                <tr>
+                    <td colspan='2'>Nenhum registro informado</td>        
+                </tr>                       
+        {% endfor %}
+    {% else %}
+
+        <div class="dados-pessoais">
+            <div class="info-pessoal">
+                <div>
+                    <p class="nome_social">{{dados_pessoais.nome_social}}</p>
+                    <p>&nbsp</p>
+                    <p><b>Idade: </b> {{dados_pessoais.idade}} anos </p>
+                    <p>(obs.: Colocar para a data mudar automaticamente)</p>
+                    <p><b>Data de Nascimento: </b>{{dados_pessoais.data_nascimento}}</p>
+                    <p><b>Sexo: </b>{{dados_pessoais.sexo}}</p>
+                    <p><b>Nº RG: </b>{{dados_pessoais.RG}}</p>
+                    <p><b>Nº CPF: </b>{{dados_pessoais.CPF}}</p>
+                    <p><b>Nacionalidade: </b>{{dados_pessoais.nacionalidade}}</p>
+                    <p>&nbsp</p>
+                </div>
+                <div class="foto">                     
+                    {% if dados_pessoais.sexo.id == 1 %}
+                    <img src=" {% static 'foto-man.jpg' %} " alt="">                       
+                    {% else %}                    
+                    <img src=" {% static 'foto-woman.jpg' %} " alt="">    
+                    {% endif %}
+                </div>
+            </div>
+            <p>&nbsp</p>
+            <div class="info">
+                <div>
+                    <b>ENDEREÇO</b>
+                    <hr>
+                    <p><b>Rua: </b>{{dados_pessoais.rua}}, 
+                    <p><b>Bairro: </b>{{dados_pessoais.bairro}}</p>
+                    <p><b>Cidade: </b>{{dados_pessoais.cidade}}</p>
+                    <p><b>Estado: </b>{{dados_pessoais.estado}}</p>
+                    <p><b>CEP: </b>{{dados_pessoais.CEP}}</p>
+                    <p>&nbsp</p>
+                </div>
+                <div>
+                    <b>INFORMAÇÕES ADICIONAIS</b>
+                    <hr>
+                    <p><b>Nome da Mãe: </b>{{dados_pessoais.nome_mae}}</p>
+                    <p><b>Nome do Acompanhante: </b>{{dados_pessoais.responsavel}}</p>
+                    <p><b>Telefone:</b>{{dados_pessoais.tel}}</p>    
+                    <p>&nbsp</p>                
+                </div>                                 
+            </div>            
+            <p><b>Data em que foi realizado o cadastro do paciente nesse sistema:</b></p>
+            <p>{{dados_pessoais.data_cadastro}} &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;  Nº de Registro: {{dados_pessoais.registro}}</p>
+        </div>
+        <hr>
+        <p>&nbsp;</p>        
+
+
+
+        {% endif %}        
+    </div>
+    
+    <div style='text-align:right; width:100%'><a  href="{% url 'Atendimento:perfil-paciente-hist' dados_pessoais.id %}"> HISTÓRICO DO PACIENTE <i class="fa-solid fa-file-medical"></i></a></div>
+
+
+
+{{dbs}}
+{% endfor %}
+<p>&nbsp;</p> 
+<a href="{% url 'Atendimento:lista-paciente' %}"> Voltar <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>
+
+{% endblock body_login %}

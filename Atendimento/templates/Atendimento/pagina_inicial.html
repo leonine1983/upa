@@ -1,0 +1,128 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block titulo_ %}
+    Página Inicial                    
+{% endblock titulo_ %} 
+{% block css %}
+<link rel="stylesheet" href=" {% static 'Atendimento/css/atendimento-pag-inicial.css' %} ">
+<link rel="stylesheet" href=" {% static 'global/css/menu/hexago.css' %} ">
+{% endblock css %}   
+{% block body_title %} Informações sobre o {{nome_sistema}}:{% endblock body_title %} 
+{% block body_login %}
+<!--Menu futuristico diagonal-->
+{% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' or grupo_usuario == 'group_Tec_Enfermagem' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+                <div class="page-title  home text-center">
+                </div>
+                <div class="hexagon-menu clear">
+                   
+                    <div class="hexagon-item">
+                        <div class="hex-item">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="hex-item">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <a  class="hex-content" href="{% url 'Atendimento:lista-paciente' %}">
+                            <span class="hex-content-inner">
+                                <span class="icon">
+                                    <i class="fa fa-universal-access"></i>
+                                </span>
+                                <span class="title">Paciente</span>
+                            </span>
+                            <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#087211dc"></path></svg>
+                        </a>
+                    </div>
+
+                    <div class="hexagon-item">
+                        <div class="hex-item">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="hex-item">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <a href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "  class="hex-content">
+                            <span class="hex-content-inner">
+                                <span class="icon">
+                                    <i class="fa fa-solid fa-people-arrows"></i>
+                                </span>
+                                <span class="title">Fila de Triagem</span>
+                            </span>
+                            <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#087211dc"></path></svg>
+                        </a>
+                    </div>
+                    <div class="hexagon-item">
+                        <div class="hex-item">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="hex-item">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <a  class="hex-content" href='{% url 'Triagem:triagem-enfermaria' %}'>
+                            <span class="hex-content-inner">
+                                <span class="icon">
+                                    <i class="fa fa-thin fa-user-nurse"></i>
+                                </span>
+                                <span class="title">Triagem</span>
+                            </span>
+                            <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#087211dc"></path></svg>
+                        </a>    
+                    </div>
+                </div>                    
+            </div>
+        </div>
+    </div>
+{% endif %}
+<!--Fim menu futuristico-->
+<div>
+    <!--Cards-info: Aqui fica todos os cards informativos do sistema-->
+    {% include 'Atendimento/pagina_inicial_complementos/cards-info.html' %}
+</div>
+
+<div>&nbsp</div>
+<div class='content-info-home'>
+    <div>
+        Temos instalado nesse {{nome_sistema}} os seguintes módulos:
+        <ul>
+            <li><h2>Registro de Pacientes:</h2> Espaço destinado à recepção da {{nome_estabelecimento}}  
+                    para a realização de registros de pacientes ou consultas em busca de informações 
+                    sobre determinado paciente.</li>
+            <div>&nbsp</div>     
+            <li><h2>Fila de Triagem:</h2> Nesse espaço, o recepcionista faz a 
+                consulta no sistema para verificar se o nome do paciente consta no sistema, se constar, 
+                o recepcionista envia o paciente para aguardar ser chamado para a TRIAGEM; caso contrário, 
+                o recepcionista terá que fazer o registro do paciente e depois retornar a esse espaço para enviar o paciente à fila de triagem.</li>
+            <div>&nbsp</div> 
+            <li><h2>Triagem:</h2> Espaço destinado ao Enfermeiro. Nele, o enfermeiro faz o primeiro 
+                atendimento ao paciente e faz a <b>classificação de emergência.</b></li>
+            <div>&nbsp</div>  
+            <li><h2>Médico:</h2> Espaço destinado ao Médico. Nesse espaço, o médico tem acesso às primeiro atendimento feito na 
+            na triagem, de acordo com a classificação de emergência vinculada a esse paciente. Além disso, pode também consultar o 
+        histórico médico desse paciente para auxiliar em suas decisões.</b></li>
+            <div>&nbsp</div>  
+        </ul>
+    </div>
+</div>
+
+  
+    
+
+
+
+    
+
+{% endblock body_login %}

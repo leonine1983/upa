@@ -1,0 +1,141 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block body_login %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'global/css/message.css' %}">
+    <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">   
+    <link rel="stylesheet" href="{% static 'global/css/form.css' %}">   
+    <style>
+        .Tabela-user-div{}
+        .Tabela-user{
+            margin:auto;
+        }
+        .Tabela-user tr th{          
+            background-color: aquamarine;
+            padding: 0.2rem;
+           
+        }
+        .Tabela-user tr td {            
+            background-color: #ebf0f7;
+            padding: 0.3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border: 0.01rem solid aquamarine;
+        }
+        .Tabela-user tr td:hover {            
+            background-color: #bbd0eb;
+        }
+       
+
+    </style>
+{% endblock css %}
+    {% include 'global/message.html' %}    
+    
+<h2><i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i> Relação de Profissionais Cadastrados no Sistema</b></h2>
+    <table class="Tabela-user" cellspacing="0">
+        <tr>
+            <th>Nome Completo</th>
+            <th>Usuário (Login)</th> 
+            <th>Email</th>
+            <th>Telefone</th>
+            <!--<th>Data Nascimento</th>
+            <th>Endereço</th>
+            <th>Grupo</th>-->
+            <th>CRM</th>
+            <th>Grupo</th>
+            <th>Ações</th>
+
+        </tr>
+        {% for groups in users %}
+        <tr>
+            <td>{{groups.user__first_name}} {{groups.user__last_name}}</td>
+            <td>{{groups.user__username}}</td>            
+            <td>{{groups.user__email}}</td>  
+            <td>{{groups.telefone}}</td>   
+            <td>{{groups.crm}}</td>
+            <!--<td>{{groups.data_nascimento}}</td>       
+            <td>{{groups.endereco}}</td>
+            <td>{{groups.user__groups__name}}</td>-->            
+            <td>{{groups.user__groups__name}}</td>
+            <td><span><a href="{% url 'Triagem:user_atualiza' groups.id %}"><i class="fa-solid fa-user-pen"></i></a></span> |  <span><a style='text-align:center; color:red' href="{% url 'Triagem:user_delete' groups.id %}"><i class="fa-solid fa-trash"></i></a></span></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+ 
+<p>&nbsp;</p>
+
+
+
+<!-- cria_enfEtec.html -->
+<form method="post">
+    {% csrf_token %}
+    <p style='text-align:center; color:red'><i class="fa-solid fa-user-slash exclui"></i> Você tem certeza de que deseja exclui o registro de <b class='uppercase'>{{ up }}</b>?</p>
+    
+    <div class="flex">
+        <a  href="{% url 'Triagem:user_create' %}" class="button-salvar">Cancelar</a>   
+        <button class="button-salvar" style="background-color:red;" type="submit">
+            Deletar {{ up }}
+        <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+</form>
+
+
+
+{% if form.errors %}
+    <ul>
+        {% for field_errors in form.errors.values %}
+            {% for error in field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+
+
+
+
+
+
+<!--SCRIPTS DO SISTEMA-->
+{% block script %}
+    <script src='{% static 'global/js/jquery.mask.min.js' %}'></script>
+        <script>
+        $(document).ready(function(){
+            $("#id_data_nascimento").mask("00/00/0000")
+        })
+        $(document).ready(function(){
+            $("#id_telefone").mask("00 0 0000-0000")
+        })
+        $(document).ready(function(){
+            $("#id_CPF").mask("000.000.000-00")
+        })
+        $(document).ready(function(){
+            $("#id_RG").mask("000.000.00-00")
+        })
+        
+        $(document).ready(function(){
+            $("#id_crm").mask("AAAAA-AA 000.000-AA")
+        })
+    </script>
+
+
+
+{% endblock script %}
+{% endblock body_login %}

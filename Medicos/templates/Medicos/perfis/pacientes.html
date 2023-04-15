@@ -1,0 +1,87 @@
+{% extends 'global/template_geral.html' %}
+<!-- titulo Web da pagina-->
+{% block title_login %} Pacientes {% endblock title_login %}
+{% load static %}
+<!--CSS local-->
+{% block css %} 
+    <!--Tabela-->
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--Menu Local-->
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
+{% endblock css %}   
+<!--Titulo da Pagina-->
+{% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema com HISTÓRICO HOSPITALAR::.  {% endblock body_title %}
+{% block body_login %}
+    
+<div class='menu-local-top'>     
+    <div class="busca-paciente">
+        <form action="?" method="GET">
+            {% csrf_token %}
+            <input type="text" placeholder="Busque por um paciente" name="busca-paciente">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+    </div>        
+</div>  
+<p>&nbsp;</p>
+<p>&nbsp;</p>    
+<p>&nbsp;</p>    
+<p>&nbsp;</p>   
+<div class='flex'>
+
+    <div class="style-tabela">       
+        <div class="top-info">
+            Na tabela abaixo, está listado todos os pacientes cadastrados nesse sistema. 
+            Caso não esteja visualizando o nome do paciente desejando, utilize o sistema de busca acima
+             para encontar o nome dele, bastando somente digitar o nome é clicar em pesquisar. 
+             Se desejar ter mais informações sobre o paciente, basta clicar sobre o nome desejado que 
+             imediatamente que página contendo todas as informações desse paciente é aberto.
+        </div>
+       <p>&nbsp;</p>
+       <div class="controle_tabela">
+        {% if page_obj.has_previous %}
+            <a class="" href="?page={{page_obj.previous_page_number}}"><i class="fa-solid fa-angles-left"></i> Voltar</a>    
+                          
+        {% endif %}
+        {% if page_obj.has_next %}               
+            <a href="?page={{ page_obj.next_page_number }}">Próxima página <i class="fa-solid fa-angles-right"></i></a>    
+        {% endif %}
+    </div>
+        <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%">                
+                <thead>
+                    <tr>
+                    <td class="top center"><strong>Nome</strong></td>
+                    <td class="top center"><strong>Telefone</strong></td>
+                    <td class="top center"><strong>Bairro</strong></td>
+                    <td class="top center"><strong>Data de Cadastro</strong></td>
+                    <td class="top center"><strong>Resp. pelo cadastro</strong></td>
+                    <td class="top center" colspan="2" ><strong>Ações</strong></td>
+                   
+                    </tr>
+                </thead>       
+                <tbody>                     
+
+                    {% for campo in object_list %}  
+                    <tr> 
+                        <td><a class="link-color" href="{% url 'Medicos:perfil_completo_paciente_menu_lateral' campo.pk %}"><span>{{campo.nome_social}}</span></a></td>                                                        
+                        <td align="center" href="">{{campo.tel}}</td>
+                        <td align="center">{{campo.bairro}}</td>
+                        <td align="center">{{campo.data_cadastro}}</td>
+                        <td align="center"><span class="uppercase"></span></td>                    
+                        <td align="center"> <a href="" class="editar fa fa-check-circle" title="Editar"></a> </td>
+                        <td align="center"> <a href="" class="deletar fa fa-times-circle" title="Deletar"></a> </td>                  
+                        
+                    </tr>       
+                    
+                    {% empty%}
+                        <tr>
+                            <td colspan='7'>Nenhum registro informado</td>  
+                                  
+                        </tr>                       
+                    {% endfor %}
+                </tbody>                
+        </table>                    
+    </div><!--tabela-->   
+
+</div>     
+            
+{% endblock body_login %}

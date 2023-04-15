@@ -1,0 +1,50 @@
+{% extends 'global/template_geral.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+{% endblock css %}  
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block title_login %}ÁREA MÉDICA {% endblock title_login %}
+{% block titulo_ %} ÁREA MÉDICA - Pacientes aguardando atendimento {% endblock titulo_ %} 
+{% block body_title %}ÁREA MÉDICA: Pacientes aguardando atendimento{% endblock body_title %}
+{% block body_login %}
+{% if success %}
+    <p>CSV importado com sucesso!</p>
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="csv_file">
+    <button type="submit">Importar CSV</button>
+</form>
+
+<h2>Site de referência para o CID-10</h2>
+<p><a href="http://tabnet.datasus.gov.br/cgi/sih/mxcid10lm.htm"> http://tabnet.datasus.gov.br/cgi/sih/mxcid10lm.htm</a></p>
+<h2>COMO PROCEDER</h2>
+<ul>
+    <li>Abra o aplicativo Microsoft Excel</li>
+    <li>Clique na ABA <b>Dados</b></li>
+    <li>Clique no botão <b>Da Web</b></li>
+    <li>Na barra de endereços <b>digite</b> ou <b>cole</b> o endereço do site que conté a tabela do Cid10.</li>
+    <li>Procure na página um <b>botão amarelo com seta preta apontando para a direita</b>.</li>
+    <li>Apos selecionar a tabela, clique em importar</li>
+    <li>Depois que importar os dados para o excel, salve o arquivo no formato <b>CSV (separado por vírgulas)</b></li>
+    <p>&nbsp;</p>
+    <p><h2>Atenção:</h2></p>
+        <div>
+            Ante de importar a tabela do CID 10 verifique 
+            se a tabela consta com as seguintes colulas, se os nomes das colunas estiverem diferentes, altere-os 
+            para que fique igual ao exemplo abaixo:
+            <p> <b> Codigo | Descricao | Codigos_da_CID_10 </b></p>
+            <p>Caso haja mais colunas, você deverá excluí-las antes de realizar a importação da tabela. </p>
+
+
+        </div>
+    </p>
+
+
+
+</ul>
+{% endblock body_login %}

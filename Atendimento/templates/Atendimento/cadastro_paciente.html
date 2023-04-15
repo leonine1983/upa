@@ -1,0 +1,57 @@
+{% extends 'global/template_geral.html' %}
+{% block title_login %}Cadastro de Pacientes {% endblock title_login %}
+{% block body_title %} Cadastro de Pacientes ::. {% endblock body_title %}
+{% load static %}
+<!--CSS local-->
+{% block css %} 
+    <!--Tabela-->
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--Menu Local-->
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
+{% endblock css %}  
+{% block body_login %}
+<div class='menu-local-top'>
+    <ul>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}">Listagem</a></li>
+        <li> <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastro</a></li>        
+    </ul>     
+          
+</div> 
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+    {% if dados %}
+    <h1><i class="fa fa-universal-access fa-2x "></i> Atualização das informações do paciente</h1>
+    {% endif %}
+</p>
+<p>&nbsp;</p>
+<form action="" method='POST'>
+    
+    <div class="form-body">
+        {% csrf_token %}
+        
+    {{form.as_div}}        
+    </div>           
+    
+    <button class='button-salvar' type="submit">Salvar</button>    
+</form>
+
+{% block script %}
+    <script src='{% static 'global/js/jquery.mask.min.js' %}'></script>
+        <script>
+        $(document).ready(function(){
+            $("#id_data_nascimento").mask("00/00/0000")
+        })
+        $(document).ready(function(){
+            $("#id_tel").mask("00 0 0000-0000")
+        })
+        $(document).ready(function(){
+            $("#id_CPF").mask("000.000.000-00")
+        })
+        $(document).ready(function(){
+            $("#id_RG").mask("000.000.00-00")
+        })
+    </script>
+{% endblock script %}
+{% endblock body_login %}

@@ -1,0 +1,189 @@
+{% load static %}
+    <div class="container-card">
+        <!--Nº DE REGISTROS TOTAL
+        <div class="center">
+            <div class="card">
+                <div class="additional">
+                    <div class="user-card">                    
+                        <img src=" {% static 'home/REGISTROS.fw.png' %} " alt="">
+                        <div class="points center">0{{quant}} registros</div>                   
+                    </div>
+                    <div class="more-info">
+                        <!-- <h1>0{{quant}} Pacientes </h1>
+                    
+                        <div class="coords">
+                            <span>Group Name</span>
+                            <span>Joined January 2019</span>
+                        </div>
+                            <div class="coords">
+                            <span>Position/Role</span>
+                            <span>City, Country</span>
+                        </div>
+                        <p>&nbsp;</p>
+                        <div class="stats">                        
+                            <div>
+                                <div class="title">Homens</div>
+                                <div class="value">{{quant_homem}}</div>
+                                <img src="{% static 'home/HOMEM.fw.png' %}" alt="">
+                                
+                            </div>
+                            <div>
+                                <div class="title">Mulheres</div>
+                                <div class="value">{{quant_mulher}}</div>
+                                <img src="{% static 'home/MULHERES.fw.png' %}" alt="">
+                            </div>                                         
+                        </div>
+                    </div>
+                </div>
+            <div class="general">                
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <h3>Nº de Registros Salvos</h3>
+                <hr>
+                {% if quant < 1 %}
+                <h1 aling='center'>0</h1>
+                {% else %}
+                <h1 aling='center'>{{quant}}.0</h1>
+                {% endif %}
+            </div>
+        </div>
+        -->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Raleway:wght@100&display=swap');
+            
+            .card-info{
+                width:100%;
+                border-top: 0.1rem solid #D8BFD8;
+            }
+            .card-info .fila_1 span{
+                background:#D8BFD8;
+                padding: 0.5rem;
+                border-bottom-left-radius:0.5rem;
+                border-bottom-right-radius:0.5rem;
+                font-family: 'Montserrat', sans-serif;
+                font-family: 'Raleway', sans-serif;  
+                display: block;  
+                width:30%;
+            }
+            .card-info .fila_1 span b{
+                position: relative;
+                font-size:1.2rem;
+                text-shadow: 
+                0 0 1px #fff, 
+                0 0 4px #fff, 
+                0 0 5px #fff, 
+                0 1px 1px rgba(0,0,0,0.2), 
+                0 2px 2px rgba(0,0,0,0.2), 
+                0 4px 4px rgba(0,0,0,0.2), 
+                0 8px 8px rgba(0,0,0,0.2), 
+                0 1px 1px rgba(0,0,0,0.2);
+            }
+            .card-info .fila_1 ul{
+                list-style:none
+                
+            }
+            .card-info .fila_1 ul li{
+                width: 21rem;
+                padding:0.5rem;
+                heigth:3rem;
+                border-top: 0.3rem solid green;
+                margin: 0.2rem;
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+            }
+            .homem{
+                background:#E0FFFF;
+            }
+            .mulher{
+                background:#FFE4E1;
+            }
+            .card-info .fila_1 ul li b{
+                font-size:1.rem
+            }
+            .card-info .fila_1 ul li ul li{                
+                border-top: none;
+                margin: -0.1rem;
+                padding: 0.2rem;
+                box-shadow:none;
+            }
+            .grid{
+                display: grid;    
+                grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            }
+        </style>
+        
+        <!-- NUMERO DE ATENDIMENTOS DIARIO -->
+        <div class='card-info'>
+            <div class='fila_1'>
+                <span >                    
+                        {% if quant_atendimentos_diario >= 1 and quant_atendimentos_diario < 10  %}                    
+                        <strong>Hoje, </strong> <b aling='center'>0{{quant_atendimentos_diario}}</b> atendimentos.
+                        {% elif quant_atendimentos_diario > 9 %}
+                        <strong>Hoje, </strong>   <b aling='center'>{{quant_atendimentos_diario}}</b> atendimento.
+                        {% else %}
+                            <b aling='center'>Até o momento, nenhum atendimento para o dia de hoje.</b>                
+                        {% endif %}                    
+                </span>
+                <ul class='grid'>
+                    {% if quant_atendimentos_diario_H > 0 %}
+                        <li class='homem'>                        
+                            <i class="fa-solid fa-mars"></i> Homens: <b>{{quant_atendimentos_diario_H}}</b>
+                            <ul>
+                                {% if quant_H_idosos > 0 %}
+                                    <li>Idosos (de 60 pra cima):<b> 0{{quant_H_idosos}}</b></li>
+                                {% endif %}
+                                {% if quant_H_adultos > 0 %}
+                                    <li>Adultos (18 a 59 anos):<b> 0{{quant_H_adultos}}</b> </li>
+                                {% endif %}
+                                {% if quant_H_adolescentes > 0 %}
+                                    <li>Adolescentes (13 a 18 anos):<b> 0{{quant_H_adolescentes}}</b> </li>
+                                {% endif %}
+                                {% if quant_H_criancas > 0 %}
+                                    <li>Crianças (1 a 13 anos):<b>0{{quant_H_criancas}}</b> </li>
+                                {% endif %} 
+                                {% if quant_H_bebe %}                   
+                                    <li>Recem-Nascidos (abaixo de um 1 ano): <b>0{{quant_H_bebe}}</b>
+                                {% endif %}    
+                                    
+                                </li> 
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if quant_atendimentos_diario_F > 0 %}
+                        <li class='mulher'>                        
+                            <i class="fa-solid fa-venus"></i> Mulheres: <b>{{quant_atendimentos_diario_F}}</b>
+                            <ul>
+                                {% if quant_F_idosos > 0  %}
+                                    <li>Idosos (de 60 pra cima):<b> 0{{quant_F_idosos}}</b></li>
+                                {% endif %}
+                                {% if quant_F_adultos > 0 %}
+                                    <li>Adultos (18 a 59 anos): <b>0{{quant_F_adultos}}</b> </li>
+                                {% endif %}
+                                {% if quant_F_adolescentes > 0 %}
+                                    <li>Adolescentes:<b>0{{quant_F_adolescentes}}</b> </li>
+                                {% endif %}
+                                {% if quant_F_criancas > 0 %}
+                                    <li>Crianças: <b>0{{quant_F_criancas}}</b> </li>                        
+                                {% endif %}
+                                {% if quant_F_bebe > 0 %}
+                                    <li>Recem-Nascidos (idade inferior a 1 ano): <b>0{{quant_F_bebe}}</b>
+                                     
+                                    </li> 
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if quant_localidades %}
+                    <li class='localidades'>                        
+                        <i class="fa-solid fa-venus"></i> Localidades: <b></b>
+                        <ul>
+                            {% for n in quant_localidades %}
+                                <li>{{n.paciente_envio_triagem__bairro}}: <b>{{n.Total}} </b></li>
+                            {% endfor %}   
+                        </ul>
+                    </li>{% endif %}
+                </ul>
+            </div>
+        </div>       
+        
+    </div>    
+    <!--End Container Card-->

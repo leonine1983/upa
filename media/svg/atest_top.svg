@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="46.4852mm" height="8.426mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 4648.52 842.6"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:#4B4B4D}
+    .fil0 {fill:#00AFEF}
+   ]]>
+  </style>
+    <clipPath id="id0">
+     <rect x="88.05" y="498.43" width="901.45" height="283.97"/>
+    </clipPath>
+    <clipPath id="id1">
+     <rect x="3867.46" y="445.59" width="727.95" height="375.33"/>
+    </clipPath>
+ </defs>
+ <g id="Camada_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2629711265104">
+   <path class="fil0" d="M1977.05 4.23l224.56 0 767.06 841.03 -224.6 0 -767.02 -841.03zm698.15 841.03l-226.53 0 -767.05 -841.03 226.31 0 767.27 841.03z"/>
+   <polygon class="fil1" points="-4.13,422.76 1951.3,422.76 2333.91,845.26 -4.13,845.26 "/>
+   <polygon class="fil1" points="4644.43,425.13 2689,425.13 2306.39,2.63 4644.43,2.63 "/>
+   <g style="clip-path:url(#id0)">
+    <image id="upa24.jfif" x="88.05" y="498.43" width="901.44" height="283.97" xlink:href="atest_top_Images\atest_top_ImgID1.png"/>
+   </g>
+   <g style="clip-path:url(#id1)">
+    <image id="sus.fw.png" x="3867.46" y="445.6" width="727.95" height="375.32" xlink:href="atest_top_Images\atest_top_ImgID2.png"/>
+   </g>
+  </g>
+ </g>
+</svg>
