@@ -7,17 +7,15 @@
 <!--CSS local-->
 {% block css %} 
     <!--Tabela-->
-    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
     <!--Menu Local-->
-    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
-    <link rel="stylesheet" href="{% static 'global/css/geral-style.css' %}">
+    <link rel="stylesheet" href="{% static 'global/css/footer.css' %}">
     <style>
         body{}
-        video{
+        .video{
           position: fixed;
-          right: 0;
-          bottom: 0;
           z-index: -1;
+          margin-right: 10rem;
+          width: 100%;
         }
         .container{
             margin: auto;
@@ -62,9 +60,11 @@
 <!--Titulo da Pagina-->
 {% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
 {% block body_login %}
-<video autoplay loop muted>
-  <source src = {% static  videoUpa %}>
+{% if videoUpa %}
+<video controls autoplay class="video">
+  <source src="{% static  videoUpa  %}">
 </video>
+{% endif %}
 <div class="container ">     
     
     {% for cf in configUpa %}

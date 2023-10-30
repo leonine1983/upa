@@ -53,6 +53,9 @@
     <!--Relação de Salas Cadastradas-->
 
    {% if object_list %}
+   <h1 style="font-size: 1.8rem !important;"><i class="fa-solid fa-house-medical"></i> Salas ou Departamentos</h1>
+   <hr>
+   <p>&nbsp;</p>
    <h2> <i class="fa-solid fa-person-shelter"></i> Relação de Salas para Atendimento Medico:</h2>
     <table class="table" >
         <tr>
@@ -73,7 +76,7 @@
     <table class="table" >
         <tr>
             <th>SALA</th>
-            <th>DESCRIÇÃO DA SALA</th>
+            <th>Nome do profissional</th>
             <th>AÇÃO</th>
         </tr>
         {% for list in profissionais %} 
@@ -90,30 +93,37 @@
     
     {% if not object_list %}
     {% if update %}                        
-    <h2>Formulário de Atualização de Salas</h2>   
+    <h1>Formulário de Atualização de Salas</h1>  
+    <hr> 
     {% elif salaProfissional %}
-    <h2>Vincular Profissional à Sala de Atendimento</h2>
+    <h1 class="h1 uppercase">Vincular Profissional à Sala de Atendimento</h1>
     <div style='text-align: right; margin-right:5rem'>
-        <a href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Cadastro de Salas</a>
+        <a class="btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Cadastro de Salas</a>
         
     </div>
     {% elif DeleteVinculo %}
     <h2> Tem certeza que deseja deletar o VÍNCULO DO PROFISSIONAL à sala?</h2> 
     {% else %}
+        
+    {% if not conteudo == 'cadastraSala' %}
     <h2> Tem certeza que deseja deletar a sala {{nomeSala}}?</h2> 
+    {% else %}
+    <h1 class="display-3"> CRIAR SALA</h1> 
+    <hr>
+    {% endif %}
     {% endif %}
          
         <div>
             <form class='form' action="" method="post">
                 {% csrf_token %}
                 {{form.as_div}}
-                <div class="flex">
-                    <a class="button-cancelar" href="{%url 'Medicos:salas' %}">Cancelar</a> 
-                    <button class="button-salvar">
+                <div class="grid row m-4">
+                    <a class="col btn btn-sm btn-danger m-4 w-50 h-100" href="{%url 'Medicos:salas' %}">Cancelar</a> 
+                    <button class="col btn btn-sm btn-primary w-50">
                         {% if update %}                        
                         Atualizar Salar
-                        {% elif salaProfissional %}
-                        Salvar
+                        {% elif conteudo == 'cadastraSala' %}
+                        CRIAR SALA
                         {% else %}
                         Deletar {{nomeSala}}
                         {% endif %} </button>                  
@@ -121,5 +131,9 @@
             </form>
         </div>        
     {% endif %}   
-    <a class='button-salvar' href="{% url 'Medicos:salasProfissionalCreate' %}"><i class="fa-solid fa-people-roof"></i> Vincula Profissional às Salas</a>
+    <a class='btn btn-sm btn-secondary m-3' href="{% url 'Medicos:salasProfissionalCreate' %}"><i class="fa-solid fa-people-roof"></i> Vincula Profissional às Salas</a>
+    
+    <a class="btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Criar Salas</a>
+
+
 {% endblock body_login %}

@@ -8,14 +8,15 @@
     <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
     <!--Menu Local-->
     <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
+     <!--FORM-->
+     <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %} "> 
 {% endblock css %}  
 {% block body_login %}
 <div class='menu-local-top'>
     <ul>
         <li><a href="{% url 'Atendimento:lista-paciente' %}">Listagem</a></li>
         <li> <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastro</a></li>        
-    </ul>     
-          
+    </ul>  
 </div> 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
@@ -26,19 +27,17 @@
     {% endif %}
 </p>
 <p>&nbsp;</p>
-<form action="" method='POST'>
-    
+<form action="" method='POST'>    
     <div class="form-body">
-        {% csrf_token %}
-        
-    {{form.as_div}}        
-    </div>           
-    
+        {% csrf_token %}                
+        {{form.as_div}}        
+    </div>  
     <button class='button-salvar' type="submit">Salvar</button>    
 </form>
-
 {% block script %}
-    <script src='{% static 'global/js/jquery.mask.min.js' %}'></script>
+    
+   <!-- <script src="{% static 'Atendimento/js/estados_cidades.js' %}" ></script> -->
+    <script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
         <script>
         $(document).ready(function(){
             $("#id_data_nascimento").mask("00/00/0000")
@@ -53,5 +52,28 @@
             $("#id_RG").mask("000.000.00-00")
         })
     </script>
+    <script src="{% static 'global/js/select2.min.js' %}"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $('#id_bairro').select2();
+        $('#id_rua').select2();
+        $('#id_estado').select2();
+        $('#id_cidade').select2();
+        $('#id_pais').select2();
+        $('#id_etnia').select2();
+    });
+    </script>
+    <!--Script para pegar cidades-->
+
+
+
+
+
+
+
+
+
+
 {% endblock script %}
 {% endblock body_login %}

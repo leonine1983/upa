@@ -2,6 +2,13 @@
 {% block css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+
+<link rel="{% static 'global/dist/css/bootstrap.min.css' %}" href="style.css">
+<style>
+    main{
+        height: 60rem !important;
+    }
+</style>
 {% endblock css %}  
 <!--Imagem Representando o setor-->
 {% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
@@ -38,22 +45,23 @@
        {{campo.idade}}
         <tr> 
             <td><a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk  %}"><span>{{campo.paciente_triagem}}</span></a></td>                                                        
-            <td align="center" class=' {% if campo.classifica_tipo.id == 1 %}
+            <td align="center" class=' {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
                                             prosseguir-red
-                                            {% elif campo.classifica_tipo.id == 2  %}
+                                            {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
                                             prosseguir-laranja
-                                            {% elif campo.classifica_tipo.id == 3  %}
+                                            {% elif campo.classifica_tipo.classifica_tipo == "Verde"   %}
                                             prosseguir-green                                            
-                                            {% elif campo.classifica_tipo.id == 4  %}
+                                            {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
                                             prosseguir-azul
                                         {% endif %}' href=""> {{campo.classifica_tipo}}</td>   
-            <td align="center" href=""><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}} <span class='prosseguir  {% if campo.classifica_tipo.id == 1 %}
+            <td align="center" href=""><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}} <span class='prosseguir  
+                {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
                 prosseguir-red
-                {% elif campo.classifica_tipo.id == 2  %}
+                {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
                 prosseguir-laranja
-                {% elif campo.classifica_tipo.id == 3  %}
+                {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
                 prosseguir-green                                            
-                {% elif campo.classifica_tipo.id == 4  %}
+                {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
                 prosseguir-azul
             {% endif %}'> Seguir com o atendimento <i class="fa-regular fa-paper-plane"></i> </span></a></td>   
                             
@@ -67,6 +75,56 @@
         {% endfor %}
     </tbody>                
 </table>  
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h1>Pacientes enviados para atendimento avançado</h1>
+
+<p>&nbsp;</p>
+<table class="table table-striped table-dark" border="0" cellpadding="0" cellspacing="0" width="100%" >
+    <thead>
+        <tr  style='background:#666' >
+            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Nome do paciente</th>
+            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Tipo de atendimento</th>
+            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Data</th>         
+            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Situação do Paciente</th>                   
+            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Médico Responsável</th>
+            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important; width: 35%' >Ação</th>
+        </tr>
+    </thead>    
+    <tbody>
+        {% for ated_espec in atendimento_especi %}
+        <tr>
+            <td scope="row" style='text-align:center' >{{ated_espec.pk_paciente}}</td>
+            <td scope="row" style='text-align:center'>{{ated_espec.tipo_atendimento}}</td>  
+            <td scope="row" style='text-align:center'>{{ated_espec.pk_paciente.data_triagem}}.</td>  
+            <td scope="row" style='text-align:center'>{{ated_espec.situacao}}</td>          
+            <td scope="row" style='text-align:center'>{{ated_espec.nome_medico}}</td>
+            <th scope="col" style='text-align:center'><a class=
+                "prosseguir 
+                {% for campo in object_list %}  
+                    {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
+                    prosseguir-red
+                    {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
+                    prosseguir-laranja
+                    {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
+                    prosseguir-green                                            
+                    {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
+                    prosseguir-azul
+                    {% endif %}
+                {% endfor %}"
+
+                
+                
+                
+                 href="{% url 'Medicos:dados_do_paciente_medicamentos' ated_espec.pk_paciente.id %}" style='color:#fff; font-weight: normal;'>Continuar com o atendimento <i class="fa-regular fa-paper-plane"></i>  </a></th>
+        </tr>
+        {% endfor %}
+       
+      
+    </tbody>
+</table>
 <div></div>
 
 </div>

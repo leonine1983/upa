@@ -2,6 +2,15 @@
 {% load static %}
 {% block title_login %}ENFERMARIA > Triagem {% endblock title_login %}
 {% block titulo_ %}Triagem{% endblock titulo_ %} 
+{% block css %}
+<link rel="stylesheet" href=" {% static 'global/css/formularios.css' %}">
+<style>
+#id_triagem_concluida{
+    scale:3
+}
+</style>
+
+{% endblock css %}
 <!--Imagem Representando o setor-->
 {% block vetor-img-aereo %}<img src=" {% static 'home/enfermagem-mulher.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
 <!--END Imagem Representando o setor-->
@@ -13,19 +22,23 @@
     <div style="margin:auto;  width: 100%;">
         <form action="" method='POST'>    
             {% csrf_token %}
-            <div class="form-body" style="" > 
+            <div  > 
                 <div > 
-                    <div style="text-align:center;margin:auto; border: 0.1rem solid #666; background: #d3d3d3; width: 50%; height: 8rem; padding: 1rem;"> 
+                    <div style="text-align:center;margin:auto; margin-bottom:1rem; border: 0.1rem solid #666; background: #d3d3d3; width: 80%; height: 8rem; padding: 1rem;"> 
                         <label  for="id_final_triagem">Confirmo a finalização do pré-atendimento do paciente 
-                            <p><b class='uppercase'>{{envio_triagem}}</b></p>
+                            <div style='text-align:center; width:100%'><b class='uppercase'>{{envio_triagem}}</b></div>
                         </label>
                         <div>&nbsp;</div>
-                        <input type='checkbox' style="scale:5" name="triagem_concluida" required="" id="id_triagem_concluida" value='1'>                             
+                        <input type='checkbox'  name="triagem_concluida" required="" id="id_triagem_concluida" value='1'>                             
                     </div>
                 </div>         
-            </div>                           
-            <button class='button-salvar' type="submit">Salvar <i class="fa-solid fa-plus"></i></button>
-            <a class='button-salvar' style='background:cornflowerblue' href=" {% url 'Triagem:triagem-enfermaria' %} ">:: CANCELAR <i class="fa-regular fa-rectangle-xmark"></i></a>
+            </div> 
+            <div style='display:block; margin-left:30%'>
+                <a class='cancel-button' href=" {% url 'Triagem:triagem-enfermaria' %} ">:: CANCELAR <i class="fa-regular fa-rectangle-xmark"></i></a>
+                <button class='button-salvar' style='margin:0' type="submit">Salvar <i class="fa-solid fa-plus"></i></button>            
+            </div>
+            
+            
         </form>
         
     </div>

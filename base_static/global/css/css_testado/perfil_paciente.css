@@ -1,0 +1,40 @@
+/* PERFIL DE USUARIO */
+.perfil-user{    
+    font-family: 'Titillium Web';
+      margin: 2rem auto;
+      width: 78%;
+      height: auto;
+      padding: 2rem;    
+      box-shadow: -0.5rem 0.4rem 0.8rem rgb(196, 192, 192);
+  }
+  .dados-pessoais{
+      font-size: 1rem !important;  
+      color: var(--cor-background-titulo);
+  }
+  .dados-pessoais strong{
+    font-size: 0.8rem;
+  }
+  .nome_social{
+   
+      font-weight: bolder;
+      font-size: 1.5rem;
+  }
+  .info, .info-pessoal, .grid{
+      display: grid;    
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
+  .info div, .info div p{
+      margin-left: 1rem;
+      width: 100%;
+  }
+  .info-pessoal .foto{
+      margin: 1rem;
+      left: 10rem;
+      width: 14.5rem;
+      margin-left: 5rem;
+      display: block;
+  }
+  .info-pessoal .foto img{
+      width: 100%;
+  }
+  

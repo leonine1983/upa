@@ -1,8 +1,7 @@
 .menu-local-top{
     display: grid;    
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    margin-bottom: -5rem;
-   
+    margin-bottom: -5rem;   
 }
 .menu-local-top ul{
     display: flex;
@@ -10,10 +9,9 @@
     text-align: center;
     margin-top: -0.05rem;
     border-bottom-left-radius: 1rem;  
+    border-bottom-right-radius: 1rem;  
     background: var(--cor-cidade-primario);
-    box-shadow:  var(--shadow);  
-    
- 
+    box-shadow:  var(--shadow);   
 }
 
 .menu-local-top ul li{

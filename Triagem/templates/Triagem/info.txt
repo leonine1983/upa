@@ -1,0 +1,18 @@
+No Protocolo de Manchester, as condições estabelecidas para a pressão arterial são as seguintes:
+
+Pressão arterial sistólica menor ou igual a 90 mmHg (milímetros de mercúrio): indica uma classificação de risco vermelho (emergência).
+Pressão arterial sistólica entre 91 e 100 mmHg: indica uma classificação de risco laranja (muito urgente).
+Pressão arterial sistólica entre 101 e 110 mmHg: indica uma classificação de risco amarelo (urgente).
+Pressão arterial sistólica maior que 110 mmHg: indica uma classificação de risco verde (pouco urgente) ou azul (não urgente), dependendo de outros sintomas e condições do paciente.
+
+
+
+
+
+As condições estabelecidas na classificação de risco no Protocolo de Manchester para a frequência cardíaca podem variar de acordo com a instituição ou versão específica do protocolo utilizada. No entanto, como exemplo, vou apresentar algumas condições comuns encontradas em alguns sistemas de triagem baseados no Protocolo de Manchester:
+
+Frequência cardíaca abaixo de 40 ou acima de 130 batimentos por minuto: indica uma classificação de risco vermelho (emergência).
+Frequência cardíaca entre 40 e 50 ou entre 120 e 130 batimentos por minuto: indica uma classificação de risco amarelo (urgência).
+Frequência cardíaca entre 50 e 100 batimentos por minuto: indica uma classificação de risco verde (pouca urgência).
+Frequência cardíaca entre 100 e 120 batimentos por minuto: indica uma classificação de risco azul (sem urgência aparente).
+Lembre-se de que essas são apenas exemplos e que as faixas de classificação de risco podem variar de acordo com a instituição e o protocolo específico que está sendo utilizado. É importante consultar as diretrizes e os protocolos oficiais da sua instituição ou do sistema de triagem em questão para obter informações precisas sobre as condições estabelecidas para a frequência cardíaca na classificação de risco do Protocolo de Manchester.

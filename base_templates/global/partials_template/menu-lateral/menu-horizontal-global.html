@@ -10,23 +10,23 @@
             <a href=""><i class="fas fa-solid fa-compass-drafting"></i> Parâmetros</a>
             <ul>
                 <li>
-                    <a href=""><i class="fab fa-amazon"></i> Classificação de Emergência</a>
+                    <a href=""></i> Classificação de Emergência</a>
                     <ul>
                         <li><a href="{% url 'Triagem:classifica-risco'%}"><i class="fas fa-user"></i> Cadastro </a></li>
                         <li><a href="{% url 'Triagem:classifica-risco-lista'%}"><i class="fas fa-user-tie"></i> Listagem </a></li>                            
                     </ul>
                 </li> 
                 <li>
-                    <a href="{% url 'Medicos:importa_csv'%}"><i class="fab fa-amazon"></i> Importar tabela cid-10</a>
+                    <a href="{% url 'Medicos:importa_csv'%}"></i> Importar tabela cid-10</a>
                 </li>                              
                 <li>
-                    <a href=""><i class="fab fa-amazon"></i> Configura Painel</a>
+                    <a href=""></i> Configura Painel</a>
                     <ul>
                         <li>
-                            <a href="{% url 'configUPA:upload_video_painel'%}"><i class="fab fa-amazon"></i>Background em video</a>
+                            <a href="{% url 'configUPA:upload_video_painel'%}"></i>Background em video</a>
                         </li>
                         <li>
-                            <a href="{% url 'configUPA:letreiroCreate'%}"><i class="fab fa-amazon"></i> Configura Letreiro</a>
+                            <a href="{% url 'configUPA:letreiroCreate'%}"></i> Configura Letreiro</a>
                         </li>  
                     </ul>
                 </li>  
@@ -37,8 +37,8 @@
             <a href=""><i class="fas fa-solid  fa-universal-access"></i> Pacientes</a>
             <ul>
                 <li>
-                    <a href="{% url 'Atendimento:lista-paciente' %}"><i class="fab fa-amazon"></i> Listagem</a>
-                    <a href="{% url 'Atendimento:registro-paciente' %}"><i class="fab fa-amazon"></i> Cadastro</a>
+                    <a href="{% url 'Atendimento:lista-paciente' %}"></i> Listagem</a>
+                    <a href="{% url 'Atendimento:registro-paciente' %}"></i> Cadastro</a>
                 </li>                
             </ul>
         </li>
@@ -47,8 +47,8 @@
             <a href=""><i class="fas fa-solid  fa-people-arrows"></i> Fila de Triagem</a>
             <ul>
                 <li>
-                    <a href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}"><i class="fab fa-amazon"></i> Fila de triagem por data</a>
-                    <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}"><i class="fab fa-amazon"></i> Enviar paciente à fila de triagem</a>
+                    <a href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}"></i> Fila de triagem por data</a>
+                    <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}"></i> Enviar paciente à fila de triagem</a>
                 </li>                
             </ul>
         </li>
@@ -56,18 +56,42 @@
             <a href=""><i class="fas fa-solid  fa-person-shelter"></i> Salas</a>
             <ul>
                 <li><i class=""></i>
+                    {% if object_list %}
                     <a href="{% url 'Medicos:salas' %}"><i class="fas fa-solid  fa-person-shelter"></i> Salas</a>
+                    {% endif %}
                     <a href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Cadastro de Salas</a>
                     <a href="{% url 'Medicos:salasProfissionalCreate' %}"><i class="fa-solid fa-people-roof"></i> Vincula Profissional à Sala</a>
                 </li>                
             </ul>
+        </li>       
+        <!--Locais-->
+        <li>
+            <a href=""><i class="fa-solid fa-street-view"></i> Locais</a>
+            <ul>
+                <li><i class=""></i>
+                    <a href="{% url 'Atendimento:cadastra_bairro' %}"></i> Bairros</a>
+                    <a href="{% url 'Atendimento:cadastra_rua' %}">Ruas</a>
+                </li>                
+            </ul>
         </li>
+        <!--Relatorios-->
         <li>
             <a href=""><i class="fas fa-solid  fa-flag"></i> Relatórios</a>
             <ul>
-                <li><i class=""></i>
-                    <a href="{% url 'Medicos:salas' %}"><i class="fas fa-solid  fa-flag"></i> Nº de pacientes no sistema</a>
-                </li>                
+                <li><i class=""></i>                    
+                    <a href="{% url 'PrintPDFs:quantiPacientSistema' %}" onclick="window.open('{% url "PrintPDFs:quantiPacientSistema" %}', 'popup', 'width=600,height=600'); return false;"><i class="fas fa-solid  fa-flag"></i> Nº de pacientes no sistema</a>
+                </li>  
+                <li>
+                    <script>
+                        function abrirPDF() {
+                            window.open("{% url 'PrintPDFs:download_pdf' %}", "_blank", "width=800,height=600");
+                        }
+                    </script>  
+                    <a href="#" onclick="abrirPDF()">
+                        <i class="fa-solid fa-paperclip"></i>                        
+                        Relação de atendimentos do dia</a>
+                    
+                </li>              
             </ul>
         </li>
        

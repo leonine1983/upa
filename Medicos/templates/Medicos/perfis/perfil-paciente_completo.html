@@ -8,6 +8,8 @@
     <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
     <!--menu em giro-->
     <link rel="stylesheet" href=" {% static 'global/css/abas_verticais.css' %} "> 
+    <link rel="stylesheet" href="{% static 'global/css/css_testado/perfil_paciente.css' %}"> 
+    <link rel="stylesheet" href="{% static 'global/css/footer.css' %}">
 {% endblock css %}   
 
 <!--Titulo da Pagina-->
@@ -17,12 +19,12 @@
             Informações Pessoais d{% if  paciente_sexo == 2 %}a{% else %}o{% endif %} Paciente: 
             <b class='uppercase'>{{paciente_nome}}</b>  
         </div>
-        <div style='
-        margin-top:-1rem;
-padding: 1.15rem;
+        <div class='shadow-sm' style='
+        margin-top:-0.5rem;
+padding: 0.5rem;
         margin-right: -1.8rem;
         font-size: 1.2rem;
-        background-color: rgba(255, 255, 255, 0.2);'> 
+        background-color: rgba(255, 255, 255, 0.2);width:22rem'> 
         {% if pkK == 0 %} 
         <a  href=" ">
             <i class="fa-solid fa-user-doctor"></i> Ainda não tem histórico</a> 
@@ -35,9 +37,6 @@ padding: 1.15rem;
             {% endif %}    
         {% endif %}  
         </div> 
-        
-
-
     </div>
     
 {% endblock body_title %}
@@ -45,9 +44,9 @@ padding: 1.15rem;
 <!--Inicio do perfil-->
 {% block body_login %} 
 <div class="perfil-user">     
-    <div class='flex uppercase' style='height:2.8rem; background:#d0d1d3; margin: -2rem -2rem 1rem;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; ' >
-        <div style='background:#d0d1d3; height:2rem; padding: 1rem; width: 80%;transform:skew(-10deg); text-align:center; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'><i class="fa-solid fa-person-breastfeeding"></i> Dados Pessoais do paciente</div>
-        <div style='background:#bfbfbf; border-bottom: 0.5rem solid #d0d1d3; height:1.5rem; padding: 1rem; width: 30%;transform:skew(-10deg);text-align:center; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;'class='uppercase' >
+    <div class='flex ' style='height:2.8rem; background:#d0d1d3; margin: -2rem -2rem 1rem;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; ' >
+        <div style='background:#d0d1d3; height:3rem; padding: 1rem; width: 80%;transform:skew(-10deg); text-align:center; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'><i class="fa-solid fa-person-breastfeeding"></i> Dados Pessoais do paciente</div>
+        <div style='background:#bfbfbf; border-bottom: 0.5rem solid #d0d1d3; height:3rem; padding: 1rem; width: 30%;transform:skew(-10deg);text-align:center; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;'class='uppercase' >
             {% if pkK == 0 %}
                 <a href=""><i class="fa-solid fa-hospital-user"></i>  Ainda não tem histórico</a></div>
             {% else %}
@@ -58,7 +57,7 @@ padding: 1.15rem;
     <div class="dados-pessoais">
         <div class="info-pessoal">
             <div>
-                <p class="nome_social">{{paciente_nome}}</p>
+                <h1 class="h1 uppercase display-4">{{paciente_nome}}</h1>
                 <p>&nbsp</p>
                 <p><b>Idade: </b> {{paciente_idade}} anos </p>
                 <p><b>Data de Nascimento: </b>{{paciente_nascimento}}</p>

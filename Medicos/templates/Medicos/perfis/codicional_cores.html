@@ -1,0 +1,9 @@
+{% if medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 1 %}
+                                prosseguir-red
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 2  %}
+                                prosseguir-laranja
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 3  %}
+                                prosseguir-green                                            
+                                {% elif medico_atendimento.paciente_medico_atendimento.classifica_tipo.id == 4  %}
+                                prosseguir-azul
+                                {% endif %}

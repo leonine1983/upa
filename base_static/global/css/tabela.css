@@ -1,0 +1,19 @@
+.Tabela-user-div{}
+.Tabela-user{
+    margin:auto;
+}
+.Tabela-user tr th{          
+    background-color: aquamarine;
+    padding: 0.2rem;
+   
+}
+.Tabela-user tr td {            
+    background-color: #ebf0f7;
+    margin: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: 0.01rem solid aquamarine;
+}
+.Tabela-user tr td:hover {            
+    background-color: #bbd0eb;
+}

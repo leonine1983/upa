@@ -3,6 +3,22 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
 <link rel="stylesheet" href="{% static 'global/css/abas_horizontais.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/formularios.css' %}">
+
+<!--Multi Select para o form-->
+<link rel="stylesheet" href="{% static 'global/js/multi-select/css/multi-select.css' %}">
+<script src="{% static 'global/js/multi-select/js/jquery.multi-select.js' %}"></script>
+<!--END Multi Select para o form-->
+
+<!--Select2-->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>      
+   $(document).ready(function() {
+       $('#id_exames').select2();
+   });
+</script>
+   <!--end Select2-->
 
 <style> {% for dados in paciente_triagem  %} 
               {% if dados.classifica_tipo.id == 1 %}
@@ -37,12 +53,12 @@
        
       
        .prescricao{
-              background:#bbb39b;
+              background:#c8e3f3;
               padding:1rem;
        }
-       .encaminhamento{
+       /**.encaminhamento{
               background-color:#DAC8B3;              
-       }
+       }**/
        .encaminhamento textarea, .atestado textarea, .exames textarea{
               width:97%;
               border:none;
@@ -50,11 +66,12 @@
               
        }
        .exames{
-              background:#d8bfd8;
+              background:#c0c0c0;
               padding:1rem;
+              
        }
        .atestado{
-              background:#97d3c4;
+             /** background:#97d3c4; **/
               padding:1rem;
        }
        #id_preescrever_medicamento_medico{
@@ -65,6 +82,61 @@
               border-top-left-radius: 1rem;
               
        }
+       select[multiple] {
+              width: 100%;
+              height: auto;
+              position: relative;
+              font-size: 16px;
+              border: none;
+              appearance: none;
+              background: transparent;
+              cursor: pointer;
+              outline: none;
+            }
+            select[multiple]::-ms-expand {
+              display: none;
+            }
+            select[multiple] option {
+              position: relative;
+              padding: 0px 35px 0px 5px;
+              cursor: pointer;
+              font-weight: normal;
+            }
+            select[multiple] option:before {
+              content: "";
+              display: inline-block;
+              position: absolute;
+              top: 50%;
+              right: 15px;
+              transform: translateY(-50%);
+              width: 18px;
+              height: 18px;
+              border-radius: 50%;
+              background-color: transparent;
+              border: 2px solid #ccc;
+              transition: all 0.2s;
+            }
+            select[multiple] option:checked:before {
+              content: "\2713";
+              color: #fff;
+              background-color: #007bff;
+              border-color: #007bff;
+            }
+            #ms-id_exames{
+              width:95%;
+        }
+        #id_atestado{
+              display: block;
+              font-size: 3rem;
+              padding: 1rem;
+              width: 5rem;
+              margin: 2rem auto;
+        }
+        .button-salvar{
+              margin:0.5rem!important;
+        }
+       
+
 </style>
 
 {% endblock css %}  
@@ -81,41 +153,66 @@
        
 {% endblock body_title %}
 {% block body_login %}
-<div  class='dados-preatendimento'>  
+<div  class='dados-preatendimento' style="margin-top: -3rem;"> 
        <!--ABAS - exibe as opções de preenchimento de documento do medico-->       
        <form  method="post" class='flex'>
               {% csrf_token %}
                      
-              <div style='width:70%'>
+              <div style='width:67%'>
                      <ul class="menu-abas ">
                             <li class='prescricao border-radius'><a href="#tab1">&nbsp;&nbsp;Preescrever Medicamento <i class="fa-solid fa-capsules"></i>&nbsp;&nbsp;</a></li>
-                            <li class='encaminhamento'><a href="#tab2">&nbsp;&nbsp;Encaminhamentos <i class="fa-regular fa-paste"></i>&nbsp;&nbsp;</a></li>                            
+                           <!-- <li class='encaminhamento'><a href="#tab2">&nbsp;&nbsp;Encaminhamentos <i class="fa-regular fa-paste"></i>&nbsp;&nbsp;</a></li> -->
                             <li class='exames'><a href="#tab3">&nbsp;&nbsp;Exames <i class="fa-solid fa-notes-medical"></i>&nbsp;&nbsp;</a></li>
                             <li class='atestado'><a href="#tab4">&nbsp;&nbsp;Atestados <i class="fa-solid fa-file-contract"></i></i>&nbsp;&nbsp;</a></li>
                      </ul>
                      
-                     <article>                     
-                            <section class='prescricao' id="tab1" class="active">                                  
-                                   {{form.preescrever_medicamento_medico}}                                   
+                     <article style='width:102%'>                     
+                            <section class='prescricao' id="tab1" class="active flex" >                                   
+                                   <div>{{form.preescrever_medicamento_medico}}{{form.media}}</div>
                             </section>
                      
-                            <section style='width:93.5%' class='encaminhamento' id="tab2">
+                          <!--  <section style='width:93.5%' class='encaminhamento' id="tab2">
                                    {{form.encaminhamento}}
-                            </section>
+                            </section>-->
                      
-                            <section class='exames' id="tab3">
-                                   {{form.exames}}
+                            <section class='exames' id="tab3" style='height:27.3rem'>
+                                   <div >                                          
+                                         <p><i class="fa-solid fa-computer-mouse"></i> Selecione os exames que são recomendados para o paciente:</p>
+                                         <p> {{form.exames}}</p>
+                                          <script>
+                                                  // Chame a função jQuery.noConflict() para liberar o símbolo $
+                                                  var jQuery = $.noConflict(true);
+                                                 $('#id_exames').multiSelect()
+                                          </script>
+                                          <!--
+                                          <div id="area">
+                                                 <h1><i class="fa-solid fa-stethoscope"></i> Solicitação de Exames</h1>
+                                          </div> -->
+                                   </div>   
                             </section>  
-                            <section class='atestado' id="tab4">
+                            <section class='atestado' id="tab4" style='height:27.3rem'>
+                                   <i class="fa-solid fa-file-contract"></i>
+                                   <div>Por favor, forneça a duração em dias para o atestado médico do paciente. Exemplo: 25 </div>
                                    {{form.atestado}}
                             </section>             
                      </article> 
               </div> 
-              <div style='width:30%; text-align: center;'>
+              <div style='width:20%; height: 30rem; text-align: center;'>
+                     {% if form.enviar_ambulatorio %}
                      <h3>Enviar o paciente para o ambulatório:</h3>
-                     {{form.enviar_ambulatorio}}              
+                     {{form.enviar_ambulatorio}}     
+                     {% endif %}         
                      <button style='width: 90%;' type="submit" class='button-salvar'>Salvar Formulário</button>
-              </div>             
+                     <a class='button-salvar' style="background-color:#87CEEB ;" href="{% url 'Triagem:triagem_especializada' %}?param={{ pk }}">Atendimento especializado</a>
+              </div>                        
        </form>
-</div>
+</div>     
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+     $(document).ready(function() {
+       $('#move').click(function() {
+         $('#id_exames option:selected').appendTo('#area');
+       });
+     });
+     </script>
 {% endblock body_login %}

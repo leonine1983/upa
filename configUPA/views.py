@@ -19,7 +19,7 @@ def upload_video(request):
         form = VideoForm()
     return render(request, 'configUPA/config.html', {
         'form' : form,
-        'backgroud_painel': ''})
+        'backgroud_painel': 'oi'})
 
 
 # CONFIGURA O LETREIRO ---------------------------------------------------------

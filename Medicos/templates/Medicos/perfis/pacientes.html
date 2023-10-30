@@ -8,18 +8,53 @@
     <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
     <!--Menu Local-->
     <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
+    <style>
+        .search-wrapper {
+            display: flex;
+            align-items: center;
+            border:0.1rem solid #666;
+            border-radius: 20px;
+            padding: 5px;
+          }
+          
+          .search-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+          }
+          
+          .search-button {
+            background-color: #4285f4;
+            color: #fff;
+            border: 0.1rem;
+            outline: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+          
+          .search-button:hover {
+            background-color: #3367d6;
+          }
+          
+    </style>
 {% endblock css %}   
 <!--Titulo da Pagina-->
 {% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema com HISTÓRICO HOSPITALAR::.  {% endblock body_title %}
 {% block body_login %}
     
-<div class='menu-local-top'>     
-    <div class="busca-paciente">
-        <form action="?" method="GET">
-            {% csrf_token %}
-            <input type="text" placeholder="Busque por um paciente" name="busca-paciente">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
+<div class='' style=''>     
+    <div class="" style='margin:auto; margin-bottom:-2rem; width:50%; '>
+        <form action="?" method="GET" class="form-inline">
+            {% csrf_token %}            
+            <div class="search-wrapper">
+              <input type="text" class="search-input" placeholder="Buscar por paciente" name="busca-paciente">
+              <button class="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
+            </div>
+          </form> 
     </div>        
 </div>  
 <p>&nbsp;</p>

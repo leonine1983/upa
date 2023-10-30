@@ -7,29 +7,35 @@
     <!--Tabela-->
     <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
     <!--Menu Local-->
-    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} ">     
+    <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
+
+   
+
 {% endblock css %}   
 <!--Titulo da Pagina-->
 {% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
 {% block body_login %}
+
+
     
-<div class='menu-local-top'>
+<div class='menu-local-top' style='margin-top:-2rem'>
     <ul>
         <li><a href="{% url 'Atendimento:lista-paciente' %}">Listagem</a></li>
         <li> <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastro</a></li>        
     </ul>      
-    <div class="busca-paciente">
-        <form action="?" method="GET">
-            {% csrf_token %}
-            <input type="text" placeholder="Busque por um paciente" name="busca-paciente">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
+         
+</div>   
+    <div class="" style='margin:5rem auto 1rem auto;  width:50%; '>
+        <form action="?" method="GET" class="form-inline">
+            {% csrf_token %}            
+            <div class="search-wrapper">
+              <input type="text" class="search-input" placeholder="Buscar por paciente" name="busca-paciente">
+              <button class="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
+            </div>
+          </form> 
     </div>        
-</div>  
-<p>&nbsp;</p>
-<p>&nbsp;</p>    
-<p>&nbsp;</p>    
-<p>&nbsp;</p>   
+
 <div class='flex'>
 
     <div class="style-tabela">       

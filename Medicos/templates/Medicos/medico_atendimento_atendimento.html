@@ -1,53 +1,47 @@
 {% extends 'global/template_geral.html' %}
-{% block css %}
 {% load static %}
-<!-- Adicione isso ao head do seu arquivo HTML -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-<!--
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"> -->
+{% block css %}
 <link rel="stylesheet" href="{% static 'global/css/modal.css' %}">
+<link rel="stylesheet" href=" {% static 'global/css/formularios.css' %}">
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
-<link rel="stylesheet" href="{% static 'global/css/menu/menu.giro.css' %}">
 
 <link rel="stylesheet" href="{% static 'global/css/menu/menu-vertical-medico.css' %}">
 
 <style> {% for dados in paciente_triagem  %} 
-              {% if dados.classifica_tipo.id == 1 %}
+              {% if dados.classifica_tipo.classifica_tipo == 'Vermelho' %}
               .dados-preatendimento ul li span{
                      color: #AA0000;
                      font-size: 1.3rem;
               }
-              {% elif dados.classifica_tipo.id == 2  %}
+              {% elif dados.classifica_tipo.classifica_tipo == 'Laranja'  %}
               .dados-preatendimento ul li span{
                      color: #ff6600;
                      font-size: 1.3rem;}
-              {% elif dados.classifica_tipo.id == 3  %}
+              {% elif dados.classifica_tipo.classifica_tipo == 'Verde'  %}
               .dados-preatendimento ul li span{
                      color:  #008200;
                      font-size: 1.3rem;}
-              {% elif dados.classifica_tipo.id == 4  %}
+              {% elif dados.classifica_tipo.classifica_tipo == 'Azul'  %}
               .dados-preatendimento ul li span{
                      color: #008dc0;
                      font-size: 1.3rem;}
               {% endif %}  
-       {% endfor %}      
+       {% endfor %} 
+       {% if atendimento == 'atendimento' %}
+       .form-body {      
+              margin:1rem;
+              background: #dbecdb;
+              padding:1rem;
+              display: grid;
+              grid-template-columns: repeat(1, 1fr);
+              gap:2rem;
+          } 
+       #id_historico_doenca_atual_HDA, #id_exame_fisico, #id_Diagnostico, #id_conduta, #id_paciente_medico_atendimento, #id_Diagnostico, #id_classificacao_internacional_doenca_CID, #select2-id_classificacao_internacional_doenca_CID-container{
+              width:87% !important;
+              margin-bottom:2%!important;
+       }
+       {% endif %}  
 </style>
-<!--Select2-->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-       // In your Javascript (external .js resource or <script> tag)
-              
-   $(document).ready(function() {
-       $('#id_classificacao_internacional_doenca_CID').select2();
-   });
-   </script>
-   <!--end Select2-->
-
-
-
 {% endblock css %}  
 <!--Imagem Representando o setor-->
 {% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
@@ -72,13 +66,13 @@
                
               <!--END Link para o perfil do paciente-->
               <div class="flex info-triagem 
-                     {% if dados.classifica_tipo.id == 1 %}
+                     {% if dados.classifica_tipo.classifica_tipo == 'Vermelho' %}
                             prosseguir-red
-                     {% elif dados.classifica_tipo.id == 2  %}
+                     {% elif dados.classifica_tipo.classifica_tipo == 'Laranja'  %}
                             prosseguir-laranja
-                     {% elif dados.classifica_tipo.id == 3  %}
+                     {% elif dados.classifica_tipo.classifica_tipo == 'Verde'  %}
                             prosseguir-green                                            
-                     {% elif dados.classifica_tipo.id == 4  %}
+                     {% elif dados.classifica_tipo.classifica_tipo == 'Azul'  %}
                             prosseguir-azul
                      {% endif %}      
               ">
@@ -91,8 +85,8 @@
               <hr>
               <div style='color:rgba(10, 30, 50, 0.8) ;padding:1rem; box-shadow:inset 0 4px 8px 0 rgba(0, 0, 0, 0.2),inset 0 6px 20px 0 rgba(0, 0, 0, 0.19);' >
                      
-                     <div><b>Nome Completo:</b> <span  class='uppercase'> {{dados}} </span></div>
-                     
+                     <div><b>Nome social do paciente:</b> <span  class='uppercase'> {{dados}} </span></div>
+                     <div><b>Enfermeira responsável pelo pré-atendimento:</b> <span  class='uppercase'> {{dados.nome_da_enfermeira}} </span></div>
                      <div class='flex'>                     
                             <ul>                            
                                    <li><b>PA - Pressão Arterial:</b> <span> {{dados.pressao_arterial_PA}} mmHg</span></li>
@@ -103,7 +97,7 @@
                                    <li><b>TEMP - Temperatura:</b> <span> {{dados.temperatura_TEMP}} °C </span></li>
                             </ul>
                             <ul>
-                                   <li><b>Peso:</b> <span> {{dados.peso}} </span></li>
+                                   <li><b>Peso:</b> <span> {{dados.peso}}kg </span></li>
                                    <li><b>Data do atendimento:</b><span> {{dados.data_triagem}} </span> </li>
                                    <li>TEMPO DE ESPERA:
                                           <ul>
@@ -138,7 +132,7 @@
        <hr>
 
 
-<form method='POST'>    
+<form method='post'>    
        <div class="form-body">
            {% csrf_token %}
            <div class='form-div'  style=''>
@@ -183,58 +177,102 @@
    
    
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="chamarPacienteModal" tabindex="-1" role="dialog" aria-labelledby="chamarPacienteModalLabel" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-         <div class="modal-content">
-           <div class="modal-header">
-             <h5 class="modal-title" id="chamarPacienteModalLabel"><h1>Chamar Paciente</h1></h5>
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-           </div>
-           <div class="modal-body">
-              <b>{{request.user.first_name}}</b>, você deseja chamar o paciente <span class='uppercase' id="nomePacienteModal"></span> para o atendimento?
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-             <button type="button" class="btn btn-primary" id="confirmarChamadaBtn">Confirmar</button>
-           </div>
+<style>
+       /* Estilo da div de sobreposição */
+       .overlay {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo escurecido */
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         z-index: 9999;
+       }
+     
+       /* Estilo do conteúdo do modal */
+       .modal-content {
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 5px;
+         max-width: 500px;
+         text-align: center;
+       }
+     
+       /* Estilo dos botões */
+       .modal-buttons {
+         display: flex;
+         justify-content: center;
+         margin-top: 20px;
+       }
+     
+       .modal-buttons button {
+         margin: 0 5px;
+       }
+     </style>
+     
+     <div class="overlay" id="chamarPacienteOverlay">
+       <div class="modal-content">
+         <h1 style="font-size: 24px;">Chamar Paciente</h1>
+         <p><b>{{request.user.first_name}}</b>, você deseja chamar o paciente <span class='uppercase' id="nomePacienteContainer"></span> para o atendimento?</p>
+         <div class="modal-buttons">
+           <button type="button" class="btn btn-secondary" id="cancelarChamadaBtn">Não</button>
+           <button type="button" class="btn btn-primary" id="confirmarChamadaBtn">Sim</button>
          </div>
        </div>
      </div>
      
-     
-{% block script %}
-
-<script>
+     <script>
        $(document).ready(function() {
          var confirmado = false; // variável booleana para verificar se o botão foi clicado
+     
          setTimeout(function() {
            var nomeCompleto = "{{ triagem.0 }}"; // Assumindo que há apenas um paciente na triagem
-           $('#nomePacienteModal').text(nomeCompleto);
-           $('#chamarPacienteModal').modal('show');
-           $('#confirmarChamadaBtn').off('click').click(function() {
-              var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-              console.log('clicou no botão confirmar');
-            
-              $.ajax({
-                url: "{% url 'Medicos:cadastrar_chamada' %}",
-                type: "POST",
-                data: {
-                  nome: nomeCompleto,
-                  csrfmiddlewaretoken: csrftoken
-                },
-                success: function() {
-                  alert("Chamada registrada com sucesso!");
-                  $('#chamarPacienteModal').modal('hide');
-                }
-              });
-            });             
+     
+           $('#nomePacienteContainer').text(nomeCompleto);
+           $('#chamarPacienteOverlay').show();
+     
+           $('#cancelarChamadaBtn').click(function() {
+             $('#chamarPacienteOverlay').hide();
+           });
+     
+           $('#confirmarChamadaBtn').click(function() {
+             var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+             console.log('clicou no botão confirmar');
+     
+             $.ajax({
+               url: "{% url 'Medicos:cadastrar_chamada' %}",
+               type: "POST",
+               data: {
+                 nome: nomeCompleto,
+                 csrfmiddlewaretoken: csrftoken
+               },
+               success: function() {
+                 alert("Chamada registrada com sucesso!");
+                 $('#chamarPacienteOverlay').hide();
+               }
+             });
+           });
          }, 2000); // 2 segundos
        });
      </script>
+     
+     
+   
+     
+{% block script %}
+
+
+
+     <script src="{% static 'global/js/select2.min.js' %}"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $('#id_classificacao_internacional_doenca_CID').select2();  
+    });
+</script>
      
 
      

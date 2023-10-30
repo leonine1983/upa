@@ -2,8 +2,9 @@
 <div class="area"></div><nav class="main-menu">
     <ul>
         <li>
-            <a href="http://justinfarrow.com">
-                <i class="fa fa-solid fa-hospital fa-2x barra-top "></i><i class=""></i>
+            <a href="" style='height: 3.7rem;'>
+                <i class="fa fa-solid fa-hospital fa-2x barra-top h-100"></i>
+                
                 <span class="nav-text barra-top "></span>
             </a>              
         </li>
@@ -25,7 +26,10 @@
         </li>
         <hr>
         <!--Visto por Admin, por Enfermagem, por Tecnico em infermagem-->
-        {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' or grupo_usuario == 'group_Tec_Enfermagem' %}
+        {% comment "Remoçaõ do grupo enfermagem" %}
+        <!-- {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' or grupo_usuario == 'group_Tec_Enfermagem' %} -->
+       {% endcomment %}
+        {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Tec_Enfermagem' %}
             <li class="has-subnav">
                 <a href="{% url 'Atendimento:lista-paciente' %}">
                     <i class="fa fa-universal-access fa-2x "></i>
@@ -49,21 +53,32 @@
         {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' %}      
             <li class="has-subnav">
                 <a href=" {% url 'Triagem:triagem-enfermaria' %} ">
-                <i class="fa fa-solid fa-brands fa-uncharted fa-rotate-90  fa-2x shadow"></i>
+                    
+                <i class="fa fa-solid fa-thin fa-laptop-medical fa-2x "></i>
+                <i class="fa-solid "></i>
                     <span class="nav-text">
                         Triagem 
                     </span>
                 </a>
             </li>
             <li class="has-subnav">
+                <a href=" {% url 'Triagem:triagem_especializada_ListView' %} ">
+                    <i class="fa fa-solid fa-x-ray fa-2x "></i> 
+                    <span class="nav-text">
+                        Especializado (Raio X e outros)
+                    </span>
+                </a>
+            </li>
+            <li class="has-subnav">
                 <a href=" {% url 'Triagem:user_create' %} ">
                     
-                <i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i>
+                <i class="fa fa-solid fa-thin fa-user-nurse fa-2x "></i>
                     <span class="nav-text">
                         Cadastrar Enfe e Tec
                     </span>
                 </a>
-            </li>
+            </li>            
+            
             <hr> 
         {% endif %}
         <!--Visto por Admin, por Medicos-->

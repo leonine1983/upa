@@ -4,14 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" type="image/ico" href="{% static 'media/cauns.ico' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'media/cauns.png' %}">
+    <meta name="description" content="Desenvolvemos sistemas digitais para gerenciamento de serviços hospitalares e da saúde em geral. Saiba mais sobre nossas soluções.">
+    <meta name="keywords" content="sistemas digitais, gerenciamento, serviços hospitalares, saúde">
+    <meta name="author" content="CAUAN's TECHNOLOGY">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'global/css/login_style_g.css' %}">
-    <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">
-    <link rel="stylesheet" href="{% static 'global/css/message.css' %}">
-    <link rel="stylesheet" href="{% static 'global/css/footer1.css' %}">
+    <link rel="canonical" href="https://www.cauans-technology.com/">
+    <link rel="icon" type="image/png" href="caminho/para/favicon.png">
+    <meta name="google-site-verification" content="User-agent: Googlebot
+    Disallow: /nogooglebot/    
+    User-agent: *
+    Allow: /    
+    Sitemap: https://www.cauans-technology.com/sitemap.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global/css/message.css' %}">    
+    <link rel="stylesheet" href=" {% static 'global/css/footer.css' %}"> 
+    <link rel="stylesheet" href=" {% static 'global/css/geral-style.css' %}"> 
+    <!--Esse css controla os dados do forma de login-->    
+    <link rel="stylesheet" href="{% static 'global/css/pagina_login.css' %}">
     <title>LOGIN:UPA</title>
 </head>
+
 <body>
+    {% include 'global/partials_template/header/header.html' %}
+    <div id="landscapeModal" class="modal">
+        <div class="modal-content">
+          <p>Por favor, gire o dispositivo para a posição paisagem.</p>
+        </div>
+    </div>
+    <video autoplay loop muted style="width: 100%;">
+        <source src = "{% static 'videos/particulas-34007.mp4' %}">
+      </video>
     <main class="  ">
         <div class=''>
             {% include 'global/message.html' %}
@@ -21,10 +47,6 @@
                     <div class="login">
                         <div class="login-title" method="post">                            
                         <span>Prefeitura Municipal de Vera Cruz</span></div>
-                        <!--<form action="{% url 'Access_Login:login_create' %}">
-                            {{form}}
-                            <button type="submit">ENTRAR</button>    
-                        </form>-->
                         <form action=" {% url 'Access_Login:login_create' %}" method='POST'>
                             {% csrf_token %}
                                 {% for field in form  %}
@@ -43,8 +65,7 @@
                                     Corrija os erros no seu formulario, antes de continuar
                                 </div>
                                 {% endif %}
-                            </form>
-                        
+                            </form>                        
                     </div>
                 </div>
                 <div class="login-brasao alinhar-horizontalment"><img src="https://seeklogo.com/images/B/brasao-municipio-de-vera-cruz-logo-D2B7893430-seeklogo.com.png" alt=""></div>
@@ -52,16 +73,25 @@
            
         </div>        
     </main>    
-    <!--{% include 'global/footer.html' %}-->
+    {% include 'global/partials_template/footer/footer.html' %}
 </body>
-</html>
+<script>
+    // Verifica se o dispositivo é um celular e está em posição retrato
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) && window.orientation === 0) {
+   // Exibe o modal
+   var landscapeModal = document.getElementById("landscapeModal");
+   landscapeModal.style.display = "block";
+   
+   // Verifica a orientação da tela a cada 100ms
+   var checkOrientation = setInterval(function() {
+      if (window.orientation === 90 || window.orientation === -90) {
+         // Fecha o modal
+         landscapeModal.style.display = "none";
+         clearInterval(checkOrientation);
+      }
+   }, 100);
+}
+</script>
+</html>       
+  
 
-
-
-
-
- 
-
-      
-  </body>
-</html>

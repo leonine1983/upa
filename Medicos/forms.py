@@ -1,4 +1,5 @@
 from django import forms
+from Triagem.models import triagem, Exames_Model
 
 class Form_medico_atendimento (forms.Form):
 
@@ -16,3 +17,24 @@ class Form_medico_atendimento (forms.Form):
     observacao = forms.Textarea()
     final_triagem = forms.CharField(help_text='')
     final_triagem_time = forms.DateField(help_text='')
+
+
+class Prescreve_Medicamentos_fomr(forms.ModelForm):
+    exames = forms.ModelMultipleChoiceField(queryset=Exames_Model.objects.all(), widget=forms.SelectMultiple, required=False)
+
+    class Meta:
+        model = triagem
+        fields = ['preescrever_medicamento_medico', 'exames', 'atestado']  
+        labels = {}
+        widgets = {}
+
+        '''
+        widgets = {
+            'conteudo_alergia': forms.Textarea(attrs={
+                 'rows': 50,
+                 'cols':150,
+                 }),
+            
+        }'''
+       
+       

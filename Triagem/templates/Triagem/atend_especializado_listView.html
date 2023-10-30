@@ -1,0 +1,118 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block title_login %}ENFERMARIA > Triagem{% endblock title_login %}
+{% block titulo_ %}Triagem{% endblock titulo_ %} 
+{% block css %}
+<link rel="stylesheet" href="{% static 'global/css/modal.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/formularios.css' %}">
+
+<link rel="stylesheet" href="{% static 'global/css/tabela.css' %}">
+<style>
+    /* Estilos para a etiqueta */
+    .etiqueta {
+        background-color: rgb(238, 238, 236);
+        text-align: center;
+        padding: 1rem;
+        border-radius: 1rem;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    }
+
+    #etiquetaContainer {
+        margin-top: 1rem;
+    }
+
+  
+    /* Estilos para a impressão */
+    @media print {
+        body {
+            background-color: rgb(223, 223, 219);
+            background-image: url("{% static 'vera cruz.png' %}");
+            background-repeat: no-repeat;
+        }
+        .etiqueta {
+        }
+    }
+</style>
+{% endblock css %}
+<!--Imagem Representando o setor-->
+{% block vetor-img-aereo %}<img src="{% static 'home/enfermagem-mulher.fw.png' %}" alt="">{% endblock vetor-img-aereo %}
+<!--END Imagem Representando o setor-->
+{% block body_title %}Serviços de Atendimento Especializado <b class='uppercase'>{{envio_triagem}}</b>{% endblock body_title %}
+{% block body_login %}
+<div class="top-info">  
+    <style>
+          .form-body {      
+            background: #dbecdb;
+            padding:1rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:1rem;}
+
+            .form-body label{
+                margin: 0rem !important;
+                padding: 0rem !important;
+            }
+
+            .form-body input[type="number"]{
+                width: 50%;
+            }
+            .form-body div{
+                margin: 0;
+                padding: 0;
+            }
+            td{
+                padding: 0.5rem;
+            }
+        
+    </style>
+    <h1>Escolha um dos serviços especializados disponíveis nessa UPA</h1>                
+           
+           <table class="Tabela-user">
+            <thead>
+                <tr>
+                    <th>PK</td>
+                    <th>Nome do paciente</td>
+                    <th>Tipo de Atendimento</td>
+                    <th>Situação</td>
+                    <th>Descrição</td>
+                    <th>Médico</td>
+                    <th>Ação</td>
+                </tr>
+            </thead>
+            
+            {% for list in object_list %}
+            <tbody>
+                <tr>
+                    <td>{{list.pk}}</th>                         
+                    <td>{{list.pk_paciente}}</th>                         
+                    <td>{{list.tipo_atendimento}}</th>
+                    <td>{{list.situacao}}</th> 
+                    <td>{{list.descreve_solicitacao}}</th>  
+                    <td>{{list.nome_medico}}</th>  
+                    <td><a href="{% url 'Triagem:triagem_especializada_UpdateView' list.pk %}">Iniciar procedimento</a> </th>    
+                </tr>
+            </tbody>
+           {% endfor %}
+           </table>
+           <div class="form-body"> 
+            <form action="" method="post" >
+                {% csrf_token %}
+                {{form.as_div}}
+                <p>&nbsp;</p>
+                <button type="submit">Enviar paciente</button>
+            </form>
+        </div>
+
+   <!--
+<script>
+    // Obtém o valor do parâmetro 'param' da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const param = urlParams.get('param');
+
+    // Atualiza o valor do campo 'pk_paciente' com o valor de 'param'
+    const pkPacienteInput = document.getElementById('id_pk_paciente');
+    pkPacienteInput.value = param;
+</script>
+-->     
+        
+{% endblock body_login %}

@@ -3,6 +3,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
 <link rel="stylesheet" href="{% static 'global/css/menu/menu.giro.css' %}">
+<link rel="stylesheet" href="{% static 'global/css/formularios.css' %}">
 
 <style> {% for dados in paciente_triagem  %} 
               {% if dados.classifica_tipo.id == 1 %}
@@ -23,7 +24,10 @@
                      color: #008dc0;
                      font-size: 1.3rem;
               {% endif %}  
-       {% endfor %}      
+       {% endfor %}     
+       #id_final_medico_atendimento {
+              scale: 0.8 !important;
+       }
 </style>
 
 {% endblock css %}  
@@ -36,7 +40,6 @@
 
 {% endblock titulo_ %} 
 {% block body_title %}
-{% include 'global/partials_template/menu-lateral/menu-giro.html' %}
        ÁREA MÉDICA - Paciente: {{triagem}}
 {% endblock body_title %}
 {% block body_login %}

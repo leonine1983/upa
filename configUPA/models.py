@@ -1,4 +1,7 @@
+import os
 from django.db import models
+from django.conf import settings
+
 
 # Create your models here.
 class config_Marquee(models.Model):
@@ -20,13 +23,22 @@ class config_Marquee(models.Model):
 
 
 class Video_Backgroud_Painel(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, null=True)
     dataHora = models.DateTimeField(auto_now=True)
-    video_file = models.FileField(upload_to='videos/')
+    video_file = models.FileField(upload_to='videos/', null=True)
 
     class Meta:
         ordering = ['-dataHora']
 
+    #Criar o metodo delete para apagar os arquivos de video relacionados aos registros presentes no model
+    def delete(self, *args, **kwargs):
+        #Remove os arquivo de video realiconado
+        if self.video_file:
+            video_file_path = os.path.join(settings.MEDIA_ROOT, self.video_file.name)
+            if os.path.isfile(video_file_path):
+                os.remove(video_file_path)
+
+        super().delete(*args)
+
     def __str__(self):
         return self.title
-

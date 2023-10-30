@@ -1,0 +1,205 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block css %}
+
+    <link rel="stylesheet" href="{% static 'global/css/message.css' %}">
+    <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">   
+    
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+      
+      .class_form {
+        max-width: 70%;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .class_form .grid p {
+        margin-bottom: 20px;
+      }
+      
+      .class_form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      
+      .class_form input[type="text"],
+      .class_form input[type="email"],
+      .class_form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      
+      .class_form input[type="radio"] {
+        margin-right: 5px;
+      }
+      
+      .class_form .helptext {
+        font-size: 12px;
+        color: #888;
+      }
+      
+      .class_form button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .radio_div{
+        margin:0.5%;
+        width:12rem;
+        text-align:center;
+        font-size:0.8rem
+
+      }
+      .icone{
+        
+        width: 7%;
+        padding:0.5rem;
+        color:#fff;
+        font-size:115%;
+        padding-left:1rem !important;
+      }
+      .border-radius-left{        
+        border-bottom-left-radius: 1rem;
+        border-top-left-radius: 1rem;
+        margin:0.2rem;
+      }
+
+      .background-escuro,  .icone{
+        background-color: cadetblue;
+      }
+
+       
+    </style>
+{% endblock css %} 
+{% block body_login %}
+ 
+{% block body_title %} Relação de usuários do grupo Médicos  {% endblock body_title %}
+    <table class="table table-striped table-primary" cellspacing="0">
+        <tr>
+            <th>Nome Completo</th>
+            <th>Usuário (Login)</th> 
+            <th>Email</th>
+            <th>Telefone</th>
+            <!--<th>Data Nascimento</th>
+            <th>Endereço</th>
+            <th>Grupo</th>-->
+            <th>CRM</th>
+            <th>Ações</th>
+        </tr>
+        {% for groups in users %}
+        <tr>
+            <td>{{groups.user__first_name}} {{groups.user__last_name}}</td>
+            <td>{{groups.user__username}}</td>            
+            <td>{{groups.user__email}}</td>  
+            <td>{{groups.telefone}}</td>   
+            <!--<td>{{groups.data_nascimento}}</td>       
+            <td>{{groups.endereco}}</td>
+            <td>{{groups.user__groups__name}}</td>-->
+            <td>{{groups.crm}}</td>
+            <td><a href="{% url 'Medicos:medico_signup_atualiza' groups.user__id %}" title='Edita as informações de ACESSO AO SISTEMA do usuario'><span><i class="fa-solid fa-user-pen"></i></span></a> | <a title='Edita as informações PESSOAIS do usuario' href="{% url 'Medicos:medico_signup_atualiza_extras' groups.id %}"><span><i class="fa-solid fa-file-pen"></i></span></a> | <a href='{% url "Medicos:medico_delete" groups.user__id  %}' title='Exclui o usuario do sistema'><span><i class="fa-solid fa-user-xmark " style="color:crimson!important"></i></span></a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+<p>&nbsp;</p>
+<div class='flex' style="box-shadow: var(--shadow); padding: 0.5rem;">
+    {% if user_edit %}<div class="h4"></dvi> <i class="fa-solid fa-user-pen"> </i> Atualizando dados de login de <b class='uppercase'>{% for n in user_update %}{{n.first_name}} {{n.last_name}}{% endfor %}</b></div> {% endif %}    
+    {% if custom %}<div class="h4"> <i class="fa-solid fa-file-pen"></i> Atualizando informações pessoais de <b class='uppercase'>{% for n in user_update %}{{n.user.first_name}} {{n.user.last_name}}{% endfor %}</b></div>{% endif %}
+    
+</div>
+{% if form.instance.pk %}
+
+{% else %}
+
+  {% if conteudo_view == 'medico_delete' %}
+  <div class=' shadow-sm p-2 m-2   border-bottom border-3 '>
+  <span class='h2 '> Deseja apagar do sistema o usuário {{paciente_nome}}?</span>
+  <p > Obs.: Todas as informações sobre esse usuários serão apagados</p></div>
+
+  {% else %}
+  <h2 class=' background-escuro shadow-sm p-2 m-2  text-light border-bottom border-3'></h2>
+  Cadastrar Médicos
+  {% endif %}
+
+{% endif %}
+<div>&nbsp;</div>
+<form method="post" class="class_form">
+    {% csrf_token %}
+    
+    {{form.as_div}}
+ 
+    </div>
+    {% if form.instance.pk %}
+    <div class="d-flex">
+      <a href=" {% url 'Medicos:medico_signup'  %} " class="btn btn-sm btn-secondary m-2 p-2" style="width:97% ;"> Cancelar <i class="fa-solid fa-floppy-disk"></i></a>
+      <button style="width:97% ;" class="button-salvar" type="submit"> Atualizar dados de {% for n in user_update %}{{n.first_name}} {{n.last_name}}{% endfor %}</b></h2>  <i class="fa-solid fa-floppy-disk"></i></button>
+    </div>
+    {% elif conteudo_view == 'medico_delete' %}
+    <div class='d-flex p-3'>
+      
+    <a href=" {% url 'Medicos:medico_signup'  %} " class="btn btn-sm btn-secondary m-2 p-2" style="width:97% ;"> Cancelar <i class="fa-solid fa-floppy-disk"></i></a>
+    <button style="width:97% ;" class="btn btn-sm btn-danger m-2" type="submit"> Deletar o usuário</b></h2> {{paciente_nome}} <i class="fa-solid fa-floppy-disk"></i></button>
+    </div>
+    {% else %}
+    <button style="width:97% ;" class="button-salvar" type="submit">
+       Cadastrar Profissional de Saude <i class="fa-solid fa-floppy-disk"></i></button>
+    {% endif %}
+</form>
+
+{% if form.errors %}
+    <ul>
+        {% for field_errors in form.errors.values %}
+            {% for error in field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!--SCRIPTS DO SISTEMA-->
+{% block script %}
+    <script src='{% static 'global/js/jquery.mask.min.js' %}'></script>
+        <script>
+        $(document).ready(function(){
+            $("#id_data_nascimento").mask("00/00/0000")
+        })
+        $(document).ready(function(){
+            $("#id_telefone").mask("00 0 0000-0000")
+        })
+        $(document).ready(function(){
+            $("#id_CPF").mask("000.000.000-00")
+        })
+        $(document).ready(function(){
+            $("#id_RG").mask("000.000.00-00")
+        })
+        
+        $(document).ready(function(){
+            $("#id_crm").mask("AAA/AA 000000")
+        })
+    </script>
+{% endblock script %}
+{% endblock body_login %}

@@ -16,7 +16,7 @@ urlpatterns = [
     path('medico/historico_paciente/historico/<int:pk>', views.paciente_perfil_completo_menu_lateral, name='perfil_completo_paciente_menu_lateral'),
     
     path('atendimento/paciente/<int:pk>', views.atendimento_medico_createView.as_view(), name='dados do paciente'),
-    path('atendimento/paciente/medicamento/<int:pk>', views.atendimento_medico_updateview.as_view(), name='dados do paciente_medicamentos'),
+    path('atendimento/paciente/medicamento/<int:pk>', views.atendimento_medico_updateview.as_view(), name='dados_do_paciente_medicamentos'),
     path('atendimento_medico_concluido/<int:pk>', views.atendimento_medico_concluido_update.as_view(), name='final_medico_concluida'),
     path('atendimento_medico_concluido/exibe/<int:pk>', views.exibe_prescreve_medicamento_update.as_view(), name='exibe_prescreve_medicamento'),
     # PDFs ------------------------------------------------------------------
@@ -25,7 +25,7 @@ urlpatterns = [
     path('medico_signup/', views.medico_signup, name='medico_signup'),
     path('medico_signup/atulizando/<int:pk>', views.MedicoUpdateView.as_view(), name='medico_signup_atualiza'),
     path('medico_signup/atulizando/extras/<int:pk>', views.MedicoUpdateView_extra.as_view(), name='medico_signup_atualiza_extras'),
-    path('medico_signup/apaga/<int:pk>', views.medico_signup, name='medico_signup_apaga'),
+    path('medico_signup/delete/<int:pk>', views.MedicoDeleteView.as_view(), name='medico_delete'),
     # Salas
     path('medicos/cadastroSalas/', views.Cadastra_Sala_view.as_view(), name='cadastroSala' ),
     path('medicos/Salas/', views.Lista_Salas_ListView.as_view(), name='salas' ),    

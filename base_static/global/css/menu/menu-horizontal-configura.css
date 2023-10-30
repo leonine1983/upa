@@ -6,7 +6,7 @@
 .menu-wrapper, .menu a{
     width: 100%;
     padding: 0.5rem;
-    height: 2rem;
+    height: 3rem;
     color: #fff;
 }
 
@@ -19,7 +19,8 @@
 
 .menu a{
     display: block;
-    padding: 10px;
+    height:auto;
+    padding:auto 3rem!important;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     text-decoration: none;

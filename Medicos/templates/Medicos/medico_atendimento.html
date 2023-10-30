@@ -4,20 +4,20 @@
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
 
 <style> {% for dados in paciente_triagem  %} 
-              {% if dados.classifica_tipo.id == 1 %}
+              {% if dados.classifica_tipo.classifica_tipo == "Vermelho" %}
               .dados-preatendimento ul li span{
                      color: #AA0000;
                      font-size: 1.3rem;
               }
-              {% elif dados.classifica_tipo.id == 2  %}
+              {% elif dados.classifica_tipo.classifica_tipo == "Laranja"   %}
               .dados-preatendimento ul li span{
                      color: #ff6600;
                      font-size: 1.3rem;
-              {% elif dados.classifica_tipo.id == 3  %}
+              {% elif dados.classifica_tipo.classifica_tipo == "Verde"  %}
               .dados-preatendimento ul li span{
                      color:  #008200;
                      font-size: 1.3rem;
-              {% elif dados.classifica_tipo.id == 4  %}
+              {% elif dados.classifica_tipo.classifica_tipo == "Azul" %}
               .dados-preatendimento ul li span{
                      color: #008dc0;
                      font-size: 1.3rem;
@@ -52,19 +52,19 @@
 <div class='dados-preatendimento'>{% for dados in paciente_triagem  %}     
        {% for dados_registro in ficha_atendimento  %}     
               <div class="info-triagem 
-                     {% if dados.classifica_tipo.id == 1 %}
+                     {% if dados.classifica_tipo.classifica_tipo == 'Vermelho' %}
                             prosseguir-red
-                     {% elif dados.classifica_tipo.id == 2  %}
+                     {% elif dados.classifica_tipo.classifica_tipo == 'Laranja'  %}
                             prosseguir-laranja
-                     {% elif dados.classifica_tipo.id == 3  %}
+                     {% elif dados.classifica_tipo.classifica_tipo == 'Verde'  %}
                             prosseguir-green                                            
-                     {% elif dados.classifica_tipo.id == 4  %}
+                     {% elif dados.classifica_tipo.classifica_tipo == 'Azul'  %}
                             prosseguir-azul
                      {% endif %}      
               ">
               CLASSIFICAÇÃO DE RISCO <span class='uppercase'>{{dados.classifica_tipo}} </span> 
               </div>
-              <p><i class="fa-regular fa-calendar-check"></i>&nbsp;{{dados.data_triagem}} &nbsp; | &nbsp; <i class="fa-solid fa-clock"></i>&nbsp;{{dados.hora_triagem}} &nbsp; | &nbsp; Informações do Pré-atendimento (Triagem) da paciente: <b class='uppercase'>{{dados_registro.nome_social}} </b> </p>
+              <p><i class="fa-regular fa-calendar-check"></i>&nbsp;{{dados.data_triagem}} &nbsp; | &nbsp; <i class="fa-solid fa-clock"></i>&nbsp;{{dados.hora_triagem}} &nbsp; | &nbsp; Informações do Pré-atendimento (Triagem) da paciente: <b class='uppercase'>{{dados_registro.nome_social}} </b> | Enfermeira responsável pelo Atendimento:</b><p class='uppercase'> <span> {{dados.nome_da_enfermeira}}</span></p>
               <hr>
               <div class='style_triagem'>
                      <div class='flex '>
@@ -99,8 +99,7 @@
                                           {% endfor %}
                                    </ul>
                             </li> 
-                            <li><b>Classificação de risco atual desse paciente:</b><p class='uppercase'> <span> {{dados.classifica_tipo}}  </span></p></li>                              
-                            
+                            <li><b>Classificação de risco atual desse paciente:</b><p class='uppercase'> <span> {{dados.classifica_tipo}}  </span></p></li>  
                      </ul>
                      </div>
                      <div><b>Sitomas relatados pelo paciente durante a triagem: </b>
@@ -112,22 +111,19 @@
        {% endfor %}
        <hr>
        <a style='text-align: center' href="{% url 'Medicos:dados do paciente' dados.pk %}"> {{dados.paciente_envio_triagem_id}} <span class='prosseguir 
-              {% if dados.classifica_tipo.id == 1 %}
+              {% if dados.classifica_tipo.classifica_tipo == "Vermelho" %}
               prosseguir-red
-              {% elif dados.classifica_tipo.id == 2  %}
+              {% elif dados.classifica_tipo.classifica_tipo == "Laranja"  %}
               prosseguir-laranja
-              {% elif dados.classifica_tipo.id == 3  %}
+              {% elif dados.classifica_tipo.classifica_tipo == "Verde"  %}
               prosseguir-green                                            
-              {% elif dados.classifica_tipo.id == 4  %}
+              {% elif dados.classifica_tipo.classifica_tipo == "Azul"  %}
               prosseguir-azul
           {% endif %}'> Seguir com o atendimento <i class="fa-regular fa-paper-plane"></i> </span></a>
-
-
-
-
-
 
           {% endfor %}
 
 </div>
+
+
 {% endblock body_login %}

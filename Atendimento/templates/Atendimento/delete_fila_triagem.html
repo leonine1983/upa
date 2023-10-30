@@ -1,4 +1,10 @@
 {% extends 'global/template_geral.html' %}
+{% block css %}
+{% load static %}
+<link rel="stylesheet" href=" {% static 'global/css/form.css' %}">
+{% endblock css %}
+
+
 
 {% block body_login %}
     <form action="" method="post">
@@ -9,7 +15,7 @@
             <p style='font-size:2rem;padding-top:1rem ;'><i class="fa-solid fa-question"></i></p>
         </div>
          <div class='flex'>
-            <a href="http://" class='button-salvar' style='background:red'>Cancelar</a><button class='button-salvar' type="submit">SIM / Deletar</button>
+            <a href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}" class='button-salvar' style='background:red'>Cancelar</a><button class='button-salvar' type="submit">SIM / Deletar</button>
          </div>
     </form>
 

@@ -1,10 +1,16 @@
 # https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/
 #
+#PARA CONFIGURAR O NGINX
+#sudo nano /etc/nginx/sites-available/upa
+#sudo ln -s /etc/nginx/sites-available/upa /etc/nginx/sites-enabled/upa 
+#sudo nginx -t
+# sudo systemctl restart nginx
+#cd /etc/nginx/sites-available/upa 
 # REPLACES
-# 34.125.33.221 = Replace with your domain
-# /home/rogerleonino/app_repo = Replace with the path to the folder for the project
-# /home/rogerleonino/app_repo/static = Replace with the path to the folder for static files
-# /home/rogerleonino/app_repo/media = Replace with the path to the folder for media files
+# 34.125.242.238 = Replace with your domain
+# /home/cauans.technology/app_repo = Replace with the path to the folder for the project
+# /home/cauans.technology/app_repo/static = Replace with the path to the folder for static files
+# /home/cauans.technology/app_repo/media = Replace with the path to the folder for media files
 # upa_gunicorn.socket = Replace with your unix socket name
 # 
 # Set timezone
@@ -15,21 +21,21 @@
 server {
   listen 80;
   listen [::]:80;
-  server_name 34.125.33.221;
+  server_name 34.125.242.238;
 
   # Add index.php to the list if you are using PHP
   index index.html index.htm index.nginx-debian.html index.php;
   
-  # ATTENTION: /home/rogerleonino/app_repo/static
+  # ATTENTION: /home/cauans.technology/app_repo/static
   location /static {
     autoindex on;
-    alias /home/rogerleonino/app_repo/static;
+    alias /home/cauans.technology/app_repo/static;
   }
 
-  # ATTENTION: /home/rogerleonino/app_repo/media 
+  # ATTENTION: /home/cauans.technology/app_repo/media 
   location /media {
     autoindex on;
-    alias /home/rogerleonino/app_repo/media;
+    alias /home/cauans.technology/app_repo/media;
   }
 
   # ATTENTION: upa_gunicorn.socket
@@ -75,7 +81,6 @@ server {
     application/rss+xml
     image/svg+xml;
 
-  access_log off;
-  #access_log  /var/log/nginx/34.125.33.221-access.log;
-  error_log   /var/log/nginx/34.125.33.221-error.log;
+  #access_log  /var/log/nginx/34.125.242.238-access.log;
+  error_log   /var/log/nginx/34.125.242.238-error.log;
 }

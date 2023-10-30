@@ -2,40 +2,402 @@
 {% load static %}
 {% block title_login %}ENFERMARIA > Triagem {% endblock title_login %}
 {% block titulo_ %}Triagem{% endblock titulo_ %} 
+
 <!--Imagem Representando o setor-->
 {% block vetor-img-aereo %}<img src=" {% static 'home/enfermagem-mulher.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
 <!--END Imagem Representando o setor-->
 {% block body_title %} TRIAGEM DE PACIENTES{% endblock body_title %}
 
-{% block css %}{% endblock css %}
+{% block css %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href=" {% static 'global/css/tabela.css' %}">
+  <link rel="stylesheet" href=" {% static 'global/css/modal.css' %}">
+  <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %}">
+  <style>
+      .modal{
+          width: 80%;
+      }
+      .red {
+          background-color: red !important;          
+        }    
+      .orange {
+        background-color: orange !important;
+      }  
+      .yellow {
+        background-color: yellow !important;
+      }  
+      .green {
+        background-color: green !important;
+      }
+      .font{
+        display:block;
+        width:100%;
+        color: white;
+        padding:0.5rem        
+      }
+      .font2{
+        display:block;
+        width:100%;
+        color: black !important;
+        padding:0.5rem
+      }
+      #id_paciente_triagem{
+        width:200%;
+      }
+    {% if info_extra == 'Analisando...' %}
+      .form-body {      
+        margin:1rem;
+        background: #dbecdb;
+        padding:1rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap:2rem;
+    }
+    {% endif %}
+  </style>
+{% endblock css %}
 
 {% block body_login %}
 <!-- Modal para exibir a mensagem -->
- 
-<div class="top-info">    
+<div class='flex' style='color: var(--cor-background-titulo); margin-bottom:-2rem '>
+  {% if paciente_triagem %}
+    <div>Paciente em Atendimento: <hr> </div>  
+        <h2 class='uppercase' style=''>
+            <i class="fa-solid fa-syringe"></i>
+         {% for dados in paciente_triagem %}
+           <!-- Modal -->   
+                {{dados}} 
+         {% endfor %}         
+        </h2>
+       
+    </div>     
+
+
+
+    <!--Avisa se o paciente tem ALERGIAS--> 
+    {% if dados_paciente %}
+        {% for dados in dados_paciente %}
+            {% if not dados.alergias == 0 %}
+                {% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
+                <div style='text-align:center; margin-bottom:-1.5rem'>
+                    <!-- Botão para abrir o modal -->
+         <button type="button" class="cancelar btn btn-primary" style='background:red' data-toggle="modal" data-target="#myModal">
+             Paciente Alérgico <i class="fa-solid fa-person-dots-from-line"></i>
+           </button>           
+             </div>
+                <div class="modal fade " id="myModal_alergia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog " role="document">
+                    <div class="modal-content ">
+                        <div class="modal-header cancelar ">
+                        <h3 class="modal-title" style='color:#fff' id="exampleModalLabel"><i class="fa-solid fa-hand-dots"></i> Paciente Alégico</h3>
+                        <button type="button" class="close excluir" data-dismiss="modal" aria-label="Fechar">
+                            <span aria-hidden="true">&times; ATENÇÃO!! <i class="fa-solid fa-hand-dots"></i></span>
+                        </button>
+                        </div>
+                        <div class="modal-body ">
+                            {{dados.conteudo_alergia}}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              <!-- JavaScript para abrir o modal automaticamente -->
+              <script>
+                var jQuery = $.noConflict();
+                jQuery(document).ready(function(){
+                  jQuery('#myModal_alergia').modal('show');
+                });
+              </script>
+               
+                {% endif %}
+            {% endif %}    
+        {% endfor %}
+    {% endif %}
+    <!--FIM Avisa se o paciente tem ALERGIAS--> 
+
+
+
+
+  {% endif %}
+
+<div class="top-info">      
     <div>
-        <form action="" method='POST'>    
+        <form action="" method='POST'> 
+          <h2 class='h2'>{{tipo_titulo}}</h2>
+          <hr>
+          <div class="flex">
+            <h3>&nbsp;&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}} </b></h3>
+            {% if info_extra == 'Analisando...' %}
+            <table style="margin-left: 20%" class="Tabela-user">   
+              <caption><b>Classificação de Risco:</b> LEGENDA</caption>         
+              <thead>
+                <tr>
+                  <th class="red">Vermelho</td>
+                  <th class="orange">Laranja</th>
+                  <th class="yellow">Amarelo</th>
+                  <th class="green">Verde</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Emergência Imediata</th>
+                  <td>Muito Urgente</td>
+                  <td>Urgente</td>
+                  <td>Pouco Urgente</td>
+                </tr>
+              </tbody>
+            </table>
+            {% endif %}
+          </div>
+          
+            
             {% csrf_token %}
-            <div class="form-body"> 
-                {{form.as_div}}
-                                                
-            </div>             
-            <button class='button-salvar' type="submit">Salvar <i class="fa-solid fa-plus"></i></button>         
-        </form>
-        <p>No campo <b>Paciente</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
-        <div>&nbsp;</div> 
+            <div class="form-body">                
+                {{form.as_div}}  
+                {% if info_extra == 'Analisando...' %}   
+                <div >
+                  <h1>{{info_extra}}</h1>
+                  {% if info_extra == 'Analisando...' %}
+                  <button type="button" class="cancelar btn btn-secondary" style='width:100% !important;margin-left:0 ' data-toggle="modal" data-target="#myModal">Nossa análise para a classificação de risco para o paciente</button>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog "   role="document">
+                        <div class="modal-content ">
+                            <div class="modal-header cancelar ">
+                              
+                            </div>
+                            <div class="modal-body" style='width:90%'>
+                              <div class="
+                                  {% if sistem_sugestao_cor == 'Vermelho' %}red{% endif %}
+                                  {% if sistem_sugestao_cor == 'Laranja' %}orange{% endif %}
+                                  {% if sistem_sugestao_cor == 'Amarelo' %}yellow font2{% endif %}
+                                  {% if sistem_sugestao_cor == 'Verde' %}green font2{% endif %} 
+                                  font">                  
+                                    <div>
+                                      {{sistem_sugestao}}
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                  <p>Com base nas informações fornecidas no formulário anterior e utilizando como base a "Classificação de Risco do Protocolo de Manchesters", podemos identificar as seguintes situações:</p>
+                  <hr>
+                  
+                  <h3>Pressão Arterial</h3>
+                  <div style='margin-left:1.5rem' >                             
+                    <div class="
+                    {% comment "ocultar" %}{% endcomment %}
+                    {% if pAcor == 'Vermelho' %}red{% endif %}
+                    {% if pAcor == 'Laranja' %}orange{% endif %}
+                    {% if pAcor == 'Amarelo' %}yellow font2{% endif %}
+                    {% if pAcor == 'Verde' %}green font2{% endif %} 
+                    font">                  
+                      <b>{{pAcor}} | <b> PA = {{pa_enviado}} mmHg (Milímetros de mercúrio)</div>
+                      <div>{{pressao_arterial_PA}}</div>                   
+                    <hr>
+                  </div>
+
+                  <h3>Frequência Cardíaca</h3>
+                  <div style='margin-left:1.5rem' >                             
+                    <div class="
+                    {% if fCor == 'Vermelho' %}red{% endif %}
+                    {% if fCor == 'Laranja' %}orange{% endif %}
+                    {% if fCor == 'Amarelo' %}yellow font2{% endif %}
+                    {% if fCor == 'Verde' %}green font2{% endif %} 
+                    font">                  
+                      <b>{{fCor}} | <b> FC = {{fc_enviado}} bpm (Batimentos por minuto)</div>
+                      <div>{{frequencia_cardiaca_FC}}</div>                    
+                    <hr>
+                  </div>
+
+                  <h3>Frequência Respiratória</h3>
+                  <div style='margin-left:1.5rem' >                             
+                    <div class="
+                    {% if fRcor == 'Vermelho' %}red{% endif %}
+                    {% if fRcor == 'Laranja' %}orange{% endif %}
+                    {% if fRcor == 'Amarelo' %}yellow font2{% endif %}
+                    {% if fRcor == 'Verde' %}green font2{% endif %} 
+                    font">                  
+                      <b>{{fRcor}} | <b> FR = {{fr_enviado}} rpm (Repirações por minuto)</div>
+                      <div>{{frequencia_respiratoria_FR}}</div>                    
+                    <hr>
+                  </div>
+                  
+                  <h3>Saturação de Oxigênio</h3>
+                  <div style='margin-left:1.5rem' >                             
+                    <div class="
+                    {% if spOcor == 'Vermelho' %}red{% endif %}
+                    {% if spOcor == 'Laranja' %}orange{% endif %}
+                    {% if spOcor == 'Amarelo' %}yellow font2{% endif %}
+                    {% if spOcor == 'Verde' %}green font2{% endif %} 
+                    font">                  
+                      <b>{{spOcor}} | <b> SPO² = {{spo_enviado}}% oxigênio </div>
+                      <div>{{saturacao_de_oxigenio_SPO2}}</div>                    
+                    <hr>
+                  </div>
+                  
+                  <h3>Hemiglicoteste</h3>
+                  <div style='margin-left:1.5rem' >                             
+                    <div class="
+                    {% if hgTcor == 'Vermelho' %}red{% endif %}
+                    {% if hgTcor == 'Laranja' %}orange{% endif %}
+                    {% if hgTcor == 'Amarelo' %}yellow font2{% endif %}
+                    {% if hgTcor == 'Verde' %}green font2{% endif %} 
+                    font">                  
+                      <b>{{hgTcor}} | <b> HGT = {{hgt_enviado}}mg/dL (3,9 mmol/L) </div>
+                      <div>{{hemoglicoteste_HGT}}</div>                    
+                    <hr>
+                  </div>
+
+                  <h3>Temperatura</h3>
+                  <div style='margin-left:1.5rem' >                             
+                    <div class="
+                    {% if temPcor == 'Vermelho' %}red{% endif %}
+                    {% if temPcor == 'Laranja' %}orange{% endif %}
+                    {% if temPcor == 'Amarelo' %}yellow font2{% endif %}
+                    {% if temPcor == 'Verde' %}green font2{% endif %} 
+                    font">                  
+                      <b>{{temPcor}} | <b>{{temp_enviado}} C° (graus Celsius) </div>
+                      <div>{{temp}}</div>                    
+                    <hr>
+                  </div> 
+                  
+                  <h3>IMC (Índice de Massa Corporal)</h3>
+                  <div style='margin-left:1.5rem' >                             
+                    <div class="
+                    {% if pesOcor == 'Vermelho' %}red{% endif %}
+                    {% if pesOcor == 'Laranja' %}orange{% endif %}
+                    {% if pesOcor == 'Amarelo' %}yellow font2{% endif %}
+                    {% if pesOcor == 'Verde' %}green font2{% endif %} 
+                    font">                  
+                      <b>{{pesOcor}} | <b> IMC = {{pesO_value}} kg/m² ({{peso_enviado}}kg &divide; {{altura_info}}²m)</div>
+                      <div>{{peso}}</div>                    
+                    <hr>
+                  </div>
+                </div>                
+                {% endif %}
+            </div> 
+            
+            {% if tipo_titulo == 'Excluir paciente da triagem' %}
+            <a class="class='btn btn-sm btn-primary m-3 " href="{% url 'Triagem:triagem-enfermaria' %}">cancelar</a>
+            {%endif%}          
+            <button class='btn btn-sm btn-primary m-3 
+            {% if tipo_titulo == 'Excluir paciente da triagem' %}
+             btn-danger
+             {% endif %}
+            
+            ' type="submit">
+              {% if tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}
+              Salvar informações do paciente
+              {% elif tipo_titulo == 'Excluir paciente da triagem' %}
+              Deletar {{ nome_objeto}} da triagem
+
+              {% else %}                
+              Iniciar Pré-atendimento 
+              {% endif %}     
+              <i class="fa-solid fa-person-walking-arrow-right"></i></button> 
+            <p>No campo <b>PACIENTE AGUARDANDO A TRIAGEM:</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
+            <p>&nbsp;</p> 
+
+        </form> 
+        {% if conteudo == 'paciente_na_triagem' %}
+        
+        <h1 class='h2 h-100 bg-purple mt-5 p-2'><i class="fa-solid fa-arrow-trend-up"></i> Pacientes em atendimento pela triagem</h1>
+        <table class='table table-striped'>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Data e horário de inicio</th>                
+              <th>Mãe</th>                       
+              <th>Ação</th> 
+            </tr>
+          </thead>
+          <tbody>
+            {% for pac in paciente_na_triagem  %}
+            <tr>
+              <td>
+                {{pac.paciente_triagem}}
+              </td>
+              <td>
+                {{pac.data_triagem}} || {{pac.hora_triagem}}
+              </td>
+              
+              <td>
+                {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
+              </td>
+              
+              <td >
+                <a class='btn btn-sm btn-secondary' href="{% url 'Triagem:triagem-enfermaria-update' pac.id %}">Continua atendimento</a>                
+                <a class='btn btn-sm btn-danger' href="{% url 'Triagem:triagem-delete' pac.id %}">Excluir da triagem</a>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4">Nenhum paciente encontrado.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table> 
+        
+        
+        <h1 class='h2 h-100 bg-purple mt-5 p-2'><i class="fa-solid fa-arrow-trend-down"></i> Triagens finalizadas hoje</h2>
+        <table class='table table-striped  table-active border border-1  '>
+          <thead>
+            <tr>
+              <th>Nome do paciente</th>
+              <th>Mãe</th>                   
+              <th>Classificação de risco atribuída</th>    
+              <th>Ação</th> 
+            </tr>
+          </thead>
+          <tbody>
+            {% for pac in paciente_na_triagem_concluidos %}
+            <tr>
+              <td>
+                {{pac.paciente_triagem}}
+              </td>
+              <td>
+                {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
+              </td>
+              
+              <td>
+                {{pac.classifica_tipo}}
+              </td>
+              <td>
+                <a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem_classifica_Risco_update' pac.id %}">Reavaliar Paciente</a>               
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table> 
+
+
+        
+        {% endif %}
         <div>&nbsp;</div> 
     </div>
-   </div>   
+   </div>  
+
    
 
 {% block script %}   
   <script>
     var alergiasField = document.getElementById("id_alergias");
-    var alergiasContentField = document.getElementById("id_alergias_content");
+    var alergiasContentField = document.getElementById("id_conteudo_alergia");
+    var comorbidadesField = document.getElementById("id_comorbidades");
+    var comorbidadesContentField = document.getElementById("id_conteudo_comorbidades")
 
     // desabilita o campo "alergias_content" quando a página é carregada
     alergiasContentField.disabled = true;
+    comorbidadesContentField.disabled = true
 
     // habilita ou desabilita o campo "alergias_content" quando o usuário seleciona uma opção diferente
     alergiasField.addEventListener("change", function() {
@@ -43,9 +405,36 @@
             alergiasContentField.disabled = false;
         } else {
             alergiasContentField.disabled = true;
+            alergiasContentField.value = 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)';
         }
+    });  
+    comorbidadesField.addEventListener("change", function(){
+      if (comorbidadesField.value == "1"){
+        comorbidadesContentField.disabled = false;
+      } else{
+        comorbidadesContentField.disabled = true;
+        comorbidadesContentField.value = 'Não possui comorbidades (Para tornar editável essa área, é necessário informar que o paciente possui comorbidades)'
+      }
+    })
+
+</script>
+
+<script src="{% static 'global/js/select2.min.js' %}"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $('#id_paciente_triagem').select2();  
     });
 </script>
+<script>
+  document.getElementById("id_frequencia_cardiaca_FC").addEventListener("change", function(){
+    this.value = parseFloat(this.value).toFixed(2);
+ });
+ document.getElementById("id_frequencia_cardiaca_FC").addEventListener("change", function(){
+  this.value = parseFloat(this.value).toFixed(2);
+});
+</script>
+
 {% endblock script %}
 
 {% endblock body_login %}

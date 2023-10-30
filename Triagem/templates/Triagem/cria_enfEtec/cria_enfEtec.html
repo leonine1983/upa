@@ -4,34 +4,94 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'global/css/message.css' %}">
     <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">   
-    <link rel="stylesheet" href="{% static 'global/css/form.css' %}">   
+    <link rel="stylesheet" href="{% static 'global/css/bootstrap.min.css' %}">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        .Tabela-user{
-            margin:auto
-        }
-        .Tabela-user tr th{          
-            background-color: aquamarine;
-            padding: 0.2rem;
-           
-        }
-        .Tabela-user tr td {            
-            background-color: #ebf0f7;
-            padding: 0.3rem;
-            padding-left: 1rem;
-            padding-right: 1rem;
-            border: 0.01rem solid aquamarine;
-        }
-        .Tabela-user tr td:hover {            
-            background-color: #bbd0eb;
-        }
+      
+      .class_form {
+        max-width: 70%;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      
+      .class_form .grid p {
+        margin-bottom: 20px;
+      }
+      
+      .class_form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      
+      .class_form input[type="text"],
+      .class_form input[type="email"],
+      .class_form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      
+      .class_form input[type="radio"] {
+        margin-right: 5px;
+      }
+      
+      .class_form .helptext {
+        font-size: 12px;
+        color: #888;
+      }
+      
+      .class_form button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .radio_div{
+        margin:0.5%;
+        width:12rem;
+        text-align:center;
+        font-size:0.8rem
+
+      }
+      .icone{
+        
+        width: 7%;
+        padding:0.5rem;
+        color:#fff;
+        font-size:115%;
+        padding-left:1rem !important;
+      }
+      .border-radius-left{        
+        border-bottom-left-radius: 1rem;
+        border-top-left-radius: 1rem;
+        margin:0.2rem;
+      }
+
+      .background-escuro,  .icone{
+        background-color: cadetblue;
+      }
+
+
+        
        
 
     </style>
 {% endblock css %}
     {% include 'global/message.html' %}    
+      
     
 <h2><i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i> Relação de Profissionais Cadastrados no Sistema</b></h2>
-    <table class="Tabela-user" cellspacing="0">
+    <table class="table table-primary" cellspacing="0">
         <tr>
             <th>Nome Completo</th>
             <th>Usuário (Login)</th> 
@@ -56,7 +116,7 @@
             <td>{{groups.endereco}}</td>
             <td>{{groups.user__groups__name}}</td>-->            
             <td>{{groups.user__groups__name}}</td>
-            <td><span><a href="{% url 'Triagem:user_atualiza' groups.user__id %}"><i class="fa-solid fa-user-pen"></i></a></span> |  <span><a href="{% url 'Triagem:user_delete' groups.id %}"><i class="fa-solid fa-trash"></i></a></span></td>
+            <td><span><a href="{% url 'Triagem:user_atualiza' groups.user__id %}"><i class="fa-solid fa-user-pen"></i></a></span> |  <span><a href="{% url 'Triagem:user_delete' groups.id %}"><i class="fa-solid fa-trash excluir"></i></a></span></td>
 
         </tr>
         {% endfor %}
@@ -71,29 +131,93 @@
   
 <h2>
 {% else %}
-    <h2><i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i> Cadastra Profissionais de <b>Enfermagem</b> ou <b>Tec em Enfermagem</b></h2>
+    <h2 class='background-escuro shadow-sm p-2 m-2  text-light border-bottom border-3'> Cadastra Profissionais de <b>Enfermagem</b> ou <b>Tec em Enfermagem</b></h2>
 {% endif %}
-
-<form method="post" class='class_form grid'>
+<form method="post" class="class_form">
     {% csrf_token %}
-    <div>
-        {{ form.as_p }}
+    <div class="grid">
+      <p>
+        <label for="id_username">
+             Usuário:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-user-nurse"></i></div><input type="text" name="username" maxlength="150" required="" id="id_username">
+        </div>
+        <span class="helptext">Obrigatório. 150 caracteres ou menos. Letras, números e @/./+/-/_ apenas.</span>
+      </p>
+      <p>&nbsp;</p>
+      <p>
+        <label for="id_first_name">
+             Primeiro nome:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-file-signature"></i></div><input type="text" name="first_name" maxlength="150" id="id_first_name"></div>            
+      </p>
+      <p>
+        <label for="id_last_name">
+             Último nome:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-file-signature"></i></div><input type="text" name="last_name" maxlength="150" id="id_last_name"></div>            
+      </p>
+      <p>
+        <label for="id_email">
+             Endereço de email:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-at"></i></div><input type="email" name="email" maxlength="254" id="id_email"></div>            
+      </p>
+      <p>
+        <label for="id_password">
+             Senha:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-key"></i></div><input type="text" name="password" maxlength="128" required="" id="id_password"></div>
+        
+      </p>
+      <p>
+        <label for="id_crm">
+           nº COREN:
+        </label>            
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-hashtag"></i></div><input type="text" name="crm" placeholder="Digite o nº COREN" maxlength="19" id="id_crm"></div>            
+      </p>
+      <p>
+        <label for="id_endereco">
+             Rua:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-regular fa-address-card"></i></div><input type="text" name="endereco" placeholder="Digite o nome da rua" maxlength="255" required="" id="id_endereco"></div>            
+      </p>
+      <p>
+        <label for="id_telefone">
+             Telefone:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-phone"></i></div><input type="text" name="telefone" maxlength="14" required="" id="id_telefone"></div>            
+      </p>
+      <p>
+        <label for="id_data_nascimento">
+             Data de nascimento:
+        </label>
+        <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-calendar"></i></div><input type="text" name="data_nascimento" required="" id="id_data_nascimento" maxlength="10"></div>
+        
+      </p>
     </div>
-    <div >
-        <div class="radio_div">
+    <p>&nbsp;</p>
+    <h2>Marque o grupo de profissionais que deseja cadastrar esse usuário:</h2>
+    <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-users-viewfinder"></i></div>
+        <div class="radios d-flex border p-2">
+            <div class="radio_div ">
             <label class="radio_label" for="enfermagem">Enfermagem</label>
-            <input class="radio" type="radio" value='group_Enfermagem' name="grupo" id="enfermagem" required>
-        </div>
-        <div class="radio_div">
+            <input class="radio" type="radio" value="group_Enfermagem" name="grupo" id="enfermagem" required="">
+            </div>
+            <div class="radio_div ">
             <label class="radio_label" for="tec">Tec em Enfermagem</label>
-            <input class="radio" type="radio" value="group_Tec_Enfermagem" name="grupo" id="tec" required>
+            <input class="radio" type="radio" value="group_Tec_Enfermagem" name="grupo" id="tec" required="">
+            </div>
         </div>
+    </div>
+ 
     </div>
     {% if form.instance.pk %}
     <button style="width:97% ;" class="button-salvar" type="submit"> Atualizar dados de {{up}} <i class="fa-solid fa-floppy-disk"></i></button>
     {% else %}
     <button style="width:97% ;" class="button-salvar" type="submit"> Cadastrar Profissional de Saude <i class="fa-solid fa-floppy-disk"></i></button>
     {% endif %}
+
 </form>
 
 {% if form.errors %}

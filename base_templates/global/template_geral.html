@@ -1,21 +1,43 @@
 {% include 'global/partials_template/head/head_top.html' %}
 {% load static %}
-{% block css %}{% endblock css %}    
-    <title>.:UPA - {% block title_login %} {% endblock title_login %}</title>    
+{% block css %}{% endblock css %} 
+<script src="{% static 'global/js/jquery-3.6.1.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'global/css/bootstrap.min.css' %}">   
+<link rel="stylesheet" href=" {% static 'global/css/footer.css' %}">
+<link rel="stylesheet" href=" {% static 'global/css/fontawesome/css/fontawesome.min.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bubbler+One&family=Darker+Grotesque:wght@500&family=Forum&family=Montserrat+Alternates&family=Tenor+Sans&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href=" {% static 'global/css/message.css' %}">
+<title>::UPA - {% block title_login %} {% endblock title_login %}</title> 
+<style>
+    body{
+        font-family: 'Bubbler One', sans-serif !important;
+        font-family: 'Darker Grotesque', sans-serif !important;
+        font-family: 'Forum', cursive !important;
+        font-family: 'Montserrat Alternates', sans-serif !important;
+        font-family: 'Tenor Sans', sans-serif !important;        
+    }
+    a{
+        text-decoration: none;
+    }
+    
+</style>   
 {% include 'global/partials_template/head/head_botton.html' %} 
 <div class="vetor-img-aereo">{% block vetor-img-aereo %}{% endblock vetor-img-aereo %}</div>
-
-<div class='conteiner'>
+<div class='conteiner'>    
     <!--Menu lateral-->
     {% include 'global/partials_template/menu-lateral/menu-lateral-atend.html' %}
     <!--Fim Menu lateral-->
     <div class="conteiner-body">
         <div class='barra-titulo-page barra-top flex'>
             <span>UPA - UNIDADE DE PRONTO ATENDIMENTO:
-                {% block titulo_ %}
-                    
-                {% endblock titulo_ %} 
+                {% block titulo_ %}{% endblock titulo_ %} 
             </span>
+            
             <!--Informações de Login e Senha-->
             <div class="flex" style="margin-left: 48%;">
                 <div>
@@ -27,20 +49,21 @@
                 </div>
             </div>  
         </div>
-    </div>
+    </div> 
 </div>
+
 <!--Menu Horizontal-->
 <div class="menu-horizontal">
     {% include 'global/partials_template/menu-lateral/menu-horizontal-global.html' %}    
 </div>
 <!--End Menu Horizontal-->
 
-<main>
+{% include 'global/message.html' %} 
+<main class="p-3" >  
     {% include 'global/partials_template/header/header.html' %}
-    <div class="main-header-title">{% block body_title %}  {% endblock body_title %}</div>
+    <div class="main-header-title mb-5 p-2">{% block body_title %}  {% endblock body_title %}</div>
     {% block body_login %}{% endblock body_login %}
 </main>
-
 {% include 'global/partials_template/footer/footer.html' %}
 {% block script %}{% endblock script %}
 </body>
