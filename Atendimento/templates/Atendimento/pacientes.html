@@ -20,48 +20,68 @@
 <div class='menu-local-top' style='margin-top:-3.5%'>
     <ul>
         <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem</a></li>
-        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>        
-        
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
     </ul> 
 </div>   
     <div class="" style='margin:5rem auto 1rem auto;  width:50%; '>
          
     </div>        
 
-<div class='flex' style="margin:8g% -5% ;">    
+<div class='flex' style="margin:8% -5% ;">    
     <div class="style-tabela">      
         <div class="border-bottom border-dark fs-3 d-flex">
             <i class="fa-duotone fa-list-ul"></i>
              Listagem de Pacientes  
         </div>
         <button onclick="exibe_info()" class="btn btn-bd-primary btn-primary btn-sm">Mais informações <i class="fa-duotone fa-hand-holding-medical"></i> </button>
-        <div id="info" class="top-info border border-primary bg-primary-subtle rounded-1 p-2" style="margin:-0.2rem 0 0 2rem ; display: none;">
+        <div id="info" class="top-info border border-primary bg-primary-subtle rounded-1 p-2 m-3" style="margin:-0.2rem 0 0 2rem ; display: none;">
             Na tabela abaixo, está listado todos os pacientes cadastrados nesse sistema. 
             Caso não esteja visualizando o nome do paciente desejando, utilize o sistema de busca acima
              para encontar o nome dele, bastando somente digitar o nome é clicar em pesquisar. 
              Se desejar ter mais informações sobre o paciente, basta clicar sobre o nome desejado que 
              imediatamente que página contendo todas as informações desse paciente é aberto.
+             <div style='text-align:right !important'><i class="fs-3 fa-duotone fa-hand-holding-medical"></i></div>
         </div>
         <div class="w-50" style="margin-left:25%; " >
             <form action="?" method="GET" class="form-inline bg-light rounded-5">
                 {% csrf_token %}            
                 <div class="search-wrapper rounded-5">
-                  <input type="text" class="search-input rounded-5 m-0" placeholder="Buscar por paciente" name="busca-paciente">
+                  <input type="text" class="search-input rounded-5 m-0" placeholder=" CODIGO | Nº SUS | NOME DO PACIENTE" name="busca-paciente">
                   <button class="search-button" type="submit" style="width: 2.8rem;"><i class="fa-solid fa-search"></i></button>
                 </div>
               </form>
         </div>
-       <p>&nbsp;</p>
-       <div class="controle_tabela">
-        {% if page_obj.has_previous %}
-            <a class="" href="?page={{page_obj.previous_page_number}}"><i class="fa-solid fa-angles-left"></i> Voltar</a>    
-                          
-        {% endif %}
-        {% if page_obj.has_next %}               
-            <a href="?page={{ page_obj.next_page_number }}">Próxima página <i class="fa-solid fa-angles-right"></i></a>    
-        {% endif %}
-    </div>
-        <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%">                
+       <div class=""> 
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for page in paginator.page_range %}
+                    {% if page_obj.number|add:"-10" <= page <= page_obj.number|add:"10" %}
+                    <li class="page-item {% if page == page_obj.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}  
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                    </a>
+                </li>
+                {% endif %}
+                </ul>
+            </nav>
+        </div>
+        <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%" style='margin-top:0.1rem'>                
                 <thead>
                     <tr>
                     <td class="top center fs-7"><strong>Codigo</strong></td>
