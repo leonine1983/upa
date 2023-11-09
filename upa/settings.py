@@ -193,3 +193,40 @@ MESSAGE_TAGS = {
     constants.ERROR: 'alert-danger',
 }
 
+# DEFINIÇÕES DE SEGURANÇA PARA SESSÕES. 
+
+# 1º define o mecanismo de armazenamento de sessão para 'django.contrib.sessions.backends.cache' ou
+# o 'django.contrib.sessions.backends.db' conforme a preferência. Foi escolhido armazenamento em cache
+SESSION_ENGINE =   'django.contrib.sessions.backends.cache'
+
+# 2º define a chave de assinatura da sessão
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Strict'
+
+# 3º Define o tempo de sessão para 1 hora (3600 segundos)
+SESSION_COOKIE_AGE = 3600
+
+# Por fim definir a pagina para onde será redirecionada o usuario apos finalizar a sessão
+LOGIN_URL = 'Access_Login:access_login_page'
+
+"""
+
+
+# Definições de seguranção para sessões. PERSONALIZADAS POR ROGERIO
+
+# Defina o mecanismo de armazenamento de sessão para 'django.contrib.sessions.backends.cache' ou 'django.contrib.sessions.backends.db' conforme sua preferência.
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+# Defina a chave de assinatura da sessão.
+SESSION_COOKIE_SECURE = True  # Certifique-se de que está em um ambiente de produção.
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Strict'
+
+# Define o tempo de sessão para 1 hora (3600 segundos)
+#SESSION_COOKIE_AGE = 3600
+
+# Define a URL de login para redirecionamento após o término da sessão
+LOGIN_URL = 'Admin_Acessos:login_create'
+
+"""

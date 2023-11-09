@@ -10,7 +10,7 @@ from django.contrib import messages
 def access_login(request):
     form = LoginForm()
     if logout:
-        messages.error(request, 'Você realizou o login com sucesso!')
+        messages.error(request, f'Você realizou o login com sucesso!')
 
 
     return render(request, 'Access_Login/sign-in/index.html',  {
