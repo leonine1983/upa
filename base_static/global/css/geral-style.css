@@ -36,6 +36,12 @@ p{
 body{
     background: var(--background-body);    
 }
+.fs-7{
+  font-size: 0.7rem !important;
+}
+.fs-6{
+  font-size: 0.8rem !important;
+}
 
 
 .conteiner-body{
@@ -87,7 +93,7 @@ main{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px !important;
     margin: 2.5rem auto !important;
     margin-top: 0 !important;
-    width: 75% !important;
+    width: 85% !important;
     height: auto !important;
     border-radius: 1rem !important;
     min-height: 41rem !important;

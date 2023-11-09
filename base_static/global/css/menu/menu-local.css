@@ -15,22 +15,19 @@
 }
 
 .menu-local-top ul li{
-    width: 10rem;
     padding: 0.5rem 1rem;
-    padding-top: 1rem;
     color: white;
     border-right: 0.1rem solid var(--cor-cidade-secundário);
     font-size: 1.1rem;    
     transition: all ease-in-out 1000ms;
     text-transform: uppercase;
 }
-.menu-local-top ul li:hover{
+.menu-local-top ul li a:hover{
     background: var(--cor-cidade-secundário);     
     color: var(--cor-cidade-primario) ;  
+    padding:0.55rem 2rem;
 }
 .menu-local-top ul li a{
     color: var(--cor-cidade-secundário);
+    transition: all ease-in-out 1000ms;
  }
-.menu-local-top ul li a:hover{    
-    color: var(--cor-cidade-primario) ;
-}

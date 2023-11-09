@@ -1,7 +1,9 @@
 {% extends 'global/template_geral.html' %}
+
 <!-- titulo Web da pagina-->
 {% block title_login %} Pacientes {% endblock title_login %}
 {% load static %}
+
 <!--CSS local-->
 {% block css %} 
     <!--Tabela-->
@@ -9,42 +11,45 @@
     <!--Menu Local-->
     <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} ">     
     <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
+{% endblock css %} 
 
-   
-
-{% endblock css %}   
 <!--Titulo da Pagina-->
 {% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
-{% block body_login %}
 
-
-    
-<div class='menu-local-top' style='margin-top:-2rem'>
+{% block body_login %}    
+<div class='menu-local-top' style='margin-top:-3.5%'>
     <ul>
-        <li><a href="{% url 'Atendimento:lista-paciente' %}">Listagem</a></li>
-        <li> <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastro</a></li>        
-    </ul>      
-         
+        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem</a></li>
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>        
+        
+    </ul> 
 </div>   
     <div class="" style='margin:5rem auto 1rem auto;  width:50%; '>
-        <form action="?" method="GET" class="form-inline">
-            {% csrf_token %}            
-            <div class="search-wrapper">
-              <input type="text" class="search-input" placeholder="Buscar por paciente" name="busca-paciente">
-              <button class="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
-            </div>
-          </form> 
+         
     </div>        
 
-<div class='flex'>
-
-    <div class="style-tabela">       
-        <div class="top-info">
+<div class='flex' style="margin:8g% -5% ;">    
+    <div class="style-tabela">      
+        <div class="border-bottom border-dark fs-3 d-flex">
+            <i class="fa-duotone fa-list-ul"></i>
+             Listagem de Pacientes  
+        </div>
+        <button onclick="exibe_info()" class="btn btn-bd-primary btn-primary btn-sm">Mais informações <i class="fa-duotone fa-hand-holding-medical"></i> </button>
+        <div id="info" class="top-info border border-primary bg-primary-subtle rounded-1 p-2" style="margin:-0.2rem 0 0 2rem ; display: none;">
             Na tabela abaixo, está listado todos os pacientes cadastrados nesse sistema. 
             Caso não esteja visualizando o nome do paciente desejando, utilize o sistema de busca acima
              para encontar o nome dele, bastando somente digitar o nome é clicar em pesquisar. 
              Se desejar ter mais informações sobre o paciente, basta clicar sobre o nome desejado que 
              imediatamente que página contendo todas as informações desse paciente é aberto.
+        </div>
+        <div class="w-50" style="margin-left:25%; " >
+            <form action="?" method="GET" class="form-inline bg-light rounded-5">
+                {% csrf_token %}            
+                <div class="search-wrapper rounded-5">
+                  <input type="text" class="search-input rounded-5 m-0" placeholder="Buscar por paciente" name="busca-paciente">
+                  <button class="search-button" type="submit" style="width: 2.8rem;"><i class="fa-solid fa-search"></i></button>
+                </div>
+              </form>
         </div>
        <p>&nbsp;</p>
        <div class="controle_tabela">
@@ -59,23 +64,41 @@
         <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%">                
                 <thead>
                     <tr>
-                    <td class="top center"><strong>Nome</strong></td>
-                    <td class="top center"><strong>Telefone</strong></td>
-                    <td class="top center"><strong>Bairro</strong></td>
-                    <td class="top center"><strong>Data de Cadastro</strong></td>
-                    <td class="top center"><strong>Resp. pelo cadastro</strong></td>
-                    <td class="top center" colspan="2" ><strong>Atualizar</strong></td>
+                    <td class="top center fs-7"><strong>Codigo</strong></td>
+                    <td class="top center fs-7"><strong>Nome Social</strong></td>                    
+                    <td class="top center fs-7"><strong>Telefone</strong></td>
+                    <td class="top center fs-7"><strong>Idade</strong></td>
+                    <td class="top center fs-7"><strong>Bairro</strong></td>
+                    <td class="top center fs-7"><strong>Data de Nascimento</strong></td>
+                    <td class="top center fs-7"><strong>RG</strong></td>
+                    <td class="top center fs-7"><strong>SUS</strong></td>
+                    <td class="top center fs-7"><strong>Alergia</strong></td>
+                    <td class="top center fs-7"><strong>Comorbidades</strong></td>
+                    <td class="top center fs-7" colspan="2" ><strong>Atualizar</strong></td>
                     </tr>
-                </thead>       
+                </thead> 
                 <tbody> 
                    
                     {% for campo in object_list %}  
                     <tr> 
-                        <td><a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk %}"><span>{{campo.nome_social}}</span></a></td>                                                        
+                        <td align="center" href="">{{campo.codigo_pacient}}</td>
+                        <td class="fs-6"><a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk %}"><span>{{campo.nome_social}}</span></a></td>                                                        
                         <td align="center" href="">{{campo.tel}}</td>
+                        <td align="center" href="">{{campo.idade}}</td>                        
                         <td align="center">{{campo.bairro}}</td>
-                        <td align="center">{{campo.data_cadastro}}</td>
-                        <td align="center"><span class="uppercase"></span></td>                        
+                        <td align="center">{{campo.data_nascimento}}</td>
+                        <td align="center">{{campo.RG}}</td>
+                        <td align="center">{{campo.cartao_sus}}</td>
+                        {% if campo.alergias %}
+                        <td align="center" class="text-danger">SIM</td>
+                            {% else %}             
+                            <td align="center" class="text-primary">NÃO</td>  
+                        {% endif %}
+                        {% if campo.comorbidades %}
+                        <td align="center" class="text-danger">SIM</td>      
+                            {% else %}             
+                            <td align="center" class="text-primary">NÃO</td>      
+                        {% endif %}
                         <td align="center"> <a href="{% url 'Atendimento:atualizar-paciente' campo.pk   %}" class="editar fa fa-check-circle" title="Editar"></a> </td>                
                     </tr>       
                     
@@ -89,5 +112,13 @@
     </div><!--tabela-->   
 
 </div>     
-            
+
+<script>
+    function exibe_info(){
+        var div_info = document.getElementById('info');
+        var disp = div_info.style.display;
+        div_info.style.display = disp === 'none' ? 'block' : 'none';
+    }
+</script>
+
 {% endblock body_login %}

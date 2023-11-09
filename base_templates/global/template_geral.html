@@ -74,12 +74,16 @@
         document.getElementById("hospital_1").style.display = "none";        
         document.getElementById("sair_login").style.display = "block";
         document.getElementById("wifi_1").style.display = "block";  
+        document.getElementsByClassName("fa-hospital-user").style.display = "block";        
+        document.getElementsByClassName("fa-address-card").style.display = "none";
       } else {
         // Se não houver conexão, oculte a div
         document.getElementById("hospital_2").style.display = "none";
         document.getElementById("hospital_1").style.display = "block";
         document.getElementById("sair_login").style.display = "none";
         document.getElementById("wifi_1").style.display = "none";  
+        document.getElementById("fa-hospital-user").style.display = "none";
+        document.getElementById("fa-address-card").style.display = "block";
       }
     }
 
