@@ -21,28 +21,26 @@
         font-family: 'Montserrat Alternates', sans-serif !important;
         font-family: 'Tenor Sans', sans-serif !important;        
     }
-    a{
-        text-decoration: none;
-    }
-    
+    a{text-decoration: none; transition: 300ms all ease-in-out;}
+    a:hover{padding-right: 0.3rem;padding-left: 0.3rem;box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;}    
 </style>   
+
 {% include 'global/partials_template/head/head_botton.html' %} 
+
 <div class="vetor-img-aereo">{% block vetor-img-aereo %}{% endblock vetor-img-aereo %}</div>
 <div class='conteiner'>    
-    <!--Menu lateral-->
+    <!--Menu lateral  -->
     {% include 'global/partials_template/menu-lateral/menu-lateral-atend.html' %}
     <!--Fim Menu lateral-->
     <div class="conteiner-body">
         <div class='barra-titulo-page barra-top flex'>
-            <span>UPA - UNIDADE DE PRONTO ATENDIMENTO:
-                {% block titulo_ %}{% endblock titulo_ %} 
-            </span>
-            
+            <span>UPA - UNIDADE DE PRONTO ATENDIMENTO</span>            
             <!--Informações de Login e Senha-->
             <div class="flex" style="margin-left: 48%;">
                 <div>
                     <div class="flex">
-                        <a href="{% url 'Access_Login:logout_upa' %}"><i class="fa-solid fa-door-open"  style=" padding: 0.5rem; "></i> <span style="padding-top:0.08rem">  Sair </a></span>
+                        <i id="wifi_1" class="fa-duotone fa-wifi mt-2"></i>
+                        <a class="link-light d-flex" href="{% url 'Access_Login:logout_upa' %}"> &nbsp;<i id="sair_login" class="fa-duotone fa-arrow-left-to-arc mt-2"></i><i class="fa-solid fa-door-open"  style="padding: 0.5rem; "></i> <span style="padding-top:0.08rem"> Sair </a></span>
                         <i class="fa-solid fa-user" style="border-radius: 100%; border:solid #fff 0.1rem; padding: 0.5rem; margin-right: 0.25rem;margin-left: 1rem;"></i>&nbsp;
                         <strong  class="uppercase" style="padding-top:0.25rem">{{request.user}}</strong>
                     </div>
@@ -64,7 +62,31 @@
     <div class="main-header-title mb-5 p-2">{% block body_title %}  {% endblock body_title %}</div>
     {% block body_login %}{% endblock body_login %}
 </main>
+
 {% include 'global/partials_template/footer/footer.html' %}
-{% block script %}{% endblock script %}
+
+<script>
+    // Função para verificar a conexão com a internet
+    function verificarConexao() {
+      if (navigator.onLine) {
+        // Se houver conexão, exiba a div
+        document.getElementById("hospital_2").style.display = "block";        
+        document.getElementById("hospital_1").style.display = "none";        
+        document.getElementById("sair_login").style.display = "block";
+        document.getElementById("wifi_1").style.display = "block";  
+      } else {
+        // Se não houver conexão, oculte a div
+        document.getElementById("hospital_2").style.display = "none";
+        document.getElementById("hospital_1").style.display = "block";
+        document.getElementById("sair_login").style.display = "none";
+        document.getElementById("wifi_1").style.display = "none";  
+      }
+    }
+
+    // Registre um ouvinte de evento para verificar a conexão quando a página carregar e sempre que a conexão mudar
+    window.addEventListener("load", verificarConexao);
+    window.addEventListener("online", verificarConexao);
+    window.addEventListener("offline", verificarConexao);
+  </script>
 </body>
 </html>
