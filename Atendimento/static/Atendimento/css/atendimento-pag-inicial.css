@@ -1,0 +1,272 @@
+
+
+.menu-local-top{
+  background-color: #f9423a;
+  display: block;
+}
+
+
+
+  a {
+    color: inherit;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s; }
+    a:hover, a:focus {
+      color: #ababab;
+      text-decoration: none;
+      outline: 0 none; }
+  
+  h1, h2, h3,
+  h4, h5, h6 {
+    color: #1e2530;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    line-height: 1.3; }
+  
+
+  
+  /*
+   * Selection color
+   */
+  ::-moz-selection {
+    background-color: #FA6862;
+    color: #fff; }
+  
+  ::selection {
+    background-color: #FA6862;
+    color: #fff; }
+  
+  /*
+   *  Reset bootstrap's default style
+   */
+  .form-control::-webkit-input-placeholder,
+  ::-webkit-input-placeholder {
+    opacity: 1;
+    color: inherit; }
+  
+  .form-control:-moz-placeholder,
+  :-moz-placeholder {
+    /* Firefox 18- */
+    opacity: 1;
+    color: inherit; }
+  
+  .form-control::-moz-placeholder,
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    opacity: 1;
+    color: inherit; }
+  
+  .form-control:-ms-input-placeholder,
+  :-ms-input-placeholder {
+    opacity: 1;
+    color: inherit; }
+  
+  button, input, select,
+  textarea, label {
+    font-weight: 400; }
+  
+  .btn {
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s; }
+    .btn:hover, .btn:focus, .btn:active:focus {
+      outline: 0 none; }
+  
+  .btn-primary {
+    background-color: #FA6862;
+    border: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    height: 48px;
+    line-height: 50px;
+    padding: 0 42px;
+    text-transform: uppercase; }
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:active:focus {
+      background-color: #f9423a; }
+  
+  .btn-border {
+    border: 1px solid #d7d8db;
+    display: inline-block;
+    padding: 7px; }
+  
+  /*
+   *  CSS Helper Class
+   */
+  .clear:before, .clear:after {
+    content: " ";
+    display: table; }
+  
+  .clear:after {
+    clear: both; }
+  
+  .pt-table {
+    display: table;
+    width: 100%;
+    height: -webkit-calc(100vh - 4px);
+    height: -moz-calc(100vh - 4px);
+    height: calc(100vh - 4px); }
+  
+  .pt-tablecell {
+    display: table-cell;
+    vertical-align: middle; }
+  
+  .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; }
+  
+  .relative {
+    position: relative; }
+  
+  .primary,
+  .link:hover {
+    color: #FA6862; }
+  
+  .no-gutter {
+    margin-left: 0;
+    margin-right: 0; }
+    .no-gutter > [class^="col-"] {
+      padding-left: 0;
+      padding-right: 0; }
+  
+  .flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex; }
+  
+  .flex-middle {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center; }
+  
+  .space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    justify-content: space-between; }
+  
+  .nicescroll-cursors {
+    background: #FA6862 !important; }
+  
+  .preloader {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex; }
+    .preloader.active.hidden {
+      display: none; }
+  
+  .loading-mask {
+    background-color: #FA6862;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 20%;
+    -webkit-transition: all 0.6s cubic-bezier(0.61, 0, 0.6, 1) 0s;
+    -moz-transition: all 0.6s cubic-bezier(0.61, 0, 0.6, 1) 0s;
+    -o-transition: all 0.6s cubic-bezier(0.61, 0, 0.6, 1) 0s;
+    transition: all 0.6s cubic-bezier(0.61, 0, 0.6, 1) 0s; }
+    .loading-mask:nth-child(2) {
+      left: 20%;
+      -webkit-transition-delay: 0.1s;
+      -moz-transition-delay: 0.1s;
+      -o-transition-delay: 0.1s;
+      transition-delay: 0.1s; }
+    .loading-mask:nth-child(3) {
+      left: 40%;
+      -webkit-transition-delay: 0.2s;
+      -moz-transition-delay: 0.2s;
+      -o-transition-delay: 0.2s;
+      transition-delay: 0.2s; }
+    .loading-mask:nth-child(4) {
+      left: 60%;
+      -webkit-transition-delay: 0.3s;
+      -moz-transition-delay: 0.3s;
+      -o-transition-delay: 0.3s;
+      transition-delay: 0.3s; }
+    .loading-mask:nth-child(5) {
+      left: 80%;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition-delay: 0.4s;
+      -o-transition-delay: 0.4s;
+      transition-delay: 0.4s; }
+  
+  .preloader.active.done {
+    z-index: 0; }
+  
+  .preloader.active .loading-mask {
+    width: 0; }
+  
+  /*------------------------------------------------
+      Start Styling
+  -------------------------------------------------*/
+  .mt20{margin-top:20px;}
+  
+  .page-close {
+    font-size: 30px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    z-index: 100; }
+  
+
+  
+  .section-title {
+    margin-bottom: 20px; }
+    .section-title h3 {
+      display: inline-block;
+      position: relative; }
+      .section-title h3::before, .section-title h3::after {
+        content: "";
+        height: 2px;
+        position: absolute;
+        bottom: 8px;
+        left: -webkit-calc(100% + 14px);
+        left: -moz-calc(100% + 14px);
+        left: calc(100% + 14px); }
+      .section-title h3::before {
+        background-color: #1e2530;
+        width: 96px;
+        bottom: 14px; }
+      .section-title h3::after {
+        background-color: #FA6862;
+        width: 73px; }
+    .section-title.light h3 {
+      color: #fff; }
+      .section-title.light h3::before {
+        background-color: #fff; }
+  
+  .page-nav {
+    bottom: 40px;
+    left: 0;
+    position: absolute;
+    right: 0; }
+    .page-nav span {
+      font-family: "Open Sans", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 0.9;
+      text-transform: uppercase; }
+  
+  /*------------------------------------------------
+      Home Page
+  -------------------------------------------------*/
+  
