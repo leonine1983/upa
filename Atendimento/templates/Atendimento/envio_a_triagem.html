@@ -31,12 +31,16 @@ $(document).ready(function() {
 
 {% block body_login %}
 <!--Botão adicionar a lista de triagem-->
+<div class="border-bottom border-dark fs-3 d-flex">
+    <i class="fa-duotone fa-list-ul"></i>
+     Fila de espera por ordem de chegada
+</div>
 {% if lista_db %}
-<a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='button-salvar' style='margin-bottom:1rem!important' >Adicionar paciente a lista de triagem <i class="fa-solid fa-plus"></i></a>
+<a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='btn btn-sm btn-primary' style='margin-bottom:1rem!important' >Adicionar paciente na fila de espera para a classificação<i class="fa-solid fa-plus"></i></a>
 {% endif %}
 <!-- FIM Botão adicionar a lista de triagem-->
 
-<table class=' table table-striped'>
+<table class='table table-striped border border-secondary'>
     <tr>
         <th class='linha-titulo'>Nome do Paciente</th>
         <th class='linha-titulo'>Data de entrada na fila de triagem</th>
@@ -150,6 +154,7 @@ $(document).ready(function() {
     </div>
 {% endif %}
 </div>
+
 <p>&nbsp;</p>
 <script src="{% static 'global/js/select2.min.js' %}"></script>
     <script>
