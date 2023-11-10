@@ -6,7 +6,7 @@
 <!--Imagem Representando o setor-->
 {% block vetor-img-aereo %}<img src=" {% static 'home/enfermagem-mulher.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
 <!--END Imagem Representando o setor-->
-{% block body_title %} TRIAGEM DE PACIENTES{% endblock body_title %}
+{% block body_title %}<i class="fa-solid fa-laptop-medical"></i> CLASSIFICAÇÃO DE PACIENTES {% endblock body_title %}
 
 {% block css %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -60,6 +60,7 @@
 {% endblock css %}
 
 {% block body_login %}
+
 <!-- Modal para exibir a mensagem -->
 <div class='flex' style='color: var(--cor-background-titulo); margin-bottom:-2rem '>
   {% if paciente_triagem %}
@@ -73,8 +74,6 @@
         </h2>
        
     </div>     
-
-
 
     <!--Avisa se o paciente tem ALERGIAS--> 
     {% if dados_paciente %}
@@ -304,7 +303,7 @@
               Iniciar Pré-atendimento 
               {% endif %}     
               <i class="fa-solid fa-person-walking-arrow-right"></i></button> 
-            <p>No campo <b>PACIENTE AGUARDANDO A TRIAGEM:</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
+            <p>No campo <b>PACIENTE AGUARDANDO CLASSIFICAÇÃO</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
             <p>&nbsp;</p> 
 
         </form> 

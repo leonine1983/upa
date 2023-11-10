@@ -9,7 +9,7 @@ from .models import triagem
 # CADASTRA O ID DO PACIENTE NA TRIAGEM
 class TriagemEnfermariaForm(forms.ModelForm):
     data_hoje = date.today()
-    paciente_triagem = forms.ModelChoiceField( label='Paciente aguardando a triagem', queryset=envio_triagem.objects.filter(data_envio_triagem=data_hoje).exclude(triagem_concluida=1))    
+    paciente_triagem = forms.ModelChoiceField( label='Paciente aguardando ser chamado para a CLASSIFICAÇÃO', queryset=envio_triagem.objects.filter(data_envio_triagem=data_hoje).exclude(triagem_concluida=1))    
 
     class Meta:
         model = triagem

@@ -15,7 +15,7 @@ class triagem_enfermaria(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = triagem
     form_class = TriagemEnfermariaForm
     template_name = 'Triagem/triagem.html'    
-    success_message = "Abertura de atendimento do paciente iniciada!"
+    success_message = "Início do atendimento ao paciente! 👩‍⚕️✨"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

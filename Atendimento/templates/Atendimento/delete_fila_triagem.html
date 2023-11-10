@@ -1,22 +1,20 @@
 {% extends 'global/template_geral.html' %}
 {% block css %}
 {% load static %}
+
 <link rel="stylesheet" href=" {% static 'global/css/form.css' %}">
 {% endblock css %}
-
-
-
 {% block body_login %}
     <form action="" method="post">
         {% csrf_token %}
          {{form.as_div}}
-         <div style='font-size:1.2rem;width:20rem;margin:auto;border-radius:2rem;text-align:center; padding: 2rem; box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);'>
-            <p>Você tem certeza que deseja excluir o paciente <b>{{object}}</b> da <b>Fila de Triagem </b></p>
-            <p style='font-size:2rem;padding-top:1rem ;'><i class="fa-solid fa-question"></i></p>
+         <div class='shadow shadow-sm p-3 m-auto w-75 text-center rounded-2 fs-4'>
+            <i class="fa-duotone fa-circle-exclamation"></i> Você tem certeza que deseja excluir o paciente <b>{{object}}</b> da <b>Fila de Espera </b>
+            <i class="fa-solid fa-question"></i>
+            <p class='text-center fs-5'><i class="fa-duotone fa-calendar-days"></i> Data atual, {% now "d/m/Y"  %} <i class="fa-duotone fa-clock"></i> Horário, {% now "H:m"  %}h</p>
         </div>
          <div class='flex'>
-            <a href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}" class='button-salvar' style='background:red'>Cancelar</a><button class='button-salvar' type="submit">SIM / Deletar</button>
+            <a href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}" class='btn btn-sm btn-primary col m-2'>Cancelar (O paciente continuará aguardando ser chamado para a classificação)</a><button class='btn btn-sm btn-danger col m-2' type="submit">SIM (o paciente será excluído da Fila de Espera)</button>
          </div>
     </form>
-
 {% endblock body_login %}

@@ -36,7 +36,8 @@ def login_create(request):
             return redirect('Atendimento:lista-paciente')
             
         else:
-            messages.error(request, 'Crendenciais inválidas')
+            messages.error(request, ' ATENÇÃO ⚠️!!! \
+            Antes que você conseguisse efetuar o login, detectamos uma tentativa de acesso com senha ou usuário incorretos.... Fique tranquilo(a), o sistema está totalmente seguro. 🚫🔒')
             return redirect(reverse('Access_Login:access_login_page'))
     
     #Se o form não for válido:
