@@ -71,10 +71,8 @@
            <!-- Modal -->   
                 {{dados}} 
          {% endfor %}         
-        </h2>
-       
-    </div>     
-
+        </h2>       
+    </div> 
     <!--Avisa se o paciente tem ALERGIAS--> 
     {% if dados_paciente %}
         {% for dados in dados_paciente %}
@@ -117,19 +115,22 @@
         {% endfor %}
     {% endif %}
     <!--FIM Avisa se o paciente tem ALERGIAS--> 
-
-
-
-
   {% endif %}
 
 <div class="top-info">      
     <div>
         <form action="" method='POST'> 
           <h2 class='h2'>{{tipo_titulo}}</h2>
-          <hr>
-          <div class="flex">
-            <h3>&nbsp;&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}} </b></h3>
+          <div class="" style='margin-top:-1.8rem'>
+            <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100'>
+              {% if nome_paciente %}
+                <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer "></i>&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}} </b></h3>
+                {% else %}            
+                <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer"></i>&nbsp;Pacientes</h3>
+              {% endif %}              
+            </div>
+            <p class='p-3 fs-7 bg-primary-subtle'>No campo <b>PACIENTE AGUARDANDO CLASSIFICAÇÃO</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
+            
             {% if info_extra == 'Analisando...' %}
             <table style="margin-left: 20%" class="Tabela-user">   
               <caption><b>Classificação de Risco:</b> LEGENDA</caption>         
@@ -151,8 +152,7 @@
               </tbody>
             </table>
             {% endif %}
-          </div>
-          
+          </div>          
             
             {% csrf_token %}
             <div class="form-body">                
@@ -288,7 +288,7 @@
             {% if tipo_titulo == 'Excluir paciente da triagem' %}
             <a class="class='btn btn-sm btn-primary m-3 " href="{% url 'Triagem:triagem-enfermaria' %}">cancelar</a>
             {%endif%}          
-            <button class='btn btn-sm btn-primary m-3 
+            <button style='margin-left:10%!important' class='btn btn-sm btn-primary m-3 w-75 fs-5
             {% if tipo_titulo == 'Excluir paciente da triagem' %}
              btn-danger
              {% endif %}
@@ -300,11 +300,10 @@
               Deletar {{ nome_objeto}} da triagem
 
               {% else %}                
-              Iniciar Pré-atendimento 
+              Iniciar Classificação do Paciente
               {% endif %}     
               <i class="fa-solid fa-person-walking-arrow-right"></i></button> 
-            <p>No campo <b>PACIENTE AGUARDANDO CLASSIFICAÇÃO</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
-            <p>&nbsp;</p> 
+            
 
         </form> 
         {% if conteudo == 'paciente_na_triagem' %}
