@@ -1,12 +1,13 @@
       
-      
-<div class="menu-wrapper menu-gray">
-    <ul class="menu">            
-        <li>
-            <a href=""><i class="fas  fa-solid fa-wrench"></i> Configurações</a>            
-        </li>
+<style>
+    .menu li{
+        border-right: 0.1rem solid rgb(83, 11, 11);
+    }
+</style>   
+<div class="menu-wrapper menu-gray " style="width: 100%;">
+    <ul class="menu d-flex">       
         <!--Parametros-->
-        <li>
+        <li class="col text-center">
             <a href=""><i class="fas fa-solid fa-compass-drafting"></i> Parâmetros</a>
             <ul>
                 <li>
@@ -33,7 +34,7 @@
             </ul>
         </li>
         <!--Pacientes-->
-        <li>
+        <li class="col text-center">
             <a href=""><i class="fas fa-solid  fa-universal-access"></i> Pacientes</a>
             <ul>
                 <li>
@@ -43,7 +44,7 @@
             </ul>
         </li>
         <!--Fila de Triagem-->
-        <li>
+        <li class="col text-center">
             <a href=""><i class="fas fa-solid  fa-people-arrows"></i> Fila de Triagem</a>
             <ul>
                 <li>
@@ -52,7 +53,7 @@
                 </li>                
             </ul>
         </li>
-        <li>
+        <li class="col text-center">
             <a href=""><i class="fas fa-solid  fa-person-shelter"></i> Salas</a>
             <ul>
                 <li><i class=""></i>
@@ -65,7 +66,7 @@
             </ul>
         </li>       
         <!--Locais-->
-        <li>
+        <li class="col-2 text-center">
             <a href=""><i class="fa-solid fa-street-view"></i> Locais</a>
             <ul>
                 <li><i class=""></i>
@@ -75,7 +76,7 @@
             </ul>
         </li>
         <!--Relatorios-->
-        <li>
+        <li class="col text-center" style="border: none !important;">
             <a href=""><i class="fas fa-solid  fa-flag"></i> Relatórios</a>
             <ul>
                 <li><i class=""></i>                    
@@ -89,11 +90,9 @@
                     </script>  
                     <a href="#" onclick="abrirPDF()">
                         <i class="fa-solid fa-paperclip"></i>                        
-                        Relação de atendimentos do dia</a>
-                    
+                        Relação de atendimentos do dia</a>                    
                 </li>              
             </ul>
-        </li>
-       
+        </li>       
     </ul>
 </div>

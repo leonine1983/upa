@@ -23,11 +23,7 @@
         <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
     </ul> 
 </div>   
-    <div class="" style='margin:5rem auto 1rem auto;  width:50%; '>
-         
-    </div>        
-
-<div class='flex' style="margin:8% -5% ;">    
+<div class='flex' style="margin:6% -5%;">    
     <div class="style-tabela">      
         <div class="border-bottom border-dark fs-3 d-flex">
             <i class="fa-duotone fa-list-ul"></i>
@@ -124,7 +120,7 @@
                     
                     {% empty%}
                         <tr>
-                            <td colspan='7'>Nenhum registro informado</td>        
+                            <td colspan='11' class='text-center'>"Nenhum paciente foi cadastrado até o momento."</td>        
                         </tr>                       
                     {% endfor %}
                 </tbody>                

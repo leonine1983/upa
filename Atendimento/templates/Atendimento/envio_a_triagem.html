@@ -1,6 +1,6 @@
 {% extends 'global/template_geral.html' %}
 {% load static %}
-{% block title_login %}FILA DE TRIAGEM {% endblock title_login %}
+{% block title_login %}FILA DE ESPERA {% endblock title_login %}
 {% block css %}
     <!--Css do Select2-->    
     <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %}">    
@@ -27,7 +27,7 @@ $(document).ready(function() {
 </script>
 
 {% endblock script %}
-{% block body_title %}Fila de Triagem ::. {% endblock body_title %}
+{% block body_title %}<i class="fa-duotone fa-person-seat"></i><i class="fa-duotone fa-person-seat"></i><i class="fa-duotone fa-person-seat"></i> Fila de espera para classificação ::. {% endblock body_title %}
 
 {% block body_login %}
 <!--Botão adicionar a lista de triagem-->
@@ -92,7 +92,7 @@ $(document).ready(function() {
                     {% if not url == 'Atendimento:envio_paciente_a_triagem'%} 
                      
                     <button class='button-salvar' type="submit">
-                        Salvar Paciente na Fila de triagem 
+                        Salvar Paciente na Fila de espera para classificação
                         <i class="fa-solid fa-plus"></i>
                     </button>
                     {% else %}
@@ -136,12 +136,12 @@ $(document).ready(function() {
             {% csrf_token %}
             {% for n in get_id  %}
                 <input name="paciente_envio_triagem" type="hidden" value="{{n.id}}">  
-                <span>Deseja enviar <b class="uppercase">{{n.nome_social}}</b> para a fila de triagem?</span>            
-        
-                <div class="flex">
-                    <a style="background-color:red;" href="{% url 'Atendimento:registro-paciente' %}" class="button-salvar">Não</a>   
-                    <button class='button-salvar' type="submit">
-                        SIM
+                <span class='fs-4'>Deseja enviar <b class="uppercase">{{n.nome_social}}</b> para a fila de espera para a classficação?</span>           
+            
+                <div class="flex w-75 m-auto p-2" >
+                    <a href="{% url 'Atendimento:registro-paciente' %}" class="btn btn-sm btn-danger col m-1">Não (Manter somente o cadastro)</a>   
+                    <button class='col btn btn-sm btn-primary m-1' type="submit">
+                        SIM <i class="fa-duotone fa-person-seat"></i>
                     <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>   

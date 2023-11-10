@@ -12,23 +12,31 @@
      <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %} "> 
 {% endblock css %}  
 {% block body_login %}
-<div class='menu-local-top'>
+<div class='menu-local-top' style='margin-top:-3.5%'>
     <ul>
-        <li><a href="{% url 'Atendimento:lista-paciente' %}">Listagem</a></li>
-        <li> <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastro</a></li>        
-    </ul>  
-</div> 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem</a></li>
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+    </ul> 
+</div>  
 <p>&nbsp;</p>
 <p>
-    {% if dados %}
-    <h1><i class="fa fa-universal-access fa-2x "></i> Atualização das informações do paciente</h1>
-    {% endif %}
+    
 </p>
 <p>&nbsp;</p>
-<form action="" method='POST'>    
-    <div class="form-body">
+<form action="" method='POST' class='pt-4' style='background:#dbecdb'>
+    {% if dados %}
+            <div class="border-bottom border-dark fs-3  d-flex m-3 w-75" >
+                <i class="fa-duotone fa-pen-nib"></i>
+                <i id="fa-hospital-user" class="fa-duotone fa-hospital-user m-1"></i> 
+                Revisão e atualização das informações do paciente.
+            </div>
+    {% else %}
+        <div class="border-bottom border-dark fs-3  d-flex m-3 w-75" >
+            <i id="fa-hospital-user" class="fa-duotone fa-hospital-user m-1"></i> 
+            Cadastro de pacientes
+        </div>
+    {% endif %}        
+    <div class="form-body">        
         {% csrf_token %}                
         {{form.as_div}}        
     </div>  
