@@ -21,6 +21,7 @@
     <ul>
         <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem</a></li>
         <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>     
     </ul> 
 </div>   
 <div class='flex' style="margin:6% -5%;">    
@@ -47,7 +48,8 @@
                 </div>
               </form>
         </div>
-       <div class=""> 
+       <div class="">         
+            <div class='btn btn-sm border mb-3'><span class='fs-3'>{{object_list.count}}</span> registros de paciente no sistema</div>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end">
                 {% if page_obj.has_previous %}
@@ -77,6 +79,7 @@
                 </ul>
             </nav>
         </div>
+        
         <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%" style='margin-top:0.1rem'>                
                 <thead>
                     <tr>
@@ -88,7 +91,7 @@
                     <td class="top center fs-7"><strong>Data de Nascimento</strong></td>
                     <td class="top center fs-7"><strong>RG</strong></td>
                     <td class="top center fs-7"><strong>SUS</strong></td>
-                    <td class="top center fs-7"><strong>Alergia</strong></td>
+                    <td class="top center fs-7"><strong>Alergias</strong></td>
                     <td class="top center fs-7"><strong>Comorbidades</strong></td>
                     <td class="top center fs-7" colspan="2" ><strong>Atualizar</strong></td>
                     </tr>
@@ -105,11 +108,14 @@
                         <td align="center">{{campo.data_nascimento}}</td>
                         <td align="center">{{campo.RG}}</td>
                         <td align="center">{{campo.cartao_sus}}</td>
-                        {% if campo.alergias %}
-                        <td align="center" class="text-danger">SIM</td>
-                            {% else %}             
-                            <td align="center" class="text-primary">NÃO</td>  
-                        {% endif %}
+                        
+                        <td align="center" class="text-danger">
+                            {% if db.paciente_envio_triagem.alergias == 0  %}
+                                <span>Nâo</span>
+                            {% else %}
+                                <span class='text-danger'>Sim <i class="fa-sharp fa-solid fa-circle-exclamation"></i></span>
+                            {% endif %}
+                        </td>
                         {% if campo.comorbidades %}
                         <td align="center" class="text-danger">SIM</td>      
                             {% else %}             

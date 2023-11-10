@@ -10,7 +10,10 @@ app_name='Atendimento'
 
 urlpatterns = [
     #Página Inicial
-    path('', views.pagina_inicial, name='pagina-inicial'),   
+    path('resumo/', views.pagina_inicial, name='pagina-inicial'), 
+    path('paciente/listagem', paciente_lista.as_view(), name='lista-paciente'),
+
+
     path('painel', views.painel, name='painel'), 
     path('painel_atendimento_Medico', views.chamar_paciente, name='chamar_paciente'),
     path('painel_tiragem', views.chamar_paciente, name='chamar_paciente_triagem'),

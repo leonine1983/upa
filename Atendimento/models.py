@@ -145,8 +145,7 @@ class ficha_de_atendimento(models.Model):
     horario_cadastro = models.TimeField(null=True, auto_now_add=True)
     cartao_sus = models.CharField(max_length=15, null=True)
     ultimo_pk = None
-    choices=(    
-        ('', ''),    
+    choices=(      
         ('0', 'Não'),
         ('1','Sim'),
     )

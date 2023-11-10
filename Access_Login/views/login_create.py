@@ -33,7 +33,7 @@ def login_create(request):
                     # Usuário não cadastrado em nenhuma sala, redirecionar para a página de criação de sala
                     return redirect('Medicos:salasProfissionalCreate')
                 
-            return redirect('Atendimento:pagina-inicial')
+            return redirect('Atendimento:lista-paciente')
             
         else:
             messages.error(request, 'Crendenciais inválidas')

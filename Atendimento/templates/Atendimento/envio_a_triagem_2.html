@@ -19,17 +19,26 @@ $(document).ready(function() {
 {% block body_title %} <i class="fa-duotone fa-person-seat"></i> <i class="fa-duotone fa-person-seat"></i> Fila de Espera ::. {% endblock body_title %}
 
 {% block body_login %}
-<!--Botão adicionar a lista de triagem-->
+<!--Botão adicionar a <b>Fila de Espera</b>-->
+<div class='menu-local-top' style='margin-top:-3.5%'>
+    <ul>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem</a></li>
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>
+    </ul> 
+</div>  
+<p>&nbsp;</p>
 {% if lista_db %}
-<a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='button-salvar' >Adicionar a paciente a lista de triagem <i class="fa-solid fa-plus"></i></a>
+<a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='btn btn-sm btn-primary' >Adicionar a paciente a <b>Fila de Espera</b> <i class="fa-solid fa-plus"></i></a>
 {% endif %}
-<!-- FIM Botão adicionar a lista de triagem-->
+<!-- FIM Botão adicionar a <b>Fila de Espera</b>-->
+{{lista_db.count}}
 <table class='tabela-div'>
     <tr>
         <th class='linha-titulo'>Nome do Paciente</th>
-        <th class='linha-titulo'>Data de entrada na fila de triagem</th>
-        <th class='linha-titulo'>Horário de entrada na fila de triagem</th>
-        <th class='linha-titulo'>Excluir paciente da fila de triagem</th>
+        <th class='linha-titulo'>Data de entrada na <b>Fila de Espera</b></th>
+        <th class='linha-titulo'>Horário de entrada na <b>Fila de Espera</b></th>
+        <th class='linha-titulo'>Excluir paciente da <b>Fila de Espera</b></th>
     </tr>
     {% for db in lista_db %}
     {% if lista_db %}
@@ -58,7 +67,7 @@ $(document).ready(function() {
         <form>
             <label for="start_date" >::CALENDÁRIO::</label>
             <div>Utilize o calendário para acompanhar os lançamentos na
-                <b>Fila de Triagem</b> de datas anteriores à atual            
+                <b><b>Fila de Espera</b></b> de datas anteriores à atual            
             </div>  
             <p>&nbsp;</p>          
             <p><input type="date" name='start_date'>
@@ -75,66 +84,22 @@ $(document).ready(function() {
                     <input type="text" valu>
                     {% for n in get_id  %}
                     <select name="paciente_envio_triagem" required="" id="id_paciente_envio_triagem" data-select2-id="select2-data-id_paciente_envio_triagem" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
-                        <option value="" selected="" data-select2-id="select2-data-2-onon">---------</option>
-                      
-                        <option value="16">joana angelica</option>
-                      
-                        <option value="17">albert</option>
-                      
-                        <option value="18">maria</option>
-                      
-                        <option value="19">maria</option>
-                      
-                        <option value="20">maria</option>
-                      
-                        <option value="21">maria</option>
-                      
-                        <option value="15">Guilherme de Souza</option>
-                      
-                        <option value="14">Maria aparecida</option>
-                      
-                        <option value="13">paulo</option>
-                      
-                        <option value="12">michele</option>
-                      
-                        <option value="10">adelson</option>
-                      
-                        <option value="11">joana da silva borges</option>
-                      
-                        <option value="9">Suzana</option>
-                      
-                        <option value="5">Cintia Teixeira Lins</option>
-                      
-                        <option value="6">enzzo</option>
-                      
-                        <option value="7">Caio</option>
-                      
-                        <option value="8">michele</option>
-                      
-                        <option value="3">Rogerio Cerqueira da Silva</option>
-                      
-                        <option value="4">jurubel</option>
-                      
-                      </select>
-
-
-
-
-
+                        <option value="3">Não há pacientes na Fila de Espera</option>
+                    </select>
                 {% if not url == 'Atendimento:envio_paciente_a_triagem'%}                          
-                <button class='button-salvar' type="submit">
-                    Salvar Paciente na Fila de triagem 
+                <button class='btn btn-sm btn-primary' type="submit">
+                    Salvar Paciente na Fila de Espera
                     <i class="fa-solid fa-plus"></i>
                 </button>
                 {% else %}
-                <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='button-salvar' >Adicionar a paciente a lista de triagem <i class="fa-solid fa-plus"></i></a>                   
+                <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='btn btn-sm btn-primary' >Adicionar a paciente a <b>Fila de Espera</b> <i class="fa-solid fa-plus"></i></a>                   
                 {% endif %}                
             </form>        
             <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastrar Paciente</a>
             <p>Utilize o sistema de busca no campo <b>Busca paciente</b> 
-                para pequisar o cadastro do paciente no sistema e em seguida envia-lo à fila de triagem. Caso não encontre o nome do paciente, clique no link 
+                para pequisar o cadastro do paciente no sistema e em seguida envia-lo à <b>Fila de Espera</b>. Caso não encontre o nome do paciente, clique no link 
                 <b>Cadastrar Paciente</b> para ir para a página de cadastro de paciente para lançá-lo no sistema. Em seguida, 
-                    retorne a essa página para adicioná-lo à fila de triagem. </p>
+                    retorne a essa página para adicioná-lo à <b>Fila de Espera</b>. </p>
         </div>
         {% endif %}
     </div>
@@ -144,7 +109,7 @@ $(document).ready(function() {
 {% if lista_db %}
 
 
-    <div class="top-info">
+    <div class="top-info m-2 rounded-3 shadow shadow-sm">
         Na tabela acima está listado todos os pacientes que estão aguardando para passar
         pela etapa de TRIAGEM. Se houver necessidade de excluir algum nome, basta clicar no botão com um X.
     </div>
