@@ -19,7 +19,6 @@
     padding:calc(var(--tamanho)/9);
 
 }
-
 .main-content-login{    
     height: auto;
     width: 100%;
@@ -63,7 +62,6 @@
     display: block;
     margin-top: calc(var(--tamanho)/22);
 }
-
 .login-login form label, .login-login form input {
     height: calc(var(--tamanho)/5);   
     display: block;
@@ -80,10 +78,8 @@
 .grid-login{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(45rem, 1fr));
-    gap: var(--spacing-gutter-large);     
-
+    gap: var(--spacing-gutter-large);   
 }
-
 .login-login form button{
     background: rgb(70, 213, 82);
     border-radius: var(--radiaus-border);
@@ -94,7 +90,6 @@
     border: none;
     text-shadow:inset var(--shadow);
 }
-
 .login-brasao img{
     width: calc(var(--tamanho)*01);
     box-shadow: var(--shadow);
@@ -105,8 +100,6 @@
     background-color: white;
     border-radius: var(--radiaus-border);
     box-shadow: var(--shadow);  
-
-
 }
 .login-bottom{
     font-size: calc(var(--tamanho)/4);
@@ -119,8 +112,7 @@
     transition: all ease-in-out 1000ms;
 }
 .login-bottom:hover{
-    scale: 1.01;
-    
+    scale: 1.01;    
 }
 
 .atalhos-painel-icons{
@@ -134,7 +126,6 @@
     border-radius: var(--radiaus-border);
     box-shadow: var(--shadow);
 }
-
 .atalhos-painel-icons-title {
     padding: calc(var(--tamanho) * 0.1) 0 ;
     margin-bottom: calc(var(--tamanho) * 0.1) ;
@@ -143,7 +134,6 @@
     box-shadow: inset var(--shadow);
 
 }
-
 .painel-icons{  
     display: block; 
     margin-bottom:calc(var(--tamanho) - 0.5rem) ;
