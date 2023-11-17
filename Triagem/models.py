@@ -13,7 +13,7 @@ class Classifica_risco_model(models.Model):
     descri = models.TextField(max_length=500, null=False, default='', verbose_name='Descrição')
 
     class Meta:
-        ordering = ['-classifica_tipo']     
+        ordering = ['id']     
 
     @receiver(post_migrate)
     def create_classifica_risco(sender, **kwargs):
@@ -34,7 +34,7 @@ class Classifica_risco_model(models.Model):
                     Classifica_risco_model.objects.create(
                         classifica_tipo = ris,
                         descri = des
-                    )
+                    )    
     
     def __str__(self) -> str:
         return self.classifica_tipo
