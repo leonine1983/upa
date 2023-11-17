@@ -140,7 +140,7 @@
                             {% for dados  in triagem %}
                                    <label for="id_paciente_medico_atendimento">Paciente</label>             
                                    <select class='uppercase' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
-                                          <option value="{{dados.id}}" selected="{{dados.id}}">{{dados}}</option>                                    
+                                          <option value="{{dados.id}}" selected="{{dados.id}}">{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</option>                                    
                                    </select>
                             {% endfor %}
                      </div>               
@@ -216,7 +216,7 @@
      <div class="overlay" id="chamarPacienteOverlay">
        <div class="modal-content">
          <h1 style="font-size: 24px;">Chamar Paciente</h1>
-         <p><b>{{request.user.first_name}}</b>, você deseja chamar o paciente <span class='uppercase' id="nomePacienteContainer"></span> para o atendimento?</p>
+         <p><b>Dr(a) {{request.user.first_name}} {{request.user.last_name}}</b>, você deseja chamar o paciente <span class='uppercase' id="nomePacienteContainer"></span> para o atendimento?</p>
          <div class="modal-buttons">
            <button type="button" class="btn btn-secondary" id="cancelarChamadaBtn">Não</button>
            <button type="button" class="btn btn-primary" id="confirmarChamadaBtn">Sim</button>
