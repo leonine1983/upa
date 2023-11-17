@@ -1,7 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-#Cria os usuarios
 from django.urls import reverse
-#restrição de acesso
 from django.views.generic import  UpdateView
 from Triagem.models import triagem
 from Atendimento.models import *
@@ -11,9 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # -------------------------- PREESCRIÇÃO DE EXAMES, MEDICAMENTOS, ATESTADOS ---------------------------------------------------------
 class atendimento_medico_updateview(LoginRequiredMixin, UpdateView):
-    model = triagem
-    #Chave Estrangeira 'paciente_medico_atendimento'
-    #fields = ['preescrever_medicamento_medico', 'encaminhamento', 'enviar_ambulatorio', 'exames', 'atestado']   
+    model = triagem 
     fields = ['preescrever_medicamento_medico', 'exames', 'atestado']   
     template_name = 'Medicos/prescrever-medicamento.html'
     
@@ -21,7 +17,6 @@ class atendimento_medico_updateview(LoginRequiredMixin, UpdateView):
         contexto = super().get_context_data(**kwargs)
         contexto['pk'] = self.kwargs['pk']
         return contexto
-
 
     def get_success_url(self):
         envio_filter = self.kwargs['pk']

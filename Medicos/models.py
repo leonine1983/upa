@@ -6,11 +6,8 @@ from django.db import models
 from Atendimento.models import *
 from Triagem.models import triagem
 from django.db.models import Q
-#libs executadas para no pos migrate
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
-
-# models.py
 from django.utils import timezone
 
 
@@ -119,25 +116,11 @@ class Medico_atendimento (models.Model):
     data_medico = models.DateField(auto_now_add=True, null=False)
     hora_medico = models.TimeField(auto_now_add=True, null=True )
     tempo_espera_paciente = models.DurationField(blank=True, null=True)
-    #alergias = (
-     #   ('sim','Sim'),
-      #  ('nao', 'Não'),
-    #)
-    #alergia_sim = models.TextField(max_length=300, null=True)
-    #alta = (
-     #   ('Sim'),
-      #  ('Não'),
-    #)
     medico_nome = models.CharField(max_length=40, null=True)
-
-    # Nessa classe Meta será criado as permissões
     
     class Meta:
         permissions = [('Acesso_permitido_Admin', 'Acesso permitido ao admin do sistema na UPA'),\
                        ('Acesso_permitido_medic', 'Acesso permitido aos médicos') ]
-
-
-
 
 
 class Chamar_P_para_atendimento(models.Model):
@@ -163,7 +146,6 @@ class Chamar_P_para_atendimento(models.Model):
             Chamar_P_para_atendimento.objects.all().delete()            
 
         super().save(*args, **kwargs)
-
 
     def __str__(self) -> str:
         return self.nome_paciente

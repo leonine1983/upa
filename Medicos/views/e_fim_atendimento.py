@@ -1,12 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-#Cria os usuarios
 from django.urls import reverse_lazy
-#restrição de acesso
 from django.views.generic import DetailView, UpdateView
 from Triagem.models import triagem
 from Atendimento.models import *
-#from Medicos.forms import Form_medico_atendimento
 from Medicos.models import Medico_atendimento
 
 
@@ -18,7 +15,6 @@ class atendimento_medico_concluido_update(SuccessMessageMixin, LoginRequiredMixi
     success_message = "Atendimento finalizado com sucesso!!"
 
 
-#View que exibe o medicamento receitado pelo medico
 class exibe_prescreve_medicamento_update(LoginRequiredMixin, DetailView):
     model = triagem
     template_name = 'Medicos/exibir_impressao/exibi_prescreve_medicamento.html'

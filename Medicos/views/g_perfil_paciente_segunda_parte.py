@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import  render
 from Triagem.models import triagem
 from Atendimento.models import *
-#from Medicos.forms import Form_medico_atendimento
 from Medicos.models import Medico_atendimento
 
 
