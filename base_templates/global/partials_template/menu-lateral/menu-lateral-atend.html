@@ -12,15 +12,7 @@
                 <i id="hospital_2" class="fa-duotone fa-hospital fa-2x barra-top h-100 pl-5" style="padding-left: 1rem;"></i>                
                 <span class="nav-text barra-top "></span>
             </a>              
-        </li>
-        <li>
-            <a href="{% url 'Atendimento:pagina-inicial' %}">
-                <i class="fa fa-home fa-2x "></i>
-                <span class="nav-text">
-                    Resumo Gráfico
-                </span>
-            </a>              
-        </li>
+        </li>       
         <li>
             <a href="{% url 'Atendimento:painel' %}">
                 <i class="fa fa-display fa-2x "></i>
@@ -55,7 +47,16 @@
             <hr> 
         {% endif %}   
         <!--Visto por Admin, por Enfermagem-->
-        {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' %}      
+        {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' %}     
+            <li>
+                <a href="#">  
+                    <!--{% url 'Atendimento:pagina-inicial' %}-->                  
+                    <i class="fa fa-2x  fa-solid fa-chart-simple"></i>
+                    <span class="nav-text">
+                        Resumo Gráfico
+                    </span>
+                </a>              
+            </li>
             <li class="has-subnav">
                 <a href=" {% url 'Triagem:triagem-enfermaria' %} ">
                     
