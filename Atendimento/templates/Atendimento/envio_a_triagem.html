@@ -79,7 +79,8 @@ $(document).ready(function() {
             </td>            
             <td class='text-center'>
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}">
-                    {% if db.paciente_envio_triagem.alergias == 0  %}
+                    
+                    {% if db.paciente_envio_triagem.alergias == '0'  %}
                     <span>Nâo</span>
                     {% else %}
                     <span>Sim <i class="fa-sharp fa-solid fa-circle-exclamation text-danger"></i></span>
@@ -87,7 +88,7 @@ $(document).ready(function() {
                 </a>                                                      
             </td>
             <td class='text-center'>
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.data_envio_triagem}} </span></a>                                                      
+                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>  {{db.data_envio_triagem}} </span></a>                                                      
             </td>
             <td class='text-center'>
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.horario_triagem}} </span></a>                                                      

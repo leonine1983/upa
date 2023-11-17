@@ -13,7 +13,7 @@ class triagem_concluida_Update(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
     fields = ['triagem_concluida']
     template_name = 'Triagem/triagem_confirm_final.html'
     success_url =reverse_lazy('Triagem:triagem-enfermaria')
-    success_message = "Finalização do antendimento ao paciente feita com sucesso!"
+    success_message = "Classificação do paciente  feita com sucesso!"
     
         
     def get_success_url(self) -> str:

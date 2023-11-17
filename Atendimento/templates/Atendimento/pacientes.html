@@ -109,17 +109,18 @@
                         <td align="center">{{campo.RG}}</td>
                         <td align="center">{{campo.cartao_sus}}</td>
                         
-                        <td align="center" class="text-danger">
-                            {% if db.paciente_envio_triagem.alergias == 0  %}
-                                <span>Nâo</span>
+                        <td align="center" >
+                            {% if campo.alergias == '0'  %}
+                                <span class="text-primary">Nâo</span>
                             {% else %}
                                 <span class='text-danger'>Sim <i class="fa-sharp fa-solid fa-circle-exclamation"></i></span>
                             {% endif %}
                         </td>
-                        {% if campo.comorbidades %}
-                        <td align="center" class="text-danger">SIM</td>      
-                            {% else %}             
-                            <td align="center" class="text-primary">NÃO</td>      
+                        {{campo.comorbidades}}
+                        {% if campo.comorbidades == '0' %}
+                            <td align="center" class="text-primary">NÃO</td>                                
+                            {% else %} 
+                            <td align="center" class="text-danger">SIM</td>
                         {% endif %}
                         <td align="center"> <a href="{% url 'Atendimento:atualizar-paciente' campo.pk   %}" class="editar fa fa-check-circle" title="Editar"></a> </td>                
                     </tr>       

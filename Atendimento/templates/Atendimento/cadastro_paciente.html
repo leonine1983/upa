@@ -12,10 +12,10 @@
      <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %} "> 
 {% endblock css %}  
 {% block body_login %}
-<div class='menu-local-top' style='margin-top:-2.96%'>
+<div class='menu-local-top' style='margin-top:-3%'>
     <ul>
         <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i></a></li>
-        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>-->Cadastro</a></li>                
         <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>
     </ul> 
 </div>  

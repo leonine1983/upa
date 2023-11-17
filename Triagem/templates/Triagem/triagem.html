@@ -62,66 +62,65 @@
 
 {% block body_login %}
 
-<!-- Modal para exibir a mensagem -->
+
 <div class='flex' style='color: var(--cor-background-titulo); margin-bottom:-2rem '>
-  {% if paciente_triagem %}
+  {% if object.paciente_triagem %}<!-- Modal para exibir a mensagem 
     <div>Paciente em Atendimento: <hr> </div>  
         <h2 class='uppercase' style=''>
             <i class="fa-solid fa-syringe"></i>
-         {% for dados in paciente_triagem %}
-           <!-- Modal -->   
+         {% for dados in paciente_triagem %}           
                 {{dados}} 
          {% endfor %}         
-        </h2>       
+        </h2>       -->
     </div> 
     <!--Avisa se o paciente tem ALERGIAS--> 
-    {% if dados_paciente %}
-        {% for dados in dados_paciente %}
-            {% if not dados.alergias == 0 %}
-                {% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
-                <div style='text-align:center; margin-bottom:-1.5rem'>
-                    <!-- Botão para abrir o modal -->
-         <button type="button" class="cancelar btn btn-primary" style='background:red' data-toggle="modal" data-target="#myModal">
-             Paciente Alérgico <i class="fa-solid fa-person-dots-from-line"></i>
-           </button>           
-             </div>
-                <div class="modal fade " id="myModal_alergia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog " role="document">
-                    <div class="modal-content ">
-                        <div class="modal-header cancelar ">
-                        <h3 class="modal-title" style='color:#fff' id="exampleModalLabel"><i class="fa-solid fa-hand-dots"></i> Paciente Alégico</h3>
-                        <button type="button" class="close excluir" data-dismiss="modal" aria-label="Fechar">
-                            <span aria-hidden="true">&times; ATENÇÃO!! <i class="fa-solid fa-hand-dots"></i></span>
-                        </button>
-                        </div>
-                        <div class="modal-body ">
-                            {{dados.conteudo_alergia}}
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
+    {% if object %} 
+      {% if not object.paciente_triagem.paciente_envio_triagem.alergias == '0' %}      
+        {% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
+          <div style='text-align:center; margin-bottom:-1.5rem'>
+            <!-- Botão para abrir o modal -->
+            <button type="button" class="cancelar btn btn-primary" style='background:red' data-toggle="modal" data-target="#myModal_alergia">
+              Paciente Alérgico <i class="fa-solid fa-person-dots-from-line"></i>
+            </button>          
+            </div>
+              <div class="modal fade " id="myModal_alergia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " role="document">
+                  <div class="modal-content ">
+                      <div class="modal-header cancelar ">
+                      <h3 class="modal-title" style='color:#fff' id="exampleModalLabel"><i class="fa-solid fa-hand-dots"></i> Paciente Alégico</h3>
+                      <button type="button" class="close excluir" data-dismiss="modal" aria-label="Fechar">
+                        <h1 class='h3 text-danger text-center text-u'>Paciente Alégico <i class="fa-solid fa-hand-dots"></i></h1>
+                      </button>
+                      </div>
+                      <div class="modal-body p-3 fs-5">
+                        <i class="fa-duotone fa-quote-left fa-fade" style="--fa-primary-color: #e50606; --fa-secondary-color: #e50606;"></i>
+                          
+                          {{object.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}
+                      </div>
+                      <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                      </div>
                   </div>
                 </div>
-              <!-- JavaScript para abrir o modal automaticamente -->
+              </div> 
               <script>
                 var jQuery = $.noConflict();
                 jQuery(document).ready(function(){
                   jQuery('#myModal_alergia').modal('show');
-                });
-              </script>
-               
-                {% endif %}
-            {% endif %}    
-        {% endfor %}
+               });               
+              </script>  
+          </div>             
+        {% endif %}
+      {% endif %} 
     {% endif %}
     <!--FIM Avisa se o paciente tem ALERGIAS--> 
   {% endif %}
 
 <div class="top-info">      
+
+  
     <div>
         <form action="" method='POST'> 
-          <h2 class='h2'>{{tipo_titulo}}</h2>
           <div class="" style='margin-top:-1.8rem'>
             <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100'>
               {% if nome_paciente %}

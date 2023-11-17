@@ -149,9 +149,9 @@ class ficha_de_atendimento(models.Model):
         ('0', 'Não'),
         ('1','Sim'),
     )
-    alergias = models.CharField(max_length=3, default=2, choices= choices, )
+    alergias = models.CharField(max_length=3, default='0', choices= choices, )
     conteudo_alergia = models.TextField(max_length=500, null=True, blank=True, default='Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)')
-    comorbidades = models.CharField(max_length=3, default=2, choices= choices )
+    comorbidades = models.CharField(max_length=3, default='0', choices= choices )
     conteudo_comorbidades = models.TextField(max_length=500, null=True, blank=True, default='Não possui comobirdades (Para tornar editável essa área, é necessário informar que o paciente possui comobirdades)')
     
     class Meta:
@@ -165,7 +165,7 @@ class ficha_de_atendimento(models.Model):
         return self.pk
         
     def __str__ (self):
-        return f'Codigo: {self.codigo_pacient} | Nome Social: {self.nome_social} | Idade: {self.RG} anos | Idade: {self.idade} anos | {"⚠️ Paciente Alergico " if self.alergias else ""}'
+        return f'Codigo: {self.codigo_pacient} | Nome Social: {self.nome_social} | Idade: {self.RG} anos | Idade: {self.idade} anos {"| ⚠️ Paciente Alergico " if not self.alergias else ""}'
 
 
 class envio_triagem(models.Model):

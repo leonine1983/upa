@@ -14,7 +14,7 @@ class EtiquetaView(LoginRequiredMixin, TemplateView):
         pk = self.kwargs.get('pk')  # Obtém o valor do parâmetro 'pk' da URL
         paciente = triagem.objects.filter(paciente_triagem_id = pk)        
         for pac in paciente:
-            nome = pac.paciente_triagem
+            nome = pac.paciente_triagem.paciente_envio_triagem.nome_social
             idade = pac.paciente_triagem.paciente_envio_triagem.idade
             d_nas = pac.paciente_triagem.paciente_envio_triagem.data_nascimento
             clas_tipo = pac.classifica_tipo
