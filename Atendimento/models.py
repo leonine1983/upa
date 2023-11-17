@@ -165,7 +165,7 @@ class ficha_de_atendimento(models.Model):
         return self.pk
         
     def __str__ (self):
-        return f'Codigo: {self.codigo_pacient} | Nome Social: {self.nome_social} | Idade: {self.RG} anos | Idade: {self.idade} anos'
+        return f'Codigo: {self.codigo_pacient} | Nome Social: {self.nome_social} | Idade: {self.RG} anos | Idade: {self.idade} anos | {"⚠️ Paciente Alergico " if self.alergias else ""}'
 
 
 class envio_triagem(models.Model):
@@ -193,5 +193,5 @@ class envio_triagem(models.Model):
         permissions = [('Acesso_permitido_envio_Tri', 'Acesso permitido para envio à Fila de Triagem')]
 
     def __str__ (self):
-        return f'Codigo: {self.paciente_envio_triagem.codigo_pacient} | Nome: {self.paciente_envio_triagem} | Idade: {self.paciente_envio_triagem.idade} anos'
+        return f'Codigo: {self.paciente_envio_triagem.codigo_pacient} | Nome: {self.paciente_envio_triagem} | Idade: {self.paciente_envio_triagem.idade} anos '
 
