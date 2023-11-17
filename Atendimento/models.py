@@ -165,7 +165,7 @@ class ficha_de_atendimento(models.Model):
         return self.pk
         
     def __str__ (self):
-        return self.nome_social
+        return f'Codigo: {self.codigo_pacient} | Nome Social: {self.nome_social} | Idade: {self.RG} anos | Idade: {self.idade} anos'
 
 
 class envio_triagem(models.Model):

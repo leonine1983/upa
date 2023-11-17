@@ -24,7 +24,7 @@ DEBUG = True
 #ALLOWED_HOSTS = ['34.125.242.238']
 #ALLOWED_HOSTS = ['www.cauans-technology.com']
 #CSRF_TRUSTED_ORIGINS = ['https://www.cauans-technology.com']
-CSRF_TRUSTED_ORIGINS = ['http://192.168.10.24']
+CSRF_TRUSTED_ORIGINS = ['http://192.168.10.24' , 'http://192.168.10.40:81']
 ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ['*', '192.168.10.24', 'localhost']
 
