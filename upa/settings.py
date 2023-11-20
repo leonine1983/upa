@@ -165,11 +165,6 @@ import mimetypes
 mimetypes.add_type("text/javascript", ".js", True)
 
 
-# Session settings
-#SESSION_COOKIE_SECURE = True
-#SESSION_COOKIE_HTTPONLY = True
-#CSRF_COOKIE_SECURE = True
-
 # Security settings
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
@@ -199,13 +194,16 @@ MESSAGE_TAGS = {
 # o 'django.contrib.sessions.backends.db' conforme a preferência. Foi escolhido armazenamento em cache
 SESSION_ENGINE =   'django.contrib.sessions.backends.cache'
 
+
+
 # 2º define a chave de assinatura da sessão
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'Strict'
+#SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_HTTPONLY = True
+#SESSION_COOKIE_SAMESITE = 'Strict'
+#CSRF_COOKIE_SECURE = True
 
 # 3º Define o tempo de sessão para 1 hora (3600 segundos)
-SESSION_COOKIE_AGE = 3600
+#SESSION_COOKIE_AGE = 3600
 
 # Por fim definir a pagina para onde será redirecionada o usuario apos finalizar a sessão
 LOGIN_URL = 'Access_Login:access_login_page'
