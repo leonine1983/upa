@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 #DEBUG = True if os.environ.get('DEBUG') == '1' else False
 DEBUG = False 
 
-ALLOWED_HOSTS = ['34.176.141.229', "http://34.176.141.229"]
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     "34.176.141.229",
