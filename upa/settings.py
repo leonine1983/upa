@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'Medicos',
     'utils',
     'websocket_app',
-    #'channels',
     'django.contrib.humanize',
     'configUPA',
     'PrintPDFs',
