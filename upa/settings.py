@@ -19,17 +19,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True if os.environ.get('DEBUG') == '1' else False
-DEBUG = True 
+DEBUG = False 
 
-#ALLOWED_HOSTS = ['34.125.242.238']
-#ALLOWED_HOSTS = ['www.cauans-technology.com']
-#CSRF_TRUSTED_ORIGINS = ['https://www.cauans-technology.com']
 CSRF_TRUSTED_ORIGINS = ['http://34.176.141.229']
-ALLOWED_HOSTS = ['http://34.176.141.229']
-#ALLOWED_HOSTS = ['*', '192.168.10.24', 'localhost']
-
-
-# Application definition
+ALLOWED_HOSTS = ['34.176.141.229']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
