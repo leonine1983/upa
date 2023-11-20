@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-
 from django.contrib.messages import constants
 from dotenv import load_dotenv
 
@@ -8,7 +7,6 @@ load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -24,7 +22,6 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    "34.176.141.229",
     "http://34.176.141.229",
 ]
 
@@ -45,11 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'configUPA',
     'PrintPDFs',
-    'ckeditor'
-   
+    'ckeditor'   
 ]
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'upa.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -104,10 +97,6 @@ DATABASES = {
         'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
-
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -193,13 +182,11 @@ MESSAGE_TAGS = {
 # o 'django.contrib.sessions.backends.db' conforme a preferência. Foi escolhido armazenamento em cache
 SESSION_ENGINE =   'django.contrib.sessions.backends.cache'
 
-
-
 # 2º define a chave de assinatura da sessão
-#SESSION_COOKIE_SECURE = True
-#SESSION_COOKIE_HTTPONLY = True
-#SESSION_COOKIE_SAMESITE = 'Strict'
-#CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Strict'
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 # 3º Define o tempo de sessão para 1 hora (3600 segundos)
 #SESSION_COOKIE_AGE = 3600
@@ -208,22 +195,7 @@ SESSION_ENGINE =   'django.contrib.sessions.backends.cache'
 LOGIN_URL = 'Access_Login:access_login_page'
 
 """
-
-
-# Definições de seguranção para sessões. PERSONALIZADAS POR ROGERIO
-
-# Defina o mecanismo de armazenamento de sessão para 'django.contrib.sessions.backends.cache' ou 'django.contrib.sessions.backends.db' conforme sua preferência.
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-
-# Defina a chave de assinatura da sessão.
-SESSION_COOKIE_SECURE = True  # Certifique-se de que está em um ambiente de produção.
-SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'Strict'
-
 # Define o tempo de sessão para 1 hora (3600 segundos)
 #SESSION_COOKIE_AGE = 3600
-
-# Define a URL de login para redirecionamento após o término da sessão
-LOGIN_URL = 'Admin_Acessos:login_create'
 
 """
