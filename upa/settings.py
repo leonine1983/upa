@@ -21,8 +21,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 #DEBUG = True if os.environ.get('DEBUG') == '1' else False
 DEBUG = False 
 
-CSRF_TRUSTED_ORIGINS = ['http://34.176.141.229']
-ALLOWED_HOSTS = ['34.176.141.229']
+
+ALLOWED_HOSTS = ['34.176.141.229', "http://34.176.141.229"]
+
+CSRF_TRUSTED_ORIGINS = [
+    "34.176.141.229",
+    "http://34.176.141.229",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',

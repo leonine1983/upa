@@ -2,9 +2,9 @@
 #
 # REPLACES
 # www.cauans-technology.com = Replace with your domain
-# /home/cauans.technology/app_repo = Replace with the path to the folder for the project
-# /home/cauans.technology/app_repo/static = Replace with the path to the folder for static files
-# /home/cauans.technology/app_repo/media = Replace with the path to the folder for media files
+# /home/matiasaildo/app_repo = Replace with the path to the folder for the project
+# /home/matiasaildo/app_repo/static = Replace with the path to the folder for static files
+# /home/matiasaildo/app_repo/media = Replace with the path to the folder for media files
 # upa_gunicorn.socket = Replace with your unix socket name
 # 
 # For letsencrypt and Ubuntu:
@@ -13,7 +13,7 @@
 # sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
 # sudo systemctl stop nginx
 # sudo certbot certonly --standalone -d www.cauans-technology.com
-# sudo chmod -R 755 /home/cauans.technology/app_repo
+# sudo chmod -R 755 /home/matiasaildo/app_repo
 # sudo nano /etc/nginx/sites-available/www.cauans-technology.com
 # Add contents of this file
 # sudo ln -s /etc/nginx/sites-available/www.cauans-technology.com /etc/nginx/sites-enabled/www.cauans-technology.com
@@ -92,16 +92,16 @@ server {
   # Add index.php to the list if you are using PHP
   index index.html index.htm index.nginx-debian.html index.php;
   
-  # ATTENTION: /home/cauans.technology/app_repo/static
+  # ATTENTION: /home/matiasaildo/app_repo/static
   location /static {
     autoindex on;
-    alias /home/cauans.technology/app_repo/static;
+    alias /home/matiasaildo/app_repo/static;
   }
 
-  # ATTENTION: /home/cauans.technology/app_repo/media 
+  # ATTENTION: /home/matiasaildo/app_repo/media 
   location /media {
     autoindex on;
-    alias /home/cauans.technology/app_repo/media;
+    alias /home/matiasaildo/app_repo/media;
   }
 
   # ATTENTION: upa_gunicorn.socket
