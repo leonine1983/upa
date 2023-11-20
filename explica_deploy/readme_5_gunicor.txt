@@ -1,7 +1,7 @@
 ###############################################################################
 # Replace
 # upa_gunicorn to the name of the gunicorn file you want
-# cauans.technology to your user name
+# matiasaildo to your user name
 # app_repo to the folder name of your project
 # upa to the folder name where you find a file called wsgi.py
 #
@@ -32,15 +32,15 @@ Requires=upa_gunicorn.socket
 After=network.target
 
 [Service]
-User=cauans.technology
+User=matiasaildo
 Group=www-data
 Restart=on-failure
-EnvironmentFile=/home/cauans.technology/app_repo/.env
-WorkingDirectory=/home/cauans.technology/app_repo
+EnvironmentFile=/home/matiasaildo/app_repo/.env
+WorkingDirectory=/home/matiasaildo/app_repo
 # --error-logfile --enable-stdio-inheritance --log-level and --capture-output
 # are all for debugging purposes.
-ExecStart=/home/cauans.technology/app_repo/venv/bin/gunicorn \
-          --error-logfile /home/cauans.technology/app_repo/gunicorn-error-log \
+ExecStart=/home/matiasaildo/app_repo/venv/bin/gunicorn \
+          --error-logfile /home/matiasaildo/app_repo/gunicorn-error-log \
           --enable-stdio-inheritance \
           --log-level "debug" \
           --capture-output \
