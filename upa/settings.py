@@ -164,10 +164,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import mimetypes
 mimetypes.add_type("text/javascript", ".js", True)
 
+
 # Session settings
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_HTTPONLY = True
+#CSRF_COOKIE_SECURE = True
 
 # Security settings
 X_FRAME_OPTIONS = 'DENY'
