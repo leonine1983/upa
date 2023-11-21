@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="20.59mm" height="5.35mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 2059 535"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#FEFEFE;stroke-width:20;stroke-miterlimit:22.9256}
+    .fil1 {fill:#4B4B4D}
+    .fil0 {fill:#00AFEF}
+   ]]>
+  </style>
+   <clipPath id="id0">
+    <rect x="1567.28" y="67.58" width="356.23" height="403.27"/>
+   </clipPath>
+ </defs>
+ <g id="Camada_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <polygon class="fil0 str0" points="503.67,544.24 175.13,11.56 368.75,11.56 697.12,543.81 "/>
+  <polygon class="fil0 str0" points="756.3,544.06 427.89,11.56 620.01,11.56 948.11,543.53 "/>
+  <polygon class="fil1 str0" points="2054.3,544.06 1005.08,544.06 677.73,9.54 2050.71,9.54 "/>
+  <g style="clip-path:url(#id0)">
+   <image id="brasao-veracruz.png" x="1567.28" y="67.59" width="356.22" height="403.26" xlink:href="atest_button_Images\atest_button_ImgID1.png"/>
+  </g>
+ </g>
+</svg>

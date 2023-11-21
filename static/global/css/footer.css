@@ -1,0 +1,48 @@
+
+/*informações de desenvolvimento*/
+footer{
+  position: relative;
+  bottom: -11.2%;
+  color:rgba(14, 27, 27, 0.8);  
+  background-color: rgba(0, 77, 0, 0.2) /* Verde escuro com 50% de transparência */!important;
+  margin-top: 10% !important;
+  padding: 1rem 1rem 0.5rem 1rem !important;
+  height: auto;
+  box-shadow:inset rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  
+  display: grid;    
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 1.01rem;
+  
+}
+footer .info{
+  width: 100%;
+}
+footer h1{
+  font-family: 'Titillium Web' !important;
+  font-size: 1rem;
+  margin: 0;
+}
+footer h2{
+  font-size: 0.9rem;
+}
+footer h1, footer h2, p{
+  margin: 0.1rem;
+  color:#172961 !important;
+}
+footer p{
+  font-size:0.8rem !important;
+}
+.info-developer {
+    padding: 0;
+    display: flex;   
+  
+  }
+  .info-developer div div{
+    padding: 0.5rem;
+    margin-left: -2rem;
+  }
+.uppercase{
+    text-transform: uppercase;
+}
+  

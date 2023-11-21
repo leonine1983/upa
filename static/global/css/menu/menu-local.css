@@ -1,0 +1,33 @@
+.menu-local-top{
+    display: grid;    
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    margin-bottom: -5rem;   
+}
+.menu-local-top ul{
+    display: flex;
+    list-style: none;
+    text-align: center;
+    margin-top: -0.05rem;
+    border-bottom-left-radius: 1rem;  
+    border-bottom-right-radius: 1rem;  
+    background: var(--cor-cidade-primario);
+    box-shadow:  var(--shadow);   
+}
+
+.menu-local-top ul li{
+    padding: 0.5rem 1rem;
+    color: white;
+    border-right: 0.1rem solid var(--cor-cidade-secundário);
+    font-size: 1.1rem;    
+    transition: all ease-in-out 1000ms;
+    text-transform: uppercase;
+}
+.menu-local-top ul li a:hover{
+    background: var(--cor-cidade-secundário);     
+    color: var(--cor-cidade-primario) ;  
+    padding:0.55rem 2rem;
+}
+.menu-local-top ul li a{
+    color: var(--cor-cidade-secundário);
+    transition: all ease-in-out 1000ms;
+ }

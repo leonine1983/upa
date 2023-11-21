@@ -1,0 +1,36 @@
+/** Classe do FORM EM ABAS*/
+
+div.items p {display: none}
+div.items p:target {display: block}
+.item-target{
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border-top-right-radius: var(--radiaus-border);
+    border-top-left-radius: var(--radiaus-border);
+    text-align: center;    
+    box-shadow: 0.1rem -0.1rem teal;
+}
+.item-target a {
+    color: #fff;    
+}
+.target-1{    
+    background:var(--target-1);
+}
+.target-2{
+    background:var(--target-2);
+}
+.target-3{
+    background:var(--target-3);
+}
+
+.itens-content {    
+    width: 100%;
+    height: 20rem;
+    padding: 0.5rem;
+    margin: -0.59rem;
+    border-radius: var(--radiaus-border);
+    box-shadow: var(--shadow);
+}
+.itens-content span{
+    display: block;
+}

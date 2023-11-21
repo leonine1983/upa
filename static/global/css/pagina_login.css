@@ -1,0 +1,116 @@
+
+@charset "utf-8";
+/* CSS Document */
+:root {      
+    /**Background do form login*/
+    --backgroud-form: rgb(119, 195, 227); 
+    /**END Background do form login*/
+    --footer:1vh;
+    --radiaus-border:0.5rem;
+    --tamanho:10rem;}
+html, body, div, span, applet, object, iframe,  p, blockquote, pre, a, abbr, and, address, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, input, textarea, select {
+	background:transparent;
+	border:0;
+	font-size:100%;
+	margin:0;
+	outline:0;
+	padding:0;
+	vertical-align:baseline; 
+    text-decoration: none;}
+body{
+    background: var(--background-body-1);
+    height: 100vh; }
+.alinhar-horizontalment{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;}
+.box-login{
+    margin:9rem auto;
+    width:calc(var(--tamanho)*4);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+.login{
+    width: calc(var(--tamanho)*2);
+    height: calc(var(--tamanho)*2);
+    background: var(--backgroud-form);
+    border-radius: var(--radiaus-border);    
+    box-shadow: var(--shadow);
+    border-radius: var(--radiaus-border);
+    display: block;
+    text-align: left;
+    padding-left: calc(var(--tamanho)/8);
+    margin:calc(var(--tamanho)/18);}
+.login-title{
+    padding: calc(var(--tamanho)/22) calc(var(--tamanho)/40);
+    padding-top: calc(var(--tamanho)/7);
+    display: block;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    font-size: calc(var(--tamanho)/9);
+    width: calc(var(--tamanho)/0.57);}
+.login-login form{
+    display: block;
+    margin-top: calc(var(--tamanho)/22);}
+.login-login form label, .login-login form input {
+    height: calc(var(--tamanho)/5);   
+    display: block;
+    font-size: calc(var(--tamanho)/8);}
+.login-login form input{
+    background: white;
+    border-radius: var(--radiaus-border);
+    box-shadow:inset var(--shadow);
+    height: calc(var(--tamanho)/4);
+    width: calc(var(--tamanho)/0.615);
+    padding-left: calc(var(--tamanho)/20);
+}
+.grid-login{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(45rem, 1fr));
+    gap: var(--spacing-gutter-large);}
+.login-login form button{
+    background: rgb(70, 213, 82);
+    border-radius: var(--radiaus-border);
+    box-shadow: var(--shadow);
+    height: calc(var(--tamanho)/4);
+    width: calc(var(--tamanho)/0.615);
+    margin-top: calc(var(--tamanho)/6);
+    border: none;
+    text-shadow:inset var(--shadow);}
+.login-brasao img{
+    width: calc(var(--tamanho)*01);
+    box-shadow: var(--shadow);
+    padding: calc(var(--tamanho)*0.2);
+    margin: 8rem;
+    margin: auto;
+    margin-left:calc(var(--tamanho)*(-0.001));
+    background-color: white;
+    border-radius: var(--radiaus-border);
+    box-shadow: var(--shadow); }
+video{
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        width: 100%;
+      }
+      /* Estilo para o modal */
+.modal {
+display: none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+background-color: #fefefe;
+margin: 15% auto;
+padding: 20px;
+border: 1px solid #888;
+width: 80%;
+}

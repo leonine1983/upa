@@ -59,23 +59,23 @@ $(document).ready(function() {
 <!-- FIM Botão adicionar a <b>Fila de Espera</b>-->
 <div class='btn btn-sm border mb-3'><span class='fs-3'>{{lista_db.count}}</span> pessoas aguardando passar pela classificação</div>
 <table class='table table-striped border border-secondary'>
-    <tr>
-        <th class='linha-titulo text-center'>Codigo</th>
-        <th class='linha-titulo text-center'>Nome do Paciente</th>
-        <th class='linha-titulo text-center'>Alergias</th>
-        <th class='linha-titulo text-center'>Data de entrada na <b>Fila de Espera</b></th>
-        <th class='linha-titulo text-center'>Horário de entrada na <b>Fila de Espera</b></th>
-        <th class='linha-titulo text-center'>Excluir paciente da <b>Fila de Espera</b></th>
+    <tr class='bg-primary-subtle fs-6'>
+        <th class='border border-success linha-titulo text-center'>Codigo</th>
+        <th class='border border-success linha-titulo text-center'>Nome do Paciente</th>
+        <th class='border border-success linha-titulo text-center'>Alergias</th>
+        <th class='border border-success linha-titulo text-center'>Data de entrada na <b>Fila de Espera</b></th>
+        <th class='border border-success linha-titulo text-center'>Horário de entrada na <b>Fila de Espera</b></th>
+        <th class='border border-success linha-titulo text-center'>Excluir paciente da <b>Fila de Espera</b></th>
     </tr>
     
     {% if not get_id %}
     {% for db in lista_db %}            
-        <tr>
+        <tr class=' fs-7 bg-primary-subtle m-0 fs-7 p-0'>
             <td class='text-center'>
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
+                <a class="link-color border" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
             </td>
             <td class='text-center'>
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>                                                      
+                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>                                                      
             </td>            
             <td class='text-center'>
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}">
