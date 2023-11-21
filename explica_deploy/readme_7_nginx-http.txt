@@ -7,7 +7,7 @@
 # sudo systemctl restart nginx
 #cd /etc/nginx/sites-available/upa 
 # REPLACES
-# 34.125.242.238 = Replace with your domain
+# 34.95.242.9 = Replace with your domain
 # /home/matiasaildo/app_repo = Replace with the path to the folder for the project
 # /home/matiasaildo/app_repo/static = Replace with the path to the folder for static files
 # /home/matiasaildo/app_repo/media = Replace with the path to the folder for media files
@@ -21,7 +21,7 @@
 server {
   listen 80;
   listen [::]:80;
-  server_name 34.125.242.238;
+  server_name 34.95.242.9;
 
   # Add index.php to the list if you are using PHP
   index index.html index.htm index.nginx-debian.html index.php;
@@ -81,6 +81,6 @@ server {
     application/rss+xml
     image/svg+xml;
 
-  #access_log  /var/log/nginx/34.125.242.238-access.log;
-  error_log   /var/log/nginx/34.125.242.238-error.log;
+  #access_log  /var/log/nginx/34.95.242.9-access.log;
+  error_log   /var/log/nginx/34.95.242.9-error.log;
 }
