@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from django.utils import timezone
+from django.contrib.auth.models import Group, User, Permission
 
 
 class CustomUserManager(BaseUserManager):
@@ -154,6 +155,52 @@ class Chamar_P_para_atendimento(models.Model):
 class CadastroSala(models.Model):
     nome_Sala = models.CharField(max_length=40, null=False, verbose_name='Escreva o nome da sala. Ex: Sala 01')
     descricao_Sala = models.TextField(max_length=200, null=False, verbose_name='Descreva a ulitilização da sala. Ex.: Sala de atendimento pediátrico')
+    
+    @receiver(post_migrate)
+    def create_register(sender, **kwargs):
+        salas_e_descricoes = [
+                                ("Sala de Emergência", "Utilizada para atendimento médico de emergência."),
+                                ("Sala de Cirurgia", "Destinada a procedimentos cirúrgicos."),
+                                ("Sala de Recuperação Pós-cirúrgica", "Espaço para a recuperação de pacientes após cirurgias."),
+                                ("Sala de Consulta", "Usada para consultas médicas regulares."),
+                                ("Sala de Exames de Diagnóstico", "Destinada à realização de exames para diagnóstico médico."),
+                                ("Sala de Tratamento Intensivo (UTI)", "Para tratamento intensivo de pacientes críticos."),
+                                ("Sala de Parto", "Utilizada para procedimentos de parto."),
+                                ("Sala de Maternidade", "Destinada ao cuidado de mães e recém-nascidos."),
+                                ("Sala de Pediatria", "Especializada no tratamento de crianças."),
+                                ("Sala de Radiologia", "Para realização de exames de imagem."),
+                                ("Sala de Ultrassonografia", "Especializada em exames de ultrassom."),
+                                ("Sala de Endoscopia", "Utilizada para procedimentos endoscópicos."),
+                                ("Sala de Quimioterapia", "Para administração de tratamentos quimioterápicos."),
+                                ("Sala de Hemodiálise", "Destinada a pacientes que necessitam de diálise renal."),
+                                ("Sala de Triagem", "Utilizada para triagem e classificação de pacientes."),
+                                ("Sala de Observação", "Espaço para observação de pacientes."),
+                                ("Sala de Isolamento", "Para pacientes com doenças contagiosas."),
+                                ("Sala de Fisioterapia", "Especializada em tratamentos de fisioterapia."),
+                                ("Sala de Psicologia Clínica", "Destinada a consultas e tratamentos psicológicos."),
+                                ("Sala de Nutrição Clínica", "Para consultas e orientações nutricionais."),
+                                ("Sala de Reabilitação", "Espaço para programas de reabilitação médica."),
+                                ("Sala de Farmácia Hospitalar", "Destinada ao armazenamento e dispensação de medicamentos."),
+                                ("Sala de Esterilização", "Para esterilização de instrumentos médicos."),
+                                ("Sala de Anestesia", "Utilizada para administração de anestesia antes de procedimentos."),
+                                ("Sala de Autópsia", "Espaço para realização de autópsias."),
+                                ("Sala de Treinamento Médico", "Utilizada para treinamento e ensino médico."),
+                                ("Sala de Conferências", "Para realização de conferências e eventos médicos."),
+                                ("Sala de Arquivo Médico", "Destinada ao armazenamento de registros médicos."),
+                                ("Sala de Espera", "Espaço para pacientes aguardarem atendimento."),
+                                ("Sala de Administração Hospitalar", "Utilizada para atividades administrativas do hospital."),
+                                ("Sala de Informática Médica", "Especializada em atividades de informática médica."),
+                                ("Sala de Manutenção", "Para atividades de manutenção predial e de equipamentos."),
+                                ("Sala de Lavanderia Hospitalar", "Para lavagem e processamento de roupas hospitalares."),
+                                ("Sala de Almoxarifado", "Utilizada para armazenamento de suprimentos e materiais."),
+                                ("Sala de Coleta de Sangue", "Para coleta de amostras de sangue."),
+                                ("Sala de Vacinação", "Destinada à administração de vacinas."),
+                                ("Sala de Controle de Infecção Hospitalar", "Especializada no controle de infecções hospitalares."),
+                            ]
+        if not CadastroSala.objects.exists():
+            CadastroSala.objects.bulk_create(
+                [CadastroSala(nome_Sala = sala, descricao_Sala = descricao ) for sala, descricao in salas_e_descricoes]
+            )              
 
     def __str__(self):
         return self.nome_Sala
