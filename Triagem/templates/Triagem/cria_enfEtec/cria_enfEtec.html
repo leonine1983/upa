@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="{% static 'Access_Login/style.css' %}">   
     <link rel="stylesheet" href="{% static 'global/css/bootstrap.min.css' %}">   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-      
+    <style>            
       .class_form {
         max-width: 70%;
         margin: 0 auto;
@@ -15,18 +14,15 @@
         border-radius: 5px;
         padding: 20px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      
+      }      
       .class_form .grid p {
         margin-bottom: 20px;
-      }
-      
+      }      
       .class_form label {
         display: block;
         font-weight: bold;
         margin-bottom: 5px;
-      }
-      
+      }      
       .class_form input[type="text"],
       .class_form input[type="email"],
       .class_form input[type="password"] {
@@ -34,17 +30,14 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 3px;
-      }
-      
+      }      
       .class_form input[type="radio"] {
         margin-right: 5px;
-      }
-      
+      }      
       .class_form .helptext {
         font-size: 12px;
         color: #888;
-      }
-      
+      }      
       .class_form button {
         display: block;
         width: 100%;
@@ -61,10 +54,8 @@
         width:12rem;
         text-align:center;
         font-size:0.8rem
-
       }
-      .icone{
-        
+      .icone{        
         width: 7%;
         padding:0.5rem;
         color:#fff;
@@ -76,20 +67,12 @@
         border-top-left-radius: 1rem;
         margin:0.2rem;
       }
-
       .background-escuro,  .icone{
         background-color: cadetblue;
-      }
-
-
-        
-       
-
+      }  
     </style>
 {% endblock css %}
-    {% include 'global/message.html' %}    
-      
-    
+{% include 'global/message.html' %} 
 <h2><i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i> Relação de Profissionais Cadastrados no Sistema</b></h2>
     <table class="table table-primary" cellspacing="0">
         <tr>
@@ -97,13 +80,9 @@
             <th>Usuário (Login)</th> 
             <th>Email</th>
             <th>Telefone</th>
-            <!--<th>Data Nascimento</th>
-            <th>Endereço</th>
-            <th>Grupo</th>-->
             <th>CRM</th>
             <th>Grupo</th>
             <th>Ações</th>
-
         </tr>
         {% for groups in users %}
         <tr>
@@ -111,27 +90,25 @@
             <td>{{groups.user__username}}</td>            
             <td>{{groups.user__email}}</td>  
             <td>{{groups.telefone}}</td>   
-            <td>{{groups.crm}}</td>
-            <!--<td>{{groups.data_nascimento}}</td>       
-            <td>{{groups.endereco}}</td>
-            <td>{{groups.user__groups__name}}</td>-->            
-            <td>{{groups.user__groups__name}}</td>
+            <td>{{groups.crm}}</td>         
+            <td>
+              {% if groups.user__groups__name == 'group_Tec_Enfermagem' %}
+                Recepção
+              {% else %}
+                Enfermagem
+              {% endif %}</td>
             <td><span><a href="{% url 'Triagem:user_atualiza' groups.user__id %}"><i class="fa-solid fa-user-pen"></i></a></span> |  <span><a href="{% url 'Triagem:user_delete' groups.id %}"><i class="fa-solid fa-trash excluir"></i></a></span></td>
-
         </tr>
         {% endfor %}
-    </table>
-
- 
+    </table> 
 <p>&nbsp;</p>
-
 {% if form.instance.pk %}
-
-    <i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i> Atualização dos dados do profissional  <b class='uppercase'>{{up}}</b> </h2>
-  
 <h2>
+  <i class="fa fa-solid fa-thin fa-user-nurse fa-2x shadow"></i>
+   Atualização dos dados do profissional<b class='uppercase'>{{up}}</b>
+</h2>
 {% else %}
-    <h2 class='background-escuro shadow-sm p-2 m-2  text-light border-bottom border-3'> Cadastra Profissionais de <b>Enfermagem</b> ou <b>Tec em Enfermagem</b></h2>
+<h2 class='background-escuro shadow-sm p-2 m-2  text-light border-bottom border-3'> Cadastra Profissionais de <b>Enfermagem</b> ou <b>Tec em Enfermagem</b></h2>
 {% endif %}
 <form method="post" class="class_form">
     {% csrf_token %}
@@ -205,7 +182,7 @@
             <input class="radio" type="radio" value="group_Enfermagem" name="grupo" id="enfermagem" required="">
             </div>
             <div class="radio_div ">
-            <label class="radio_label" for="tec">Tec em Enfermagem</label>
+            <label class="radio_label" for="tec">Recepção</label>
             <input class="radio" type="radio" value="group_Tec_Enfermagem" name="grupo" id="tec" required="">
             </div>
         </div>
