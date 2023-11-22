@@ -111,5 +111,42 @@
     window.addEventListener("online", verificarConexao);
     window.addEventListener("offline", verificarConexao);
   </script>
+  <div class='p-1 text-center bg-secondary-subtle' >
+    {% if licenca_ativa == None %}
+    <div style='background:#FA8072'>Lincença vencida. Por favor entrar em contato com o Administrador. Tel.: 71 9 86881943</div>     
+        <div class="modal fade" id="myModal" data-backdrop="static">
+            <div class="modal-dialog">
+              <div class="modal-content" style='width:70vw !important; margin-left:-20vw!important'>
+                <div class="modal-header" style='background:#FA8072'>
+                    <h4 class="modal-title text-center">A LICENÇA EXPIROU <i class="fa-solid fa-house-medical-circle-exclamation" style="color: #dc1840;"></i></h4>
+                </div>
+                <div class="modal-body p-5">
+                    <h2 class='h1 fs-1 mb-4'>Prezado usuário,</h2>
+                    <p class='fs-5'>               
+                    Informamos que a licença de uso do sistema SG-UPA expirou.
+                    Para continuar utilizando o sistema, solicitamos que entre em contato com o 
+                    administrador pelo seguinte número de telefone (WhatsApp): **(71) 9 8688 1943 - Rogério Cerqueira da Silva**.
+                
+                    <p class='fs-5  mt-3'>Agradecemos pela compreensão e colaboração. Em breve, o sistema será bloqueado caso não haja renovação da licença.</p>
+                    <p class='fs-5  mt-4'>               
+                        Atenciosamente,
+                    </p>
+                    <p class='fs-5 mt-4 text-right'>
+                        Equipe de Suporte Técnico
+                    </p>   
+                <!-- Remova o botão de fechamento -->
+              </div>
+            </div>
+          </div>
+          
+          <script>
+            $(document).ready(function() {
+              $('#myModal').modal('show');
+            });
+          </script>  
+    {% else %}
+        {{licenca_ativa}}
+    {% endif %}    
+</div>
 </body>
 </html>

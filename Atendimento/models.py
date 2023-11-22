@@ -194,4 +194,19 @@ class envio_triagem(models.Model):
 
     def __str__ (self):
         return f'Codigo: {self.paciente_envio_triagem.codigo_pacient} | Nome: {self.paciente_envio_triagem} | Idade: {self.paciente_envio_triagem.idade} anos '
+    
+
+class Licenca(models.Model):
+    expiracao = models.DateTimeField()
+    ativa = models.BooleanField(default=True)
+
+    def __str__(self):
+        status = "Ativa" if self.ativa else "Inativa"
+        data_formatada = self.expiracao.strftime("%d de %B de %Y")
+        return f"Licença (Expiração: {data_formatada}, Status: {status})"
+
+
+
+    
+
 
