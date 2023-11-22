@@ -1,14 +1,7 @@
-from datetime import date, datetime
-
-#criar o grupos para restringir o acesso dos usuarios
-from django.contrib.auth.models import Group, Permission
+from datetime import date, datetime, timedelta
 from django.db import models
-
-# Após rodar o migrate alguns dados precisam ser lançados no sistema
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
-import random
-import uuid
 
 
 class Bairro (models.Model):
@@ -204,9 +197,16 @@ class Licenca(models.Model):
         status = "Ativa" if self.ativa else "Inativa"
         data_formatada = self.expiracao.strftime("%d de %B de %Y")
         return f"Licença (Expiração: {data_formatada}, Status: {status})"
-
-
-
     
-
-
+    @receiver(post_migrate)
+    def create_registros(sender, **kwargs):
+        if not Licenca.objects.exists():
+            # Obtém a data atual
+            data_atual = datetime.now()
+            # Adiciona mais 35 dias
+            expiracao = data_atual + timedelta(days=35)
+                        
+            Licenca.objects.create(
+                expiracao = expiracao,
+                ativa = True
+            )
