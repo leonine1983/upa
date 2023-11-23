@@ -34,9 +34,9 @@
         margin-top: 1rem;
     }
     .form input, .form textarea, .form select{
-        margin-left: 1rem;
+        margin-left: 0.2rem;
         border-radius: 0.8rem;
-        padding: 0.8rem;
+        padding: 0.5rem;
         border: 0.1rem solid coral;
         width: 90%;
         font-size: 1.1rem;
@@ -127,14 +127,15 @@
         <div>
             <form class='form' action="" method="post">
                 {% csrf_token %}
+                
                 {{form.as_div}}
                 <div class="grid row m-4">
                     <a class="col btn btn-sm btn-danger m-4 w-50 h-100" href="{%url 'Medicos:salas' %}">Cancelar</a> 
-                    <button class="col btn btn-sm btn-primary w-50">
+                    <button class="col btn btn-sm btn-primary">
                         {% if update %}                        
                         Atualizar Salar
                         {% elif conteudo == 'cadastraSala' %}
-                        CRIAR SALA
+                            Registrar Sala de Atendimento <i class="fa-duotone fa-hospital-user"></i>
                         {% else %}
                         Deletar {{nomeSala}}
                         {% endif %} </button>                  
