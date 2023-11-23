@@ -54,53 +54,55 @@
 <div class='row'>
     <div class='col bg-secondary-subtle mt--2 p-3'>
         {% if object_list %}
-            <h1 style="font-size: 1.8rem !important;"><i class="fa-solid fa-house-medical"></i> Salas de Atendimento</h1>
-            <hr>  
-            <!--Paginaçaõ da relação de salas -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                {% if object_list.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{object_list.previous_page_number}}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo; Início</span>
-                    </a>
-                </li>
-                {% endif %}
-                {% for page in object_list.paginator.page_range %}
-                    {% if object_list.number|add:"-10" <= page <= object_list.number|add:"10" %}
-                    <li class="page-item {% if page == object_list.number %}active{% endif %}">
-                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            {% if not vinculo_sala %}
+                <h1 style="font-size: 1.8rem !important;"><i class="fa-solid fa-house-medical"></i> Salas de Atendimento</h1>
+                <hr>  
+                <!--Paginaçaõ da relação de salas -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                    {% if object_list.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{object_list.previous_page_number}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo; Início</span>
+                        </a>
                     </li>
                     {% endif %}
-                {% endfor %}
+                    {% for page in object_list.paginator.page_range %}
+                        {% if object_list.number|add:"-10" <= page <= object_list.number|add:"10" %}
+                        <li class="page-item {% if page == object_list.number %}active{% endif %}">
+                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
 
-                {% if object_list.has_next %}  
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ object_list.next_page_number }}" aria-label="Next">
-                    <span aria-hidden="true"> &raquo;</span>
-                    </a>
-                </li>
-                {% endif %}
-                </ul>
-            </nav>            
-            <table class="table table-sm table-striped" >
-                <tr class='fs-6'>
-                    <th class='col-1'>id</th>
-                    <th class='col-3'>SALA</th>
-                    <th class='col-3'>DESCRIÇÃO DA SALA</th>
-                    <th class='col-2'>AÇÃO</th>
-                </tr>
-                {% for list in object_list %} 
-                <tr>
-                    <td>{{list.id}}</td>
-                    <td>{{list.nome_Sala}}</td>
-                    <td>{{list.descricao_Sala}}</td>
-                    <td><span><a href="{% url 'Medicos:salasUpdate' list.pk %}"><i class="fa-solid fa-pen-to-square update"></i></a></span> | <span><a href="{% url 'Medicos:salasDelete' list.pk %}"><i class="fa-solid fa-trash-can delete"></i></a></span></td>
-                </tr>
-                {% endfor %}
-            </table>
+                    {% if object_list.has_next %}  
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ object_list.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true"> &raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    </ul>
+                </nav>            
+                <table class="table table-sm table-striped" >
+                    <tr class='fs-6'>
+                        <th class='col-1'>id</th>
+                        <th class='col-3'>SALA</th>
+                        <th class='col-3'>DESCRIÇÃO DA SALA</th>
+                        <th class='col-2'>AÇÃO</th>
+                    </tr>
+                    {% for list in object_list %} 
+                    <tr>
+                        <td>{{list.id}}</td>
+                        <td>{{list.nome_Sala}}</td>
+                        <td>{{list.descricao_Sala}}</td>
+                        <td><span><a href="{% url 'Medicos:salasUpdate' list.pk %}"><i class="fa-solid fa-pen-to-square update"></i></a></span> | <span><a href="{% url 'Medicos:salasDelete' list.pk %}"><i class="fa-solid fa-trash-can delete"></i></a></span></td>
+                    </tr>
+                    {% endfor %}
+                </table>
             <!--FIM Paginaçaõ da relação de salas --> 
-
+        {% endif %}
+        {% if vinculo_sala %}
             <hr>
             <h2> <i class="fa-solid fa-person-shelter"></i> Relação de Salas Ocupadas:</h2>
             <table class="table" >
@@ -116,8 +118,9 @@
                     <td><span ><a href="{% url 'Medicos:salasProfissionalUpdate' list.pk %}"><i class="fa-solid fa-pen-to-square update"></i></a></span> | <span><a href="{% url 'Medicos:salasProfissionalDelete' list.pk %}"><i class="fa-solid fa-trash-can delete"></i></a></span></td>
                 </tr>
                 {% endfor %}
-            </table>   
-        {% endif %}                 
+            </table> 
+        {% endif %}  
+    {% endif %}                 
         <!--Cadastro de Salas-->
     </div>
     <div class='col'>    
@@ -135,7 +138,8 @@
         {% else %}
             
         {% if not conteudo == 'cadastraSala' %}
-        <h2> Tem certeza que deseja deletar a sala {{nomeSala}}?</h2> 
+        <div class='mt-5'>&nbsp;</div>
+        <h2 class='fs-4 text-center w-75 m-auto mt-5'> Tem certeza que deseja deletar a <b class='text-uppercase'>{{object}}</b>?</h2> 
         {% else %}
     
         <h1 class="h3 text-capitalize" style='margin-top:-2rem !important'><i class="fa-duotone fa-hospital-user"></i>Registrar nova sala de atendimento</h1> 
