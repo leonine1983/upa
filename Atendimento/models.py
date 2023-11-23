@@ -1,4 +1,4 @@
-from datetime import date, datetime, timedelta
+from datetime import date, timezone, timedelta
 from django.db import models
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
@@ -201,12 +201,11 @@ class Licenca(models.Model):
     @receiver(post_migrate)
     def create_registros(sender, **kwargs):
         if not Licenca.objects.exists():
-            # Obtém a data atual
-            data_atual = datetime.now()
-            # Adiciona mais 35 dias
-            expiracao = data_atual + timedelta(days=35)
-                        
+            # Obtenha a data atual com informações de fuso horário
+            expiracao = timezone.now() + timedelta(days=35)
+            
+            # Crie a instância de Licenca
             Licenca.objects.create(
-                expiracao = expiracao,
-                ativa = True
+                expiracao=expiracao,
+                ativa=True
             )
