@@ -51,98 +51,133 @@
 {% block body_title %}<i class="fa-duotone fa-house-medical-flag"></i> Dependências do Hospital {% endblock body_title %}
 {% block body_login %}
     <!--Relação de Salas Cadastradas-->
+<div class='row'>
+    <div class='col'>
+        {% if object_list %}
+            <h1 style="font-size: 1.8rem !important;"><i class="fa-solid fa-house-medical"></i> Salas de Atendimento</h1>
+            <hr>
+           
+            
 
-   {% if object_list %}
-   <h1 style="font-size: 1.8rem !important;"><i class="fa-solid fa-house-medical"></i> Salas ou Departamentos</h1>
-   <hr>
-   <p>&nbsp;</p>
-   <h2> <i class="fa-solid fa-person-shelter"></i> Relação de Salas para Atendimento Medico:</h2>
-    <table class="table" >
-        <tr>
-            <th>SALA</th>
-            <th>DESCRIÇÃO DA SALA</th>
-            <th>AÇÃO</th>
-        </tr>
-        {% for list in object_list %} 
-        <tr>
-            <td>{{list.nome_Sala}}</td>
-            <td>{{list.descricao_Sala}}</td>
-            <td><span><a href="{% url 'Medicos:salasUpdate' list.pk %}"><i class="fa-solid fa-pen-to-square update"></i></a></span> | <span><a href="{% url 'Medicos:salasDelete' list.pk %}"><i class="fa-solid fa-trash-can delete"></i></a></span></td>
-        </tr>
-        {% endfor %}
-    </table>  
-    <hr>
-    <h2> <i class="fa-solid fa-person-shelter"></i> Relação de Salas Ocupadas:</h2>
-    <table class="table" >
-        <tr>
-            <th>SALA</th>
-            <th>Nome do profissional</th>
-            <th>AÇÃO</th>
-        </tr>
-        {% for list in profissionais %} 
-        <tr>
-            <td>{{list.nomeSala}}</td>
-            <td>{{list.profissionalSaude}}</td>
-            <td><span><a href="{% url 'Medicos:salasProfissionalUpdate' list.pk %}"><i class="fa-solid fa-pen-to-square update"></i></a></span> | <span><a href="{% url 'Medicos:salasProfissionalDelete' list.pk %}"><i class="fa-solid fa-trash-can delete"></i></a></span></td>
-        </tr>
-        {% endfor %}
-    </table>   
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                {% if object_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{object_list.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo; Início</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for page in object_list.paginator.page_range %}
+                    {% if object_list.number|add:"-10" <= page <= object_list.number|add:"10" %}
+                    <li class="page-item {% if page == object_list.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
 
-    {% endif %}                 
-    <!--Cadastro de Salas-->
+                {% if object_list.has_next %}  
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ object_list.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true"> &raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                </ul>
+            </nav>
+
+
+            <table class="table table-sm table-striped" >
+                <tr class='fs-6'>
+                    <th class='col-1'>id</th>
+                    <th class='col-3'>SALA</th>
+                    <th class='col-3'>DESCRIÇÃO DA SALA</th>
+                    <th class='col-1'>AÇÃO</th>
+                </tr>
+                {% for list in object_list %} 
+                <tr>
+                    <td>{{list.id}}</td>
+                    <td>{{list.nome_Sala}}</td>
+                    <td>{{list.descricao_Sala}}</td>
+                    <td><span><a href="{% url 'Medicos:salasUpdate' list.pk %}"><i class="fa-solid fa-pen-to-square update"></i></a></span> | <span><a href="{% url 'Medicos:salasDelete' list.pk %}"><i class="fa-solid fa-trash-can delete"></i></a></span></td>
+                </tr>
+                {% endfor %}
+            </table>  
+
+            <hr>
+            <h2> <i class="fa-solid fa-person-shelter"></i> Relação de Salas Ocupadas:</h2>
+            <table class="table" >
+                <tr>
+                    <th>SALA</th>
+                    <th>Nome do profissional</th>
+                    <th>AÇÃO</th>
+                </tr>
+                {% for list in profissionais %} 
+                <tr class='fs-7' >
+                    <td >{{list.nomeSala}}</td>
+                    <td>{{list.profissionalSaude}}</td>
+                    <td><span ><a href="{% url 'Medicos:salasProfissionalUpdate' list.pk %}"><i class="fa-solid fa-pen-to-square update"></i></a></span> | <span><a href="{% url 'Medicos:salasProfissionalDelete' list.pk %}"><i class="fa-solid fa-trash-can delete"></i></a></span></td>
+                </tr>
+                {% endfor %}
+            </table>   
+        {% endif %}                 
+        <!--Cadastro de Salas-->
+    </div>
+    <div class='col'>    
+        {% if object_list %}
+        {% if update %}                        
+        <h1>Formulário de Atualização de Salas</h1>  
+        <hr> 
+        {% elif salaProfissional %}
+        <h1 class="h1 uppercase">Vincular Profissional à Sala de Atendimento</h1>
+        <div style='text-align: right; margin-right:5rem'>
+            <a class="btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Cadastro de Salas</a>        
+        </div>
+        {% elif DeleteVinculo %}
+        <h2> Tem certeza que deseja deletar o VÍNCULO DO PROFISSIONAL à sala?</h2> 
+        {% else %}
+            
+        {% if not conteudo == 'cadastraSala' %}
+        <h2> Tem certeza que deseja deletar a sala {{nomeSala}}?</h2> 
+        {% else %}
     
-    {% if not object_list %}
-    {% if update %}                        
-    <h1>Formulário de Atualização de Salas</h1>  
-    <hr> 
-    {% elif salaProfissional %}
-    <h1 class="h1 uppercase">Vincular Profissional à Sala de Atendimento</h1>
-    <div style='text-align: right; margin-right:5rem'>
-        <a class="btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Cadastro de Salas</a>
-        
+        <h1 class="h3 text-capitalize" style='margin-top:-2rem !important'><i class="fa-duotone fa-hospital-user"></i>Registrar nova sala de atendimento</h1> 
+        <hr>
+        <div class='p-2 text-justify' >
+            A criação das salas de atendimento é fundamental para a estruturação eficaz do sistema SG-UPA,
+            garantindo uma organização coesa e eficiente das atividades realizadas em uma Unidade de Pronto Atendimento. 
+            Este formulário destina-se à criação das salas necessárias para abranger todas as especialidades oferecidas 
+            por este estabelecimento de saúde.
+        </div>
+        <div class='p-2 text-justify w-75 text-primary'>
+            <b>Instruções:</b>
+            Por favor, preencha este formulário com informações precisas para que possamos criar o máximo de salas
+            necessário para atender a diversidade de especialidades da SG-UPA.
+        </div>
+        {% endif %}
+        {% endif %}
+            
+            <div>
+                <form class='form' action="" method="post">
+                    {% csrf_token %}
+                    
+                    {{form.as_div}}
+                    <div class="grid row m-4">
+                        <a class="col btn btn-sm btn-danger m-4 w-50 h-100" href="{%url 'Medicos:salas' %}">Cancelar</a> 
+                        <button class="col btn btn-sm btn-primary m-4 w-50 h-100">
+                            {% if update %}                        
+                            Atualizar Salar
+                            {% elif conteudo == 'cadastraSala' %}
+                                Registrar Sala de Atendimento <i class="fa-duotone fa-hospital-user"></i>
+                            {% else %}
+                            Deletar {{nomeSala}}
+                            {% endif %} </button>                  
+                    </div>
+                </form>
+            </div>        
+        {% endif %}   
     </div>
-    {% elif DeleteVinculo %}
-    <h2> Tem certeza que deseja deletar o VÍNCULO DO PROFISSIONAL à sala?</h2> 
-    {% else %}
-        
-    {% if not conteudo == 'cadastraSala' %}
-    <h2> Tem certeza que deseja deletar a sala {{nomeSala}}?</h2> 
-    {% else %}
-    <h1 class="h3 text-capitalize" style='margin-top:-2rem !important'><i class="fa-duotone fa-hospital-user"></i>Registrar nova sala de atendimento</h1> 
-    <hr>
-    <div class='p-2 text-justify' >
-        A criação das salas de atendimento é fundamental para a estruturação eficaz do sistema SG-UPA,
-        garantindo uma organização coesa e eficiente das atividades realizadas em uma Unidade de Pronto Atendimento. 
-        Este formulário destina-se à criação das salas necessárias para abranger todas as especialidades oferecidas 
-        por este estabelecimento de saúde.
-    </div>
-    <div class='p-2 text-justify w-75 text-primary'>
-        <b>Instruções:</b>
-        Por favor, preencha este formulário com informações precisas para que possamos criar o máximo de salas
-         necessário para atender a diversidade de especialidades da SG-UPA.
-    </div>
-    {% endif %}
-    {% endif %}
-         
-        <div>
-            <form class='form' action="" method="post">
-                {% csrf_token %}
-                
-                {{form.as_div}}
-                <div class="grid row m-4">
-                    <a class="col btn btn-sm btn-danger m-4 w-50 h-100" href="{%url 'Medicos:salas' %}">Cancelar</a> 
-                    <button class="col btn btn-sm btn-primary m-4 w-50 h-100">
-                        {% if update %}                        
-                        Atualizar Salar
-                        {% elif conteudo == 'cadastraSala' %}
-                            Registrar Sala de Atendimento <i class="fa-duotone fa-hospital-user"></i>
-                        {% else %}
-                        Deletar {{nomeSala}}
-                        {% endif %} </button>                  
-                </div>
-            </form>
-        </div>        
-    {% endif %}   
+</div>
     <a class='btn btn-sm btn-secondary m-3' href="{% url 'Medicos:salasProfissionalCreate' %}"><i class="fa-solid fa-people-roof"></i> Vincula Profissional às Salas</a>    
     <a class="btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Criar Salas</a>
 
