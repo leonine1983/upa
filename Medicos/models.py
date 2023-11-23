@@ -153,8 +153,8 @@ class Chamar_P_para_atendimento(models.Model):
 
 
 class CadastroSala(models.Model):
-    nome_Sala = models.CharField(max_length=40, null=False, verbose_name='Escreva o nome da sala. Ex: Sala 01')
-    descricao_Sala = models.TextField(max_length=200, null=False, verbose_name='Descreva a ulitilização da sala. Ex.: Sala de atendimento pediátrico')
+    nome_Sala = models.CharField(max_length=40, null=False, default='Ex: Sala de pediatria')
+    descricao_Sala = models.TextField(max_length=200, null=False, default='Ex.: Sala de atendimento pediátrico')
     
     @receiver(post_migrate)
     def create_register(sender, **kwargs):
