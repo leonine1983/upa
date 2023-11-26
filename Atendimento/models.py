@@ -1,4 +1,4 @@
-from datetime import date, timezone, timedelta
+from datetime import date, timezone, timedelta, datetime
 from django.db import models
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
@@ -196,13 +196,13 @@ class Licenca(models.Model):
     def __str__(self):
         status = "Ativa" if self.ativa else "Inativa"
         data_formatada = self.expiracao.strftime("%d de %B de %Y")
-        return f"Licença (Expiração: {data_formatada}, Status: {status})"
+        return f"Licença (Expiração: {data_formatada}, Status: {status})"    
     
     @receiver(post_migrate)
     def create_registros(sender, **kwargs):
         if not Licenca.objects.exists():
             # Obtenha a data atual com informações de fuso horário
-            expiracao = timezone.now() + timedelta(days=35)
+            expiracao = datetime.now() + timedelta(days=35)
             
             # Crie a instância de Licenca
             Licenca.objects.create(
