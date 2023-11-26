@@ -183,7 +183,7 @@ $(document).ready(function() {
             {% csrf_token %}
             {% for n in get_id  %}
                 <input name="paciente_envio_triagem" type="hidden" value="{{n.id}}">  
-                <span class='fs-4'>Deseja enviar <b class="uppercase">{{n.nome_social}}</b> para a <b>Fila de Espera</b> para a classficação?</span>           
+                <span class='fs-5'>Deseja enviar <b class="uppercase">{{n.nome_social}}</b> para a <b>Fila de Espera</b> para a classficação?</span>           
             
                 <div class="flex w-75 m-auto p-2" >
                     <a href="{% url 'Atendimento:registro-paciente' %}" class="btn btn-sm btn-danger col m-1">Não (Manter somente o cadastro)</a>   
