@@ -126,7 +126,7 @@ class Medico_atendimento (models.Model):
 
 class Chamar_P_para_atendimento(models.Model):
     # Define o modelo "Chamar_P_para_atendimento" com três campos: "nome_paciente", "profissionalSaude" e "data_chamada"
-    nome_paciente = models.CharField(max_length=100)
+    nome_paciente = models.ForeignKey(Medico_atendimento, null=True, on_delete=models.CASCADE)
     profissionalSaude_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     data_chamada = models.DateTimeField(auto_now=True, null=True)
     data_criacao = models.DateTimeField(default=timezone.now)

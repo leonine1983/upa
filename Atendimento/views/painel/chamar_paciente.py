@@ -12,9 +12,9 @@ from Medicos.models import Chamar_P_para_atendimento, Salas_Atendimento, Cadastr
 def chamar_paciente(request):    
     
     # Busca o id do profissional de saúde na primeira chamada de atendimento
-    nome_paciente = Chamar_P_para_atendimento.objects.first().nome_paciente
-    nome_paciente_2 = Chamar_P_para_atendimento.objects.first().nome_paciente
-    profissional_id = Chamar_P_para_atendimento.objects.first().profissionalSaude_id_id   
+    nome_paciente = Chamar_P_para_atendimento.objects.first()
+    nome_paciente_2 = Chamar_P_para_atendimento.objects.first()
+    profissional_id = Chamar_P_para_atendimento.objects.first().profissionalSaude_id  
     print(f'id do profissional {profissional_id}')     
     # Busca o objeto Salas_Atendimento que corresponde ao profissional de saúde encontrado
     sala_do_usuario = Salas_Atendimento.objects.get(profissionalSaude_id=profissional_id)
