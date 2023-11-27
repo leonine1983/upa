@@ -14,7 +14,17 @@
             margin-bottom:3rem;
           }
           .btn btn-sm btn-primary{
-            margin-bottom:2rem
+            margin-bottom:2rem;
+          
+          }
+          td .hours48{
+            position: absolute;
+            margin-bottom: 0rem;
+            font-size: 0.7rem;
+            margin-left: -9.5rem;
+            padding: 0.1rem;
+            color:rgb(255, 255, 255) ;
+
           }
     </style>
 {% endblock css %}    
@@ -63,19 +73,19 @@ $(document).ready(function() {
         <th class='border border-success linha-titulo text-center'>Codigo</th>
         <th class='border border-success linha-titulo text-center'>Nome do Paciente</th>
         <th class='border border-success linha-titulo text-center'>Alergias</th>
-        <th class='border border-success linha-titulo text-center'>Data de entrada na <b>Fila de Espera</b></th>
-        <th class='border border-success linha-titulo text-center'>Horário de entrada na <b>Fila de Espera</b></th>
+        <th class='border border-success linha-titulo text-center'>Data Entrada na <b>Fila de Espera</b></th>
         <th class='border border-success linha-titulo text-center'>Excluir paciente da <b>Fila de Espera</b></th>
     </tr>
     
     {% if not get_id %}
     {% for db in lista_db %}     
-        <tr class=' fs-7 bg-primary-subtle m-0 fs-7 p-0'>
+        <tr class='fs-7  m-0 fs-7 p-0 {% if db.retornou_em_menos_de_48_horas %}bg-danger-subtle text-light {% else %}bg-primary-subtle{% endif %} '>
             <td class='text-center'>
-                <a class="link-color border" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
+                <div class="hours48 bg-danger border p-1 rounded-start-5">{% if db.retornou_em_menos_de_48_horas %}Retornou em menos de 48{% endif %} {{ paciente.nome_do_campo_do_modelo }}</div>
+                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
             </td>
             <td class='text-center'>
-                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>                                                      
+                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>                                                      
             </td>            
             <td class='text-center'>
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}">
@@ -88,10 +98,7 @@ $(document).ready(function() {
                 </a>                                                      
             </td>
             <td class='text-center'>
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>  {{db.data_envio_triagem}} </span></a>                                                      
-            </td>
-            <td class='text-center'>
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.horario_triagem}} </span></a>                                                      
+                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>  {{db.data_envio_triagem}} {{db.horario_triagem}} </span></a>                                                      
             </td>
             <td class='text-center'>                
                 <a href="{% url 'Atendimento:delete_de_paciente_na_triagem' db.id %}" class=" text-danger" title="Deletar"> <i class="fa-solid fa-user-xmark excluir"></i> Excluir da fila</a> 
