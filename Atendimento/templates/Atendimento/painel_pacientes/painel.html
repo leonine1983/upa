@@ -65,7 +65,9 @@
   <source src="{% static  videoUpa  %}">
 </video>
 {% else %}
-sem video
+<video controls autoplay class="video">
+  <source src="{% static 'videos/videoplayback.mp4'  %}">
+</video>
 {% endif %}
 <div class="container ">     
     
@@ -219,6 +221,7 @@ sem video
           </audio>
         </div>
       </div>
+      {% comment "oculta script do video" %}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>...
       <script>
         var audio = $('#audio-player')[0]; // seleciona o elemento de áudio
@@ -288,5 +291,6 @@ sem video
       });
       
       </script>
+      {% endcomment %}
     </div>              
 {% endblock body_login %}

@@ -15,7 +15,7 @@ urlpatterns = [
 
 
     path('painel', views.painel, name='painel'), 
-    path('painel_atendimento_Medico', views.chamar_paciente, name='chamar_paciente'),
+    #path('painel_atendimento_Medico', views.chamar_paciente, name='chamar_paciente'),
     path('painel_tiragem', views.chamar_paciente, name='chamar_paciente_triagem'),
 
     #Cadastro Bairro
