@@ -9,6 +9,7 @@ from Triagem.models import triagem
 from Triagem.forms import TriagemEnfermaria_Alergias_UpdateForm
 from django.db.models import Max
 
+
         
 # verificar se o paciente possui alergia e depois envia para classificação de risco
 class triagem_enfermaria_Alergia_Update(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -28,11 +29,12 @@ class triagem_enfermaria_Alergia_Update(LoginRequiredMixin, SuccessMessageMixin,
     def get_success_url(self):
         # Busca o último lançamento do paciente no envio_triagem
         ultimo_envio_triagem_id = envio_triagem.objects.filter(paciente_envio_triagem_id=self.kwargs['pk']).aggregate(Max('id'))['id__max']
+        print(f'ulitma triagem {ultimo_envio_triagem_id}')
         
         if ultimo_envio_triagem_id:
             # Busca o ID correspondente na tabela triagem
             classifica_risco_id = triagem.objects.filter(paciente_triagem__id=ultimo_envio_triagem_id).values_list('id', flat=True).first()
-            print(classifica_risco_id)
+            print(f'valor do classifica risco {classifica_risco_id}')
             
             return reverse('Triagem:triagem_classifica_Risco_update', kwargs={'pk': classifica_risco_id})
 

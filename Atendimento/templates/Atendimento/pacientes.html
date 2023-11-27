@@ -37,13 +37,31 @@
              para encontar o nome dele, bastando somente digitar o nome é clicar em pesquisar. 
              Se desejar ter mais informações sobre o paciente, basta clicar sobre o nome desejado que 
              imediatamente que página contendo todas as informações desse paciente é aberto.
+             <div class='pt-3'>
+                <i class="fa-sharp fa-solid fa-magnifying-glass-plus"></i> <strong>Busca de paciente usando CPF ou RG </strong>
+                <p>Para realizar a busca de pacientes usando o RG ou CPF é preciso se atentar para seguinte situação:</p>
+                    <ul>
+                        <li>Se optar por digitar o número de CPF ou RG completos no campo de busca é necessário 
+                            respeitar a formatação dos números do CPF ou RG. Ex.: 
+                            <ul>
+                                <li>Dessa forma: 000.000.000-00</li>
+                            </ul>
+                        </li>
+                        <li>O mais indicado seria pesquisar usando somente as iniciais do RG ou: CPF
+                            <ul>
+                                <li>Dessa forma: 000.0</li>
+                            </ul>
+                        </li>
+                    </ul>
+                
+            </div>
              <div style='text-align:right !important'><i class="fs-3 fa-duotone fa-hand-holding-medical"></i></div>
         </div>
         <div class="w-50" style="margin-left:25%; " >
             <form action="?" method="GET" class="form-inline bg-light rounded-5">
                 {% csrf_token %}            
                 <div class="search-wrapper rounded-5">
-                  <input type="text" class="search-input rounded-5 m-0" placeholder=" CODIGO | Nº SUS | NOME DO PACIENTE" name="busca-paciente">
+                  <input type="text" class="search-input rounded-5 m-0" placeholder=" CODIGO | Nº SUS | NOME DO PACIENTE | RG | CPF" name="busca-paciente">
                   <button class="search-button" type="submit" style="width: 2.8rem;"><i class="fa-solid fa-search"></i></button>
                 </div>
               </form>

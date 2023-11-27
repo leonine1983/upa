@@ -6,11 +6,6 @@ from Atendimento.models import ficha_de_atendimento
 from django.shortcuts import redirect
 from django import forms
 import uuid
-
-import random
-
-import random
-
 import random
 
 class PacienteForm(forms.ModelForm):

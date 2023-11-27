@@ -14,7 +14,9 @@ class paciente_lista(LoginRequiredMixin, ListView):
         if txt_nome:
             nome = ficha_de_atendimento.objects.filter(nome_social__icontains=txt_nome) | \
                    ficha_de_atendimento.objects.filter(cartao_sus__icontains=txt_nome) | \
-                   ficha_de_atendimento.objects.filter(codigo_pacient__icontains=txt_nome)
+                   ficha_de_atendimento.objects.filter(codigo_pacient__icontains=txt_nome) | \
+                   ficha_de_atendimento.objects.filter(CPF__icontains=txt_nome) | \
+                   ficha_de_atendimento.objects.filter(RG__icontains=txt_nome) 
         else:
             nome = ficha_de_atendimento.objects.all()
 
