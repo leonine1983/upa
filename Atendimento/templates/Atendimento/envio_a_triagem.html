@@ -69,7 +69,7 @@ $(document).ready(function() {
     </tr>
     
     {% if not get_id %}
-    {% for db in lista_db %}            
+    {% for db in lista_db %}     
         <tr class=' fs-7 bg-primary-subtle m-0 fs-7 p-0'>
             <td class='text-center'>
                 <a class="link-color border" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      

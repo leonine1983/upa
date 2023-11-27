@@ -171,6 +171,7 @@ class envio_triagem(models.Model):
     )
     triagem_concluida = models.CharField(max_length=1, null=True)
     data_triagem_concluida = models.DateField(auto_now=True, null=True)
+    retornou_em_menos_de_48_horas = models.BooleanField(default=False)
  
 
     class Meta:

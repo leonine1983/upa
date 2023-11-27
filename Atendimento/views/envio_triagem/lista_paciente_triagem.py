@@ -2,6 +2,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from Atendimento.models import envio_triagem
+from datetime import timedelta
  
 
 #cria a lista
@@ -37,6 +38,12 @@ def lista_de_paciente_na_triagem(request):
         object_list = envio_triagem.objects.filter(data_envio_triagem = date_hoje) & envio_triagem.objects.exclude(triagem_concluida = 1)
         #object_list = envio_triagem.objects.all()
         #print(f'a data de hoje e {date_hoje}')
+    
+    pacientes_em_menos_de_48_horas = []
+    for triagem in object_list:
+        diferenca_tempo = datetime.now() - datetime.combine(triagem.data_envio_triagem, triagem.horario_triagem)
+        if diferenca_tempo < timedelta(hours=48):
+            pacientes_em_menos_de_48_horas.append(triagem)
 
     data_hoje = datetime.today()    
 
@@ -44,5 +51,6 @@ def lista_de_paciente_na_triagem(request):
         'lista_db' : object_list,
         'data_hoje' : date_hoje,
         'url' :   'Atendimento:envio_paciente_a_triagem',  
+        'pacientes_em_menos_de_48_horas': pacientes_em_menos_de_48_horas,
     })
 
