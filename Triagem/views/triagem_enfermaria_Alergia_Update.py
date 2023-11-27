@@ -32,11 +32,14 @@ class triagem_enfermaria_Alergia_Update(LoginRequiredMixin, SuccessMessageMixin,
         print(f'ulitma triagem {ultimo_envio_triagem_id}')
         
         if ultimo_envio_triagem_id:
-            # Busca o ID correspondente na tabela triagem
-            classifica_risco_id = triagem.objects.filter(paciente_triagem__id=ultimo_envio_triagem_id).values_list('id', flat=True).first()
-            print(f'valor do classifica risco {classifica_risco_id}')
-            
-            return reverse('Triagem:triagem_classifica_Risco_update', kwargs={'pk': classifica_risco_id})
+            print(f'ulitma triagem entrando na codiçao: {ultimo_envio_triagem_id}')
+            # Busca o ID correspondente na tabela triagem 
+            oi = 'babaabababa'
+            id = triagem.objects.filter(paciente_triagem__id = 10)
+            #classifica_risco_id = triagem.objects.filter(paciente_triagem__id=ultimo_envio_triagem_id).values_list('id', flat=True).first()
+            print(f'valor do classifica riscoggggggggggggggggggggg {id} {oi}')
+            #return reverse('Triagem:triagem_classifica_Risco_update', kwargs={'pk': classifica_risco_id})           
+           
 
         # Caso não encontre nenhum ID correspondente, retorna a URL padrão
         return super().get_success_url()
