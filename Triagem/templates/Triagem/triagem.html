@@ -131,10 +131,12 @@
             {% endif %}
             
             {% if info_extra == 'Analisando...' %}
-            <table style="" class="Tabela-user mt-4">   
+            {% comment "dados tabela" %}
+            <table class="bg-secondary mt-4">   
               <caption><b>Classificação de Risco:</b> LEGENDA</caption>         
               <thead>
                 <tr>
+                  
                   <th class="red col-2 text-center">Vermelho</td>
                   <th class="orange col-2 text-center">Laranja</th>
                   <th class="yellow col-2 text-center">Amarelo</th>
@@ -149,143 +151,149 @@
                   <td class="text-center">Urgente</td>
                   <td class="text-center">Pouco Urgente</td>
                   <td class="text-center">Não Urgente</td>
+                  <td class="text-center">
+                  </td>
                 </tr>
               </tbody>
-            </table>
+            </table>{% endcomment %}
+
             {% endif %}
           </div>          
             
             {% csrf_token %}
             <div class="form-body">                
-                {{form.as_div}}  
+                {{form.as_div}} 
+                {% comment "Classificação de risco automatica desativada" %} 
                 {% if info_extra == 'Analisando...' %}   
-                <div >
-                  <h1>{{info_extra}}</h1>
-                  {% if info_extra == 'Analisando...' %}
-                  <button type="button" class="cancelar btn btn-secondary" style='width:100% !important;margin-left:0 ' data-toggle="modal" data-target="#myModal">Nossa análise para a classificação de risco para o paciente</button>
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog "   role="document">
-                        <div class="modal-content ">
-                            <div class="modal-header cancelar ">
-                              
-                            </div>
-                            <div class="modal-body" style='width:90%'>
-                              <div class="
-                                  {% if sistem_sugestao_cor == 'Vermelho' %}red{% endif %}
-                                  {% if sistem_sugestao_cor == 'Laranja' %}orange{% endif %}
-                                  {% if sistem_sugestao_cor == 'Amarelo' %}yellow font2{% endif %}
-                                  {% if sistem_sugestao_cor == 'Verde' %}green font2{% endif %} 
-                                  font">                  
-                                    <div>
-                                      {{sistem_sugestao}}
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                  <div >
+                    <h1>{{info_extra}}</h1>
+                    {% if info_extra == 'Analisando...' %}
+                    <button type="button" class="cancelar btn btn-secondary" style='width:100% !important;margin-left:0 ' data-toggle="modal" data-target="#myModal">Nossa análise para a classificação de risco para o paciente</button>
+                      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog "   role="document">
+                          <div class="modal-content ">
+                              <div class="modal-header cancelar ">
+                                
+                              </div>
+                              <div class="modal-body" style='width:90%'>
+                                <div class="
+                                    {% if sistem_sugestao_cor == 'Vermelho' %}red{% endif %}
+                                    {% if sistem_sugestao_cor == 'Laranja' %}orange{% endif %}
+                                    {% if sistem_sugestao_cor == 'Amarelo' %}yellow font2{% endif %}
+                                    {% if sistem_sugestao_cor == 'Verde' %}green font2{% endif %} 
+                                    font">                  
+                                      <div>
+                                        {{sistem_sugestao}}
+                                      </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
+                      {% endif %}
+                    <p>Com base nas informações fornecidas no formulário anterior e utilizando como base a "Classificação de Risco do Protocolo de Manchesters", podemos identificar as seguintes situações:</p>
+                    <hr>
+                    
+                    <h3>Pressão Arterial</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if pAcor == 'Vermelho' %}red{% endif %}
+                      {% if pAcor == 'Laranja' %}orange{% endif %}
+                      {% if pAcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if pAcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{pAcor}} | <b> PA = {{pa_enviado}} mmHg (Milímetros de mercúrio)</div>
+                        <div>{{pressao_arterial_PA}}</div>                   
+                      <hr>
                     </div>
-                    {% endif %}
-                  <p>Com base nas informações fornecidas no formulário anterior e utilizando como base a "Classificação de Risco do Protocolo de Manchesters", podemos identificar as seguintes situações:</p>
-                  <hr>
-                  
-                  <h3>Pressão Arterial</h3>
-                  <div style='margin-left:1.5rem' >                             
-                    <div class="
-                    {% comment "ocultar" %}{% endcomment %}
-                    {% if pAcor == 'Vermelho' %}red{% endif %}
-                    {% if pAcor == 'Laranja' %}orange{% endif %}
-                    {% if pAcor == 'Amarelo' %}yellow font2{% endif %}
-                    {% if pAcor == 'Verde' %}green font2{% endif %} 
-                    font">                  
-                      <b>{{pAcor}} | <b> PA = {{pa_enviado}} mmHg (Milímetros de mercúrio)</div>
-                      <div>{{pressao_arterial_PA}}</div>                   
-                    <hr>
-                  </div>
 
-                  <h3>Frequência Cardíaca</h3>
-                  <div style='margin-left:1.5rem' >                             
-                    <div class="
-                    {% if fCor == 'Vermelho' %}red{% endif %}
-                    {% if fCor == 'Laranja' %}orange{% endif %}
-                    {% if fCor == 'Amarelo' %}yellow font2{% endif %}
-                    {% if fCor == 'Verde' %}green font2{% endif %} 
-                    font">                  
-                      <b>{{fCor}} | <b> FC = {{fc_enviado}} bpm (Batimentos por minuto)</div>
-                      <div>{{frequencia_cardiaca_FC}}</div>                    
-                    <hr>
-                  </div>
+                    <h3>Frequência Cardíaca</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if fCor == 'Vermelho' %}red{% endif %}
+                      {% if fCor == 'Laranja' %}orange{% endif %}
+                      {% if fCor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if fCor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{fCor}} | <b> FC = {{fc_enviado}} bpm (Batimentos por minuto)</div>
+                        <div>{{frequencia_cardiaca_FC}}</div>                    
+                      <hr>
+                    </div>
 
-                  <h3>Frequência Respiratória</h3>
-                  <div style='margin-left:1.5rem' >                             
-                    <div class="
-                    {% if fRcor == 'Vermelho' %}red{% endif %}
-                    {% if fRcor == 'Laranja' %}orange{% endif %}
-                    {% if fRcor == 'Amarelo' %}yellow font2{% endif %}
-                    {% if fRcor == 'Verde' %}green font2{% endif %} 
-                    font">                  
-                      <b>{{fRcor}} | <b> FR = {{fr_enviado}} rpm (Repirações por minuto)</div>
-                      <div>{{frequencia_respiratoria_FR}}</div>                    
-                    <hr>
-                  </div>
-                  
-                  <h3>Saturação de Oxigênio</h3>
-                  <div style='margin-left:1.5rem' >                             
-                    <div class="
-                    {% if spOcor == 'Vermelho' %}red{% endif %}
-                    {% if spOcor == 'Laranja' %}orange{% endif %}
-                    {% if spOcor == 'Amarelo' %}yellow font2{% endif %}
-                    {% if spOcor == 'Verde' %}green font2{% endif %} 
-                    font">                  
-                      <b>{{spOcor}} | <b> SPO² = {{spo_enviado}}% oxigênio </div>
-                      <div>{{saturacao_de_oxigenio_SPO2}}</div>                    
-                    <hr>
-                  </div>
-                  
-                  <h3>Hemiglicoteste</h3>
-                  <div style='margin-left:1.5rem' >                             
-                    <div class="
-                    {% if hgTcor == 'Vermelho' %}red{% endif %}
-                    {% if hgTcor == 'Laranja' %}orange{% endif %}
-                    {% if hgTcor == 'Amarelo' %}yellow font2{% endif %}
-                    {% if hgTcor == 'Verde' %}green font2{% endif %} 
-                    font">                  
-                      <b>{{hgTcor}} | <b> HGT = {{hgt_enviado}}mg/dL (3,9 mmol/L) </div>
-                      <div>{{hemoglicoteste_HGT}}</div>                    
-                    <hr>
-                  </div>
+                    <h3>Frequência Respiratória</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if fRcor == 'Vermelho' %}red{% endif %}
+                      {% if fRcor == 'Laranja' %}orange{% endif %}
+                      {% if fRcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if fRcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{fRcor}} | <b> FR = {{fr_enviado}} rpm (Repirações por minuto)</div>
+                        <div>{{frequencia_respiratoria_FR}}</div>                    
+                      <hr>
+                    </div>
+                    
+                    <h3>Saturação de Oxigênio</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if spOcor == 'Vermelho' %}red{% endif %}
+                      {% if spOcor == 'Laranja' %}orange{% endif %}
+                      {% if spOcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if spOcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{spOcor}} | <b> SPO² = {{spo_enviado}}% oxigênio </div>
+                        <div>{{saturacao_de_oxigenio_SPO2}}</div>                    
+                      <hr>
+                    </div>
+                    
+                    <h3>Hemiglicoteste</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if hgTcor == 'Vermelho' %}red{% endif %}
+                      {% if hgTcor == 'Laranja' %}orange{% endif %}
+                      {% if hgTcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if hgTcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{hgTcor}} | <b> HGT = {{hgt_enviado}}mg/dL (3,9 mmol/L) </div>
+                        <div>{{hemoglicoteste_HGT}}</div>                    
+                      <hr>
+                    </div>
 
-                  <h3>Temperatura</h3>
-                  <div style='margin-left:1.5rem' >                             
-                    <div class="
-                    {% if temPcor == 'Vermelho' %}red{% endif %}
-                    {% if temPcor == 'Laranja' %}orange{% endif %}
-                    {% if temPcor == 'Amarelo' %}yellow font2{% endif %}
-                    {% if temPcor == 'Verde' %}green font2{% endif %} 
-                    font">                  
-                      <b>{{temPcor}} | <b>{{temp_enviado}} C° (graus Celsius) </div>
-                      <div>{{temp}}</div>                    
-                    <hr>
-                  </div> 
-                  
-                  <h3>IMC (Índice de Massa Corporal)</h3>
-                  <div style='margin-left:1.5rem' >                             
-                    <div class="
-                    {% if pesOcor == 'Vermelho' %}red{% endif %}
-                    {% if pesOcor == 'Laranja' %}orange{% endif %}
-                    {% if pesOcor == 'Amarelo' %}yellow font2{% endif %}
-                    {% if pesOcor == 'Verde' %}green font2{% endif %} 
-                    font">                  
-                      <b>{{pesOcor}} | <b> IMC = {{pesO_value}} kg/m² ({{peso_enviado}}kg &divide; {{altura_info}}²m)</div>
-                      <div>{{peso}}</div>                    
-                    <hr>
-                  </div>
-                </div>                
+                    <h3>Temperatura</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if temPcor == 'Vermelho' %}red{% endif %}
+                      {% if temPcor == 'Laranja' %}orange{% endif %}
+                      {% if temPcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if temPcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{temPcor}} | <b>{{temp_enviado}} C° (graus Celsius) </div>
+                        <div>{{temp}}</div>                    
+                      <hr>
+                    </div> 
+                    
+                    <h3>IMC (Índice de Massa Corporal)</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if pesOcor == 'Vermelho' %}red{% endif %}
+                      {% if pesOcor == 'Laranja' %}orange{% endif %}
+                      {% if pesOcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if pesOcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{pesOcor}} | <b> IMC = {{pesO_value}} kg/m² ({{peso_enviado}}kg &divide; {{altura_info}}²m)</div>
+                        <div>{{peso}}</div>                    
+                      <hr>
+                    </div>
+                  </div>                
                 {% endif %}
-            </div> 
+                {% endcomment %}
+                <img src="{% static 'cores-protocolo-manchester-1.jpg' %} " width="90%" alt="">
+            </div>
             
+           
             {% if tipo_titulo == 'Excluir paciente da triagem' %}
             <a class="class='btn btn-sm btn-primary m-3 " href="{% url 'Triagem:triagem-enfermaria' %}">cancelar</a>
             {%endif%}          
