@@ -171,15 +171,7 @@ class envio_triagem(models.Model):
     )
     triagem_concluida = models.CharField(max_length=1, null=True)
     data_triagem_concluida = models.DateField(auto_now=True, null=True)
-    q1 = models.CharField(max_length=1, null=True, default='')
-    q2 = models.CharField(max_length=1, null=True, default='')
-    q3 = models.CharField(max_length=1, null=True, default='')
-    q4 = models.CharField(max_length=1, null=True, default='')
-    q5 = models.CharField(max_length=1, null=True, default='')
-    q6 = models.CharField(max_length=1, null=True, default='')
-    q7 = models.CharField(max_length=1, null=True, default='')
-    q8 = models.CharField(max_length=1, null=True, default='')
-    q9 = models.CharField(max_length=1, null=True, default='')    
+ 
 
     class Meta:
         ordering = ['horario_triagem', 'data_envio_triagem']

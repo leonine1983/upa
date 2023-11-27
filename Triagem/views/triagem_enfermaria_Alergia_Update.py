@@ -19,6 +19,7 @@ class triagem_enfermaria_Alergia_Update(LoginRequiredMixin, SuccessMessageMixin,
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['triagem_andamento'] = "ok" 
         context ['nome_paciente'] = self.object.nome_social        
         context ['tipo_titulo'] = 'Pré-atendimento | ALERGIAS e COMORBIDADES'
         context ['tipo_select'] = f"{self.kwargs['pk']} - {envio_triagem.objects.filter(paciente_envio_triagem_id=self.kwargs['pk']).aggregate(Max('id'))['id__max']}"

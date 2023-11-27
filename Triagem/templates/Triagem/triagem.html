@@ -77,7 +77,7 @@
     {% if object %} 
       {% if not object.paciente_triagem.paciente_envio_triagem.alergias == '0' %}      
         {% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
-          <div style='text-align:center; margin-bottom:-1.5rem'>
+          <div style='text-align:center; margin-bottom:2rem'>
             <!-- Botão para abrir o modal -->
             <button type="button" class="cancelar btn btn-primary" style='background:red' data-toggle="modal" data-target="#myModal_alergia">
               Paciente Alérgico <i class="fa-solid fa-person-dots-from-line"></i>
@@ -96,9 +96,6 @@
                         <i class="fa-duotone fa-quote-left fa-fade" style="--fa-primary-color: #e50606; --fa-secondary-color: #e50606;"></i>
                           
                           {{object.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}
-                      </div>
-                      <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                       </div>
                   </div>
                 </div>
@@ -129,25 +126,29 @@
                 <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer"></i>&nbsp;Pacientes</h3>
               {% endif %}              
             </div>
-            <p class='p-3 fs-7 bg-primary-subtle'>No campo <b>PACIENTE AGUARDANDO CLASSIFICAÇÃO</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
+            {% if not triagem_andamento %}
+              <p class='p-3 fs-7 bg-primary-subtle'>No campo   <b>PACIENTE AGUARDANDO CLASSIFICAÇÃO</b> só estão disponíveis os nomes dos pacientes que estão na <b>Fila de triagem</b>. Se o nome do paciente que estiver procurando não estiver disponível nesse campo, verifique com a recepção o motivo de não terem lançado o nome do paciente na "FILA DE TRIAGEM" .  </p>
+            {% endif %}
             
             {% if info_extra == 'Analisando...' %}
-            <table style="margin-left: 20%" class="Tabela-user">   
+            <table style="" class="Tabela-user mt-4">   
               <caption><b>Classificação de Risco:</b> LEGENDA</caption>         
               <thead>
                 <tr>
-                  <th class="red">Vermelho</td>
-                  <th class="orange">Laranja</th>
-                  <th class="yellow">Amarelo</th>
-                  <th class="green">Verde</th>
+                  <th class="red col-2 text-center">Vermelho</td>
+                  <th class="orange col-2 text-center">Laranja</th>
+                  <th class="yellow col-2 text-center">Amarelo</th>
+                  <th class="green col-2 text-center">Verde</th>
+                  <th class="bg-primary col-2 text-center">Azul</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Emergência Imediata</th>
-                  <td>Muito Urgente</td>
-                  <td>Urgente</td>
-                  <td>Pouco Urgente</td>
+                  <td class="text-center">Emergência Imediata</th>
+                  <td class="text-center">Muito Urgente</td>
+                  <td class="text-center">Urgente</td>
+                  <td class="text-center">Pouco Urgente</td>
+                  <td class="text-center">Não Urgente</td>
                 </tr>
               </tbody>
             </table>

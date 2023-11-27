@@ -239,6 +239,10 @@ class triagem_classifica_Risco_update(LoginRequiredMixin, SuccessMessageMixin, U
         context['data_triagem'] = self.object.data_triagem
         context['hora_triagem'] = self.object.hora_triagem 
 
+        context['triagem_andamento'] = "ok" 
+
+        
+
         return context
 
     def get_success_url(self) -> str:

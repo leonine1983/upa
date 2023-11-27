@@ -23,6 +23,7 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
         context = super().get_context_data(**kwargs)
         context ['nome_paciente'] = self.object.paciente_triagem.paciente_envio_triagem.nome_social        
         context ['tipo_select'] = 'Pré-atendimento'
+        context['triagem_andamento'] = "ok" 
         return context
 
     # Pega o valor do id do paciente no model envio_triagem
