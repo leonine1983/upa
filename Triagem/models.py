@@ -124,7 +124,7 @@ class triagem(models.Model):
         ordering = ['classifica_tipo', 'hora_triagem', 'paciente_triagem__paciente_envio_triagem__idade']    
 
     def __str__ (self):
-        return '{}'.format(self.paciente_triagem)
+        return '{}'.format(self.paciente_triagem.paciente_envio_triagem)
 
 
 # Aplica ao paciente determinado tipo de atendimento   

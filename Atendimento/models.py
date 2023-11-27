@@ -178,7 +178,7 @@ class envio_triagem(models.Model):
         permissions = [('Acesso_permitido_envio_Tri', 'Acesso permitido para envio à Fila de Triagem')]
 
     def __str__ (self):
-        return f'Codigo: {self.paciente_envio_triagem.codigo_pacient} | Nome: {self.paciente_envio_triagem} | Idade: {self.paciente_envio_triagem.idade} anos '
+        return f'Codigo: {self.paciente_envio_triagem.codigo_pacient} | Nome: {self.paciente_envio_triagem.nome_social} | Idade: {self.paciente_envio_triagem.idade} anos '
     
 
 class Licenca(models.Model):

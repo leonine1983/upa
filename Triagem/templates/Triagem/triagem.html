@@ -113,13 +113,13 @@
     <!--FIM Avisa se o paciente tem ALERGIAS--> 
   {% endif %}
 
-<div class="top-info">      
+<div class="top-info ">      
 
   
     <div>
-        <form action="" method='POST'> 
-          <div class="" style='margin-top:-1.8rem'>
-            <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100'>
+        <form action="" method='POST' class=""> 
+          <div class="" style='margin-top:-1.8rem '>
+            <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100' >
               {% if nome_paciente %}
                 <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer "></i>&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}} </b></h3>
                 {% else %}            
@@ -290,7 +290,9 @@
                   </div>                
                 {% endif %}
                 {% endcomment %}
-                <img src="{% static 'cores-protocolo-manchester-1.jpg' %} " width="90%" alt="">
+                {% if classifica %}
+                  <img src="{% static 'cores-protocolo-manchester-1.jpg' %} " width="100%" alt="" class="shadow shadow-sm shadow-lg">
+                {% endif %}
             </div>
             
            
@@ -312,8 +314,6 @@
               Iniciar Classificação do Paciente
               {% endif %}     
               <i class="fa-solid fa-person-walking-arrow-right"></i></button> 
-            
-
         </form> 
         {% if conteudo == 'paciente_na_triagem' %}
         
@@ -385,9 +385,6 @@
             {% endfor %}
           </tbody>
         </table> 
-
-
-        
         {% endif %}
         <div>&nbsp;</div> 
     </div>
