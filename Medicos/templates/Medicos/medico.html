@@ -8,6 +8,14 @@
     main{
         height: 60rem !important;
     }
+    .hours48{
+        position: absolute;
+        margin-top: -3rem !important;
+        font-size: 0.55rem;
+        margin-left: -0.5rem;
+        padding: 0.1rem;
+        color:rgb(255, 255, 255) ;
+      }
 </style>
 {% endblock css %}  
 <!--Imagem Representando o setor-->
@@ -44,7 +52,12 @@
         {% for campo in object_list %}  
        {{campo.idade}}
         <tr> 
-            <td><a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk  %}"><span>{{campo.paciente_triagem}}</span></a></td>                                                        
+            <td {% if campo.paciente_triagem.retornou_em_menos_de_48_horas %} style='border:solid 0.13rem' class='border-danger' {% endif %}>
+                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk  %}">
+                    <span>{{campo.paciente_triagem}}</span>fff 
+                    <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if campo.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div> 
+                </a>
+            </td>                                                        
             <td align="center" class=' {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
                                             prosseguir-red
                                             {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
