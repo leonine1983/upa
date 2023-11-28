@@ -3,13 +3,18 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from Atendimento.models import envio_triagem, ficha_de_atendimento
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from django.utils.safestring import mark_safe
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+from django.urls import reverse
+from django.shortcuts import redirect
+
 
 #criar a pagina de cadastro
+# ...
+
 class envio_paciente_a_triagem_2(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = envio_triagem
     fields = ['paciente_envio_triagem']      
@@ -23,16 +28,36 @@ class envio_paciente_a_triagem_2(LoginRequiredMixin, SuccessMessageMixin, Create
     success_url = reverse_lazy('Atendimento:lista_de_paciente_na_triagem')
     success_message = "Paciente enviado com sucesso para a fila de classificação! 🚀"
 
-    # Verificar se o usuário foi atendido em menos de 48 horas
+
     def form_valid(self, form):
         paciente = form.cleaned_data['paciente_envio_triagem']
-        ultima_triagem = envio_triagem.objects.filter(paciente_envio_triagem=paciente).order_by('-data_envio_triagem', '-horario_triagem').first()
+        
+        ultima_triagem = envio_triagem.objects.filter(
+            paciente_envio_triagem=paciente
+        ).order_by('-data_envio_triagem', '-horario_triagem').first()
 
-        if ultima_triagem:
-            diferenca_tempo = datetime.now() - datetime.combine(ultima_triagem.data_envio_triagem, ultima_triagem.horario_triagem)
-            if diferenca_tempo < timedelta(hours=48):
-                # Adicionar ícone à mensagem de aviso como HTML seguro
-                nome_paciente = form.cleaned_data['paciente_envio_triagem'].nome_social
-                mensagem = mark_safe(f'<i class="fa-thin fa-skull-crossbones"></i> Paciente {nome_paciente} atendido em menos de 48 horas. Tratar como maior urgência.')
-                messages.warning(self.request, mensagem, extra_tags='alert-warning')
+        print(f'ultima triagem {ultima_triagem}')
+        
+        if ultima_triagem is not None:
+            registros_48_horas = envio_triagem.objects.filter(
+                paciente_envio_triagem=paciente,
+                data_envio_triagem__gte=datetime.now() - timedelta(hours=48)
+            ).exclude(id=ultima_triagem.id if ultima_triagem else None)
+
+            if registros_48_horas.count() > 1:
+                paciente.retornou_em_menos_de_48_horas = True
+            else:
+                paciente.retornou_em_menos_de_48_horas = False
+
+            nome_paciente = form.cleaned_data['paciente_envio_triagem'].nome_social
+            mensagem = mark_safe(f'<i class="fa-thin fa-skull-crossbones"></i> Paciente {nome_paciente} atendido em menos de 48 horas. Tratar como maior urgência.')
+            messages.warning(self.request, mensagem, extra_tags='alert-warning')
+
+        # Certifique-se de definir o valor antes de salvar
+        paciente.save()
+
         return super().form_valid(form)
+
+
+
+

@@ -4,11 +4,13 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.views.generic.edit import UpdateView
 from Triagem.models import triagem
+from Triagem.forms import Classifica_form
 
 
 # verificar a classificação de risco
 class triagem_classifica_Risco_update(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    fields = ['classifica_tipo']
+    #fields = ['classifica_tipo']
+    form_class =Classifica_form
     model = triagem
     template_name = 'Triagem/triagem.html' 
     success_message = 'Vinculação de classificação risco feita com sucesso!'      

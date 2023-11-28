@@ -1,10 +1,8 @@
 from datetime import date
-
 from django import forms
-
 from Atendimento.models import envio_triagem, ficha_de_atendimento
 
-from .models import triagem
+from .models import triagem, Classifica_risco_model
 
 # CADASTRA O ID DO PACIENTE NA TRIAGEM
 class TriagemEnfermariaForm(forms.ModelForm):
@@ -55,8 +53,22 @@ class TriagemEnfermaria_Alergias_UpdateForm(forms.ModelForm):
                  'cols':500,
                  }),
             
-        }
-       
-       
+        }       
+
+
+class Classifica_form(forms.ModelForm):
+
+    classifica_tipo = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'border border-info p-2 pb-1 bg-transparent text-info col m-2 rounded-1'}),
+    )
+    descri = forms.CharField(
+        widget = forms.Textarea(attrs={'class': 'border border-info p-2 pb-1 bg-transparent text-info col m-2 rounded-1'}),
+        required=False          
+    )     
+
+    class Meta:
+        model = Classifica_risco_model
+        fields = '__all__'
+    
 
 

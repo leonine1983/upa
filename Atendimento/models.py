@@ -122,8 +122,8 @@ class ficha_de_atendimento(models.Model):
     etnia = models.ForeignKey(Etnia, null=True, on_delete=models.CASCADE)
     data_nascimento = models.DateField( auto_now=False, auto_now_add=False, default='')
     sexo = models.ForeignKey(genero_sexual, null=True, on_delete=models.CASCADE)
-    RG = models.CharField(max_length=13, null=False, default='000.000.00-00')
-    CPF = models.CharField(max_length=14, null=False, default='000.000.000-00')
+    RG = models.CharField(max_length=13, null=False, default='')
+    CPF = models.CharField(max_length=14, null=False, default='')
     nacionalidade = models.CharField(max_length=30, null=False, default='')
     rua = models.ForeignKey(Rua, null=True, on_delete=models.PROTECT)
     bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE, related_name='fichas_atendimento_bairro')
@@ -171,7 +171,7 @@ class envio_triagem(models.Model):
     )
     triagem_concluida = models.CharField(max_length=1, null=True)
     data_triagem_concluida = models.DateField(auto_now=True, null=True)
-    retornou_em_menos_de_48_horas = models.BooleanField(default=False)
+    retornou_em_menos_de_48_horas = models.BooleanField(null=False, default=False)
  
 
     class Meta:

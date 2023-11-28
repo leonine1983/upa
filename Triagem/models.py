@@ -18,8 +18,14 @@ class Classifica_risco_model(models.Model):
     @receiver(post_migrate)
     def create_classifica_risco(sender, **kwargs):
         # Irá pecorrer a lista de riscos e adicionar conteudo caso não exista
-        groups_risco = ['Vermelho', 'Laranja', 'Verde', 'Azul']   
-        groups_descri = ['Caso gravíssimo, com necessidade de atendimento imediato e risco de morte. A cor laranja é para casos muito urgentes, graves, com risco significativo de evoluir para morte e que exige atendimento urgente.', 'Casos muito urgentes, graves, com risco significativo de evoluir para morte e que exige atendimento urgente', 'Pouco Urgente', 'Não urgente' ]
+        groups_risco = ['Vermelho', 'Laranja','Amarelo', 'Verde', 'Azul']       
+        groups_descri = [
+                        'Emergência imediata: Atendimento médico imediato é necessário. O paciente está em risco de vida.',
+                        'Emergência: Atendimento médico é urgente, mas não imediatamente para salvar a vida.',
+                        'Urgência: O paciente precisa de atendimento, mas pode esperar um pouco. Não há risco imediato de vida.',
+                        'Semi-urgência: O paciente precisa de atendimento, mas pode esperar mais tempo. Não há risco significativo de vida.',
+                        'Não urgente: O paciente precisa de atendimento, mas pode esperar. Não há risco significativo de vida.'
+                    ]
         
         if not Classifica_risco_model.objects.exists():
             for i in range(len(groups_risco)):
