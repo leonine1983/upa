@@ -46,6 +46,14 @@
       #id_paciente_triagem{
         width:200%;
       }
+      .hours48{
+        position: absolute;
+        margin-top: -1.5rem !important;
+        font-size: 0.7rem;
+        margin-left: 0;
+        padding: 0.1rem;
+        color:rgb(255, 255, 255) ;
+      }
     {% if info_extra == 'Analisando...' %}
       .form-body {      
         margin:1rem;
@@ -55,6 +63,7 @@
         grid-template-columns: repeat(2, 1fr);
         gap:2rem;
     }
+
     {% endif %}
 
   </style>
@@ -112,7 +121,6 @@
     {% endif %}
     <!--FIM Avisa se o paciente tem ALERGIAS--> 
   {% endif %}
-
 <div class="top-info ">      
 
   
@@ -121,7 +129,7 @@
           <div class="" style='margin-top:-1.8rem '>
             <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100' >
               {% if nome_paciente %}
-                <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer "></i>&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}} </b></h3>
+                <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer "></i>&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}}</b>{% if retorno48 %}| <span class='mx-3 text-danger'><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</span>{% endif %}</h3>
                 {% else %}            
                 <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer"></i>&nbsp;Pacientes</h3>
               {% endif %}              
@@ -359,23 +367,24 @@
         <table class='table table-striped  table-active border border-1  '>
           <thead>
             <tr>
-              <th>Nome do paciente</th>
+              <th class="text-center">Nome do paciente</th>
               <th>Mãe</th>                   
-              <th>Classificação de risco atribuída</th>    
+              <th class="text-center">Classificação de risco atribuída</th>    
               <th>Ação</th> 
             </tr>
           </thead>
           <tbody>
             {% for pac in paciente_na_triagem_concluidos %}
-            <tr>
-              <td>
+            <tr {% if pac.paciente_triagem.retornou_em_menos_de_48_horas %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}>
+              <td >
+                <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if pac.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div>
                 {{pac.paciente_triagem}}
               </td>
               <td>
                 {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
               </td>
               
-              <td>
+              <td class="text-center ">
                 {{pac.classifica_tipo}}
               </td>
               <td>

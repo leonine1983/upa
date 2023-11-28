@@ -198,6 +198,8 @@ class triagem_classifica_Risco_update(LoginRequiredMixin, SuccessMessageMixin, U
         context['info_extra'] = 'Analisando...'
         context['tipo_select'] = 'Defina a classificação de Risco do Paciente'        
         context ['nome_paciente'] = self.object.paciente_triagem.paciente_envio_triagem.nome_social 
+        context ['retorno48'] = self.object.paciente_triagem.retornou_em_menos_de_48_horas
+        
 
         # Pressão Arterial
         context['pAcor'] = pAcor
