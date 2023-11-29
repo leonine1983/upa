@@ -142,8 +142,8 @@
               {% for dados  in triagem %}
               <div class='d-flex'> 
                      <label for="id_paciente_medico_atendimento" class='fs-6 text-text-danger-emphasis'>Paciente em atendimento: </label>                                         
-                     <select class='uppercase ml-4' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
-                            <option value="{{dados.id}}" selected="{{dados.id}}">{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</option>                                    
+                     <select class=' ml-4 bg-dark-subtle m-1' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
+                            <option  value="{{dados.id}}" selected="{{dados.id}}">Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} |&nbsp; Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b> &nbsp;| Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos</option>                                    
                      </select>                            
               </div>
               {% endfor %}
