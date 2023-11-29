@@ -18,7 +18,7 @@ class TriagemEnfermariaForm(forms.ModelForm):
 class TriagemEnfermariaUpdateForm(forms.ModelForm):
     class Meta:
         model = triagem
-        fields = ['frequencia_cardiaca_FC', 'pressao_arterial_PA','pressao_arterial_PA_2', 'frequencia_respiratoria_FR',
+        fields = ['frequencia_cardiaca_FC', 'pressao_arterial_PA_2', 'pressao_arterial_PA', 'frequencia_respiratoria_FR',
                   'saturacao_de_oxigenio_SPO2', 'hemoglicoteste_HGT', 'temperatura_TEMP', 'peso', 'altura',
                   'observacao']
         labels = {

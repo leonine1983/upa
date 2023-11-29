@@ -98,7 +98,7 @@ class triagem(models.Model):
     paciente_triagem = models.OneToOneField(envio_triagem, related_name='rel_envio_triagem', null=False, on_delete=models.PROTECT)
     exames = models.ManyToManyField(Exames_Model, blank=True)
     pressao_arterial_PA = models.FloatField(null=True, blank=True, verbose_name='Pressão arterial (mínima) PA-1')
-    pressao_arterial_PA_2 = models.FloatField(null=True, blank=True, verbose_name='Pressão arterial (máxima)) PA-2')
+    pressao_arterial_PA_2 = models.FloatField(null=True, blank=True, verbose_name='Pressão arterial (máxima) PA-2')
     frequencia_cardiaca_FC = models.FloatField(null=True, blank=True)
     frequencia_respiratoria_FR = models.FloatField(null=True, blank=True)
     saturacao_de_oxigenio_SPO2 = models.FloatField(null=True, blank=True)
