@@ -105,13 +105,39 @@
         {% if vinculo_sala %}
             <hr>
             <h2> <i class="fa-solid fa-person-shelter"></i> Relação de Salas Ocupadas:</h2>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                {% if object_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{object_list.previous_page_number}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo; Início</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for page in object_list.paginator.page_range %}
+                    {% if object_list.number|add:"-10" <= page <= object_list.number|add:"10" %}
+                    <li class="page-item {% if page == object_list.number %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if object_list.has_next %}  
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ object_list.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true"> &raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                </ul>
+            </nav> 
             <table class="table" >
                 <tr>
                     <th>SALA</th>
                     <th>Nome do profissional</th>
                     <th>AÇÃO</th>
                 </tr>
-                {% for list in profissionais %} 
+                {% for list in object_list %} 
                 <tr class='fs-7' >
                     <td >{{list.nomeSala}}</td>
                     <td>{{list.profissionalSaude}}</td>
@@ -171,9 +197,16 @@
                             Atualizar Salar
                             {% elif conteudo == 'cadastraSala' %}
                                 Registrar Sala de Atendimento <i class="fa-duotone fa-hospital-user"></i>
-                            {% else %}
-                            Deletar {{nomeSala}}
-                            {% endif %} </button>                  
+                            {% else %}                            
+                                {% if vinculo_sala %}
+                                    Vincular o profissional à sala
+                                    {% else %}
+                                    Deletar {{nomeSala}}
+                                {% endif %}
+
+                            {% endif %} 
+                            
+                        </button>                  
                     </div>
                 </form>
             </div>        
