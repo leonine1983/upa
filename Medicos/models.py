@@ -2,7 +2,6 @@
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin, User)
 from django.db import models
-
 from Atendimento.models import *
 from Triagem.models import triagem
 from django.db.models import Q
@@ -10,6 +9,7 @@ from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from django.utils import timezone
 from django.contrib.auth.models import Group, User, Permission
+from ckeditor.fields import RichTextField
 
 
 class CustomUserManager(BaseUserManager):
@@ -109,11 +109,11 @@ class cid_10 (models.Model):
 # Create your models here.
 class Medico_atendimento (models.Model):
     paciente_medico_atendimento = models.OneToOneField(triagem, null=False, on_delete=models.PROTECT)    
-    historico_doenca_atual_HDA = models.TextField(max_length=500, null=True, default='Não se aplica')
-    exame_fisico = models.TextField(max_length=500, null=True, default='Não se aplica')
-    Diagnostico = models.CharField(max_length=200, null=True, default='Não se aplica')
+    historico_doenca_atual_HDA = RichTextField(null=True, blank=True)
+    exame_fisico = RichTextField(null=True, blank=True)
+    Diagnostico = RichTextField(null=True, blank=True)
     classificacao_internacional_doenca_CID = models.ForeignKey(cid_10, null=True, default='Não se aplica', on_delete=models.CASCADE)
-    conduta = models.TextField(max_length=500, null=True, default='Não se aplica')
+    conduta = RichTextField(null=True, blank=True)
     data_medico = models.DateField(auto_now_add=True, null=False)
     hora_medico = models.TimeField(auto_now_add=True, null=True )
     tempo_espera_paciente = models.DurationField(blank=True, null=True)
