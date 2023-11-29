@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import triagem_enfermaria, Classifica_risco_view, Classifica_risco_lista_view, Classifica_risco_Update_view, triagem_enfermariaUpdate, triagem_enfermaria_Alergia_Update, triagem_classifica_Risco_update, Triagem_Delete
 
 
@@ -31,4 +33,4 @@ urlpatterns = [
     path('triagem/Enfermeros_e_Tec/atualiza/<int:pk>', views.EnfermUpdateView.as_view(), name='user_atualiza'),
     path('triagem/Enfermeros_e_Tec/deleta/<int:pk>', views.DeleteUserDelet.as_view(), name='user_delete'),
    
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

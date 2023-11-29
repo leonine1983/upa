@@ -16,8 +16,9 @@ from Medicos.models import CustomUser
 class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = triagem
     form_class = TriagemEnfermariaUpdateForm
+    #fields = fields = ['frequencia_cardiaca_FC', 'pressao_arterial_PA_2', 'pressao_arterial_PA', 'frequencia_respiratoria_FR', 'saturacao_de_oxigenio_SPO2', 'hemoglicoteste_HGT', 'temperatura_TEMP', 'peso', 'altura', 'observacao']
     template_name = 'Triagem/triagem.html'
-    success_message = "Utilize os campos para registrar os dados obtidos do paciente"
+    success_message = "Avaliação Concluída ✔️ Sinais vitais registrados com sucesso!👩‍⚕️"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -30,6 +31,9 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
     def get_success_url(self):
         paciente_envio_triagem_id = self.object.paciente_triagem.paciente_envio_triagem_id
         return reverse_lazy('Triagem:triagem-enfermaria-alergia-update', args=[paciente_envio_triagem_id])
+    
+
+    
 
 
     def form_valid(self, form):

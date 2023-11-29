@@ -157,6 +157,19 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": None,
+        "width": "100%",
+        "extraPlugins": ",".join(
+            [
+                "codesnippet",
+            ]
+        ),
+    },
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

@@ -7,7 +7,6 @@ from Atendimento.models import envio_triagem, ficha_de_atendimento
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, User
 from ckeditor.fields import RichTextField
 
-
 class Classifica_risco_model(models.Model):
     classifica_tipo = models.CharField(max_length=30, null=False, default="Vermelho", verbose_name="Tipo de Emergência")
     descri = models.TextField(max_length=500, null=False, default='', verbose_name='Descrição')
@@ -109,7 +108,7 @@ class triagem(models.Model):
     data_triagem = models.DateField(auto_now_add=True, null=False)
     hora_triagem = models.TimeField(auto_now_add=True, null=True )
     classifica_tipo = models.ForeignKey(Classifica_risco_model, null=True, on_delete=models.PROTECT, verbose_name='Classificação de Emergência')
-    observacao = models.TextField(max_length=700, null=False, verbose_name='Observação')
+    observacao = RichTextField(null=True, blank=True)
     choices=(    
         ('', ''),    
         ('0', 'Não'),

@@ -63,8 +63,10 @@
         grid-template-columns: repeat(2, 1fr);
         gap:2rem;
     }
+    
 
     {% endif %}
+    .form-body div:last-child{width:132.5%!important}
 
   </style>
 {% endblock css %}
@@ -169,7 +171,8 @@
           </div>          
             
             {% csrf_token %}
-            <div class="form-body">                
+            <div class="form-body">   
+              {{ form.media }}             
                 {{form.as_div}} 
                 {% comment "Classificação de risco automatica desativada" %} 
                 {% if info_extra == 'Analisando...' %}   

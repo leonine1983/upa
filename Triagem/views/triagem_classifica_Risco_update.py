@@ -9,8 +9,8 @@ from Triagem.forms import Classifica_form
 
 # verificar a classificação de risco
 class triagem_classifica_Risco_update(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    #fields = ['classifica_tipo']
-    form_class =Classifica_form
+    fields = ['classifica_tipo']
+    #form_class =Classifica_form
     model = triagem
     template_name = 'Triagem/triagem.html' 
     success_message = 'Vinculação de classificação risco feita com sucesso!'      
@@ -117,7 +117,8 @@ class triagem_classifica_Risco_update(LoginRequiredMixin, SuccessMessageMixin, U
                 hgTcor = cor1
             return hgt, hgTcor
         hgt, hgTcor = verifica_hemiglicoteste()
-
+        
+        """
         def verifica_peso():
             altura_info = self.object.altura
             peso_info = self.object.peso
@@ -142,7 +143,7 @@ class triagem_classifica_Risco_update(LoginRequiredMixin, SuccessMessageMixin, U
                 pesOcor = cor1           
             
             return peso, pesOcor, peso_info, altura_info, pesO_value
-        peso, pesOcor, peso_info, altura_info, pesO_value= verifica_peso()	
+        peso, pesOcor, peso_info, altura_info, pesO_value= verifica_peso()	"""
 
         def verifica_temp():  
             temP_value = self.object.temperatura_TEMP 
@@ -228,12 +229,13 @@ class triagem_classifica_Risco_update(LoginRequiredMixin, SuccessMessageMixin, U
         context['hgt_enviado'] = self.object.hemoglicoteste_HGT
         context['hemoglicoteste_HGT'] = hgt
 
-        # Peso
+        # Peso 
+        """
         context['pesOcor'] = pesOcor
         context['peso_enviado'] = self.object.peso
         context['peso'] = peso
         context['altura_info'] = altura_info
-        context['pesO_value'] = pesO_value
+        context['pesO_value'] = pesO_value """
 
         # Temperatura
         context['temPcor'] = temPcor
