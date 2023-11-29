@@ -1,6 +1,7 @@
 {% extends 'global/template_geral.html' %}
 {% block css %}
 {% load static %}
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.0/css/sharp-light.css">
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
 <style>
     .table{
@@ -213,8 +214,17 @@
         {% endif %}   
     </div>
 </div>
-    <a class='btn btn-sm btn-secondary m-3' href="{% url 'Medicos:salasProfissionalCreate' %}"><i class="fa-solid fa-people-roof"></i> Vincula Profissional às Salas</a>    
-    <a class="btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Criar Salas</a>
+<div class='row'>
+    <a class=' col btn btn-sm btn-secondary m-3' href="{% url 'Medicos:salasProfissionalCreate' %}"><i class="fa-solid fa-people-roof"></i> Vincula Profissional às Salas</a>    
+    <a class=" col btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Criar Salas</a>
+    {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' %}     
+    <a class="col fs-5 btn btn-sm bg-secondary-subtle m-3 w-50 border" href="{% url 'Triagem:triagem-enfermaria' %}"><i class="fa-sharp fa-thin fa-user-nurse-hair mr-5"></i><span class='pr-4 pl-4'> Ir para a Classificação </span><i class="fa-sharp fa-thin fa-user-nurse-hair-long"></i> </a>
+    {% endif %}
+    {% if  grupo_usuario == 'group_Medicos' or grupo_usuario == 'group_UPA-Admin' %}
+    <a class="col fs-5 btn btn-sm bg-secondary-subtle m-3 w-50 border" href="{% url 'Medicos:medico_prontuario'  %}"><i class="fa-thin fa-user-doctor mr-5"></i><span class='pr-4 pl-4'> Ir para Atendimento Médico  </span><i class="fa-thin fa-user-doctor-hair-long"></i> </a>
+    {% endif %}
+</div>
+
 
 
 {% endblock body_login %}
