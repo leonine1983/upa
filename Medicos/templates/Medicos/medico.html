@@ -93,93 +93,116 @@
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<h1>Pacientes enviados para atendimento avançado</h1>
+    <div class='p-3 bg-dark-subtle shadow'>
+        <h1 class='h2'>Tabela de Encaminhamentos Médicos</h1>
+        <hr>
+        <p>Esta tabela registra os pacientes que foram encaminhados para procedimentos específicos.</p>
+        <ul>
+            <li><strong>Nome do Paciente:</strong> Nome completo da pessoa encaminhada para o procedimento.</li>
+            <li><strong>Data e Hora do Encaminhamento:</strong> Momento em que o paciente foi encaminhado.</li>
+            <li><strong>Tipo de Procedimento:</strong> Procedimento específico para o qual o paciente foi encaminhado (por exemplo, raio-X de tórax, avaliação da oxigenação, etc.).</li>            
+            <li><strong>Nome do Médico:</strong> Identificador  do médico responsável.</li>   
+        </ul>
 
-<p>&nbsp;</p>
-<table class="table table-striped table-dark" border="0" cellpadding="0" cellspacing="0" width="100%" >
-    <thead>
-        <tr  style='background:#666' >
-            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Nome do paciente</th>
-            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Tipo de atendimento</th>
-            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Data</th>         
-            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Situação do Paciente</th>                   
-            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Médico Responsável</th>
-            <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important; width: 35%' >Ação</th>
-        </tr>
-    </thead>    
-    <tbody>
-        {% for ated_espec in atendimento_especi %}
-        <tr>
-            <td scope="row" style='text-align:center' >{{ated_espec.pk_paciente}}</td>
-            <td scope="row" style='text-align:center'>{{ated_espec.tipo_atendimento}}</td>  
-            <td scope="row" style='text-align:center'>{{ated_espec.pk_paciente.data_triagem}}.</td>  
-            <td scope="row" style='text-align:center'>{{ated_espec.situacao}}</td>          
-            <td scope="row" style='text-align:center'>{{ated_espec.nome_medico}}</td>
-            <th scope="col" style='text-align:center'><a class=
-                "prosseguir 
-                {% for campo in object_list %}  
-                    {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
-                    prosseguir-red
-                    {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
-                    prosseguir-laranja
-                    {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
-                    prosseguir-green                                            
-                    {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
-                    prosseguir-azul
-                    {% endif %}
-                {% endfor %}"
 
+        <p>&nbsp;</p>
+        <table class="table table-striped table-dark" border="0" cellpadding="0" cellspacing="0" width="100%" >
+            <thead>
+                <tr  style='background:#666' >
+                    <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Nome do paciente</th>
+                    <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Data</th>                      
+                    <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Tipo de procedimento</th>       
+                    <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Situação do Paciente</th>                   
+                    <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important'>Médico Responsável</th>
+                    <th scope="col" style='padding:0.5rem; color:#fff; font-weight: normal !important; width: 35%' >Ação</th>
+                </tr>
+            </thead>    
+            <tbody>
+                {% for ated_espec in atendimento_especi %}
+                <tr>
+                    <td scope="row" style='text-align:center' >{{ated_espec.pk_paciente}}</td>
+                    <td scope="row" style='text-align:center'>{{ated_espec.tipo_atendimento}}</td>  
+                    <td scope="row" style='text-align:center'>{{ated_espec.pk_paciente.data_triagem}}.</td>  
+                    <td scope="row" style='text-align:center'>{{ated_espec.situacao}}</td>          
+                    <td scope="row" style='text-align:center'>{{ated_espec.nome_medico}}</td>
+                    <th scope="col" style='text-align:center'><a class=
+                        "prosseguir 
+                        {% for campo in object_list %}  
+                            {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
+                            prosseguir-red
+                            {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
+                            prosseguir-laranja
+                            {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
+                            prosseguir-green                                            
+                            {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
+                            prosseguir-azul
+                            {% endif %}
+                        {% endfor %}"
+
+                        
+                        
+                        
+                        href="{% url 'Medicos:dados_do_paciente_medicamentos' ated_espec.pk_paciente.id %}" style='color:#fff; font-weight: normal;'>Continuar com o atendimento <i class="fa-regular fa-paper-plane"></i>  </a></th>
+                </tr>
+                {% endfor %}
+            
+            
+            </tbody>
+        </table>
+    </div>
+    <p>&nbsp;</p>
+    <div class='mt-5 p-3 bg-info-subtle shadow'>
+        <h1 class='h2'>Tabela de Atendimentos Médicos Diários </h1>
+        <hr>
+        <p>Esta tabela registra os pacientes que foram atendidos por um médico no dia atual.</p>
+        <ul>
+            <li><strong>Nome Paciente e Codigo:</strong> Identificador único do paciente atendido.</li>
+            <li><strong>Data e Hora do Atendimento:</strong> Momento do atendimento.</li>
+            <li><strong>Nome do Médico:</strong> Identificador  do médico responsável.</li>           
+            <li><strong>Situação do paciente:</strong> Situação em que se encontra o paciente.</li> 
+            <li><strong>Possibilidade de Reavaliação:</strong> Indicador para reavaliar o paciente posteriormente.</li>
+        </ul>
+
+        <div class='bg-white'>
+            <table class="table table-striped border bg-white" cellpadding="0" cellspacing="0" width="100%" >
+                <thead>
+                    <tr  class="bg-info">
+                        <th scope="col" class="center text-dark-emphasis text-center">Nome do paciente</th>
+                        <th scope="col" class="center text-dark-emphasis text-center">Data</th>                         
+                        <th scope="col" class="center text-dark-emphasis text-center">Médico Responsável</th>
+                        <th scope="col" class="center text-dark-emphasis text-center">Possibilidade de Reavaliação</th>
+                    </tr>
+                </thead>    
+                <tbody>
+                    {% for ated_espec in atendimentos_hoje %}
+                    <tr>
+                        <td scope="row" style='text-align:center' >{{ated_espec.paciente_medico_atendimento.paciente_triagem}}</td>
+                        <td scope="row" style='text-align:center'>{{ated_espec.data_medico}} <i class="fa-thin fa-alarm-clock"></i> {{ated_espec.hora_medico}}</td>          
+                        <td scope="row" style='text-align:center'>{{ated_espec.nome_medico}}</td>
+                        <th scope="col" style='text-align:center'><a class=
+                            "prosseguir 
+                            {% for campo in object_list %}  
+                                {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
+                                prosseguir-red
+                                {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
+                                prosseguir-laranja
+                                {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
+                                prosseguir-green                                            
+                                {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
+                                prosseguir-azul
+                                {% endif %}
+                            {% endfor %}"                   
+                            
+                            
+                            href="{% url 'Medicos:dados_do_paciente_atualiza' ated_espec.id %}" style='color:#fff; font-weight: normal;'>Reavaliar paciente <i class="fa-regular fa-paper-plane"></i>  </a></th>
+                    </tr>
+                    {% endfor %}
                 
                 
-                
-                 href="{% url 'Medicos:dados_do_paciente_medicamentos' ated_espec.pk_paciente.id %}" style='color:#fff; font-weight: normal;'>Continuar com o atendimento <i class="fa-regular fa-paper-plane"></i>  </a></th>
-        </tr>
-        {% endfor %}
-       
-      
-    </tbody>
-</table>
-<p>&nbsp;</p>
-<h1 class='p-1 mt-5 bg-info-subtle h2'>Atendimentos realizado hoje</h1>
-<div class='bg-white'>
-    <table class="table table-striped border bg-white" cellpadding="0" cellspacing="0" width="100%" >
-        <thead>
-            <tr  class="bg-info">
-                <th scope="col" class="center text-light text-center">Nome do paciente</th>
-                <th scope="col" class="center text-light text-center">Data</th>                         
-                <th scope="col" class="center text-light text-center">Médico Responsável</th>
-                <th scope="col" class="center text-light text-center">Ação</th>
-            </tr>
-        </thead>    
-        <tbody>
-            {% for ated_espec in atendimentos_hoje %}
-            <tr>
-                <td scope="row" style='text-align:center' >{{ated_espec.paciente_medico_atendimento.paciente_triagem}}</td>
-                <td scope="row" style='text-align:center'>{{ated_espec.data_medico}}</td>          
-                <td scope="row" style='text-align:center'>{{ated_espec.nome_medico}}</td>
-                <th scope="col" style='text-align:center'><a class=
-                    "prosseguir 
-                    {% for campo in object_list %}  
-                        {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
-                        prosseguir-red
-                        {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
-                        prosseguir-laranja
-                        {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
-                        prosseguir-green                                            
-                        {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
-                        prosseguir-azul
-                        {% endif %}
-                    {% endfor %}"                   
-                    
-                    
-                    href="{% url 'Medicos:dados_do_paciente_atualiza' ated_espec.id %}" style='color:#fff; font-weight: normal;'>Continuar com o atendimento <i class="fa-regular fa-paper-plane"></i>  </a></th>
-            </tr>
-            {% endfor %}
-        
-        
-        </tbody>
-    </table>
-</div>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
 {% endblock body_login %}

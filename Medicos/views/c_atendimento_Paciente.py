@@ -26,6 +26,7 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         context['atendimento'] = 'atendimento'        
         return context
 
+    
     def form_valid(self, form):
         self.object = form.save(commit=False)
         
@@ -49,7 +50,8 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
             if medico_group == "group_Medicos":
                 medico_group = "Medico"
             
-            self.object.medico_nome += f' | {medico_group} | CRM nº: {crm}'
+            #self.object.medico_nome += f' | {medico_group} | CRM nº: {crm}'
+            #self.object.medico_nome = self.request.user.username  # Substitua 'username' pelo campo que contém o nome do médico no modelo User
         
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())

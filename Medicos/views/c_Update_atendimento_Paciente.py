@@ -27,7 +27,7 @@ class atendimento_medico_Atualiza(SuccessMessageMixin, LoginRequiredMixin, Updat
 
         return context
 
-    def form_valid(self, form):
+    """def form_valid(self, form):
         self.object = form.save(commit=False)
         
         # Define os campos do objeto Medico_atendimento
@@ -52,9 +52,28 @@ class atendimento_medico_Atualiza(SuccessMessageMixin, LoginRequiredMixin, Updat
             
             self.object.medico_nome += f' | {medico_group} | CRM nº: {crm}'
         
+        
         self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponseRedirect(self.get_success_url())"""
     
     #success_url = reverse_lazy('Medicos:dados do paciente_medicamentos self.kwargs['pk']')
     def get_success_url(self):
-        return reverse('Medicos:dados_do_paciente_medicamentos', kwargs={'pk':self.kwargs['pk']})
+        return reverse('Medicos:dados_do_paciente_medicamentos', kwargs={'pk':self.object.paciente_medico_atendimento.id})
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
