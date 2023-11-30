@@ -2,6 +2,7 @@ from .pdfs.views import *
 from .a_aguardando_atendimento import *
 from .b_info_vindo_triagem import *
 from .c_atendimento_Paciente import *
+from .c_Update_atendimento_Paciente import *
 from .d_atestados_exames import *
 from .e_fim_atendimento import *
 from .f_perfil_paciente import *

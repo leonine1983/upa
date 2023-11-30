@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import  UpdateView
 from Triagem.models import triagem
+from Medicos.models import Medico_atendimento
 from Atendimento.models import *
 from Triagem.models import triagem
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,6 +17,7 @@ class atendimento_medico_updateview(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         contexto = super().get_context_data(**kwargs)
         contexto['pk'] = self.kwargs['pk']
+        contexto['resultado_medico'] = Medico_atendimento.objects.filter(paciente_medico_atendimento_id = self.kwargs['pk'])
         return contexto
 
     def get_success_url(self):

@@ -202,7 +202,7 @@
                      <h3>Enviar o paciente para o ambulatório:</h3>
                      {{form.enviar_ambulatorio}}     
                      {% endif %}         
-                     <button style='width: 90%;' type="submit" class='button-salvar'>Salvar Formulário</button>
+                     <button style='width: 90%;' type="submit" class='button-salvar'>{{pk}}  Salvar Formulário</button>
                      <a class='button-salvar' style="background-color:#87CEEB ;" href="{% url 'Triagem:triagem_especializada' %}?param={{ pk }}">Atendimento especializado</a>
               </div>                        
        </form>

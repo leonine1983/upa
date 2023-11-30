@@ -16,6 +16,7 @@ urlpatterns = [
     path('medico/historico_paciente/historico/<int:pk>', views.paciente_perfil_completo_menu_lateral, name='perfil_completo_paciente_menu_lateral'),
     
     path('atendimento/paciente/<int:pk>', views.atendimento_medico_createView.as_view(), name='dados do paciente'),
+    path('atendimento/paciente/update/<int:pk>', views.atendimento_medico_Atualiza.as_view(), name='dados_do_paciente_atualiza'),
     path('atendimento/paciente/medicamento/<int:pk>', views.atendimento_medico_updateview.as_view(), name='dados_do_paciente_medicamentos'),
     path('atendimento_medico_concluido/<int:pk>', views.atendimento_medico_concluido_update.as_view(), name='final_medico_concluida'),
     path('atendimento_medico_concluido/exibe/<int:pk>', views.exibe_prescreve_medicamento_update.as_view(), name='exibe_prescreve_medicamento'),
