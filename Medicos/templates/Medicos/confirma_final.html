@@ -47,25 +47,35 @@
        <p>&nbsp:</p>
        <h1>Final de Atendimento</h1>
        <hr>
-       <form method='POST'>
+       <form method='POST' >
               {% csrf_token %}              
-              <div style="text-align:center;margin:auto; border: 0.1rem solid #666; background: #d3d3d3; width: 50%; height: 8rem; padding: 1rem;"> 
-                     <label  for="id_final_triagem">Confirmo a finalização do Atendimento ao paciente 
-                            <p><b class='uppercase'>{{triagem}}</b></p>
+              <div class='bg-body-tertiary shadow-sm p-3 text-center w-75'> 
+                     <label  for="id_final_triagem">
+                            Completado o atendimento ao paciente <strong class='text-uppercase'>{{triagem}}</strong>, 
+                            confirmo que todos os procedimentos necessários foram realizados de acordo com os padrões estabelecidos.
+                             O paciente foi devidamente assistido e encontra-se pronto para seguir sua próxima etapa de cuidados médicos, se necessário.
+                            
                      </label>
-                     <div>&nbsp;</div>
-                     <input  style="scale:5" type="checkbox" name="final_medico_atendimento" value="1" maxlength="3" required="" id="id_final_medico_atendimento">                               
+                     <div class='m-2 p-2 btn btn-secondary'>Clique no quadrado à direita para confirmar: 
+                     <input  style="scale:5" type="checkbox" name="final_medico_atendimento" value="1" maxlength="3" required="" id="id_final_medico_atendimento"> 
+                      </div>                             
               </div> 
-              <div>
-                     <b>Observação:</b>
-                     <p>Após confirmar a finalização do atendimento ao paciente {{triagem}},
-                            o nome dessa pessoa não irá mais aparecer na página <b>Pacientes aguardando atendimento</b>.
-                            Para o que o nome desse paciente volte aparecer na página de pacientes aguardando atendimento
-                            será necessário esse mesmo pacienta passar novamente pela <b>Fila de Triagem</b> e logo em 
-                            seguida, passar pela <b>Triagem</b>.
-                     </p>
+              <div class='w-75 m-5'>
+                     <div>
+                            <p><strong>Observação:</strong></p>
+                            <p>
+                                Após confirmar a conclusão do atendimento ao paciente {{triagem}}, o nome deste paciente será removido da seção 
+                                <strong>Pacientes Aguardando Atendimento</strong>.
+                            </p>
+                            <p>
+                                Para reintegrar o nome do paciente à lista de espera, será necessário que ele passe novamente pela 
+                                <strong>Fila de Espera</strong> e, em seguida, pela <strong>Classificação</strong>.
+                            </p>
+                        </div>
+                        
+                     <button class='btn btn-sm btn-primary w-75 m-auto' type="submit">Finalizar atendimento</button>
               </div>
-              <button class='button-salvar' type="submit">Finalizar atendimento</button>
+              
               
        </form>       
 </div>
