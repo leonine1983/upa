@@ -13,6 +13,7 @@ from .j_chamarPaciente import *
 from .importar_CID10 import *
 # pastas
 from .salas import *
+from .exames import *
 from .vincula_salas import *
 from .criar_medicos import *
 from .pdfs import *

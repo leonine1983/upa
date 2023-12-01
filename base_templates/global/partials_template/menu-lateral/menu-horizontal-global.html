@@ -9,19 +9,22 @@
         <!--Parametros-->
         <li class="col text-center">
             <a href=""><i class="fas fa-solid fa-compass-drafting"></i> Parâmetros</a>
-            <ul>
-                <li>
-                    <a href=""></i> Classificação de Emergência</a>
+            <ul >
+                <li class='text-left'>
+                    <a href=""><i class="fa-thin fa-land-mine-on"></i> Classificação de Emergência</a>
                     <ul>
                         <li><a href="{% url 'Triagem:classifica-risco'%}"><i class="fas fa-user"></i> Cadastro </a></li>
                         <li><a href="{% url 'Triagem:classifica-risco-lista'%}"><i class="fas fa-user-tie"></i> Listagem </a></li>                            
                     </ul>
                 </li> 
+                <li class='text-left'>
+                    <a href="{% url 'Medicos:importa_csv'%}"><i class="fa-thin fa-border-none"></i> Importar tabela cid-10</a>
+                </li> 
                 <li>
-                    <a href="{% url 'Medicos:importa_csv'%}"></i> Importar tabela cid-10</a>
+                    <a href="{% url 'Medicos:cadastroExame'%}"><i class="fa-thin fa-vial-circle-check"></i> Cadastrar tipo de exames</a>
                 </li>                              
                 <li>
-                    <a href=""></i> Configura Painel</a>
+                    <a href=""><i class="fa-thin fa-solar-panel"></i> Configura Painel</a>
                     <ul>
                         <li>
                             <a href="{% url 'configUPA:upload_video_painel'%}"></i>Background em video</a>
