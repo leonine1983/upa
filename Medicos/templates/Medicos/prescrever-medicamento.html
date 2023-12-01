@@ -173,7 +173,10 @@
               <style>
 
                      @media print {
-                            p{padding: 0rem!important;margin: 0!important;font-size: 0.8rem;}
+                            body{font-family: Arial, Helvetica, sans-serif !important;}
+                            p{padding: 0rem!important;margin: 0!important;font-size: 0.7rem;}
+                            div{font-size: 0.7rem;}
+                            #cabecalho div, #cabecalho p{font-size: 0.9rem!important;}
                             h1, h2, h3, h4, h5, h6 {
                                           margin: 0; /* Zera as margens para títulos */
                                           padding: 0; /* Zera o padding para títulos */
@@ -184,22 +187,23 @@
                             background-repeat: repeat-x; /* Repete a imagem horizontalmente */
                             color: #fff; /* Cor do texto para h1 */
                             text-align: center; /* Centraliza o texto no h1 */
-                            line-height: 100px; /* Altura da linha para centralizar verticalmente */
+                            line-height: 20px; /* Altura da linha para centralizar verticalmente */
                             }
-                            h2 {display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important; font-weight: lighter!important;}
+                            
+                            h2 {display: flex;width:auto; margin-right: 3%; font-size: 1.4rem !important; font-weight: lighter!important;}
                             .comorbidade{
-                                   background-color:#ccc!important;
+                                   background-color:hsl(0, 0%, 80%)!important;
                             }
                      }
               </style>
                      <div style='display:flex'>
-                            <div style='width: 68%'>
+                            <div id="cabecalho" style='width: 68%;'>
                                    <div style='display:flex'><div style=' margin-right: 1rem;'>UPA VERA CRUZ</div><li>HTMAS</li></div>
                                    <p>Av. Juvenal João Vinagre, 175. Centro. Vera Cruz - BA</p>
                                    <p>Tel.: (71) 3633 - 2286</p>
                                    <p>Email: servicosocial.upaveracruz@gmail.com</p>
                             </div>
-                            <div style='display:flex;width:32%; padding-top: 1rem;'>
+                            <div style='display:flex;width:32%; padding-top: 0.1rem;'>
                                    <div><img width="50" src="{% static 'brasao-veracruz.png' %}" alt=""></div>
                                    <div><img width="160" src="{% static 'upa24.png' %}" alt=""></div>
 
@@ -328,7 +332,7 @@
                                           <style>ul{display:flex}</style>
                                           {{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_comorbidades|safe}}
                                    </div>  
-                                   <div style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; display:flex">
+                                   <div style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; display:flex; border: 0.1rem solid #ccc;">
                                           <div style="width: 50%;">
                                                  <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;">CLASSIFICAÇÃO:</b>
                                                  <style>ul{display:flex}</style>
@@ -341,7 +345,7 @@
                                    </div>
                             </div>
                             <!--MÉDICO-->
-                            <div style="margin-top: 5%;">
+                            <div style="margin-top: 3%;">
                                    <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important;">Informaçõe do Atendimento Médico</h2>
                                    <hr>
                                    Hora: {{r.hora_medico}}hs
@@ -393,9 +397,7 @@
                             </div>
                             <!--EXTRA-->
                             <div style="margin-top: 5%;">
-                                   <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important;">Outros..</h2>
-                                   <hr>
-                                   <div style="margin-left: 2rem; margin-bottom:1.5rem">
+                                   <div style="margin-left: 2rem; margin-bottom:1.5rem; border: 0.1rem solid #ccc">
                                           <p style="background-color:#ccc; padding: 0.5rem">Alergias: {% if not r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.alergias == "0" %}SIM {% else %}NÃO{% endif %}<i></i> </p>
                                           {% if not r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.alergias == "0" %}
                                           <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">                                               
@@ -409,7 +411,7 @@
                                           
                                    </div>
                                    <div style="margin-left: 2rem">
-                                          <p style="border:solid 0.1rem #ccc; padding: 0.5rem; font-weight: 700;">Alta:</p>
+                                          <p style="border:solid 0.1rem #ccc; padding: 0.8rem; font-weight: 700;">Alta:</p>
                                    </div>
                                    <div style="margin-left: 2rem">
                                           <p style=" padding: 1rem; font-weight: 700; text-align: right !important; ">Médico: _____________________________________</p>
@@ -491,14 +493,21 @@
 
 
 <script>
-    function imprimirRelatorio() {
-        var conteudoDiv = document.getElementById('imprimir_relatorio_medico').innerHTML;
-        var janelaImpressao = window.open('', '', 'width=600');
-        janelaImpressao.document.write('<html><head><title>Imprimir Relatório Médico</title></head><body>');
-        janelaImpressao.document.write(conteudoDiv);
-        janelaImpressao.document.write('</body></html>');
-        janelaImpressao.document.close();
-        janelaImpressao.print();
-    }
-</script>
+       function imprimirRelatorio() {
+           var conteudoDiv = document.getElementById('imprimir_relatorio_medico').innerHTML;
+           var janelaImpressao = window.open('', '', 'width=600');
+   
+           // Verifica se a janela foi aberta corretamente
+           if (janelaImpressao) {
+               janelaImpressao.document.write('<html><head><title>Relatório Médico</title></head><body>');
+               janelaImpressao.document.write(conteudoDiv);
+               janelaImpressao.document.write('</body></html>');
+               janelaImpressao.document.close();
+               janelaImpressao.print();
+           } else {
+               alert('Erro ao abrir a janela de impressão. Verifique se as configurações do seu navegador permitem pop-ups.');
+           }
+       }
+   </script>
+   
 {% endblock body_login %}
