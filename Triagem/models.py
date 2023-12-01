@@ -116,9 +116,9 @@ class triagem(models.Model):
     )    
     preescrever_medicamento_medico = RichTextField(null=True, blank=True)
 #    preescrever_medicamento_medico = models.TextField(max_length=500, null=True, default='Preescreva o medicamento para o paciente')
-    encaminhamento = models.TextField(max_length=500, null=True, default='Digite o encaminhamento do paciente')
-    atestado = models.CharField(max_length=2, null=True, default='0')
-    exames = models.ManyToManyField(Exames_Model, null=True)    
+    encaminhamento = models.TextField(max_length=500, null=True, blank=True, default='Digite o encaminhamento do paciente')
+    atestado = models.CharField(max_length=2, null=True,blank=True, default='0')
+    exames = models.ManyToManyField(Exames_Model, null=True, blank=True)    
     # Atenção quem envia dados para o campo final_triagem é o medico, a triagem é finalizada com campo triagem_concluida no model envio_triagem
     final_triagem = models.CharField(max_length=3, null=True, default='')    
     final_triagem_time = models.DateField(auto_now=True, null=False)

@@ -111,67 +111,79 @@
 {% for t in triagem_now %} 
 
 <div style='width:100%; margin-top:-3rem'>
+       <nav class='row'>                                         
+              <a class='col btn btn-sm btn-secondary m-2'  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarPDF_exame(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
+              <a class='col btn btn-sm btn-success m-2' href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
+       </nav> 
        <ul class="menu-abas ">              
-                     {% if not t.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %}    
-                            <li class='prescricao border-radius'><a href="#tab1">&nbsp;&nbsp;Preescrever Medicamento <i class="fa-solid fa-capsules"></i>&nbsp;&nbsp;</a></li>
+                     {% if not t.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %} 
+                            {% if not t.preescrever_medicamento_medico == "" %}
+                                   <li class='prescricao border-radius'><a href="#tab1">&nbsp;&nbsp;Preescrever Medicamento <i class="fa-solid fa-capsules"></i>&nbsp;&nbsp;</a></li>
+                            {% endif %}   
                      {% endif %} 
                      {% if not t.encaminhamento == 'Digite o encaminhamento do paciente' %} 
                             <li class='encaminhamento'><a href="#tab2">&nbsp;&nbsp;Encaminhamentos <i class="fa-regular fa-paste"></i>&nbsp;&nbsp;</a></li>                            
                      {% endif %}
                      {% if not t.exames == 'Preencha com a relação de exames' %}   
-                            <li class='exames'><a href="#tab3">&nbsp;&nbsp;Exames <i class="fa-solid fa-notes-medical"></i>&nbsp;&nbsp;</a></li>
+                            {% if t.exames.all %}
+                                   <li class='exames'><a href="#tab3">&nbsp;&nbsp;Exames<i class="fa-solid fa-notes-medical"></i>&nbsp;&nbsp;</a></li>
+                            {% endif %}
                      {% endif %}
                      {% if not t.atestado == 'Digite a quantidade de dias que o paciente irá ficar de repouso' %}
-                            <li class='atestado'><a href="#tab4">&nbsp;&nbsp;Atestados <i class="fa-solid fa-file-contract"></i></i>&nbsp;&nbsp;</a></li>
+                            {% if not t.atestado == '0'  %}
+                                   <li class='atestado'><a href="#tab4">&nbsp;&nbsp;Atestados <i class="fa-solid fa-file-contract"></i></i>&nbsp;&nbsp;</a></li>
+                            {% endif %}
                      {% endif %}                       
               {% endfor %}        
        </ul>         
        <article>
               
-              {% for t in triagem_now %} 
-                     {% if not t.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %}           
-                            <section class='prescricao' id="tab1" class="active"> 
-                                   <nav class="menu-vertical-medico">
-                                          <ul>                                          
-                                                 <li><a  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarPDF(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
-                                                 <li><a href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
-                                          </ul>
-                                   </nav> 
-                                   <!--Imprimir medicamentos-->
-                                   <div id="tab11" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
-                                   box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                   -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                   -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
-                                          <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
-                                          <div class='card-medico' style="              
-                                                 position: relative;
-                                                 z-index: 10;
-                                                 top: -45rem;
-                                                 padding: 2rem;
-                                                 padding-bottom:0.1rem;
-                                                 height:42rem">                                                                                     
-                                                 <h3>Nome do(a) paciente:</h3>                                                                                              
-                                                 <hr style="width: 50%;">
-                                                 <div style='margin-left:2rem; margin-bottom:2rem;' class='uppercase'><strong>{{t}}</strong></div>
-                                                 <h3>Preescrição de Medicamentos:</h3>                                                 
-                                                 <hr style="width: 50%;">
-                                                 <div style='margin:1rem 2rem; max-height:15rem; height:15rem; font-weight: bold;'>
-                                                 {{t.preescrever_medicamento_medico | safe}}
+              {% for t in triagem_now %}               
+                     {% if not t.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %}     
+                            {% if not t.preescrever_medicamento_medico == "" %}      
+                                   <section class='prescricao' id="tab1" class="active"> 
+                                          <nav class="menu-vertical-medico">
+                                                 <ul>                                          
+                                                        <li><a  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarPDF(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
+                                                        <li><a href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
+                                                 </ul>
+                                          </nav> 
+                                          <!--Imprimir medicamentos-->
+                                          <div id="tab11" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
+                                          box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                          -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                          -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
+                                                 <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
+                                                 <div class='card-medico' style="              
+                                                        position: relative;
+                                                        z-index: 10;
+                                                        top: -45rem;
+                                                        padding: 2rem;
+                                                        padding-bottom:0.1rem;
+                                                        height:42rem">                                                                                     
+                                                        <h3>Nome do(a) paciente:</h3>                                                                                              
+                                                        <hr style="width: 50%;">
+                                                        <div style='margin-left:2rem; margin-bottom:2rem;' class='uppercase'><strong>{{t}}</strong></div>
+                                                        <h3>Preescrição de Medicamentos:</h3>                                                 
+                                                        <hr style="width: 50%;">
+                                                        <div style='margin:1rem 2rem; max-height:15rem; height:15rem; font-weight: bold;'>
+                                                        {{t.preescrever_medicamento_medico | safe}}
+                                                        </div>
+                                                 <div style='text-align:center; width: 100%; '>                                          
+                                                        <span >Dr.(a) {{request.user}}</span><br>
+                                                        <hr style="width: 75%;margin: auto;">
+                                                        Médico que fez o atendimento
                                                  </div>
-                                          <div style='text-align:center; width: 100%; '>                                          
-                                                 <span >Dr.(a) {{request.user}}</span><br>
-                                                 <hr style="width: 75%;margin: auto;">
-                                                 Médico que fez o atendimento
-                                          </div>
-                                          <div style='font-size:0.6rem; margin-top:9rem; '>
-                                                 <b>UPA VERA CRUZ</b>
-                                                 <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
-                                                 <BR/>Tel.: (71) 3633-2286\
-                                                 <BR/>Email: servicosocial.upaveracruz@gmail.com
-                                          </div>  
-                                   </div> 
-                                   <!--FIM Imprimir medicamentos-->
-                            </section>
+                                                 <div style='font-size:0.6rem; margin-top:9rem; '>
+                                                        <b>UPA VERA CRUZ</b>
+                                                        <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
+                                                        <BR/>Tel.: (71) 3633-2286\
+                                                        <BR/>Email: servicosocial.upaveracruz@gmail.com
+                                                 </div>  
+                                          </div> 
+                                          <!--FIM Imprimir medicamentos-->
+                                   </section>
+                            {% endif %}
                      {% endif %}
                      <!--Imprimir Encaminhamentos-->
                      {% if not t.encaminhamento == 'Digite o encaminhamento do paciente' %}  
@@ -182,109 +194,107 @@
                       <!--FIM Encaminhamentos-->
                       <!-- Imprimir medicamentos Exames-->
                      
-                      {% if not t.exames == 'Preencha com a relação de exames' %}         
-                            <section class='exames' id="tab3">
-                                   <nav class="menu-vertical-medico">
-                                          <ul>                                          
-                                                 <li><a  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarPDF_exame(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
-                                                 <li><a href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
-                                          </ul>
-                                   </nav> 
-                                    <!--Exames-->
-                                    <div id="tab33" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
-                                    box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                    -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                    -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
-                                           <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
-                                           <div class='card-medico' style="              
-                                                  position: relative;
-                                                  z-index: 10;
-                                                  top: -45rem;
-                                                  padding: 2rem;
-                                                  padding-bottom:0.1rem;
-                                                  height:42rem">                 
-                                                  <h3>SOLICITAÇÃO DE EXAMES</h3>                                                                                                                                             
-                                                 <hr style="width: 50%;">
-                                                  <p>&nbsp;</p> 
-                                                  <p style='margin-left:2rem; margin-top:-1.8rem; font-size:0.8rem' class='uppercase'>Solicito ao paciente <strong style='font-size:1rem'>{{t}}</strong> os seguintes exames:
-                                                  </p>
-                                                  <div style='margin:1rem auto; width:20rem; font-size:0.8rem;' class='grid'>     
-                                                       {% for ex in  t.exames.all %}                                                        
-                                                             <div style='margin-right:2rem; padding:0.1rem; max-height: 10rem;height: 10rem;'><b><i class="fa-solid fa-check"></i> {{ex.nome_exame}} </b></div>
-                                                       {% endfor %}
-                                                  </div>                                                  
-                                                  <div style='margin-left:2rem; margin:4.2rem auto; text-align: right;'>                                                        
-                                                         <p>&nbsp;</p>
-                                                         <span style='text-align:right'>Vera Cruz, {{t.data_triagem}}</span>
-                                                  </div>                                                
-                                                  <div style='text-align:center; width: 100%; '>                                          
-                                                        <span >Dr.(a) {{request.user}}</span><br>
-                                                        <hr style="width: 75%;margin: auto;">
-                                                        Médico que fez o atendimento
-                                                 </div>
-                                           <div style='font-size:0.6rem; margin-top:6.6rem'>
-                                                  <b>UPA VERA CRUZ</b>
-                                                  <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
-                                                  <BR/>Tel.: (71) 3633-2286\
-                                                  <BR/>Email: servicosocial.upaveracruz@gmail.com
-                                           </div>                                       
-                                    </div>                                    
-                                    <!--fim Exames-->                                   
-                            </section>
+                      {% if not t.exames == 'Preencha com a relação de exames' %}    
+                            {% if t.exames.all %} 
+                                   <section class='exames' id="tab3">                                          
+                                          <!--Exames-->
+                                          <div id="tab33" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
+                                          box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                          -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                          -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
+                                                 <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
+                                                 <div class='card-medico' style="              
+                                                        position: relative;
+                                                        z-index: 10;
+                                                        top: -45rem;
+                                                        padding: 2rem;
+                                                        padding-bottom:0.1rem;
+                                                        height:42rem">                 
+                                                        <h3>SOLICITAÇÃO DE EXAMES</h3>                                                                                                                                             
+                                                        <hr style="width: 50%;">
+                                                        <p>&nbsp;</p> 
+                                                        <p style='margin-left:2rem; margin-top:-1.8rem; font-size:0.8rem' class='uppercase'>Solicito ao paciente <strong style='font-size:1rem'>{{t}}</strong> os seguintes exames:
+                                                        </p>
+                                                        <div style='margin:1rem auto; width:20rem; font-size:0.8rem;' class='grid'>     
+                                                        {% for ex in  t.exames.all %}                                                        
+                                                               <div style='margin-right:2rem; padding:0.1rem; max-height: 10rem;height: 10rem;'><b><i class="fa-solid fa-check"></i> {{ex.nome_exame}} </b></div>
+                                                        {% endfor %}
+                                                        </div>                                                  
+                                                        <div style='margin-left:2rem; margin:4.2rem auto; text-align: right;'>                                                        
+                                                               <p>&nbsp;</p>
+                                                               <span style='text-align:right'>Vera Cruz, {{t.data_triagem}}</span>
+                                                        </div>                                                
+                                                        <div style='text-align:center; width: 100%; '>                                          
+                                                               <span >Dr.(a) {{request.user}}</span><br>
+                                                               <hr style="width: 75%;margin: auto;">
+                                                               Médico que fez o atendimento
+                                                        </div>
+                                                 <div style='font-size:0.6rem; margin-top:6.6rem'>
+                                                        <b>UPA VERA CRUZ</b>
+                                                        <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
+                                                        <BR/>Tel.: (71) 3633-2286\
+                                                        <BR/>Email: servicosocial.upaveracruz@gmail.com
+                                                 </div>                                       
+                                          </div>                                    
+                                          <!--fim Exames-->                                   
+                                   </section>
+                            {% endif %}
                      {% endif %}  
                      <!--FIM Imprimir exames-->
                      <!--Imprimir Atestados-->
                      {% if not t.atestado == 'Digite a quantidade de dias que o paciente irá ficar de repouso' %}
-                            <section class='atestado' id="tab4">
-                                   <nav class="menu-vertical-medico">
-                                          <ul>                                          
-                                                 <li><a  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarAtestPDF(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
-                                                 <li><a href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
-                                          </ul>
-                                   </nav> 
-                                   <!--Imprimir Atestados-->
-                                   <div id="tab44" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
-                                   box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                   -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                   -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
-                                          <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
-                                          <div class='card-medico' style="              
-                                                 position: relative;
-                                                 z-index: 10;
-                                                 top: -45rem;
-                                                 padding: 2rem;
-                                                 padding-bottom:0.1rem;
-                                                 height:42rem">                 
-                                                 <h3>ATESTADO MÉDICO</h3>
-                                                 <p>&nbsp;</p> 
-                                                 <div style='margin: 2rem; font-size:0.8rem; height:9.7rem; max-height:9.7rem' class='uppercase'>Atesto para os devidos fins que <strong style='font-size:1rem'>{{t}}</strong> esteve sob
-                                                 tratamento médico nesta unidade de saúde, no dia <strong style='font-size:1rem'>{{t.data_triagem}}</strong>, necessitando de <strong style='font-size:1rem'>{{t.atestado}}</strong> dias de afastamento a partir desta data,
-                                          por motivo de doença. </div>                                                 
-                                                 <div style='margin-left:2rem;margin-top: -3rem;  height:7rem'>
-                                                        <p>CID 10: <p>
-                                                        <div style='margin:1rem auto; width:30rem; font-size:0.8rem;' class='grid'>     
-                                                               {% for t in cid10  %}                                                       
-                                                                      <div style='margin-right:2rem; padding:0.1rem'><b><i class="fa-solid fa-check"></i> {{t.classificacao_internacional_doenca_CID}} </b></div>
-                                                               {% endfor %}
-                                                        </div>                                                        
-                                                 </div>                                                
-                                                 <div style='margin-left:2rem; margin:3rem auto; text-align: right;'>     
-                                                         <span style='text-align:right'>Vera Cruz, {{t.data_triagem}}</span>
-                                                  </div>                                                
-                                                  <div style='text-align:center; width: 100%; '>                                          
-                                                        <span >Dr.(a) {{request.user}}</span><br>
-                                                        <hr style="width: 75%;margin: auto;">
-                                                        Médico que fez o atendimento
-                                                 </div>
-                                           <div style='font-size:0.6rem; margin-top:6.6rem'>
-                                                  <b>UPA VERA CRUZ</b>
-                                                  <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
-                                                  <BR/>Tel.: (71) 3633-2286\
-                                                  <BR/>Email: servicosocial.upaveracruz@gmail.com
-                                           </div>                                       
-                                   </div>                                    
-                                   <!--fim Imprimir Atestados-->
-                            </section>
+                            {% if not t.atestado == '0' %}                                    
+                                   <section class='atestado' id="tab4">
+                                          <nav class="menu-vertical-medico">
+                                                 <ul>                                          
+                                                        <li><a  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarAtestPDF(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
+                                                        <li><a href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
+                                                 </ul>
+                                          </nav> 
+                                          <!--Imprimir Atestados-->
+                                          <div id="tab44" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
+                                          box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                          -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                          -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
+                                                 <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
+                                                 <div class='card-medico' style="              
+                                                        position: relative;
+                                                        z-index: 10;
+                                                        top: -45rem;
+                                                        padding: 2rem;
+                                                        padding-bottom:0.1rem;
+                                                        height:42rem">                 
+                                                        <h3>ATESTADO MÉDICO</h3>
+                                                        <p>&nbsp;</p> 
+                                                        <div style='margin: 2rem; font-size:0.8rem; height:9.7rem; max-height:9.7rem' class='uppercase'>Atesto para os devidos fins que <strong style='font-size:1rem'>{{t}}</strong> esteve sob
+                                                        tratamento médico nesta unidade de saúde, no dia <strong style='font-size:1rem'>{{t.data_triagem}}</strong>, necessitando de <strong style='font-size:1rem'>{{t.atestado}}</strong> dias de afastamento a partir desta data,
+                                                 por motivo de doença. </div>                                                 
+                                                        <div style='margin-left:2rem;margin-top: -3rem;  height:7rem'>
+                                                               <p>CID 10: <p>
+                                                               <div style='margin:1rem auto; width:30rem; font-size:0.8rem;' class='grid'>     
+                                                                      {% for t in cid10  %}                                                       
+                                                                             <div style='margin-right:2rem; padding:0.1rem'><b><i class="fa-solid fa-check"></i> {{t.classificacao_internacional_doenca_CID}} </b></div>
+                                                                      {% endfor %}
+                                                               </div>                                                        
+                                                        </div>                                                
+                                                        <div style='margin-left:2rem; margin:3rem auto; text-align: right;'>     
+                                                               <span style='text-align:right'>Vera Cruz, {{t.data_triagem}}</span>
+                                                        </div>                                                
+                                                        <div style='text-align:center; width: 100%; '>                                          
+                                                               <span >Dr.(a) {{request.user}}</span><br>
+                                                               <hr style="width: 75%;margin: auto;">
+                                                               Médico que fez o atendimento
+                                                        </div>
+                                                 <div style='font-size:0.6rem; margin-top:6.6rem'>
+                                                        <b>UPA VERA CRUZ</b>
+                                                        <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
+                                                        <BR/>Tel.: (71) 3633-2286\
+                                                        <BR/>Email: servicosocial.upaveracruz@gmail.com
+                                                 </div>                                       
+                                          </div>                                    
+                                          <!--fim Imprimir Atestados-->
+                                   </section>
+                            {% endif %}
                      {% endif %}  
                        
        </article> 
