@@ -108,7 +108,7 @@ class cid_10 (models.Model):
 
 # Create your models here.
 class Medico_atendimento (models.Model):
-    paciente_medico_atendimento = models.OneToOneField(triagem, null=False, on_delete=models.PROTECT)    
+    paciente_medico_atendimento = models.ForeignKey(triagem, null=False, on_delete=models.PROTECT)    
     historico_doenca_atual_HDA = RichTextField(null=True, blank=True)
     exame_fisico = RichTextField(null=True, blank=True)
     Diagnostico = RichTextField(null=True, blank=True)

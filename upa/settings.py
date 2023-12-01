@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'configUPA',
     'PrintPDFs',
-    'ckeditor'
+    'ckeditor',
    
 ]
 

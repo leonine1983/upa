@@ -1,6 +1,7 @@
 {% extends 'global/template_geral.html' %}
 {% load static %}
 {% block css %}
+
 <link rel="stylesheet" href="{% static 'global/css/modal.css' %}">
 <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %}">
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
@@ -60,6 +61,13 @@
        {% endfor %}
 {% endblock body_title %}
 {% block body_login %}
+{% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+{% endif %}
 <div  class='dados-preatendimento'>
        <!--Informações da Triagem-->
        {% for dados in triagem  %} 
@@ -144,6 +152,9 @@
                      <label for="id_paciente_medico_atendimento" class='fs-6 text-text-danger-emphasis'>Paciente em atendimento: </label>                                         
                      <select class=' ml-4 bg-dark-subtle m-1' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
                             <option  value="{{dados.id}}" selected="{{dados.id}}">Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} |&nbsp; Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b> &nbsp;| Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos</option>                                    
+                            {% for error in form.paciente_medico_atendimento.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
                      </select>                            
               </div>
               {% endfor %}
@@ -151,7 +162,11 @@
               <hr style='margin-top:-2rem!important'>              
               <div class='d-flex bg-secondary-subtle p-3' style='margin-top:-3rem!important'> 
                      <label for="id_classificação_internacional_doenca_CID" class='fs-6 text-danger-emphasis'>Classificação internacional doença CID:</label>
-                     {{form.classificacao_internacional_doenca_CID}}
+                     {% for error in form.nome.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                     {% endfor %}
+                     {{form.nome.label_tag}}
+                     {{form.classificacao_internacional_doenca_CID}}                     
               </div>  
               <div class="bd-example border" style='margin-top:-2rem!important'>
                      <div class="d-flex align-items-start">
@@ -172,7 +187,12 @@
                        <div class="tab-content" id="v-pills-tabContent">
                          <div class="tab-pane fade active show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <p><strong>Descreva o histórico da doença atual (HDA)</strong> </p>
+                            {% for error in form.historico_doenca_atual_HDA.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                            {% endfor %}                            
+                            {{ form.historico_doenca_atual_HDA.label_tag }}
                             {{form.historico_doenca_atual_HDA}}
+                            
                          </div>
                          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                             <p><strong>Descreva o exame físico do paciente</strong></p>
