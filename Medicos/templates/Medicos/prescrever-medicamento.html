@@ -8,7 +8,6 @@
 <!--Multi Select para o form-->
 <link rel="stylesheet" href="{% static 'global/js/multi-select/css/multi-select.css' %}">
 <script src="{% static 'global/js/multi-select/js/jquery.multi-select.js' %}"></script>
-<!--END Multi Select para o form-->
 
 <!--Select2-->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -74,6 +73,7 @@
              /** background:#97d3c4; **/
               padding:1rem;
        }
+       #id_atestado{scale: 0.5!important;margin-left: 10!important;}
        #id_preescrever_medicamento_medico{
               background:transparent;
               width:95%;
@@ -142,6 +142,9 @@
         }
         .main-header-title, .main-header{
               display:none !important;
+        }
+        .vetor-img-aereo{
+              margin-top: -8%!important;
         }
        
 
@@ -428,61 +431,62 @@
 
 
        </div>
-       <div class='col mt-3'>              
-              <form  method="post" class='flex'>
-                     {% csrf_token %}
-                            
-                     <div style='width:67%'>
-                            <ul class="menu-abas ">
-                                   <li class='prescricao border-radius'><a href="#tab1">&nbsp;&nbsp;Preescrever Medicamento <i class="fa-solid fa-capsules"></i>&nbsp;&nbsp;</a></li>
-                            <!-- <li class='encaminhamento'><a href="#tab2">&nbsp;&nbsp;Encaminhamentos <i class="fa-regular fa-paste"></i>&nbsp;&nbsp;</a></li> -->
-                                   <li class='exames'><a href="#tab3">&nbsp;&nbsp;Exames <i class="fa-solid fa-notes-medical"></i>&nbsp;&nbsp;</a></li>
-                                   <li class='atestado'><a href="#tab4">&nbsp;&nbsp;Atestados <i class="fa-solid fa-file-contract"></i></i>&nbsp;&nbsp;</a></li>
-                            </ul>
-                            
-                            <article style='width:102%'>                     
-                                   <section class='prescricao' id="tab1" class="active flex" >                                   
-                                          <div>{{form.preescrever_medicamento_medico}}{{form.media}}</div>
-                                   </section>
-                            
-                            <!--  <section style='width:93.5%' class='encaminhamento' id="tab2">
-                                          {{form.encaminhamento}}
-                                   </section>-->
-                            
-                                   <section class='exames' id="tab3" style='height:27.3rem'>
-                                          <div >                                          
-                                          <p><i class="fa-solid fa-computer-mouse"></i> Selecione os exames que são recomendados para o paciente:</p>
-                                          <p> {{form.exames}}</p>
+       <div class='col mt-5'>  
+              <h1 class="h4 ml-3 w-75">Caso seja necessário gerar algum documento para o paciente, utilize os botões abaixo.</h1>
+              <hr>
+                       
+              <form  method="post">                     
+                     {% csrf_token %}                     
+                     <div>
+                            <div class="d-flex  border">
+                                   <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                          <button class="nav-link active " id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Preescrever Medicamento </button>
+                                          <button class="nav-link " id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Exames</button>
+                                          <button class="nav-link " id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Atestado Paciente</button>
+                                          <!--<button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</button>-->
+                                   </div>   
+
+                                   <div class="tab-content border border-1 h-100" id="v-pills-tabContent">
+                                          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">{{form.preescrever_medicamento_medico}}{{form.media}}</div>
+                                          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                                 <p> {{form.exames}}</p>
                                                  <script>
                                                         // Chame a função jQuery.noConflict() para liberar o símbolo $
                                                         var jQuery = $.noConflict(true);
                                                         $('#id_exames').multiSelect()
                                                  </script>
-                                                 <!--
-                                                 <div id="area">
-                                                        <h1><i class="fa-solid fa-stethoscope"></i> Solicitação de Exames</h1>
-                                                 </div> -->
-                                          </div>   
-                                   </section>  
-                                   <section class='atestado' id="tab4" style='height:27.3rem'>
-                                          <i class="fa-solid fa-file-contract"></i>
-                                          <div>Por favor, forneça a duração em dias para o atestado médico do paciente. Exemplo: 25 </div>
-                                          {{form.atestado}}
-                                   </section>             
-                            </article> 
-                     </div> 
-                     <div style='width:20%; height: 30rem; text-align: center;'>
-                            {% if form.enviar_ambulatorio %}
-                            <h3>Enviar o paciente para o ambulatório:</h3>
-                            {{form.enviar_ambulatorio}}     
-                            {% endif %}         
-                            <button style='width: 90%;' type="submit" class='button-salvar'>{{pk}}  Salvar Formulário</button>
-                            <a class='button-salvar' style="background-color:#87CEEB ;" href="{% url 'Triagem:triagem_especializada' %}?param={{ pk }}">Atendimento especializado</a>
-                     </div>                        
+                                          </div>
+                                          <div class="tab-pane fade d-flex" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                                                 
+                                                 {{form.atestado}} Digite a quantidade de dias que o paciente permanecerá em descanso e recuperação. 🕒
+                                          </div>
+                                          <!--<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>-->
+                                   </div>
+                            </div> 
+                            
+                            <div >
+                                   {% if form.enviar_ambulatorio %}
+                                   <h3>Enviar o paciente para o ambulatório:</h3>
+                                   {{form.enviar_ambulatorio}}     
+                                   {% endif %}         
+                                   <button style='width: 90%;' type="submit" class='btn btn-sm btn-secondary mt-3 fs-4'>Continuar <i class="fa-solid fa-angles-right"></i></button>
+                                   <div class="m-auto mt-3 w-75">Se necessário encaminhar o paciente para atendimentos especializados, como exames de raio-x, ambulatório e outros, utilize o botão <b>Atendimento especializado</b>. 🏥
+                                          <a class='btn btn-sm bg-secondary-subtle'  href="{% url 'Triagem:triagem_especializada' %}?param={{ pk }}">Atendimento especializado</a>
+                                   </div>
+                                   
+                            </div>                          
+                                                        
+                     </div>  
+                                                   
               </form>
+             
        </div>
+       
 </div>     
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!--Multi Select para o form-->
+       <link rel="stylesheet" href="{% static 'global/js/multi-select/css/multi-select.css' %}">
+       <script src="{% static 'global/js/multi-select/js/jquery.multi-select.js' %}"></script>
      <script>
      $(document).ready(function() {
        $('#move').click(function() {
