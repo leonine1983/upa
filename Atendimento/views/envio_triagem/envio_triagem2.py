@@ -17,7 +17,7 @@ from django.shortcuts import redirect
 
 class envio_paciente_a_triagem_2(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = envio_triagem
-    fields = ['paciente_envio_triagem']      
+    fields = ['paciente_envio_triagem', 'nome_acompanhante']      
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        

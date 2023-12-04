@@ -7,11 +7,13 @@ from django.views.generic.edit import CreateView
 from Atendimento.models import envio_triagem , ficha_de_atendimento
 from datetime import timezone, datetime, timedelta
 from django.utils.safestring import mark_safe
+from .envio_form import Envio_Form
 
 
 class envio_paciente_a_triagem(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = envio_triagem
-    fields = ['paciente_envio_triagem', 'retornou_em_menos_de_48_horas']    
+    #fields = ['paciente_envio_triagem', 'retornou_em_menos_de_48_horas', 'nome_acompanhante']   
+    form_class = Envio_Form
     template_name = 'Atendimento/envio_a_triagem.html'    
     success_url = reverse_lazy('Atendimento:lista_de_paciente_na_triagem')
     success_message = "Paciente enviado com sucesso para a fila de classificação! 🚀"

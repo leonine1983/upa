@@ -305,22 +305,19 @@
                                    <p>Hora: {{r.paciente_medico_atendimento.hora_triagem}}hs</p> </p>
                                    <div style="display: flex;width:auto; font-size:0.9rem">
                                           <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">PA:</b>&nbsp; {{r.paciente_medico_atendimento.pressao_arterial_PA}} max | {{r.paciente_medico_atendimento.pressao_arterial_PA_2}} min
+                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">PA:</b>&nbsp; {{r.paciente_medico_atendimento.pressao_arterial_PA}}mmHg max | {{r.paciente_medico_atendimento.pressao_arterial_PA_2}}mmHg min
                                           </div>
                                           <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FC:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_cardiaca_FC}}
+                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FC:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_cardiaca_FC}}bpm
                                           </div>   
                                           <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FR:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_respiratoria_FR}}
+                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FR:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_respiratoria_FR}}bpm
                                           </div>  
                                           <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">SPO²:</b>&nbsp; {{r.paciente_medico_atendimento.saturacao_de_oxigenio_SPO2}}
-                                          </div> 
+                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">SPO²:</b>&nbsp; {{r.paciente_medico_atendimento.saturacao_de_oxigenio_SPO2}}%
+                                          </div>                                                                                  
                                           <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">SPO²:</b>&nbsp; {{r.paciente_medico_atendimento.saturacao_de_oxigenio_SPO2}}
-                                          </div>                                        
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">HGT:</b>&nbsp; {{r.paciente_medico_atendimento.hemoglicoteste_HGT}}
+                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">HGT:</b>&nbsp; {{r.paciente_medico_atendimento.hemoglicoteste_HGT}}mg/dL
                                           </div> 
                                           <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
                                                  <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">TEMP:</b>&nbsp; {{r.paciente_medico_atendimento.temperatura_TEMP}}c°
@@ -351,7 +348,7 @@
                             <div style="margin-top: 3%;">
                                    <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important;">Informaçõe do Atendimento Médico</h2>
                                    <hr>
-                                   Hora: {{r.hora_medico}}hs
+                                   Data: {{r.data_medico}}hs Hora: {{r.hora_medico}}hs
                                    <div style="margin-left: 2rem;">
                                           <p style="background-color:#ccc; padding: 0.5rem">H.D.A: </p>
                                           <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
@@ -432,7 +429,7 @@
 
        </div>
        <div class='col mt-5'>  
-              <h1 class="h4 ml-3 w-75">Caso seja necessário gerar algum documento para o paciente, utilize os botões abaixo.</h1>
+              <h1 class="h4 ml-3 w-75 bg-secondary-subtle p-3 rounded-top-1 shadow shadow-sm">Caso seja necessário gerar algum documento para o paciente, utilize os botões abaixo.</h1>
               <hr>
                        
               <form  method="post">                     

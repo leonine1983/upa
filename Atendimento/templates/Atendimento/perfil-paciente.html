@@ -14,7 +14,7 @@
 <!--Titulo da Pagina-->
 {% block body_title %}   Informações Pessoais do Paciente::   {% endblock body_title %}
 {% block body_login %}
-<div class='menu-local-top' style='margin-top:-1rem ; border-right-bottom-radius:10rem'>
+<div class='menu-local-top' style='margin-top:-3rem ; border-right-bottom-radius:10rem'>
     <ul style='border-bottom-right-radius: 1rem;  '>
         <li><a href="{% url 'Atendimento:lista-paciente' %}">Listagem</a></li>
         <li> <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastro</a></li>
@@ -173,14 +173,14 @@
         <div class="dados-pessoais">
             <div class="info-pessoal">
                 <div>
-                    <p class="nome_social">{{dados_pessoais.nome_social}}</p>
-                    <p>&nbsp</p>
+                    <p class="nome_social p-1 text-uppercase fs-4 bg-secondary-subtle">{{dados_pessoais.nome_social}}</p>
+                    <p>&nbsp</p>                    
                     <p><b>Idade: </b> {{dados_pessoais.idade}} anos </p>
-                    <p>(obs.: Colocar para a data mudar automaticamente)</p>
                     <p><b>Data de Nascimento: </b>{{dados_pessoais.data_nascimento}}</p>
                     <p><b>Sexo: </b>{{dados_pessoais.sexo}}</p>
                     <p><b>Nº RG: </b>{{dados_pessoais.RG}}</p>
                     <p><b>Nº CPF: </b>{{dados_pessoais.CPF}}</p>
+                    <p><b>Cartão do SUS: </b> {{dados_pessoais.cartao_sus}} </p>
                     <p><b>Nacionalidade: </b>{{dados_pessoais.nacionalidade}}</p>
                     <p>&nbsp</p>
                 </div>
@@ -214,7 +214,7 @@
                 </div>                                 
             </div>            
             <p><b>Data em que foi realizado o cadastro do paciente nesse sistema:</b></p>
-            <p>{{dados_pessoais.data_cadastro}} &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;  Nº de Registro: {{dados_pessoais.registro}}</p>
+            <p>{{dados_pessoais.data_cadastro}} &nbsp;&nbsp;<b>|</b>&nbsp;&nbsp;  Nº de Registro:  {{dados_pessoais.codigo_pacient}}</p>
         </div>
         <hr>
         <p>&nbsp;</p>        
@@ -223,9 +223,7 @@
 
         {% endif %}        
     </div>
-    
-    <div style='text-align:right; width:100%'><a  href="{% url 'Atendimento:perfil-paciente-hist' dados_pessoais.id %}"> HISTÓRICO DO PACIENTE <i class="fa-solid fa-file-medical"></i></a></div>
-
+   *
 
 
 {{dbs}}
