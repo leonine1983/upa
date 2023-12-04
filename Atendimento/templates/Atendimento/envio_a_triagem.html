@@ -133,21 +133,20 @@ $(document).ready(function() {
                         <style>
                             .select2 {
                                 width:90% !important;
-                                margin:2rem 0 !important;
                             }
                         </style>
                     <div class='col row p-0'>
-                        <div class='col'>
-                            <label for="id_paciente_envio_triagem">Selecione o nome do paciente</label>
+                        <div class='col m-1 bg-secondary-subtle'>
+                            <label for="id_paciente_envio_triagem"><i class="fa-solid fa-person"></i> Selecione o nome do paciente</label>
                             {{form.paciente_envio_triagem}}  
                         </div>
-                        <div class='col'>
-                            <label for="id_nome_acompanhante">Digite o nome do acompanhate</label>
+                        <div class='col p-2 m-1 bg-secondary-subtle'>
+                            <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling text-uppercase"></i> Nome do acompanhate</label>
                             {{form.nome_acompanhante}}  
                         </div>
                     </div>       
                     {% if not url == 'Atendimento:envio_paciente_a_triagem'%}                      
-                    <button class='btn btn-sm btn-primary col-4 m-3' type="submit">
+                    <button class='btn btn-sm btn-primary col-3 m-3' type="submit">
                         <i class="fa-thin fa-diagram-successor"></i>
                         Salvar Paciente na <b>Fila de Espera</b> para classificação
                         <i class="fa-solid fa-plus"></i>
