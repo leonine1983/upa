@@ -31,50 +31,50 @@ class TriagemEnfermariaUpdateForm(forms.ModelForm):
                  'saturacao_de_oxigenio_SPO2', 'hemoglicoteste_HGT', 'temperatura_TEMP', 'peso', 'altura',
                 'observacao']
     
-    frequencia_cardiaca_FC = forms.CharField(
-        #label='Nome do profissional:',
+    frequencia_cardiaca_FC = forms.FloatField(
+        label='Frequência Cardíaca (FC):',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3'}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    pressao_arterial_PA_2 = forms.CharField(
-        #label='Nome do profissional:',
+    pressao_arterial_PA_2 = forms.FloatField(
+        label='Pressão Arterial SISTÓLICA:',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 '}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase '}),
     )
-    pressao_arterial_PA = forms.CharField(
-        #label='Nome do profissional:',
+    pressao_arterial_PA = forms.FloatField(
+        label='Pressão Arterial DIASTÓLICA:',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3'}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    frequencia_respiratoria_FR = forms.CharField(
-        #label='Nome do profissional:',
+    frequencia_respiratoria_FR = forms.FloatField(
+        label='Frequência Cardíaca (FC):',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3'}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    saturacao_de_oxigenio_SPO2 = forms.CharField(
-        #label='Nome do profissional:',
+    saturacao_de_oxigenio_SPO2 = forms.FloatField(
+        label='Saturação de Oxigênio (SPO²):',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 '}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    hemoglicoteste_HGT = forms.CharField(
-        #label='Nome do profissional:',
+    hemoglicoteste_HGT = forms.FloatField(
+        label='Hemoglicoteste (HGT):',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 '}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    temperatura_TEMP = forms.CharField(
-        #label='Nome do profissional:',
+    temperatura_TEMP = forms.FloatField(
+        label='Temperatura (C°):',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 '}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    peso = forms.CharField(
-        #label='Nome do profissional:',
+    peso = forms.FloatField(
+        label='Peso (Kg):',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 '}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    altura = forms.CharField(
-        #label='Nome do profissional:',
+    altura = forms.FloatField(
+        label='Altura:',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3'}),
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
    
     def clean_peso(self):

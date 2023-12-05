@@ -24,6 +24,7 @@
             padding: 0.1rem;
             color:rgb(255, 255, 255) ;
           }
+          .select2-selection{margin-left:-15%!important; width:100%!important; padding:0.3rem 0 !important}
     </style>
 {% endblock css %}    
 {% block script %}
@@ -80,18 +81,18 @@ $(document).ready(function() {
     {% if not get_id %}
     {% for db in lista_db %}     
         <tr class='fs-7  m-0 fs-7 p-0 {% if db.retornou_em_menos_de_48_horas %}bg-danger-subtle text-light {% else %}bg-primary-subtle{% endif %} '>
-            <td class='text-center text-uppercase'>
+            <td class='text-center '>
                 <div class="hours48 bg-danger border p-1 rounded-start-5">{% if db.retornou_em_menos_de_48_horas %}Retornou em menos de 48{% endif %} {{ paciente.nome_do_campo_do_modelo }}</div>
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
             </td>
             <td class='text-center'>
-                <a class="link-color text-uppercase" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>
+                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>
             </td> 
             <td class='text-center'>
-                <a class="link-color text-uppercase fs-4" title='Ver perfil do paciente' href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span><i class="fa-duotone fa-square-user"></i> </span></a>
+                <a class="link-color  fs-4" title='Ver perfil do paciente' href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span><i class="fa-duotone fa-square-user"></i> </span></a>
             </td>    
             <td class='text-center'>
-                <a class="link-color text-uppercase" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.nome_acompanhante }}</span></a>                                                     
+                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.nome_acompanhante }}</span></a>                                                     
             </td>             
             <td class='text-center'>
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}">
@@ -144,12 +145,12 @@ $(document).ready(function() {
                             }
                         </style>
                     <div class='col row p-0'>
-                        <div class='col m-1 bg-secondary-subtle'>
-                            <label for="id_paciente_envio_triagem"><i class="fa-solid fa-person"></i> Selecione o nome do paciente</label>
+                        <div class='col p-3 bg-secondary-subtle m-3'>
+                            <label for="id_paciente_envio_triagem"><i class="fa-solid fa-person"></i> Selecione o nome do paciente &nbsp;&nbsp;&nbsp;</label>
                             {{form.paciente_envio_triagem}}  
                         </div>
-                        <div class='col p-2 m-1 bg-secondary-subtle'>
-                            <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling text-uppercase"></i> Nome do acompanhate</label>
+                        <div class='col m-1 pt-3 bg-secondary-subtle'>
+                            <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Nome do acompanhate</label>
                             {{form.nome_acompanhante}}  
                         </div>
                     </div>       

@@ -12,5 +12,5 @@ class Envio_Form(forms.ModelForm):
 
         widgets = {
             #'paciente_envio_triagem': forms.Select(attrs={'class': 'form-control'}),
-            'nome_acompanhante':forms.TextInput(attrs={'class': 'form-control m-1 text-uppercase text-center '})
+            'nome_acompanhante':forms.TextInput(attrs={'class': 'form-control text-center '})
         }
