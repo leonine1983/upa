@@ -97,8 +97,8 @@
                      <div><b>Enfermeira responsável pelo pré-atendimento:</b> <span  class='uppercase'> {{dados.nome_da_enfermeira}} </span></div>
                      <div class='flex'>                     
                             <ul>                            
-                                   <li><b>PA (Máxima) - Pressão Arterial Máxima:</b> <span> {{dados.pressao_arterial_PA_2}} mmHg</span></li>
-                                   <li><b>PA (Mínima) - Pressão Arterial Mínima:</b> <span> {{dados.pressao_arterial_PA}} mmHg</span></li>
+                                   <li><b>Pressão Arterial Distólica:</b> <span> {{dados.pressao_arterial_PA_2}} mmHg</span></li>
+                                   <li><b>Pressão Arterial Siastólica:</b> <span> {{dados.pressao_arterial_PA}} mmHg</span></li>
                                    <li><b>FC - Frequência Cardiaca:</b><span> {{dados.frequencia_cardiaca_FC}} bpm</span> </li>
                                    <li><b>FR - frequencia_respiratoria_FR:</b><span> {{dados.frequencia_cardiaca_FC}} bpm </span></li>
                                    <li><b>SPO² - Saturação de Oxigênio :</b> <span> {{dados.saturacao_de_oxigenio_SPO2}}% </span> </li>
@@ -122,7 +122,21 @@
                                    <li><b>Classificação de risco atual desse paciente:</b> <span> {{dados.classifica_tipo}}  </span></li>                            
                                    
                             </ul>
-                     </div> 
+                            {% if dados.data_triagem.paciente_envio_triagem.alergias  %} 
+                                   <div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Paciente Alérgico:
+                                          <div class='ml-3 p-2  w-100 fs-5'>
+                                                 {{dados.data_triagem.paciente_envio_triagem.conteudo_alergia}}                          
+                                          </div>
+                                   </div>
+                            {% endif %} 
+                            {% if dados.data_triagem.paciente_envio_triagem.comorbidades  %} 
+                                   <div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Comorbidades:
+                                          <div class='ml-3 p-2  w-100 fs-5'>
+                                                 {{dados.data_triagem.paciente_envio_triagem.conteudo_comorbidades}} 
+                                          </div>
+                                   </div>
+                            {% endif %} 
+                            </div> 
                      <div>
                             <b><h3> Sitomas relatados pelo paciente durante a triagem: </h3></b>
                             <div style='font-size: 1.3rem; padding: 1.4rem; border: 0.1rem solid #666; background:#f5f5dc'>
