@@ -10,6 +10,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 from django.urls import reverse
 from django.shortcuts import redirect
+from .envio_form import Envio_Form
 
 
 #criar a pagina de cadastro
@@ -17,7 +18,8 @@ from django.shortcuts import redirect
 
 class envio_paciente_a_triagem_2(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = envio_triagem
-    fields = ['paciente_envio_triagem', 'nome_acompanhante']      
+    #fields = ['paciente_envio_triagem', 'nome_acompanhante']      
+    form_class = Envio_Form
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        

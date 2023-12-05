@@ -30,19 +30,19 @@ class PacienteForm(forms.ModelForm):
         fields = ['nome_social', 'codigo_pacient', 'data_nascimento', 'sexo', 'etnia', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado', 'pais', 'CEP', 'nome_mae', 'responsavel', 'tel', 'cartao_sus']
 
         widgets = {
-            'nome_social': forms.TextInput(attrs={'class': 'form-control'}),
+            'nome_social': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
             'codigo_pacient': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
-            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'YYYY-MM-DD'}),
-            'sexo': forms.Select(attrs={'class': 'form-select'}),
+            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'DD/MM/AAAA'}),
+            'sexo': forms.Select(attrs={'class': 'form-select text-uppercase'}),
             'RG': forms.TextInput(attrs={'class': 'form-control'}),
             'CPF': forms.TextInput(attrs={'class': 'form-control'}),
-            'nacionalidade': forms.TextInput(attrs={'class': 'form-control'}),
-            'rua': forms.Select(attrs={'class': 'form-select'}),
-            'bairro': forms.Select(attrs={'class': 'form-select'}),
+            'nacionalidade': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
+            'rua': forms.Select(attrs={'class': 'form-select text-uppercase'}),
+            'bairro': forms.Select(attrs={'class': 'form-select text-uppercase'}),
             'CEP': forms.TextInput(attrs={'class': 'form-control'}),
-            'nome_mae': forms.TextInput(attrs={'class': 'form-control'}),
-            'responsavel': forms.TextInput(attrs={'class': 'form-control'}),
-            'tel': forms.TextInput(attrs={'class': 'form-control'}),
+            'nome_mae': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
+            'responsavel': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
+            'tel': forms.TextInput(attrs={'class': 'form-control '}),
             'cartao_sus': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
