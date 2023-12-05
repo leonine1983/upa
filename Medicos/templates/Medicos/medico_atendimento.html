@@ -66,29 +66,30 @@
               </div>
               <p><i class="fa-regular fa-calendar-check"></i>&nbsp;{{dados.data_triagem}} &nbsp; | &nbsp; <i class="fa-solid fa-clock"></i>&nbsp;{{dados.hora_triagem}} &nbsp; | &nbsp; Informações do Pré-atendimento (Triagem) da paciente: <b class='uppercase'>{{dados_registro.nome_social}} </b> | Enfermeira responsável pelo Atendimento:</b><p class='uppercase'> <span> {{dados.nome_da_enfermeira}}</span></p>
               <hr>
-              <div class='style_triagem'>
+              <div class='style_triagem '>
                      <div class='flex '>
                      <ul>
-                            <li><b>Nome Completo:</b> <p class='uppercase'><span> {{dados_registro.nome_social}} </span></p></li>
-                            <li><b>PA - Pressão Arterial:</b><p class='uppercase'> <span> {{dados.pressao_arterial_PA}} mmHg</span></p></li>
-                            <li><b>FC - Frequência Cardiaca:</b><p class='uppercase'><span> {{dados.frequencia_cardiaca_FC}} bpm</span></p></li>
-                            <li><b>FR - frequencia_respiratoria_FR:</b><p class='uppercase'><span> {{dados.frequencia_cardiaca_FC}} bpm </span></p></li>
+                            <li class='fs-7'><b>Nome Completo:</b> <p class='uppercase'><span> {{dados_registro.nome_social}} </span></p></li>
+                            <li class='fs-7'><b>PA - Pressão Arterial Sistólica:</b><p class='uppercase'> <span> {{dados.pressao_arterial_PA}} mmHg</span></p></li>
+                            <li class='fs-7'><b>PA - Pressão Arterial Diastólica:</b><p class='uppercase'> <span> {{dados.pressao_arterial_PA_2}} mmHg</span></p></li>
+                            <li class='fs-7'><b>FC - Frequência Cardiaca:</b><p class='uppercase'><span> {{dados.frequencia_cardiaca_FC}} bpm</span></p></li>
+                            <li class='fs-7'><b>FR - Frequencia Respiratoria:</b><p class='uppercase'><span> {{dados.frequencia_cardiaca_FC}} bpm </span></p></li>
                             
                      </ul>
                      <ul>   
                             
-                            <li><b>SPO² - Saturação de Oxigênio :</b><p class='uppercase'> <span> {{dados.saturacao_de_oxigenio_SPO2}}% </span> </p></li> 
-                            <li><b>HGT - Hemigloteste :</b><p class='uppercase'><span> {{dados.hemoglicoteste_HGT}} mg/dL </span></p></li>
-                            <li><b>TEMP - Temperatura:</b><p class='uppercase'> <span> {{dados.temperatura_TEMP}} °C </span></p></li></p>                        
-                            <li><b>Peso:</b><p class='uppercase'> <span> {{dados.peso}} kg</span></p></li>
+                            <li class='fs-7'><b>SPO² - Saturação de Oxigênio :</b><p class='uppercase'> <span> {{dados.saturacao_de_oxigenio_SPO2}}% </span> </p></li> 
+                            <li class='fs-7'><b>HGT - Hemigloteste :</b><p class='uppercase'><span> {{dados.hemoglicoteste_HGT}} mg/dL </span></p></li>
+                            <li class='fs-7'><b>TEMP - Temperatura:</b><p class='uppercase'> <span> {{dados.temperatura_TEMP}} °C </span></p></li></p>                        
+                            <li class='fs-7'><b>Peso:</b><p class='uppercase'> <span> {{dados.peso}} kg</span></p></li>
                             
                                                        
                              
                                                   
                      </ul>
                      <ul>
-                            <li><b>Data do atendimento:</b><p class='uppercase'><span> {{dados.data_triagem}} </span> </p></li>
-                            <li>TEMPO DE ESPERA:
+                            <li class='fs-7'><b>Data do atendimento:</b><p class='uppercase'><span> {{dados.data_triagem}} </span> </p></li>
+                            <li class='fs-7'>TEMPO DE ESPERA:
                                    <ul>
                                           {% for envio_triagem in dados_triagem %}
                                                  <li><b>Horário em que o paciente passou pela recepção:</b><p class='uppercase'><span> 
@@ -99,8 +100,23 @@
                                           {% endfor %}
                                    </ul>
                             </li> 
-                            <li><b>Classificação de risco atual desse paciente:</b><p class='uppercase'> <span> {{dados.classifica_tipo}}  </span></p></li>  
+                            <li class='fs-7'><b>Classificação de risco atual desse paciente:</b><p class='uppercase'> <span> {{dados.classifica_tipo}}  </span></p></li>  
                      </ul>
+                     {% if dados.data_triagem.paciente_envio_triagem.alergias  %} 
+                            <div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Paciente Alérgico:
+                                   <div class='ml-3 p-2  w-100 fs-5'>
+                                          {{dados.data_triagem.paciente_envio_triagem.conteudo_alergia}}                                          
+                                   </div>
+                            </div>
+                     {% endif %} 
+                     {% if dados.data_triagem.paciente_envio_triagem.comorbidades  %} 
+                            <div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Comorbidades:
+                                   <div class='ml-3 p-2  w-100 fs-5'>
+                                          {{dados.data_triagem.paciente_envio_triagem.conteudo_comorbidades}}                                          
+                                   </div>
+                            </div>
+                     {% endif %} 
+                     
                      </div>
                      <div><b>Sitomas relatados pelo paciente durante a triagem: </b>
                             <div style='font-size: 1.3rem; padding: 1.4rem; border: 0.1rem solid #666'>
