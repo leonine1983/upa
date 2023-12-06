@@ -37,17 +37,17 @@ class TriagemEnfermariaUpdateForm(forms.ModelForm):
         widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
     pressao_arterial_PA_2 = forms.FloatField(
-        label='Pressão Arterial SISTÓLICA:',
+        label='Pressão Arterial DIASTÓLICA:',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
         widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase '}),
     )
     pressao_arterial_PA = forms.FloatField(
-        label='Pressão Arterial DIASTÓLICA:',
+        label='Pressão Arterial SISTÓLICA:',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
         widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
     frequencia_respiratoria_FR = forms.FloatField(
-        label='Frequência Cardíaca (FC):',
+        label='Frequência Respiratória (FC):',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
         widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )

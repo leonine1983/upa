@@ -1129,20 +1129,7 @@ a:hover {
                                    <li><b>Classificação de risco atual desse paciente:</b> <span> {{dados.classifica_tipo}}  </span></li>                            
                                    
                             </ul>
-                            {% if dados.data_triagem.paciente_envio_triagem.alergias  %} 
-                                   <div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Paciente Alérgico:
-                                          <div class='ml-3 p-2  w-100 fs-5'>
-                                                 {{dados.data_triagem.paciente_envio_triagem.conteudo_alergia}}                          
-                                          </div>
-                                   </div>
-                            {% endif %} 
-                            {% if dados.data_triagem.paciente_envio_triagem.comorbidades  %} 
-                                   <div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Comorbidades:
-                                          <div class='ml-3 p-2  w-100 fs-5'>
-                                                 {{dados.data_triagem.paciente_envio_triagem.conteudo_comorbidades}} 
-                                          </div>
-                                   </div>
-                            {% endif %} 
+                            
                             </div> 
                      <div>
                             <b><h3> Sitomas relatados pelo paciente durante a triagem: </h3></b>
@@ -1150,6 +1137,20 @@ a:hover {
                                    {{dados.observacao|safe}}
                             </div>                            
                      </div>
+					 {% if dados.paciente_triagem.paciente_envio_triagem.alergias == '1' %} 
+								<div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Paciente Alérgico:
+										<div class='ml-3 p-2  w-100 fs-5'>
+												{{dados.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}                          
+										</div>
+								</div>
+						{% endif %} 
+						{% if dados.data_triagem.paciente_envio_triagem.comorbidades == '1'  %} 
+								<div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Comorbidades:
+										<div class='ml-3 p-2  w-100 fs-5'>
+												{{dados.paciente_triagem.paciente_envio_triagem.conteudo_comorbidades}} 
+										</div>
+								</div>
+						{% endif %} 
               </div>             
                    
        {% endfor %}

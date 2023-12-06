@@ -30,10 +30,7 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
     # Pega o valor do id do paciente no model envio_triagem
     def get_success_url(self):
         paciente_envio_triagem_id = self.object.paciente_triagem.paciente_envio_triagem_id
-        return reverse_lazy('Triagem:triagem-enfermaria-alergia-update', args=[paciente_envio_triagem_id])
-    
-
-    
+        return reverse_lazy('Triagem:triagem-enfermaria-alergia-update', args=[paciente_envio_triagem_id])   
 
 
     def form_valid(self, form):
