@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'global/css/modal.css' %}">
 <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %}">
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <link rel="stylesheet" href="{% static 'global/css/menu/menu-vertical-medico.css' %}">
 
@@ -194,8 +195,8 @@
                             <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">
                                    <label for="id_Diagnostico">Diagnóstico:</label>
                             </button>
-                         <button class="nav-link " id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="true">
-                            <label for="id_Conduta">Conduta:</label>
+                            <button class="nav-link " id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="true">
+                                   <label for="id_Conduta">Conduta:</label>
                             </button>
                        </div>
                        <div class="tab-content" id="v-pills-tabContent">
@@ -234,6 +235,19 @@
                             })
                             })
                      </script>
+                     <script>
+                            function changeTab(tabId) {
+                                // Esconde todas as abas
+                                var tabs = document.querySelectorAll('.tab-pane');
+                                tabs.forEach(function (tab) {
+                                    tab.classList.remove('active', 'show');
+                                });
+                        
+                                // Ativa a aba clicada
+                                var activeTab = document.getElementById(tabId);
+                                activeTab.classList.add('active', 'show');
+                            }
+                        </script>
        </div>
 
    
