@@ -24,6 +24,7 @@ class envio_paciente_a_triagem_2(LoginRequiredMixin, SuccessMessageMixin, Create
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)        
         context ['get_id'] = ficha_de_atendimento.objects.filter(id = self.kwargs['pk']) 
+        context ['envio_triagem'] = 'on'
         return context
     
     template_name = 'Atendimento/envio_a_triagem.html'    

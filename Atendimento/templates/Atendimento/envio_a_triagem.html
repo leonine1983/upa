@@ -145,6 +145,7 @@ $(document).ready(function() {
                             }
                         </style>
                     <div class='col row p-0'>
+                        {% if envio_triagem %}
                         <div class='col p-3 bg-secondary-subtle m-3'>
                             <label for="id_paciente_envio_triagem"><i class="fa-solid fa-person"></i> Selecione o nome do paciente &nbsp;&nbsp;&nbsp;</label>
                             {{form.paciente_envio_triagem}}  
@@ -153,6 +154,7 @@ $(document).ready(function() {
                             <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Nome do acompanhate</label>
                             {{form.nome_acompanhante}}  
                         </div>
+                        {% endif %}
                     </div>       
                     {% if not url == 'Atendimento:envio_paciente_a_triagem'%}                      
                     <button class='btn btn-sm btn-primary col-3 m-3' type="submit">
