@@ -33,10 +33,10 @@ urlpatterns = [
     path('medicos/Salas/atualizacao/<int:pk>', views.Atualiza_Sala_UpdatView.as_view(), name='salasUpdate' ),
     path('medicos/Salas/delete/<int:pk>', views.Delete_Sala_Delet.as_view(), name='salasDelete' ),
     # Exames
-    path('medicos/cadastroExames/', views.Cadastra_Exame_view.as_view(), name='cadastroExame' ),
+    path('medicos/cadastroExames/', views.Cadastra_Exame_view.as_view(), name='cadastroExame' ),    
+    path('medicos/cadastroExames/atualizacao/<int:pk>', views.Atualiza_Exame_UpdatView.as_view(), name='exameUpdate' ),
     path('medicos/Salas/', views.Lista_Salas_ListView.as_view(), name='salas' ),    
-    path('medicos/Salas/atualizacao/<int:pk>', views.Atualiza_Sala_UpdatView.as_view(), name='salasUpdate' ),
-    path('medicos/Salas/delete/<int:pk>', views.Delete_Sala_Delet.as_view(), name='salasDelete' ),
+    path('medicos/Exames/delete/<int:pk>', views.Delete_Exame_Delet.as_view(), name='exameDelete' ),
     # vincula Profissional
     path('medicos/Salas/profissional/', views.VinculaProfissiona_sala_view.as_view(), name='salasProfissionalCreate' ),
     path('medicos/Salas/profissional/update/<int:pk>', views.VinculaProfissiona_sala_update.as_view(), name='salasProfissionalUpdate' ),

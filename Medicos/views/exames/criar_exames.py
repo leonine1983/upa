@@ -4,14 +4,14 @@ from django.urls import  reverse_lazy
 from django.core.paginator import Paginator
 from django.views.generic import CreateView
 from Triagem.models import Exames_Model
-from Medicos.views.salas.salas_form import Salas_form
+from Medicos.views.exames.exame_form import Exame_form
 
 class Cadastra_Exame_view(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Exames_Model
-    template_name = 'Medicos/salas/salas.html'
-    form_class = Salas_form
-    success_url = reverse_lazy('Medicos:cadastroSala')    
-    success_message = "🏥 **Sala de Atendimento Médico Cadastrada com Sucesso!** 🎉"
+    template_name = 'Medicos/exames/exames.html'
+    form_class = Exame_form
+    success_url = reverse_lazy('Medicos:cadastroExame')    
+    success_message = "🏥 **Novo tipo de exame cadastrado com sucesso!** 🎉"
     paginate_by = 10 # Defina o número de itens por página
 
 
