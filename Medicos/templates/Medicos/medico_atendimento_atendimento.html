@@ -1171,15 +1171,23 @@ a:hover {
            
               {% for dados  in triagem %}
               <div class='d-flex pb-3'> 
-                     <div class='d-flex w-100'>
-                            <label class='col-2' for="id_paciente_medico_atendimento" class='fs-3 text-danger-emphasis'>Paciente em atendimento: </label>
-                             <div class='col-8'>
-                                   <div> <i class="fa-thin fa-asterisk"></i> Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} 
-                                          &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-file-signature"></i> Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b> &nbsp;
-                                          &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-cake-candles "></i> Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos</div>       
-                                   {{form.paciente_medico_atendimento}}
-                            </div>
-                             
+                     <div class='w-100 bg-secondary-subtle p-2'>
+						<div>
+							{% for dados  in triagem %}
+									<label for="id_paciente_medico_atendimento">Paciente em atendimento</label>             
+									<select class='uppercase' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
+											<option value="{{dados.id}}" selected="{{dados.id}}">
+											Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} 
+											&nbsp;&nbsp;|
+											&nbsp;&nbsp;
+											Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b>
+											&nbsp;&nbsp;|
+											&nbsp;&nbsp;
+											Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos
+											</option>                                    
+									</select>
+							{% endfor %}
+						</div> 
                      </div>
                      
                      {% for error in form.paciente_medico_atendimento.errors %}
