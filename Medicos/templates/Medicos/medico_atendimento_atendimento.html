@@ -1170,28 +1170,33 @@ a:hover {
            {{ form.media }}
            
               {% for dados  in triagem %}
-              <div class='d-flex'> 
-                     <label for="id_paciente_medico_atendimento" class='fs-6 text-text-danger-emphasis'>Paciente em atendimento: </label>                                         
-                     <select class=' ml-4 bg-dark-subtle m-1' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
-                            <option  value="{{dados.id}}" selected="{{dados.id}}">Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} |&nbsp; Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b> &nbsp;| Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos</option>                                    
-                            {% for error in form.paciente_medico_atendimento.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                     </select>                            
+              <div class='d-flex pb-3'> 
+                     <div class='d-flex w-100'>
+                            <label class='col-2' for="id_paciente_medico_atendimento" class='fs-3 text-danger-emphasis'>Paciente em atendimento: </label>
+                             <div class='col-8'>
+                                   <div> <i class="fa-thin fa-asterisk"></i> Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} 
+                                          &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-file-signature"></i> Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b> &nbsp;
+                                          &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-cake-candles "></i> Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos</div>       
+                                   {{form.paciente_medico_atendimento}}
+                            </div>
+                             
+                     </div>
+                     
+                     {% for error in form.paciente_medico_atendimento.errors %}
+                     <div class='p-2 bg-danger-subtle rounded-2'><i class="fa-duotone fa-circle-exclamation"></i>  {{error}} </div> 
+                     {% endfor %}                        
               </div>
               {% endfor %}
               <div class='h3' style='margin-top:-3rem!important'>Seções para o dignógstico do paciente</div>
               <hr style='margin-top:-2rem!important'>              
               <div class='d-flex bg-secondary-subtle p-3' style='margin-top:-3rem!important'> 
-                     <label for="id_classificação_internacional_doenca_CID" class='fs-6 text-danger-emphasis'>Classificação internacional doença CID:</label>
-                     {% for error in form.nome.errors %}
+                     <label for="id_classificação_internacional_doenca_CID" class='fs-6 text-danger-emphasis'>{{form.classificacao_internacional_doenca_CID.label_tag}}</label>
+                     {% for error in form.classificacao_internacional_doenca_CID.errors %}
                             <div style="color: red;">{{ error }}</div>
                      {% endfor %}
-                     {{form.nome.label_tag}}
-                     {{form.classificacao_internacional_doenca_CID}}                     
+                     <div>{{form.classificacao_internacional_doenca_CID}}</div>
               </div>
              
-
              
 		<div class="page w-100" style="height:20rem!import">
 			<!-- tabs -->
@@ -1222,17 +1227,27 @@ a:hover {
 					<li class="tab-content tab-content-2 typography">
                                           <p><strong>Descreva o exame físico do paciente</strong></p>
                                           {{form.exame_fisico}}
+                                          {% for error in form.exame_fisico.errors %}
+                                          <div class='p-2 bg-danger'> {{error}} </div> 
+                                          
+                                          {% endfor %}
 						
                                    </li>
 					
 					<li class="tab-content tab-content-3 typography">
                                           <p><strong>Descreva o diagnóstico do paciente</strong></p>
-                                          {{form.Diagnostico}}   
+                                          {{form.Diagnostico}}  
+                                          {% for error in form.Diagnostico.errors  %}
+                                          <div class='p-2 bg-danger'> {{error}} </div>          
+                                          {% endfor %} 
 					</li>
 					
 					<li class="tab-content tab-content-last typography">
 						<p><strong>Descreva a conduta do paciente</strong></p>
                                           {{form.conduta}}
+                                          {% for error in form.conduta.errors  %}
+                                          <div class='p-2 bg-danger'> {{error}} </div>
+                                          {% endfor %}
 					</li>
 				</ul>
 			</div>

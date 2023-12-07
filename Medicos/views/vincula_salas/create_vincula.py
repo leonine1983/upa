@@ -19,9 +19,9 @@ class VinculaProfissiona_sala_view(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['salaProfissional'] = 'vinculaSala'
-        
         paginator = Paginator(Salas_Atendimento.objects.all(), self.paginate_by)
         page_number = self.request.GET.get('page')  # Obtenha o número da página da URL
         context["vinculo_sala"] = 'ok'
-        context["object_list"] = paginator.get_page(page_number)
+        context['object_list'] = paginator.get_page(page_number)
         return context
+    
