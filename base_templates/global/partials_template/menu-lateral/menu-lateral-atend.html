@@ -49,8 +49,8 @@
         <!--Visto por Admin, por Enfermagem-->
         {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' %}     
             <li>
-                <a href="#">  
-                    <!--{% url 'Atendimento:pagina-inicial' %}-->                  
+                <a href="{% url 'Atendimento:pagina-inicial' %}">  
+                                    
                     <i class="fa fa-2x  fa-solid fa-chart-simple"></i>
                     <span class="nav-text">
                         Resumo Gráfico

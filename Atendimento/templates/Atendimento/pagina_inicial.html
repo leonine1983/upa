@@ -14,75 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                <div class="page-title  home text-center">
-                </div>
-                <div class="hexagon-menu clear">
-                   
-                    <div class="hexagon-item">
-                        <div class="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <div class="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <a  class="hex-content" href="{% url 'Atendimento:lista-paciente' %}">
-                            <span class="hex-content-inner">
-                                <span class="icon">
-                                    <i class="fa fa-universal-access"></i>
-                                </span>
-                                <span class="title">Paciente</span>
-                            </span>
-                            <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#087211dc"></path></svg>
-                        </a>
-                    </div>
-
-                    <div class="hexagon-item">
-                        <div class="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <div class="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <a href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "  class="hex-content">
-                            <span class="hex-content-inner">
-                                <span class="icon">
-                                    <i class="fa fa-solid fa-people-arrows"></i>
-                                </span>
-                                <span class="title">Fila de Triagem</span>
-                            </span>
-                            <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#087211dc"></path></svg>
-                        </a>
-                    </div>
-                    <div class="hexagon-item">
-                        <div class="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <div class="hex-item">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <a  class="hex-content" href='{% url 'Triagem:triagem-enfermaria' %}'>
-                            <span class="hex-content-inner">
-                                <span class="icon">
-                                    <i class="fa fa-thin fa-user-nurse"></i>
-                                </span>
-                                <span class="title">Triagem</span>
-                            </span>
-                            <svg viewBox="0 0 173.20508075688772 200" height="200" width="174" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M86.60254037844386 0L173.20508075688772 50L173.20508075688772 150L86.60254037844386 200L0 150L0 50Z" fill="#087211dc"></path></svg>
-                        </a>    
-                    </div>
-                </div>                    
+                <div class="page-title  home text-center"></div>                                  
             </div>
         </div>
     </div>
@@ -94,6 +26,7 @@
 </div>
 
 <div>&nbsp</div>
+<!--
 <div class='content-info-home'>
     <div>
         Temos instalado nesse {{nome_sistema}} os seguintes módulos:
@@ -116,13 +49,7 @@
             <div>&nbsp</div>  
         </ul>
     </div>
-</div>
-
-  
-    
-
-
-
-    
+</div>-->    
+<img src="data:image/png;base64,{{ imagem_base64 }}" alt="Gráfico de Atendimentos por Localidade">
 
 {% endblock body_login %}

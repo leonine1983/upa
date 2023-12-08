@@ -5,6 +5,23 @@ from django.urls import reverse_lazy
 from django.db.models import Count
 from Atendimento.models import envio_triagem, ficha_de_atendimento
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+import io
+import base64
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import io
+import base64
+
 
 @login_required
 def pagina_inicial(request):
@@ -17,7 +34,31 @@ def pagina_inicial(request):
     h = "Masculino"
     m = "Feminino"
    
+    # Extraia os dados de localidades do contexto Django
+    localidades = []
+    quantidades = []
+    for item in pacient_localidade:
+        localidades.append(item['paciente_envio_triagem__bairro__bairro_nome'])
+        quantidades.append(item['Total'])
+
+    # Gere o gráfico
+    fig, ax = plt.subplots()
+    ax.bar(localidades, quantidades)
+    ax.set_xlabel('Localidades')
+    ax.set_ylabel('Número de Atendimentos')
+    ax.set_title('Atendimentos por Localidade')
+    
+    # Salve a imagem em um buffer
+    buffer = io.BytesIO()
+    FigureCanvas(fig).print_png(buffer)
+    buffer.seek(0)
+
+    # Converta a imagem para base64 para incluí-la no contexto do Django
+    imagem_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+    
+    # Renderize a página
     return render(request, 'Atendimento/pagina_inicial.html', {
+        'imagem_base64': imagem_base64,
         'quant' : int(len(ficha_de_atendimento.objects.all())),
         'quant_homem' : len(ficha_de_atendimento.objects.filter(sexo = 1)),
         'quant_mulher' : len(ficha_de_atendimento.objects.filter(sexo = 2)),
