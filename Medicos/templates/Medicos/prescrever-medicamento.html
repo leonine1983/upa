@@ -147,6 +147,7 @@
               margin-top: -8%!important;
         }
 
+        .d_none{display: none!important;}
 
 
 
@@ -1219,7 +1220,6 @@ a:hover {
                             <div style='display:flex;width:32%; padding-top: 0.1rem;'>
                                    <div><img width="50" src="{% static 'brasao-veracruz.png' %}" alt=""></div>
                                    <div><img width="160" src="{% static 'upa24.png' %}" alt=""></div>
-
                             </div>
                      </div>
                      <div style='padding-top: 2rem;'><h1 style='font-size: 1.5rem; text-align: center !important;'>FICHA DE ATENDIMENTO DE EMERGÊNCIA</h1></div>
@@ -1354,7 +1354,7 @@ a:hover {
                                           </div>
                                    </div>
                             </div>
-                            <!--MÉDICO-->
+                            <!--MÉDICO-->                            
                             <div style="margin-top: 3%;">
                                    <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important; margin-bottom:-1%">Informaçõe do Atendimento Médico</h2>
                                    <hr>
@@ -1429,19 +1429,103 @@ a:hover {
                                           
                                    </div>
                                    <div style="margin-left: 2rem">
-                                          <p style="border:solid 0.1rem #ccc; padding: 0.8rem; font-weight: 700;">Alta:</p>
+                                          <p style="border:solid 0.1rem #ccc; padding: 0.9rem; font-weight: 700;">Alta:</p>
                                    </div>
                                    <div style="margin-left: 2rem">
                                           <p style=" padding: 1rem; font-weight: 700; text-align: right !important; ">Médico: _____________________________________</p>
                                    </div>
                             </div>
-                            
+                            <div style="page-break-before: always;"></div>
 
-                         
-                            
-                            
+                            <!-- SEGUNDA PAGINA DO FORMULARIO -->
+                            <div class="d_none">
+                                   <div  style='display:flex ' >
+                                          <div id="cabecalho" style='width: 68%;'>
+                                                 <div style='display:flex'><div style=' margin-right: 1rem;'>UPA VERA CRUZ</div><li>HTMAS</li></div>
+                                                 <p>Av. Juvenal João Vinagre, 175. Centro. Vera Cruz - BA</p>
+                                                 <p>Tel.: (71) 3633 - 2286</p>
+                                                 <p>Email: servicosocial.upaveracruz@gmail.com</p>
+                                          </div>
+                                          <div style='display:flex;width:32%; padding-top: 0.1rem;'>
+                                                 <div><img width="50" src="{% static 'brasao-veracruz.png' %}" alt=""></div>
+                                                 <div><img width="160" src="{% static 'upa24.png' %}" alt=""></div>
+                                          </div>
+                                   </div>
+                                   <h1 style="margin-top: 2rem;">Anotações Complementares</h1>
+                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
+                                          <div style="display: flex !important;">
+                                                 <div style="width: 10rem;">Evolução Médica: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                   </div>
+                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
+                                          <div style="display: flex !important;">
+                                                 <div style="width: 10rem;">Enfermeiro (a): </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                   </div>
+                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
+                                          <div style="display: flex !important;">
+                                                 <div style="width: 12rem;">Tec. Enfermagem: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                   </div>
+                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
+                                          <div style="display: flex !important;">
+                                                 <div style="width: 25rem;">Laboratório - RX - Serviço Social: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                   </div>
+                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
+                                          <div style="display: flex !important;">
+                                                 <div style="width:6rem;">Nutrição: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                   </div>
+                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
+                                          <div style="display: flex !important;">
+                                                 <div style="width:15rem;">Pacientes Internados: </div>
+                                          </div>
+                                          <div style="display: flex !important;">
+                                                 <div style="width:15rem;">Telefone 1: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                                 <div style="width:10rem;">Nome: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>
+                                          <div style="display: flex !important;">
+                                                 <div style="width:15rem;">Telefone 2: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                                 <div style="width:10rem;">Nome: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>                                   
+                                   </div>
+                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
+                                          <div style="display: flex !important;">
+                                                 <div style="width:18rem;">Reservado à Coordenação: </div>
+                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
+                                          </div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
+                                   </div>
+                                   <div style="margin-top: 0.7rem;" class="st-icon-addthis"v style="margin-top: 0.7rem;"><span style="margin-right: 8rem;">Atestado Médico: __________ dias</span><span>Número da D.O: ____________________</span></div>
+                            </div>
                      {% endfor %}
-
               </div>
 
 
@@ -1496,28 +1580,7 @@ a:hover {
                                                  {{form.conduta}}
                                           </li>-->
                                    </ul>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            
+                            </div>                            
                             <div >
                                    {% if form.enviar_ambulatorio %}
                                    <h3>Enviar o paciente para o ambulatório:</h3>
@@ -1534,27 +1597,7 @@ a:hover {
                                                    
               </form>
              
-       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       
-       
+       </div>      
 </div>     
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <!--Multi Select para o form-->
@@ -1569,15 +1612,16 @@ a:hover {
      </script>
 
 
-<script>
+     <script>
        function imprimirRelatorio() {
            var conteudoDiv = document.getElementById('imprimir_relatorio_medico').innerHTML;
            var janelaImpressao = window.open('', '', 'width=600');
-   
+    
            // Verifica se a janela foi aberta corretamente
            if (janelaImpressao) {
                janelaImpressao.document.write('<html><head><title>Relatório Médico</title></head><body>');
                janelaImpressao.document.write(conteudoDiv);
+               janelaImpressao.document.write('<div style="page-break-before: always;"></div>'); // Adiciona quebra de página
                janelaImpressao.document.write('</body></html>');
                janelaImpressao.document.close();
                janelaImpressao.print();
@@ -1585,6 +1629,7 @@ a:hover {
                alert('Erro ao abrir a janela de impressão. Verifique se as configurações do seu navegador permitem pop-ups.');
            }
        }
-   </script>
+    </script>
+    
    
 {% endblock body_login %}
