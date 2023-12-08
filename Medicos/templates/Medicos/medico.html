@@ -47,13 +47,7 @@ p {
 	margin-bottom: 40px;
 	text-align: center;
 }
-a {
-	text-decoration: underline;
-	color: #1889e6;
-}
-a:hover {
-	text-decoration: none;
-}
+
 .bg {
 	position: fixed;
 	top: 0;
@@ -121,10 +115,12 @@ a:hover {
 	border: 0;
 	outline: none;
 	font-size: 13px;
+	
+	height:100vh!important;/*controla o tamanho do conteudo da tab*/
 }
 .pcss3t > ul > li {
 	position: absolute;
-	width: 100%;
+	width: 100%;	
 	overflow: auto;
 	padding: 30px 40px 40px;
 	box-sizing: border-box;
@@ -340,10 +336,7 @@ a:hover {
 	top: 0;
 	left: 0;
 }
-.pcss3t .typography a {
-	text-decoration: underline;
-	color: #1889e6;
-}
+
 .pcss3t .typography a:hover {
 	text-decoration: none;
 }
@@ -1045,8 +1038,11 @@ a:hover {
 {% block titulo_ %} ÁREA MÉDICA - Pacientes aguardando atendimento {% endblock titulo_ %} 
 {% block body_title %}ÁREA MÉDICA: Pacientes aguardando atendimento{% endblock body_title %}
 {% block body_login %}
-<div>
-    
+<div >
+    <h1 style='margin-top:-3rem!important'><i class="fa-duotone fa-display-medical"></i> Atendimentos do dia</h1>
+	<hr>
+	<p class='fs-5'><strong>Bem-vindo, Dr. {{request.user}}!</strong> Nesta página, você terá acesso a todos os pacientes aguardando atendimento. Além disso, nas abas adicionais, pode revisar atendimentos não finalizados, casos encaminhados para outros setores e os registros de todos os atendimentos realizados no dia. Facilitamos sua gestão de pacientes para uma prática médica mais eficiente e organizada.</p>
+
 <p>&nbsp;</p>
 	<!-- tabs -->
     
@@ -1055,12 +1051,12 @@ a:hover {
         <label for="tab1"><i class="icon-bolt"></i>Aguardando Atendimento</label>
         
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
-        <label for="tab2"><i class="icon-picture"></i>Encaminhamentos Médicos</label>        
+        <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>        
         <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
         <label for="tab3"><i class="icon-cogs"></i>Todos os Atendimentos Médico do Dia </label>
         {% if not nao_finalizado == '1' %}
             <input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
-            <label for="tab5"><i class="icon-globe"></i>Pacientes não finalizados </label>
+            <label for="tab5"><i class="icon-globe"></i>0{{atend_aguarda_final|length}} - Pacientes não finalizados </label>
         {% endif %}
         
         <ul>
@@ -1089,8 +1085,8 @@ a:hover {
                     {{campo.medico_atendimento.paciente_medico_atendimento}}
                         {% if not campo.medico_atendimento.paciente_medico_atendimento %}
                             <tr> 
-                                <td {% if campo.paciente_triagem.retornou_em_menos_de_48_horas %} style='border:solid 0.13rem' class='border-danger' {% endif %}>
-                                    <a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk  %}">
+                                <td {% if campo.paciente_triagem.retornou_em_menos_de_48_horas %} style='border:solid 0.2rem' class='border-danger p-3' {% endif %}>
+                                    <a class="link-color " href="{% url 'Atendimento:perfil-paciente' campo.pk  %}">
                                         <span>{{campo.paciente_triagem}}</span>
                                         <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if campo.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div> 
                                     </a>
@@ -1131,7 +1127,7 @@ a:hover {
             </li>
             
             <li class="tab-content tab-content-2 typography">
-                <h1 class='fs-4'>Encaminhamentos Médicos</h1>
+                <h1 class='fs-4'><i class="fa-thin fa-hashtag"></i> 0{{atendimento_especi|length}} - Encaminhamentos Médicos</h1>
                 <hr>
                 <p>Esta tabela registra os pacientes que foram encaminhados para procedimentos específicos.</p>
                 <ul>
@@ -1181,7 +1177,7 @@ a:hover {
             
             <li class="tab-content tab-content-3 typography">
 
-                <h1 class='fs-4'>Todos os Atendimentos Médicos do Dia </h1>
+                <h1 class='fs-4'><i class="fa-thin fa-hashtag"></i> 0{{atendimentos_hoje|length}} - Atendimentos Médicos do Dia </h1>
                 <hr>
                 <p>Esta tabela registra os pacientes que foram atendidos por um médico no dia atual.</p>
                 <ul>
@@ -1233,10 +1229,12 @@ a:hover {
             </li>
             {% if not nao_finalizado == '1' %}
             <li class="tab-content tab-content-last typography">
-                <h1 class="fs-5">Atenção! Pacientes não finalizados</h1>
-                <table>
+                <h1 class="fs-3 bg-danger-subtle p-1 rounded-top-2"><i class="fa-duotone fa-circle-exclamation text-danger ml-2"></i> 0{{atend_aguarda_final|length}} - Atenção! Pacientes não finalizados</h1>
+				<p class='fs-5 p-4'><strong>Atenção, Dr.!</strong> Nesta seção, são listados os atendimentos que, por alguma razão, não foram finalizados e, portanto, não constarão na relação final de atendimentos. Isso pode causar erro no cálculo total. Solicitamos a sua atenção especial a esta página para a conclusão dos atendimentos listados. Se não houver nenhum, ficamos felizes em informar que os atendimentos pelo sistema estão transcorrendo de maneira eficiente.</p>
+
+                <table class='table border'>
                     <thead>
-                        <tr class="text-center">
+                        <tr class="text-center bg-secondary-subtle">
                             <th scope="col" style='padding:0.5rem;  font-weight: normal !important'>Nome do paciente</th>
                             <th scope="col" style='padding:0.5rem;  font-weight: normal !important'>Classificação de Risco</th>
                             <th scope="col" style='padding:0.5rem; font-weight: normal !important'>Médico Responsável</th>
@@ -1248,7 +1246,8 @@ a:hover {
                             {% if  ated_espec.medico_atendimento.paciente_medico_atendimento %}
                                 <tr class="text-center">
                                     <td scope="row" style='text-align:center' >{{ated_espec.paciente_triagem}}</td>
-                                    <td scope="row" style='text-align:center' class='  
+                                    <td scope="row" style='text-align:center' ><div
+										class='  
                                     {% if ated_espec.classifica_tipo.classifica_tipo == "Vermelho" %}
                                     prosseguir-red
                                     {% elif ated_espec.classifica_tipo.classifica_tipo == "Laranja"  %}
@@ -1257,9 +1256,10 @@ a:hover {
                                     prosseguir-green                                            
                                     {% elif ated_espec.classifica_tipo.classifica_tipo == "Azul"  %}
                                     prosseguir-azul
-                                {% endif %}'>{{ated_espec.classifica_tipo}} <i class="fa-thin fa-alarm-clock"></i> {{ated_espec.hora_medico}}</td>          
+                                {% endif %}'
+										>{{ated_espec.classifica_tipo}} <i class="fa-thin fa-alarm-clock"></i></div> {{ated_espec.hora_medico}}</td>          
                                     <td scope="row" style='text-align:center'>Dr.(a) {{ated_espec.medico_atendimento.medico_nome}}</td>
-                                    <th scope="col" style='text-align:center'><a href="{% url 'Medicos:dados_do_paciente_atualiza' ated_espec.medico_atendimento.id %}" style=' font-weight: normal;'>Prosseguir com o atendimento<i class="fa-regular fa-paper-plane"></i>  </a></th>
+                                    <th scope="col" style='text-align:center'><a href="{% url 'Medicos:dados_do_paciente_atualiza' ated_espec.medico_atendimento.id %}" style=' font-weight: normal;'>Finalizar atendimento<i class="fa-regular fa-paper-plane"></i>  </a></th>
                                     
                                 </tr>
                             {% endif %}
