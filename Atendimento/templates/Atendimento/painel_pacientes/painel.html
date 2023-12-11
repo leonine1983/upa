@@ -207,11 +207,11 @@
     {% endif %}
     {% endfor %} 
     <div class="div-content" style='display:block;  font-size:2rem; margin:1rem auto;'>
-      <div><span style='font-size:1.2rem'>ATENDIMENTO:</span> <span class='uppercase' id='sala'></span></div>
+      <div><span style='font-size:1.2rem'>ATENDIMENTO:</span> <span class='fs-5' id='sala'></span></div>
       <hr>
       <div>              
         <div id="chamada-paciente">
-          <p><h1 class='uppercase' style='font-size:3rem' id="nome-paciente"></h1></p>
+          <p><h1 class='uppercase' style='font-size:2.5rem' id="nome-paciente"></h1></p>
           <p style='font-size:1.5rem; color:rgb(157, 19, 170)'>Por favor se dirigir à sala de <span class='uppercase' id='sala_sala'></span></p>
           <hr>
           <p style="font-weight: bold ;font-size:1.2rem" id='hora-ultima'></p>
@@ -220,7 +220,31 @@
             <source  id="audio-source"  type="audio/mpeg" >
           </audio>
         </div>
+        <div>
+          <h1 class="fs-5">Últimos pacientes chamados {{nome_paciente_chamado}}</h1>
+          {{nome_paciente_chamado}}
+          {% for n in nome_paciente_chamado %}
+            {{n}}
+          {% endfor %}
+          <div id='ultimo_chamado'>           
+          </div>    
+          
+          <ul>
+            {{ nome_paciente_chamado|safe }}dd
+
+
+
+        
+          </ul>
+
+          </div>
+
+        </div>
       </div>
+
+
+
+
       
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>...
       <script>
@@ -228,14 +252,14 @@
         var audioSource = $('#audio-source'); // seleciona o elemento source do áudio
         var audioBase64Anterior = ''; // variável para armazenar o áudio da chamada anterior
         var audioRepeticoes = 0; // contador para controlar as repetições do áudio 
-        // var dataChamada = moment(data.data_chamada);
-//$('#data-chamada').text('Data de Chamada: ' + dataChamada.format('DD/MM/YYYY HH:mm:ss'));
 
       
       function atualizarDadosChamada(data) {
+
         $('#nome-paciente').text('' + data.nome_paciente2); 
         $('#sala').text('' + data.nome_sala); 
         $('#sala_sala').text('' + data.nome_sala); 
+       // $('#ultimo_chamado').text('' + data.nome_paciente_chamado)
         
         //var dataChamada = moment(data.data_chamada)
         //$('#data-chamada').text('Data de Criação:' + dataChamada.format('HH:mm:ss'))
