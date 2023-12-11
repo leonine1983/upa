@@ -122,6 +122,9 @@ class Medico_atendimento (models.Model):
     class Meta:
         permissions = [('Acesso_permitido_Admin', 'Acesso permitido ao admin do sistema na UPA'),\
                        ('Acesso_permitido_medic', 'Acesso permitido aos médicos') ]
+        
+    def __str__(self) -> str:
+        return self.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social
 
 
 
@@ -150,8 +153,11 @@ class Chamar_P_para_atendimento(models.Model):
 
         super().save(*args, **kwargs)
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self) -> str:
-        return self.nome_paciente
+        return str(self.nome_paciente.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social)
 
 
 class CadastroSala(models.Model):
@@ -213,7 +219,7 @@ class Salas_Atendimento(models.Model):
     profissionalSaude = models.ForeignKey(User, limit_choices_to={'groups__name__in':['group_Medicos', 'group_Enfermagem']}, on_delete=models.CASCADE)
     
     def __str__(self):
-        return str(self.nomeSala)
+        return str(self.nomeSala.nome_Sala )
     
 
 

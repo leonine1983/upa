@@ -41,6 +41,10 @@ class Prescreve_Medicamentos_fomr(forms.ModelForm):
 
 
 class ChamarPacienteForm(forms.Form):
+    class Meta:
+        fields = ['nome_paciente','profissionalSaude_id']
+        
     nome_paciente = forms.CharField(widget=forms.HiddenInput())
+    profissionalSaude_id = forms.CharField(widget=forms.HiddenInput())
 
        

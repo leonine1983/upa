@@ -22,6 +22,7 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         context = super().get_context_data(**kwargs) 
         pk = self.kwargs['pk']    
         context['paciente_medico'] = Medico_atendimento.objects.filter(pk=pk)
+        context['pkpk'] = pk
         context['triagem'] = triagem.objects.filter(id = pk)
         context['atendimento'] = 'atendimento'        
         return context
