@@ -1381,28 +1381,27 @@ a:hover {
      </style>
 
 
-
+	 <!--Botão chamar paciente-->
 	 <div class="floating-form-container">
 		<div class="floating-button" onclick="toggleForm()">
 			<i class="fa-solid fa-microphone-lines"></i>
 		</div>
-		Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b>
-	{% for t in paciente_medico %}
-		<!-- seu_template.html -->
-<form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form" id="floatingForm">
-    {% csrf_token %}
+		{% for t  in triagem %}
+			<!-- seu_template.html -->
+			<form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form" id="floatingForm">
+				{% csrf_token %}
 
-    <select class="uppercase" style="border:none; font-size:1.2rem" name="nome_paciente" required="" id="id_nome_paciente">
-        <option value="{{ t.paciente_medico_atendimento_id }}" selected="2">Chamar o Paciente {{ t.paciente_medico_atendimento }} id ={{pkpk}}</option>
-    </select>
-	<select class="uppercase" style="border:none; font-size:1.2rem" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-        <option value="{{ request.user}}" selected="2">Dr.(a){{ request.user.first_name }}ss</option>
-    </select><button type="submit">Chamar Paciente</button>
-</form>
-
+				<select class="uppercase" style="border:none; font-size:1.2rem" name="nome_paciente" required="" id="id_nome_paciente">
+					<option value="{{ t.pk }}" selected="2">Chamar o Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
+				</select>
+				<select class="uppercase" style="border:none; font-size:1.2rem" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+					<option value="{{ request.user}}" selected="2">Dr.(a){{ request.user.first_name }}</option>
+				</select><button type="submit">Chamar Paciente</button>
+			</form>
 		{% endfor %}
-	  </div>
-		  </div>
+	  	</div>
+	</div>
+	<!--END Botão chamar paciente-->
 
 	  <script>
 		function toggleForm() {

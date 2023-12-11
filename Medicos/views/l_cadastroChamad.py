@@ -6,6 +6,7 @@ from django.views import View
 from Medicos.forms import ChamarPacienteForm
 from Medicos.models import Chamar_P_para_atendimento, Medico_atendimento
 from django.contrib.auth.models import User
+from Triagem.models import triagem
 
 class MedicoChamaPacienteView(SuccessMessageMixin, View):
     template_name = 'seu_template.html'  # Substitua pelo nome real do seu template
@@ -17,7 +18,7 @@ class MedicoChamaPacienteView(SuccessMessageMixin, View):
             nome_paciente_id = form.cleaned_data['nome_paciente']
             profissionalSaude_id_username = form.cleaned_data['profissionalSaude_id']  # Alterado para pegar o username
 
-            nome_paciente = Medico_atendimento.objects.get(id=nome_paciente_id)
+            nome_paciente = triagem.objects.get(id=nome_paciente_id)
 
             # Obtém a instância do modelo User com base no username
             profissionalSaude_user = User.objects.get(username=profissionalSaude_id_username)

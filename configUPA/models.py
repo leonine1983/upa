@@ -5,9 +5,9 @@ from django.conf import settings
 
 # Create your models here.
 class config_Marquee(models.Model):
-    gif_medico = models.BooleanField(null=False, default=True)
-    gif_enfermera = models.BooleanField(null=False, default=True)
-    gif_Ze_gotina = models.BooleanField(null=False, default=True)
+    gif_medico = models.BooleanField(null=False, default=False)
+    gif_enfermera = models.BooleanField(null=False, default=False)
+    gif_Ze_gotina = models.BooleanField(null=False, default=False)
     data_ativa = models.BooleanField(null=False, default=True)
     hora_ativa = models.BooleanField(null=False, default=True)
     distancia = models.IntegerField(null=False, default='60' )
@@ -15,7 +15,7 @@ class config_Marquee(models.Model):
     bem_vindo_ativa_coracao = models.BooleanField(null=False, default=True)    
     bem_vindo_msg = models.TextField(null=False, default="Bem vindos à UPA de Vera Cruz ")
     mensagem_ativa = models.BooleanField(null=False, default=True)
-    mensagem = models.TextField(null=True, default="")
+    mensagem = models.TextField(null=True, default="🌞 Agradecemos pela paciência e confiança. Pedimos que aguardem com tranquilidade, pois estamos preparando tudo para atendê-los da melhor forma possível. Em breve, cada um de vocês será chamado para receber o cuidado especial que merece. Tenham um dia maravilhoso! 💙")
     letreiro_ativa = models.BooleanField(null=False, default=True)
 
     def __str__(self) :

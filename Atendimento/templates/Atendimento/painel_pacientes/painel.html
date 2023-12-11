@@ -14,8 +14,8 @@
         .video{
           position: fixed;
           z-index: -1;
-          margin-right: 10rem;
           width: 100%;
+          margin-top:-5%!important;
         }
         .container{
             margin: auto;
@@ -38,7 +38,7 @@
           padding: 1rem;   box-shadow: var(--shadow);
           background: var(--principal);
           background-color: rgba(161, 194, 160, 0.8); 
-          margin-top:-1rem;
+          margin-top:-0.1rem;
           box-shadow: var(--shadow);
         }
         marquee .fa-heart-pulse{color:red}
@@ -61,21 +61,21 @@
 {% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
 {% block body_login %}
 {% if videoUpa %}
-<video controls autoplay class="video">
+<video controls autoplay loop class="video">
   <source src="{% static  videoUpa  %}">
 </video>
 {% else %}
-<video controls autoplay class="video">
-  <source src="{% static 'videos/videoplayback.mp4'  %}">
+<video controls autoplay loop class="video" >
+  <source src="{% static 'videos/enfermeira_orando.mp4'  %}">
 </video>
 {% endif %}
-<div class="container ">     
+<div class="container">     
     
     {% for cf in configUpa %}
       {% if cf.letreiro_ativa %}
-    <marquee style="" behavior="scroll" direction="">   
+    <marquee behavior="scroll" direction="" class='rounded-bottom-5'>   
       <!--MARQUEEE-->       
-      <div>        
+      <div class='fs-6'>        
         <span> 
           
           {% if cf.gif_Ze_gotina %}
