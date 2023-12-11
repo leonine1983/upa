@@ -37,4 +37,10 @@ class Prescreve_Medicamentos_fomr(forms.ModelForm):
             
         }'''
        
+
+
+
+class ChamarPacienteForm(forms.Form):
+    nome_paciente = forms.CharField(widget=forms.HiddenInput())
+
        

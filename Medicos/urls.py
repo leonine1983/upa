@@ -8,6 +8,8 @@ urlpatterns = [
     path('', views.medico_protuario_view_, name='medico_prontuario'),
     #path('', views.medico_prontuario_view.as_view(), name='medico_prontuario'),
     path('atendimento/<int:pk>', views.medico_atendimento_view, name='medico_atendimento'), 
+    path('medico_chama_paciente/<int:pk>/', views.MedicoChamaPacienteView.as_view(), name='medico_chama_paciente'),
+
     
     #perfil completo do paciente / historico
     path('medico/lista_historico_paciente/', views.paciente_lista_historico.as_view(), name='lista_paciente_medico'),  

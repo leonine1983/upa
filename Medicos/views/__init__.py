@@ -10,6 +10,7 @@ from .g_perfil_paciente_segunda_parte import *
 from .h_perfil_paciente_perfil_completo import *
 from .i_lista_paciente_busca import *
 from .j_chamarPaciente import *
+from .l_cadastroChamad import *
 from .importar_CID10 import *
 # pastas
 from .salas import *

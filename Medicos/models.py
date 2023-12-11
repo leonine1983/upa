@@ -124,9 +124,11 @@ class Medico_atendimento (models.Model):
                        ('Acesso_permitido_medic', 'Acesso permitido aos médicos') ]
 
 
+
+
 class Chamar_P_para_atendimento(models.Model):
     # Define o modelo "Chamar_P_para_atendimento" com três campos: "nome_paciente", "profissionalSaude" e "data_chamada"
-    nome_paciente = models.OneToOneField(Medico_atendimento, null=True, on_delete=models.CASCADE)
+    nome_paciente = models.ForeignKey(Medico_atendimento, null=True, on_delete=models.CASCADE)
     profissionalSaude_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     data_chamada = models.DateTimeField(auto_now=True, null=True)
     data_criacao = models.DateTimeField(default=timezone.now)

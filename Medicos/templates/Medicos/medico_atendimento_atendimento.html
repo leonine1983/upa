@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+
+
+
 <link rel="stylesheet" href="{% static 'global/css/menu/menu-vertical-medico.css' %}">
 
 <style> {% for dados in paciente_triagem  %} 
@@ -1067,13 +1070,6 @@ a:hover {
        {% endfor %}
 {% endblock body_title %}
 {% block body_login %}
-{% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-{% endif %}
 
 <div  class='dados-preatendimento'>
        <!--Informações da Triagem-->
@@ -1206,7 +1202,7 @@ a:hover {
               </div>
              
              
-		<div class="page w-100" style="height:20rem!import">
+		<div class="page w-100" style="height:20rem!important">
 			<!-- tabs -->
 			<div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
 				<input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
@@ -1320,8 +1316,101 @@ a:hover {
        .modal-buttons button {
          margin: 0 5px;
        }
+
+
+
+
+	   body {
+		margin: 0;
+		padding: 0;
+		font-family: Arial, sans-serif;
+	  }
+	  
+	  .floating-form-container {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		z-index: 1000;
+	  }
+	  
+	  .floating-button {
+		background-color: #3498db;
+		color: #fff;
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	  }
+	  
+	  .floating-form {
+		display: none;
+		background-color: #fff;
+		border: 1px solid #ccc;
+		padding: 20px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	  }
+	  
+	  .floating-form label,
+	  .floating-form input,
+	  .floating-form button {
+		display: block;
+		margin-bottom: 10px;
+	  }
+	  
+	  .floating-form button {
+		background-color: #3498db;
+		color: #fff;
+		border: none;
+		padding: 10px 20px;
+		font-size: 16px;
+		cursor: pointer;
+		border-radius: 5px;
+	  }
+	  
+	  .floating-form button:hover {
+		background-color: #2980b9;
+	  }
+	  
+
+
+
      </style>
-     {% comment "chamar pacient desativado momentaneatment" %}
+
+
+
+	 <div class="floating-form-container">
+		<div class="floating-button" onclick="toggleForm()">
+			<i class="fa-solid fa-microphone-lines"></i>
+		</div>
+	{% for t in paciente_medico %}
+		<!-- seu_template.html -->
+<form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form" id="floatingForm">
+    {% csrf_token %}
+
+    <select class="uppercase" style="border:none; font-size:1.2rem" name="nome_paciente" required="" id="id_nome_paciente">
+        <option value="{{ t.id }}" selected="2">Chamar o Paciente {{ t.paciente_medico_atendimento }}</option>
+    </select>
+	<select class="uppercase" style="border:none; font-size:1.2rem" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+        <option value="{{ request.user.id}}" selected="2">{{ request.user.first_name }}</option>
+    </select><button type="submit">Chamar Paciente</button>
+</form>
+
+		{% endfor %}
+	  </div>
+		  </div>
+
+	  <script>
+		function toggleForm() {
+			var floatingForm = document.getElementById('floatingForm');
+			floatingForm.style.display = (floatingForm.style.display === 'none' || floatingForm.style.display === '') ? 'block' : 'none';
+		  }
+		  
+	  </script>
+	 {% comment "chamada de paciente via ajax" %}
      <div class="overlay" id="chamarPacienteOverlay">
        <div class="modal-content">
          <h1 style="font-size: 24px;">Chamar Paciente</h1>
@@ -1352,7 +1441,7 @@ a:hover {
              console.log('clicou no botão confirmar');
      
              $.ajax({
-               url: "{% url 'Medicos:cadastrar_chamada' %}",
+			   url: "{% url 'Medicos:cadastrar_chamada' %}",
                type: "POST",
                data: {
                  nome: nomeCompleto,
@@ -1367,10 +1456,10 @@ a:hover {
          }, 2000); // 2 segundos
        });
      </script>
-     {% endcomment %}
+    
      
      
-   
+   {% endcomment %}
      
 {% block script %}
 
