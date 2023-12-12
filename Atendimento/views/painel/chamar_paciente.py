@@ -26,10 +26,12 @@ def chamar_paciente(request):
     data_atual = datetime.now().date()
 
     # Filtra a queryset para incluir apenas registros do dia atual
-    nome_paciente_chamado = Chamar_P_para_atendimento.objects.filter(data_chamada__date=data_atual)
+    nome_paciente_chamado = Chamar_P_para_atendimento.objects.filter(data_chamada__date=data_atual)[:5]
     nome_paciente_chamado_data = {}
     for n in nome_paciente_chamado:
-        nome_paciente_chamado_data = f"<li>Nome: {n.nome_paciente}</li>"
+        data_chamada = n.data_chamada
+        hora_formato = data_chamada.strftime('%H:%M')
+        nome_paciente_chamado_data = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato}</li>"
     #nome_paciente_chamado_data = serialize('json', nome_paciente_chamado)
 
     sala = Salas_Atendimento.objects.filter(profissionalSaude=profissional_id)
