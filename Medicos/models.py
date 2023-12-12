@@ -136,6 +136,7 @@ class Chamar_P_para_atendimento(models.Model):
     data_chamada = models.DateTimeField(auto_now=True, null=True)
     data_criacao = models.DateTimeField(default=timezone.now)
     data_atualizacao = models.DateTimeField(default=timezone.now)
+    chamado = models.BooleanField(default=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)

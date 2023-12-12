@@ -1,19 +1,26 @@
-# views.py
-from django.shortcuts import redirect
+from django.forms.forms import BaseForm
+from django.http.response import HttpResponse
+from Medicos.models import Chamar_P_para_atendimento
+from django.views.generic import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
-from django.views import View
-from Medicos.forms import ChamarPacienteForm
-from Medicos.models import Chamar_P_para_atendimento, Medico_atendimento
-from django.contrib.auth.models import User
-from Triagem.models import triagem
 
-class MedicoChamaPacienteView(SuccessMessageMixin, View):
-    template_name = 'seu_template.html' 
-    success_message = "Paciente chamado com sucesso"
+class Update_chama_usuario(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Chamar_P_para_atendimento
+    fields = ['chamado']
+    success_message = "👤 Paciente apresentou-se ao atendimento"
+    
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
 
-    def post(self, request, pk):
-        form = ChamarPacienteForm(request.POST)
+
+
+
+
+    """
+    
+    form = ChamarPacienteForm(request.POST)
         if form.is_valid():
             nome_paciente_id = form.cleaned_data['nome_paciente']
             profissionalSaude_id_username = form.cleaned_data['profissionalSaude_id']  # Alterado para pegar o username
@@ -33,3 +40,6 @@ class MedicoChamaPacienteView(SuccessMessageMixin, View):
         else:
             # Lida com erros de formulário, se necessário
             pass
+    
+    
+    """

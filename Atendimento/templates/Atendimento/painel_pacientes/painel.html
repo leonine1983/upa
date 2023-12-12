@@ -304,10 +304,10 @@
       
         // adiciona evento de escuta para fim da reprodução do áudio
         audio.addEventListener('ended', function() {
-          if (audioRepeticoes < 2) { // se não alcançou o limite de repetições
+          if (audioRepeticoes < 1) { // se não alcançou o limite de repetições
             setTimeout(function() {
               audio.play(); // inicia a reprodução novamente
-            }, 2000); // espera 2 segundos
+            }, 3000); // espera 2 segundos
             audioRepeticoes++; // incrementa o contador de repetições
           }
         });

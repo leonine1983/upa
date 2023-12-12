@@ -355,17 +355,21 @@
 		</div>
 		{% for t  in triagem %}
 			<!-- seu_template.html -->
-			<form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form" id="floatingForm">
-				{% csrf_token %}
+                     <div class='d-flex'>
+                            <form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form" id="floatingForm">
+                                   {% csrf_token %}
 
-				<select class="uppercase" style="border:none; font-size:1.2rem" name="nome_paciente" required="" id="id_nome_paciente">
-					<option value="{{ t.pk }}" selected="2">Chamar o Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
-				</select>
-				<select class="uppercase" style="border:none; font-size:1.2rem" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-					<option value="{{ request.user}}" selected="2">Dr.(a){{ request.user.first_name }}</option>
-				</select><button type="submit">Chamar Paciente</button>
-			</form>
-		{% endfor %}
+                                   <select class="uppercase" style="border:none; font-size:1.2rem" name="nome_paciente" required="" id="id_nome_paciente">
+                                          <option value="{{ t.pk }}" selected="2">Chamar o Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
+                                   </select>
+                                   <select class="uppercase" style="border:none; font-size:1.2rem" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+                                          <option value="{{ request.user}}" selected="2">Dr.(a){{ request.user.first_name }}</option>
+                                   </select><button type="submit">Chamar Paciente</button>
+                            </form> 
+                            
+                            <a href="{% url 'Medicos:medico_avisa_paciente' t.id %}" class='btn btn-danger'>Apresentou-se</a>      
+                     </div>
+		{% endfor %}{{pkpk}}
 	  	</div>
 	</div>
 	<!--END Botão chamar paciente-->

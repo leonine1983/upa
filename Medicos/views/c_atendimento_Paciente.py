@@ -5,7 +5,7 @@ from django.http import  HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import CreateView
 #from Medicos.forms import Form_medico_atendimento
-from Medicos.models import CustomUser, Medico_atendimento
+from Medicos.models import CustomUser, Medico_atendimento, Chamar_P_para_atendimento
 from Triagem.models import triagem
 from Medicos.models import CustomUser
 
@@ -21,8 +21,8 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
         pk = self.kwargs['pk']    
-        context['paciente_medico'] = Medico_atendimento.objects.filter(pk=pk)
-        context['pkpk'] = pk
+        #context['paciente_medico'] = Medico_atendimento.objects.filter(pk=pk)
+        context['pkpk'] = Chamar_P_para_atendimento.objects.all()
         context['triagem'] = triagem.objects.filter(id = pk)
         context['atendimento'] = 'atendimento'        
         return context

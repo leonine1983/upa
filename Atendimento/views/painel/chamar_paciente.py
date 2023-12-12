@@ -16,12 +16,13 @@ from django.utils.safestring import mark_safe
 def chamar_paciente(request):    
     
     # Busca o id do profissional de saúde na primeira chamada de atendimento
-    nome_paciente = Chamar_P_para_atendimento.objects.first().nome_paciente    
+    nome_paciente = Chamar_P_para_atendimento.objects.filter(chamado=False).first().nome_paciente    
     profissional_id = Chamar_P_para_atendimento.objects.first().profissionalSaude_id 
     sala_do_usuario = Salas_Atendimento.objects.get(profissionalSaude=profissional_id).nomeSala
 
     nome_paciente_nome = Chamar_P_para_atendimento.objects.first().nome_paciente.paciente_triagem.paciente_envio_triagem.nome_social
     nome_paciente = f'Paciente {nome_paciente}  por favor se dirigir à {sala_do_usuario}'
+    print(f'nome do paciente {nome_paciente}')
 
     data_atual = datetime.now().date()
 
@@ -50,7 +51,7 @@ def chamar_paciente(request):
     audio_base64 = base64.b64encode(audio_content).decode('utf-8')
 
     # Montar a resposta JSON
-    print(f'nome do paciente {nome_paciente_chamado_data}')
+    
 
     response_data = {
         'nome_paciente_chamado' : mark_safe(nome_paciente_chamado_data),
