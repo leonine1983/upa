@@ -366,10 +366,14 @@
                                           <option value="{{ request.user}}" selected="2">Dr.(a){{ request.user.first_name }}</option>
                                    </select><button type="submit">Chamar Paciente</button>
                             </form> 
-                            
-                            <a href="{% url 'Medicos:medico_avisa_paciente' t.id %}" class='btn btn-danger'>Apresentou-se</a>      
+                            {% if chamado %}
+                                   {{exibe_b}}
+                                   {% if not exibe_b  %}
+                                   <a href="{% url 'Medicos:medico_avisa_pacientee' exibe_id %}" class='btn btn-danger'><i class="fa-solid fa-volume-slash"></i> Desistir de Chamada</a>      
+                                   {% endif %}
+                            {% endif %}
                      </div>
-		{% endfor %}{{pkpk}}
+		{% endfor %}
 	  	</div>
 	</div>
 	<!--END Botão chamar paciente-->

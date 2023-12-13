@@ -22,12 +22,10 @@ urlpatterns = [
     path('triagem/delete/<int:pk>', Triagem_Delete.as_view(), name='triagem-delete'),
 
 
-    path('chamar_paciente/<int:pk>/', views.chamar_paciente_triagem, name='chamar_paciente'),
     # Classifica risco
     path('classifica-risco', Classifica_risco_view.as_view(), name='classifica-risco'),
     path('classifica-risco/lista', Classifica_risco_lista_view.as_view(), name='classifica-risco-lista'),   
     path('classifica-risco/update/<int:pk>', Classifica_risco_Update_view.as_view(), name='classifica-risco-Update'),   
-    path('triagem/chamar_paciente', views.sua_view, name='chamar_paciente_triagem' ),   
     # cadastro de Enfermeras e Tec-enfermagem
     path('triagem/Enfermerios_e_Tec', views.Enferm_SignUpForm, name='user_create'),
     path('triagem/Enfermeros_e_Tec/atualiza/<int:pk>', views.EnfermUpdateView.as_view(), name='user_atualiza'),

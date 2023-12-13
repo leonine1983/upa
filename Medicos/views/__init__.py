@@ -17,6 +17,4 @@ from .salas import *
 from .exames import *
 from .vincula_salas import *
 from .criar_medicos import *
-from .chamar_paciente import *
-from .pdfs import *
-
+from .chamar_pacientee import *

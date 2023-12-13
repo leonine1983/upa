@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group, User
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib.auth.models import Group
+from django.contrib import messages
 from django.http import  HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import CreateView
@@ -8,6 +9,8 @@ from django.views.generic import CreateView
 from Medicos.models import CustomUser, Medico_atendimento, Chamar_P_para_atendimento
 from Triagem.models import triagem
 from Medicos.models import CustomUser
+from datetime import datetime
+
 
 
 class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -16,15 +19,51 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
     fields = ['paciente_medico_atendimento', 'historico_doenca_atual_HDA', 'exame_fisico', 'Diagnostico', 'conduta','classificacao_internacional_doenca_CID']
     template_name = 'Medicos/medico_atendimento_atendimento.html'   
     success_message = 'Avaliação médica feita com sucesso'
+
+    #messages.success(self.request, 'A mensagem que você deseja exibir quando exibe_b for verdadeiro.')
      
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
-        pk = self.kwargs['pk']    
+        pk = self.kwargs['pk']  
+        """
+        chamado = Chamar_P_para_atendimento.objects.filter(nome_paciente = pk, data_chamada__date = datetime.now().date()).first()
+        print(f'todos no chamadao {chamado}')
+        # Inicializar a variável exibe_b
+        if chamado:
+            for n in chamado:
+                exibe_b = n.chamado
+                exibe_id = n.pk
+                if exibe_b:
+                    messages.info(self.request, "Paciente já presente na sala de atendimento; ⚠️ favor cancelar a chamada.")
+                print(f'valor de exibie {exibe_b}') """
+        
+        # Usar o método first() para pegar o primeiro registro
+        chamado = Chamar_P_para_atendimento.objects.filter(nome_paciente=pk, data_chamada__date=datetime.now().date()).first()
+
+        # Inicializar a variável exibe_b
+        exibe_b = chamado.chamado
+        exibe_id = chamado.pk
+
+        # Se exibe_b for True, mostrar uma mensagem
+        if exibe_b:
+            messages.info(self.request, "Paciente já presente na sala de atendimento; ⚠️ favor cancelar a chamada.")
+
+        
+        else:
+            chamado = False
+            exibe_b = False
+
+           
+            
         #context['paciente_medico'] = Medico_atendimento.objects.filter(pk=pk)        
         context['triagem'] = triagem.objects.filter(id = pk)
-       
-        context['atendimento'] = 'atendimento'        
+        context['exibe_b'] = exibe_b  
+        context['atendimento'] = 'atendimento'     
+        context['chamado'] = chamado
+        if chamado:
+            context['exibe_id'] = exibe_id   
+           
         return context
 
     

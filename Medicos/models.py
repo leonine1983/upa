@@ -158,7 +158,7 @@ class Chamar_P_para_atendimento(models.Model):
         ordering = ['-id']
 
     def __str__(self) -> str:
-        return str(self.nome_paciente.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social)
+        return str(self.nome_paciente.paciente_triagem.paciente_envio_triagem.nome_social)
 
 
 class CadastroSala(models.Model):

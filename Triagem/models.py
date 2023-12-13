@@ -147,24 +147,6 @@ class Atendimento_especializado(models.Model):
     pk_paciente = models.ForeignKey(triagem, null=False, on_delete=models.CASCADE)    
 
 
-class ChamarPaciente(models.Model):
-    id_paciente = models.CharField(max_length=255)
-    nome_paciente = models.CharField(max_length=255)
-    data_criacao = models.DateTimeField(default=timezone.now)
-
-    def save(self, *args, **kwargs):
-        #exclui os registros existentes
-        ChamarPaciente.objects.all().delete()
-
-        #define a data e hora da criação do registro
-        self.data_criacao = timezone.now()
-
-        #salva o registro no banco de dados
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.nome_paciente
-
 # xxxxxxxxxxxxxxxxxxxxxxxxxxxx CADASTRA E ALTERA USUARIOS xxxxxxxxxxxxxxxxxxxxxxxxxx
 # Para criar outros campos para o usuario
 class CustomUserManager(BaseUserManager):

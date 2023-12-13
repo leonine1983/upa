@@ -1,1 +1,0 @@
-from .update_chama_paciente import *
