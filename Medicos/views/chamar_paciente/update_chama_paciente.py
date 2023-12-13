@@ -1,17 +1,29 @@
-from django.forms.forms import BaseForm
-from django.http.response import HttpResponse
-from Medicos.models import Chamar_P_para_atendimento
-from django.views.generic import UpdateView
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import UpdateView
+from Medicos.models import Chamar_P_para_atendimento
 
 class Update_chama_usuario(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Chamar_P_para_atendimento
     fields = ['chamado']
     success_message = "👤 Paciente apresentou-se ao atendimento"
-    
+
     def form_valid(self, form):
-        return super().form_valid(form)
+        # Configura o campo 'chamado' como verdadeiro
+        form.instance.chamado = True
+
+        # Chama o método form_valid da classe pai para realizar as validações padrão
+        response = super().form_valid(form)
+
+        # Redireciona de volta para a página anterior
+        return redirect(self.request.META.get('HTTP_REFERER', reverse_lazy('nome_da_sua_view')))
+
+    # Se você não quiser uma mensagem de sucesso padrão, você pode desativar a SuccessMessageMixin
+    # removendo a linha "success_message = "👤 Paciente apresentou-se ao atendimento""
+
+    
     
 
 
