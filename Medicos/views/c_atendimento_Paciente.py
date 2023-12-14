@@ -26,33 +26,32 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
         pk = self.kwargs['pk']  
-        """
-        chamado = Chamar_P_para_atendimento.objects.filter(nome_paciente = pk, data_chamada__date = datetime.now().date()).first()
-        print(f'todos no chamadao {chamado}')
-        # Inicializar a variável exibe_b
-        if chamado:
-            for n in chamado:
-                exibe_b = n.chamado
-                exibe_id = n.pk
-                if exibe_b:
-                    messages.info(self.request, "Paciente já presente na sala de atendimento; ⚠️ favor cancelar a chamada.")
-                print(f'valor de exibie {exibe_b}') """
-        
-        # Usar o método first() para pegar o primeiro registro
-        chamado = Chamar_P_para_atendimento.objects.filter(nome_paciente=pk, data_chamada__date=datetime.now().date()).first()
+    
+        # Evitar Erros
+        exibe_b = {}
+        exibe_id = None
+        try:
+            # Usar o método first() para pegar o primeiro registro
+            chamado = Chamar_P_para_atendimento.objects.filter(nome_paciente=pk, data_chamada__date=datetime.now().date()).first()
+            exibe_b = chamado.chamado
+            exibe_id = chamado.pk
 
-        # Inicializar a variável exibe_b
-        exibe_b = chamado.chamado
-        exibe_id = chamado.pk
+        except AttributeError:
+            # Tratamento de erros: Informar ao medico a inexistencia de chamado de paciente
+            messages.add_message(self.request, messages.DEBUG, f"Nenhuma chamada foi encontrada para o paciente {self.kwargs['pk']} na data de hoje")
+
 
         # Se exibe_b for True, mostrar uma mensagem
         if exibe_b:
-            messages.info(self.request, "Paciente já presente na sala de atendimento; ⚠️ favor cancelar a chamada.")
-
-        
+            pass
         else:
             chamado = False
             exibe_b = False
+
+        # Inicializar a variável exibe_b
+        print(f'esse é o chamado : {chamado}')
+        print(f'esse é o exibe_b : {exibe_b}')
+        print(f'esse o id do chamado: {exibe_id}')
 
            
             
@@ -60,9 +59,7 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         context['triagem'] = triagem.objects.filter(id = pk)
         context['exibe_b'] = exibe_b  
         context['atendimento'] = 'atendimento'     
-        context['chamado'] = chamado
-        if chamado:
-            context['exibe_id'] = exibe_id   
+        context['exibe_id'] = exibe_id   
            
         return context
 

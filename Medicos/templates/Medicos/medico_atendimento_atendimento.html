@@ -45,10 +45,6 @@
 		margin-bottom:2%!important;
 }
 {% endif %}  
-
-
-
-
        /* Estilo da div de sobreposição */
        .overlay {
          position: fixed;
@@ -133,6 +129,7 @@
 	  .floating-form button:hover {
 		background-color: #2980b9;
 	  }
+
 	  
 </style>
 {% endblock css %}  
@@ -365,11 +362,11 @@
                                    <select class="uppercase" style="border:none; font-size:1.2rem" name="profissionalSaude_id" required="" id="profissionalSaude_id">
                                           <option value="{{ request.user}}" selected="2">Dr.(a){{ request.user.first_name }}</option>
                                    </select><button type="submit">Chamar Paciente</button>
-                            </form> 
-                            {% if chamado %}
-                                   {{exibe_b}}
-                                   {% if not exibe_b  %}
-                                   <a href="{% url 'Medicos:medico_avisa_pacientee' exibe_id %}" class='btn btn-danger'><i class="fa-solid fa-volume-slash"></i> Desistir de Chamada</a>      
+                            </form>
+                            {% if not exibe_b %}
+                            {{exibe_id}}
+                                   {% if exibe_id is not None %}
+                                   <a href="{% url 'Medicos:medico_avisa_pacientee' exibe_id %}" class='btn btn-danger'><i class="fa-solid fa-volume-slash"></i> Desistir de Chamada</a>          
                                    {% endif %}
                             {% endif %}
                      </div>
@@ -448,6 +445,14 @@
     });
 </script>
      
+
+# Se exibe_b for True, mostrar uma mensagem
+if exibe_b:
+    messages.error(self.request, "Chamada de paciente cancelada com êxito! 🚫✅", extra_tags='exibir_mensagem')
+else:
+    chamado = False
+    exibe_b = False
+
 
      
      
