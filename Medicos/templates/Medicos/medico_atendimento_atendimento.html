@@ -346,28 +346,34 @@
 
 
 	 <!--Botão chamar paciente-->
+        
 	 <div class="floating-form-container">
-		<div class="floating-button" onclick="toggleForm()">
+              {% if exibe_b %}
+		<div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
 			<i class="fa-solid fa-microphone-lines"></i>
 		</div>
+              {% endif %}
 		{% for t  in triagem %}
 			<!-- seu_template.html -->
                      <div class='d-flex'>
-                            <form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form" id="floatingForm">
+                            <form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
                                    {% csrf_token %}
-
-                                   <select class="uppercase" style="border:none; font-size:1.2rem" name="nome_paciente" required="" id="id_nome_paciente">
-                                          <option value="{{ t.pk }}" selected="2">Chamar o Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
-                                   </select>
-                                   <select class="uppercase" style="border:none; font-size:1.2rem" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-                                          <option value="{{ request.user}}" selected="2">Dr.(a){{ request.user.first_name }}</option>
-                                   </select><button type="submit">Chamar Paciente</button>
+                                   <p>
+                                          <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
+                                                 <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
+                                          </select>
+                                   </p>
+                                   <p>
+                                          <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+                                                 <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user }} {{ request.user.first_name }} {{ request.user.get_full_name }}</option>
+                                          </select><button type="submit">Chamar Paciente</button>
+                                   </p>
                             </form>
                             {% if not exibe_b %}
-                            {{exibe_id}}
                                    {% if exibe_id is not None %}
-                                   <a href="{% url 'Medicos:medico_avisa_pacientee' exibe_id %}" class='btn btn-danger'><i class="fa-solid fa-volume-slash"></i> Desistir de Chamada</a>          
+                                   <a href="{% url 'Medicos:medico_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
                                    {% endif %}
+                            {% else %}
                             {% endif %}
                      </div>
 		{% endfor %}
