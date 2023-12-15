@@ -348,7 +348,7 @@
 	 <!--Botão chamar paciente-->
         
 	 <div class="floating-form-container">
-              {% if exibe_b %}
+              {% if exibe_id is None or exibe_b == True %}
 		<div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
 			<i class="fa-solid fa-microphone-lines"></i>
 		</div>
