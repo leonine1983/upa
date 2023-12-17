@@ -130,6 +130,11 @@
 		background-color: #2980b9;
 	  }
 
+         .cke{
+              width:120% !important
+         }
+       li{width:100% !important}
+
 	  
 </style>
 {% endblock css %}  
@@ -273,16 +278,9 @@
               {% endfor %}
               <div class='h3' style='margin-top:-1rem!important'>Seções para o dignógstico do paciente</div>
               <hr style='margin-top:-2rem!important'>              
-              <div class='bg-dark-subtle p-3' style='margin-top:-3rem!important'> 
-                     <label for="id_classificação_internacional_doenca_CID" class='fs-6 text-danger-emphasis'>{{form.classificacao_internacional_doenca_CID.label_tag}}</label>
-                     {% for error in form.classificacao_internacional_doenca_CID.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                     {% endfor %}
-                     <div>{{form.classificacao_internacional_doenca_CID}}</div>
-              </div>
              
              
-		<div class="page w-100 bg-danger-subtle p-1" style="height:40rem!important; margin-top: -1rem;">
+		<div class="page w-100 bg-danger-subtle p-1" style="height:40rem!important; margin-top: -3rem;">
 			<!-- tabs -->
 			<div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
 				<input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
@@ -291,7 +289,7 @@
 				<input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
 				<label for="tab2"><i class="fa-sharp fa-solid fa-person-running-fast"></i> Exame fisico:</label>
 				
-				<input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
+				<input type="radio" name="pcss3t" id="tab3" class="tab-content-3 bg-dark-subtle">
 				<label for="tab3"><i class="fa-sharp fa-light fa-stethoscope"></i> Diagnóstico:</label>
 				
 				<input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
@@ -314,7 +312,15 @@
                                           {% endfor %}
                                    </li>
 					
-					<li class="tab-content tab-content-3 typography">
+					<li class="tab-content tab-content-3 typography bg-dark-subtle pt-5">
+                                          <div class='bg-dark-subtle p-3' style='margin-top:-3rem!important'> 
+                                                 <label for="id_classificação_internacional_doenca_CID" class='fs-6 text-danger-emphasis'>{{form.classificacao_internacional_doenca_CID.label_tag}}</label>
+                                                 {% for error in form.classificacao_internacional_doenca_CID.errors %}
+                                                        <div style="color: red;">{{ error }}</div>
+                                                 {% endfor %}
+                                                 <div>{{form.classificacao_internacional_doenca_CID}}</div>
+                                          </div>
+                                         
                                           <p><strong>Descreva o diagnóstico do paciente</strong></p>
                                           {{form.Diagnostico}}  
                                           {% for error in form.Diagnostico.errors  %}
@@ -323,6 +329,8 @@
 					</li>
 					
 					<li class="tab-content tab-content-last typography">
+                                          <p><strong>Preescrever medicamento</strong></p>
+                                          {{form.medicamento}}
 						<p><strong>Descreva a conduta do paciente</strong></p>
                                           {{form.conduta}}
                                           {% for error in form.conduta.errors  %}
@@ -450,15 +458,6 @@
         $('#id_classificacao_internacional_doenca_CID').select2();  
     });
 </script>
-     
-
-# Se exibe_b for True, mostrar uma mensagem
-if exibe_b:
-    messages.error(self.request, "Chamada de paciente cancelada com êxito! 🚫✅", extra_tags='exibir_mensagem')
-else:
-    chamado = False
-    exibe_b = False
-
 
      
      

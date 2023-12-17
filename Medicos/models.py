@@ -106,13 +106,29 @@ class cid_10 (models.Model):
         return cid_10.objects.filter(Q(codigo=q) | Q(descricao_icontains=q) | Q(codigo_Cid10 =q) )  
 
 
-# Create your models here.
+class Medicamento(models.Model):
+    nome_medicamento = models.CharField(max_length=255)
+    principio_ativo = models.CharField(max_length=255, null=True, blank=True)
+    forma_farmaceutica = models.CharField(max_length=100, null=True, blank=True)
+    concentracao = models.CharField(max_length=50, null=True, blank=True)
+    via_administracao = models.CharField(max_length=50, null=True, blank=True)
+    quantidade_disponivel = models.PositiveIntegerField()
+    unidade_medida = models.CharField(max_length=20, null=True, blank=True)
+    data_validade = models.DateField(null=True, blank=True)
+    fabricante = models.CharField(max_length=255, null=True, blank=True)
+    observacoes = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.nome_medicamento
+
+
 class Medico_atendimento (models.Model):
     paciente_medico_atendimento = models.OneToOneField(triagem, null=False, on_delete=models.PROTECT)    
     historico_doenca_atual_HDA = RichTextField(null=True, blank=True)
     exame_fisico = RichTextField(null=True, blank=True)
     Diagnostico = RichTextField(null=True, blank=True)
     classificacao_internacional_doenca_CID = models.ForeignKey(cid_10, null=True, default='Não se aplica', on_delete=models.CASCADE)
+    medicamento = models.ManyToManyField(Medicamento)
     conduta = RichTextField(null=True, blank=True)
     data_medico = models.DateField(auto_now_add=True, null=False)
     hora_medico = models.TimeField(auto_now_add=True, null=True )
@@ -125,8 +141,22 @@ class Medico_atendimento (models.Model):
         
     def __str__(self) -> str:
         return self.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social
-
-
+    
+    @receiver(post_migrate)
+    def add_example_medicamento(sender, **kwargs):
+        if not Medicamento.objects.exists():
+            Medicamento.objects.create(
+                nome_medicamento='Exemplo Medicamento',
+                principio_ativo='Ativo Exemplo',
+                forma_farmaceutica='Comprimido',
+                concentracao='10mg',
+                via_administracao='Oral',
+                quantidade_disponivel=50,
+                unidade_medida='Comprimidos',
+                data_validade='2023-12-31',
+                fabricante='Fabricante Exemplo',
+                observacoes='Este é um exemplo de medicamento.'
+            )
 
 
 class Chamar_P_para_atendimento(models.Model):
@@ -221,6 +251,9 @@ class Salas_Atendimento(models.Model):
     
     def __str__(self):
         return str(self.nomeSala.nome_Sala )
+    
+
+
     
 
 

@@ -16,7 +16,7 @@ from datetime import datetime
 class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Medico_atendimento
     #Chave Estrangeira 'paciente_medico_atendimento'
-    fields = ['paciente_medico_atendimento', 'historico_doenca_atual_HDA', 'exame_fisico', 'Diagnostico', 'conduta','classificacao_internacional_doenca_CID']
+    fields = ['paciente_medico_atendimento', 'historico_doenca_atual_HDA', 'exame_fisico', 'Diagnostico','medicamento', 'conduta','classificacao_internacional_doenca_CID']
     template_name = 'Medicos/medico_atendimento_atendimento.html'   
     success_message = 'Avaliação médica feita com sucesso'
 
