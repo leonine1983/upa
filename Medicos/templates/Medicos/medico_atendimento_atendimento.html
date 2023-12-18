@@ -10,6 +10,14 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" href="{% static 'global/css/menu/menu-vertical-medico.css' %}">
+
+<link rel="stylesheet" href="{% static "global/filter-multi-select-main/dist/filter_multi_select.css" %} " />
+<script src="{% static "global/filter-multi-select-main/dist/filter-multi-select-bundle.min.js" %}"></script>
+
+
+<link rel="stylesheet" href="filter_multi_select.css" />
+<script src="filter-multi-select-bundle.min.js"></script>
+
 <style>
 {% for dados in paciente_triagem  %} 
 	{% if dados.classifica_tipo.classifica_tipo == 'Vermelho' %}
@@ -157,6 +165,33 @@
 
 <div  class='dados-preatendimento'>
        <!--Informações da Triagem-->
+
+
+       <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+       <!-- Load Bootstrap -->
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   
+       <!-- Load the plugin bundle. -->
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
        {% for dados in triagem  %} 
                
               <!--END Link para o perfil do paciente-->
@@ -330,6 +365,36 @@
 					<li class="tab-content tab-content-last typography">
                                           <p><strong>Preescrever medicamento</strong></p>
                                           {{form.medicamento}}
+
+
+                                          <link rel="stylesheet" href="{% static "global/filter-multi-select-main/dist/filter_multi_select.css" %} " />
+       <script src="{% static "global/filter-multi-select-main/dist/filter-multi-select-bundle.min.js" %}"></script>
+
+       
+             
+    
+   
+            <script>
+              // Use the plugin once the DOM has been loaded.
+              $(function () {
+                // Apply the plugin 
+                
+                var medicamento = $('#id_medicamento').filterMultiSelect({
+                  selectAllText: 'all...',
+                  placeholderText: 'click to select a shape',
+                  filterText: 'search',
+                  labelText: 'Medicamentos',
+                  caseSensitive: true,
+                });
+          
+              });
+            </script>
+
+
+
+
+
+
 						<p><strong>Descreva a conduta do paciente</strong></p>
                                           {{form.conduta}}
                                           {% for error in form.conduta.errors  %}
