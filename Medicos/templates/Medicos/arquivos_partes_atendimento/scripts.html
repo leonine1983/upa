@@ -1,0 +1,17 @@
+{% load static %}
+<script src="{% static 'global/js/select2.min.js' %}"></script>
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('#id_classificacao_internacional_doenca_CID').select2();  
+});
+</script>
+
+<!--Alterna entre chamar e cancelar paciente-->
+<script>
+    function toggleForm() {
+        var floatingForm = document.getElementById('floatingForm');
+        floatingForm.style.display = (floatingForm.style.display === 'none' || floatingForm.style.display === '') ? 'block' : 'none';
+      }
+      
+  </script>
