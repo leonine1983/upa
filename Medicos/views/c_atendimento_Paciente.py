@@ -57,6 +57,7 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
             
         #context['paciente_medico'] = Medico_atendimento.objects.filter(pk=pk)        
         context['triagem'] = triagem.objects.filter(id = pk)
+        context['chamado'] = chamado
         context['exibe_b'] = exibe_b  
         context['atendimento'] = 'atendimento'     
         context['exibe_id'] = exibe_id   
@@ -95,4 +96,6 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
     
     #success_url = reverse_lazy('Medicos:dados do paciente_medicamentos self.kwargs['pk']')
     def get_success_url(self):
+        
         return reverse('Medicos:dados_do_paciente_medicamentos', kwargs={'pk':self.kwargs['pk']})
+        #return reverse('Medicos:medico_avisa_paciente_pos_atendimento', kwargs={'pk':self.kwargs['pk']})

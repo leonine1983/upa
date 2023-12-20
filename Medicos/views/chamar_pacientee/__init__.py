@@ -1,1 +1,2 @@
 from .update_chama_paciente import Update_chama_usuarioo
+from .update_chama_paciente_pos_atendimento import Update_chama_usuario_pos_atendimento

@@ -32,7 +32,6 @@ END Imagem Representando o setor-->
        </div>
        <hr>
 
-
 <form method='post'>  
        
        <div class="form-body bg-light shadow">
@@ -122,26 +121,109 @@ END Imagem Representando o setor-->
                                           {{form.medicamento}}
 
 
+
+
+
+                                          <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+                                          <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+                                      
+                                          <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+                                      
+                                          <link rel="stylesheet" href="fonts/icomoon/style.css">
                                           
-       
-             
-    
-   
-            <script>
-              // Use the plugin once the DOM has been loaded.
-              $(function () {
-                // Apply the plugin 
-                
-                var medicamento = $('#id_medicamento').filterMultiSelect({
-                  selectAllText: 'all...',
-                  placeholderText: 'click to select a shape',
-                  filterText: 'search',
-                  labelText: 'Medicamentos',
-                  caseSensitive: true,
-                });
-          
-              });
-            </script>
+                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/fonts/icomoon/style.css' %}">
+                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/chosen.css' %}">
+                                              
+                                          <!-- Bootstrap CSS -->
+                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/bootstrap.min.css' %}">
+                                          
+                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/bootstrap.min.css' %}">
+                                          
+                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/style.css' %}">
+                                          <!-- Style -->
+
+
+
+
+
+                                          <div class="content">
+                                                 <h2 class="text-center"><label for="multiple-label-example">Multi-Select #10 (Limit to 5)</label></h2>
+                                                 <div class="container text-left">
+                                                   <div class="row justify-content-center mb-3">
+                                                     <div class="col-md-5">
+                                                       <div class="color-1">
+                                                         <select data-placeholder="Select Categories" multiple class="chosen-select" id="multiple-label-example" tabindex="8">
+                                                           <option>Design</option>
+                                                           <option>HTML5</option>
+                                                           <option>CSS3</option>
+                                                           <option>jQuery</option>
+                                                           <option>BS4</option>
+                                                           <option>Bootstrap</option>
+                                                           <option>WordPress</option>
+                                                           <option>FrontEnd</option>
+                                                         </select>
+                                                       </div>
+                                                 
+                                                     </div>
+                                                   </div>
+                                             
+                                                   <div class="row justify-content-center mb-3">
+                                                     <div class="col-md-5">
+                                                       <div class="color-2">
+                                                         <select data-placeholder="Select Categories" multiple class="chosen-select" tabindex="8">
+                                                           <option>Design</option>
+                                                           <option>HTML5</option>
+                                                           <option>CSS3</option>
+                                                           <option>jQuery</option>
+                                                           <option>BS4</option>
+                                                           <option>Bootstrap</option>
+                                                           <option>WordPress</option>
+                                                           <option>FrontEnd</option>
+                                                         </select>
+                                                       </div>
+                                                 
+                                                     </div>
+                                                   </div>
+                                             
+                                                   <div class="row justify-content-center mb-3">
+                                                     <div class="col-md-5">
+                                                       <div class="color-3">
+                                                         <select data-placeholder="Select Categories" multiple class="chosen-select" tabindex="8">
+                                                           <option>Design</option>
+                                                           <option>HTML5</option>
+                                                           <option>CSS3</option>
+                                                           <option>jQuery</option>
+                                                           <option>BS4</option>
+                                                           <option>Bootstrap</option>
+                                                           <option>WordPress</option>
+                                                           <option>FrontEnd</option>
+                                                         </select>
+                                                       </div>
+                                                 
+                                                     </div>
+                                                   </div>
+                                             
+                                                 </div>
+                                               </div>
+                                                 
+                                                 
+                                             
+                                                 <script src="{% static 'global/multiselect-20/js/jquery-3.3.1.min.js' %}"></script>
+                                                 <script src="{% static 'global/multiselect-20/js/popper.min.js' %}"></script>
+                                                 <script src="{% static 'global/multiselect-20/js/bootstrap.min.js' %}"></script>
+                                                 <script src="{% static 'global/multiselect-20/js/chosen.jquery.min.js' %}"></script>
+                                                 
+                                                 <script src="{% static 'global/multiselect-20/js/main.js' %}"></script>
+                                          
+
+
+
+
+
+
+
+
 
 
 
@@ -163,9 +245,37 @@ END Imagem Representando o setor-->
               Ao clicar em "Cancelar", você será redirecionado para a área de espera por atendimento, onde o paciente permanecerá aguardando a consulta com o médico.
 		</div>
        <div class='w-75 m-auto row '>
-              <a  class='col btn btn-sm btn-danger m-3' href="{% url 'Medicos:medico_prontuario' %}">Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>
-              <button class='col btn btn-success btn-sm m-3' type="submit" style="margin-right:12rem">Salvar</button>  
+              {% if exibe_id is not None %}
+                     {% if chamado.chamado %}
+                            <a  class='col btn btn-sm btn-danger m-3' href="{% url 'Medicos:medico_prontuario' %} ">Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>
+                            {% else %}
+                                   <div  class='col btn btn-sm btn-danger m-3' title='Para ativar, cancele a chamada do paciente no botão ao lado'>Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></div>
+
+                     {% endif %}
+              
+              {% endif %}
+               <button class='col btn btn-success btn-sm m-3' {% if exibe_id is not None %}{% if not chamado.chamado %}  disabled {% endif %} {% endif %} type="submit" style="margin-right:12rem">Salvar</button>  
        </div>
+       {% if exibe_id is not None %}
+              {% if not chamado.chamado %}
+              <div class="card text-center m-auto">
+                     <div class="card-header bg-danger text-light">
+                       ATENÇÃO!!!
+                     </div>
+                     <div class="card-body">
+                       <h5 class="card-title">Antes de Continuar...</h5>
+                       <p class="card-text">🔄 Para prosseguir ou cancelar o atendimento,
+                             é necessário cancelar a chamada do paciente no painel. 
+                             Pressione o botão localizado na parte inferior à direita da tela.</p>
+                     </div>
+                     
+                     <div class="card-footer text-danger">
+                            Chamada Ativa <i class="fa-solid fa-volume-xmark"></i>
+                     </div>
+                   </div>
+              {% endif %} 
+       {% endif %}
+
    </form>  
 </div>
 
@@ -211,7 +321,7 @@ END Imagem Representando o setor-->
      
 {% block script %}
 {% include "Medicos/arquivos_partes_atendimento/scripts.html" %}
-{% include "Medicos/arquivos_partes_atendimento/scripts.html" %}     
      
+
 {% endblock script %}
 {% endblock body_login %}
