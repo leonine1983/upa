@@ -49,6 +49,12 @@
         color: #fff !important;
         font-size: 2rem;
     }
+    body{
+            background-color: #e3e3e3 !important;
+        }
+        main{
+            background-color: #e4e4e4 !important;
+        }
     
 </style>   
 
@@ -84,9 +90,10 @@
 <!--End Menu Horizontal-->
 
 {% include 'global/message.html' %} 
-<main class="p-3" >  
-    {% include 'global/partials_template/header/header.html' %}
-    <div class="main-header-title mb-5 p-2">{% block body_title %}  {% endblock body_title %}</div>
+<main style="margin-bottom: -10rem !important;">  
+    <!--{% include 'global/partials_template/header/header.html' %}-->
+    <!--<div class="main-header-title mb-5 p-2">{% block body_title %}  {% endblock body_title %}</div>-->
+    <p>&nbsp;</p>
     {% block body_login %}{% endblock body_login %}
 </main>
 

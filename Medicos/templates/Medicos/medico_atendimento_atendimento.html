@@ -5,7 +5,7 @@
        {% include "Medicos/arquivos_partes_atendimento/css.html" %}
 {% endblock css %}  
 <!--Imagem Representando o setor
-{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
+
 END Imagem Representando o setor-->
 {% block title_login %}ÁREA MÉDICA {% endblock title_login %}
 {% block titulo_ %} 
@@ -22,7 +22,7 @@ END Imagem Representando o setor-->
 {% endblock body_title %}
 {% block body_login %}
 
-<div  class='dados-preatendimento'>
+<div  class='dados-preatendimento '>
        <!--Informações da Triagem-->
        {% include "Medicos/arquivos_partes_atendimento/infO_triagem.html" %}
        <p>&nbsp;</p>
@@ -31,48 +31,43 @@ END Imagem Representando o setor-->
               <div class='uppercase'><i class="fa-solid fa-user-doctor"></i> Dr(a) {{request.user}}</div>
        </div>
        <hr>
-
-<form method='post'>  
-       
-       <div class="form-body bg-light shadow">
+<form method='post'>     
+       <div class="form-body bg-secondary-subtle shadow-sm">
            {% csrf_token %}
            {{ form.media }}
            
               {% for dados  in triagem %}
-              <div class='d-flex pb-3'> 
-                     <div class='w-100 bg-dark-subtle p-2'>
-						<div>
-							{% for dados  in triagem %}
-									<label for="id_paciente_medico_atendimento">Paciente em atendimento</label>             
-									<select class='uppercase' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
-											<option value="{{dados.id}}" selected="{{dados.id}}">
-											Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} 
-											&nbsp;&nbsp;|
-											&nbsp;&nbsp;
-											Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b>
-											&nbsp;&nbsp;|
-											&nbsp;&nbsp;
-											Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos
-											</option>                                    
-									</select>
-							{% endfor %}
-						</div> 
-                     </div>
-                     
+              <div class='d-flex'> 
+                     <div class='w-100'>
+                            <div>
+                                   {% for dados  in triagem %}          
+                                                 <div class="fs-4" >Paciente em atendimento</div>
+                                                 <select class='uppercase' style='border:none; font-size:1.2rem' name="paciente_medico_atendimento" required="" id="id_paciente_medico_atendimento">
+                                                               <option value="{{dados.id}}" selected="{{dados.id}}">
+                                                               Codigo: {{dados.paciente_triagem.paciente_envio_triagem.codigo_pacient}} 
+                                                               &nbsp;&nbsp;|
+                                                               &nbsp;&nbsp;
+                                                               Nome: <b class='text-uppercase'>{{dados.paciente_triagem.paciente_envio_triagem.nome_social}}</b>
+                                                               &nbsp;&nbsp;|
+                                                               &nbsp;&nbsp;
+                                                               Idade: {{dados.paciente_triagem.paciente_envio_triagem.idade}} anos
+                                                               </option>                                    
+                                                 </select>
+                                   {% endfor %}
+                            </div> 
+                     </div>       
                      {% for error in form.paciente_medico_atendimento.errors %}
                      <div class='p-2 bg-danger-subtle rounded-2'><i class="fa-duotone fa-circle-exclamation"></i>  {{error}} </div> 
                      {% endfor %}                        
               </div>
               {% endfor %}
-              <div class='h3' style='margin-top:-1rem!important'>Seções para o dignógstico do paciente</div>
+              <div class='h3' style='margin-top:-1.8rem!important'>Seções para o dignógstico do paciente</div>
               <hr style='margin-top:-2rem!important'>              
-             
-             
-		<div class="page w-100 bg-danger-subtle p-1" style="height:40rem!important; margin-top: -3rem;">
+		<div class="page w-100 bg-dark-subtle p-3 shadow" style="height:auto!important; margin-top: -3rem;">
 			<!-- tabs -->
 			<div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
 				<input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
-				<label for="tab1"><i class="fa-solid fa-person-dots-from-line"></i> Histórico da Doença Atual (HDA):</label>
+				<label for="tab1"><i class="fa-solid fa-person-dots-from-line"></i> Histórico da Doença Atual (HDA) - Anamnese:</label>
 				
 				<input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
 				<label for="tab2"><i class="fa-sharp fa-solid fa-person-running-fast"></i> Exame fisico:</label>
@@ -84,16 +79,16 @@ END Imagem Representando o setor-->
 				<label for="tab5"><i class="icon-globe"></i>Conduta:</label>
 				
 				<ul>
-					<li class="tab-content tab-content-first typography">
-                                          <p><strong>{{ form.historico_doenca_atual_HDA.label_tag }}</strong> </p>
+					<li class="tab-content tab-content-first typography bg-dark-subtle">
+                                          <div class="fs-4" >HDA - Histórico da Doença Atual - Anamnese</div>
                                           {% for error in form.historico_doenca_atual_HDA.errors %}
                                           <div style="color: red;">{{ error }}</div>
                                           {% endfor %}                            
                                           {{form.historico_doenca_atual_HDA}}
 					</li>
 					
-					<li class="tab-content tab-content-2 typography">
-                                          <p><strong>Descreva o exame físico do paciente</strong></p>
+					<li class="tab-content tab-content-2 typography bg-dark-subtle">
+                                          <div class="fs-4" >Descreva o exame físico do paciente</div>
                                           {{form.exame_fisico}}
                                           {% for error in form.exame_fisico.errors %}
                                           <div class='p-2 bg-danger'> {{error}} </div> 
@@ -101,136 +96,35 @@ END Imagem Representando o setor-->
                                    </li>
 					
 					<li class="tab-content tab-content-3 typography bg-dark-subtle pt-5">
-                                          <div class='bg-dark-subtle p-3' style='margin-top:-3rem!important'> 
-                                                 <label for="id_classificação_internacional_doenca_CID" class='fs-6 text-danger-emphasis'>{{form.classificacao_internacional_doenca_CID.label_tag}}</label>
+                                          <div class='bg-dark-subtle pt-3 pb-2' style='margin-top:-3rem!important'> 
+                                                 <div class="fs-4" >CID - Classificação Internacional de Doença</div>
                                                  {% for error in form.classificacao_internacional_doenca_CID.errors %}
                                                         <div style="color: red;">{{ error }}</div>
                                                  {% endfor %}
                                                  <div>{{form.classificacao_internacional_doenca_CID}}</div>
                                           </div>
-                                         
-                                          <p><strong>Descreva o diagnóstico do paciente</strong></p>
+                                          <div class="fs-4" >Descreva o diagnóstico do paciente</div>
                                           {{form.Diagnostico}}  
                                           {% for error in form.Diagnostico.errors  %}
                                           <div class='p-2 bg-danger'> {{error}} </div>          
                                           {% endfor %} 
 					</li>
 					
-					<li class="tab-content tab-content-last typography">
-                                          <p><strong>Preescrever medicamento</strong></p>
-                                          {{form.medicamento}}
-
-
-
-
-
-                                          <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
-                                          <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-                                      
-                                          <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
-                                      
-                                          <link rel="stylesheet" href="fonts/icomoon/style.css">
-                                          
-                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/fonts/icomoon/style.css' %}">
-                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/chosen.css' %}">
-                                              
-                                          <!-- Bootstrap CSS -->
-                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/bootstrap.min.css' %}">
-                                          
-                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/bootstrap.min.css' %}">
-                                          
-                                          <link rel="stylesheet" href="{% static 'global/multiselect-20/css/style.css' %}">
-                                          <!-- Style -->
-
-
-
-
-
-                                          <div class="content">
-                                                 <h2 class="text-center"><label for="multiple-label-example">Multi-Select #10 (Limit to 5)</label></h2>
-                                                 <div class="container text-left">
-                                                   <div class="row justify-content-center mb-3">
-                                                     <div class="col-md-5">
-                                                       <div class="color-1">
-                                                         <select data-placeholder="Select Categories" multiple class="chosen-select" id="multiple-label-example" tabindex="8">
-                                                           <option>Design</option>
-                                                           <option>HTML5</option>
-                                                           <option>CSS3</option>
-                                                           <option>jQuery</option>
-                                                           <option>BS4</option>
-                                                           <option>Bootstrap</option>
-                                                           <option>WordPress</option>
-                                                           <option>FrontEnd</option>
-                                                         </select>
-                                                       </div>
-                                                 
-                                                     </div>
-                                                   </div>
-                                             
-                                                   <div class="row justify-content-center mb-3">
-                                                     <div class="col-md-5">
-                                                       <div class="color-2">
-                                                         <select data-placeholder="Select Categories" multiple class="chosen-select" tabindex="8">
-                                                           <option>Design</option>
-                                                           <option>HTML5</option>
-                                                           <option>CSS3</option>
-                                                           <option>jQuery</option>
-                                                           <option>BS4</option>
-                                                           <option>Bootstrap</option>
-                                                           <option>WordPress</option>
-                                                           <option>FrontEnd</option>
-                                                         </select>
-                                                       </div>
-                                                 
-                                                     </div>
-                                                   </div>
-                                             
-                                                   <div class="row justify-content-center mb-3">
-                                                     <div class="col-md-5">
-                                                       <div class="color-3">
-                                                         <select data-placeholder="Select Categories" multiple class="chosen-select" tabindex="8">
-                                                           <option>Design</option>
-                                                           <option>HTML5</option>
-                                                           <option>CSS3</option>
-                                                           <option>jQuery</option>
-                                                           <option>BS4</option>
-                                                           <option>Bootstrap</option>
-                                                           <option>WordPress</option>
-                                                           <option>FrontEnd</option>
-                                                         </select>
-                                                       </div>
-                                                 
-                                                     </div>
-                                                   </div>
-                                             
+					<li class="tab-content tab-content-last typography bg-dark-subtle" >
+                                          <div class="row justify-content-left mb-2" style="margin-top: -1rem">
+                                                 <div class="fs-4" style="margin-bottom: -1rem;" >Preescrever Medicamentos</div>
+                                                 <div class="col-md-5">
+                                                        <div class="color-2">
+                                                               {{form.medicamento}}
+                                                        </div>
                                                  </div>
-                                               </div>
-                                                 
-                                                 
-                                             
-                                                 <script src="{% static 'global/multiselect-20/js/jquery-3.3.1.min.js' %}"></script>
-                                                 <script src="{% static 'global/multiselect-20/js/popper.min.js' %}"></script>
-                                                 <script src="{% static 'global/multiselect-20/js/bootstrap.min.js' %}"></script>
-                                                 <script src="{% static 'global/multiselect-20/js/chosen.jquery.min.js' %}"></script>
-                                                 
-                                                 <script src="{% static 'global/multiselect-20/js/main.js' %}"></script>
-                                          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-						<p><strong>Descreva a conduta do paciente</strong></p>
+                                          </div>
+                                          <script src="{% static 'global/multiselect-20/js/jquery-3.3.1.min.js' %}"></script>
+                                          <script src="{% static 'global/multiselect-20/js/popper.min.js' %}"></script>
+                                          <script src="{% static 'global/multiselect-20/js/bootstrap.min.js' %}"></script>
+                                          <script src="{% static 'global/multiselect-20/js/chosen.jquery.min.js' %}"></script>
+                                          <script src="{% static 'global/multiselect-20/js/main.js' %}"></script>
+                                          <div class="fs-4" >Descreva a conduta do paciente</div>
                                           {{form.conduta}}
                                           {% for error in form.conduta.errors  %}
                                           <div class='p-2 bg-danger'> {{error}} </div>
@@ -239,86 +133,81 @@ END Imagem Representando o setor-->
 				</ul>
 			</div>
 			<!--/ tabs -->
-		</div>   
-       <div class='w-75 p-1 fs-5 '>
-              <p><i class="fa-duotone fa-diamond-exclamation ml-4" style="--fa-primary-color: #511f24; --fa-secondary-color: #511f24;"></i> <b> Atenção:</b></p>
-              Ao clicar em "Cancelar", você será redirecionado para a área de espera por atendimento, onde o paciente permanecerá aguardando a consulta com o médico.
-		</div>
-       <div class='w-75 m-auto row '>
-              {% if exibe_id is not None %}
-                     {% if chamado.chamado %}
-                            <a  class='col btn btn-sm btn-danger m-3' href="{% url 'Medicos:medico_prontuario' %} ">Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>
-                            {% else %}
-                                   <div  class='col btn btn-sm btn-danger m-3' title='Para ativar, cancele a chamada do paciente no botão ao lado'>Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></div>
+		</div>  
+              <div class="d-flex"> 
+                     <div class='w-75 fs-5 text-justify pr-2'>
+                            Ao clicar em "Cancelar", você será redirecionado para a área de espera por atendimento, onde o paciente permanecerá aguardando a consulta com o médico.
+                            </div>
+                     <div class='w-75 m-auto row '>
+                            {% if exibe_id is not None %}
+                                   {% if chamado.chamado %}
+                                          <a  class='col btn btn-sm btn-danger m-3' href="{% url 'Medicos:medico_prontuario' %} ">Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>
+                                          {% else %}
+                                                 <div  class='col btn btn-sm btn-danger m-3' title='Para ativar, cancele a chamada do paciente no botão ao lado'>Cancelar Atendimento <i class="fa-solid fa-person-walking-arrow-loop-left"></i></div>
 
+                                   {% endif %}
+                            
+                            {% endif %}
+                            <button class='col btn btn-success btn-sm m-3' {% if exibe_id is not None %}{% if not chamado.chamado %}  disabled {% endif %} {% endif %} type="submit" style="margin-right:12rem">Salvar</button>  
+                     </div>
+                     {% if exibe_id is not None %}
+                            {% if not chamado.chamado %}
+                            <div class="card text-center m-auto">
+                                   <div class="card-header bg-danger text-light">
+                                   ATENÇÃO!!!
+                                   </div>
+                                   <div class="card-body">
+                                   <h5 class="card-title">Antes de Continuar...</h5>
+                                   <p class="card-text">🔄 Para prosseguir ou cancelar o atendimento,
+                                          é necessário cancelar a chamada do paciente no painel. 
+                                          Pressione o botão localizado na parte inferior à direita da tela.</p>
+                                   </div>
+                                   
+                                   <div class="card-footer text-danger">
+                                          Chamada Ativa <i class="fa-solid fa-volume-xmark"></i>
+                                   </div>
+                            </div>
+                            {% endif %} 
                      {% endif %}
-              
-              {% endif %}
-               <button class='col btn btn-success btn-sm m-3' {% if exibe_id is not None %}{% if not chamado.chamado %}  disabled {% endif %} {% endif %} type="submit" style="margin-right:12rem">Salvar</button>  
-       </div>
-       {% if exibe_id is not None %}
-              {% if not chamado.chamado %}
-              <div class="card text-center m-auto">
-                     <div class="card-header bg-danger text-light">
-                       ATENÇÃO!!!
-                     </div>
-                     <div class="card-body">
-                       <h5 class="card-title">Antes de Continuar...</h5>
-                       <p class="card-text">🔄 Para prosseguir ou cancelar o atendimento,
-                             é necessário cancelar a chamada do paciente no painel. 
-                             Pressione o botão localizado na parte inferior à direita da tela.</p>
-                     </div>
-                     
-                     <div class="card-footer text-danger">
-                            Chamada Ativa <i class="fa-solid fa-volume-xmark"></i>
-                     </div>
-                   </div>
-              {% endif %} 
-       {% endif %}
+              </div>
 
    </form>  
 </div>
-
-
-	 <!--Botão chamar paciente-->
+<!--Botão chamar paciente-->
         
-	 <div class="floating-form-container">
-              {% if exibe_id is None or exibe_b == True %}
-		<div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
-			<i class="fa-solid fa-microphone-lines"></i>
-		</div>
-              {% endif %}
-		{% for t  in triagem %}
-			<!-- seu_template.html -->
-                     <div class='d-flex'>
-                            <form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
-                                   {% csrf_token %}
-                                   <p>
-                                          <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
-                                                 <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
-                                          </select>
-                                   </p>
-                                   <p>
-                                          <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-                                                 <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user }} {{ request.user.first_name }} {{ request.user.get_full_name }}</option>
-                                          </select><button type="submit">Chamar Paciente</button>
-                                   </p>
-                            </form>
-                            {% if not exibe_b %}
-                                   {% if exibe_id is not None %}
-                                   <a href="{% url 'Medicos:medico_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
-                                   {% endif %}
-                            {% else %}
+<div class="floating-form-container">
+       {% if exibe_id is None or exibe_b == True %}
+              <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
+                     <i class="fa-solid fa-microphone-lines"></i>
+              </div>
+       {% endif %}
+       {% for t  in triagem %}
+              <!-- seu_template.html -->
+              <div class='d-flex'>
+                     <form action="{% url 'Medicos:medico_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
+                            {% csrf_token %}
+                            <p>
+                                   <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
+                                          <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
+                                   </select>
+                            </p>
+                            <p>
+                                   <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+                                          <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user }} {{ request.user.first_name }} {{ request.user.get_full_name }}</option>
+                                   </select><button type="submit">Chamar Paciente</button>
+                            </p>
+                     </form>
+                     {% if not exibe_b %}
+                            {% if exibe_id is not None %}
+                            <a href="{% url 'Medicos:medico_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
                             {% endif %}
-                     </div>
-		{% endfor %}
-	  	</div>
-	</div>
-	<!--END Botão chamar paciente-->
-
-	  
-
-     
+                     {% else %}
+                     {% endif %}
+              </div>
+       {% endfor %}
+       </div>
+</div>
+<!--END Botão chamar paciente-->
 {% block script %}
 {% include "Medicos/arquivos_partes_atendimento/scripts.html" %}
      

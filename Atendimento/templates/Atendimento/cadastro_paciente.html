@@ -38,7 +38,101 @@
     {% endif %}        
     <div class="form-body">        
         {% csrf_token %}                
-        {{form.as_div}}        
+        <div class="form-group">
+            {{ form.nome_social.label_tag }}
+            {{ form.nome_social }}
+            {{ form.nome_social.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.codigo_pacient.label_tag }}
+            {{ form.codigo_pacient }}
+            {{ form.codigo_pacient.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.data_nascimento.label_tag }}
+            {{ form.data_nascimento }}
+            {{ form.data_nascimento.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.sexo.label_tag }}
+            {{ form.sexo }}
+            {{ form.sexo.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.etnia.label_tag }}
+            {{ form.etnia }}
+            {{ form.etnia.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.RG.label_tag }}
+            {{ form.RG }}
+            {{ form.RG.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.CPF.label_tag }}
+            {{ form.CPF }}
+            {{ form.CPF.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.nacionalidade.label_tag }}
+            {{ form.nacionalidade }}
+            {{ form.nacionalidade.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.rua.label_tag }}
+            {{ form.rua }}
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar Rua' href="{% url 'Atendimento:cadastra_rua' %}"></a>
+            {{ form.rua.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.bairro.label_tag }}
+            {{ form.bairro }}
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar bairro' href="{% url 'Atendimento:cadastra_bairro' %}"></a>
+            {{ form.bairro.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.cidade.label_tag }}
+            {{ form.cidade }}
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar cidade' href="#"></a>
+            {{ form.cidade.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.estado.label_tag }}
+            {{ form.estado }}
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar cidade' href="#"></a>
+            {{ form.estado.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.pais.label_tag }}
+            {{ form.pais }}
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar pais' href="#"></a>
+            {{ form.pais.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.CEP.label_tag }}
+            {{ form.CEP }}
+            {{ form.CEP.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.nome_mae.label_tag }}
+            {{ form.nome_mae }}
+            {{ form.nome_mae.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.responsavel.label_tag }}
+            {{ form.responsavel }}
+            {{ form.responsavel.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.tel.label_tag }}
+            {{ form.tel }}
+            {{ form.tel.errors }}
+        </div>
+        <div class="form-group">
+            {{ form.cartao_sus.label_tag }}
+            {{ form.cartao_sus }}
+            {{ form.cartao_sus.errors }}
+        </div>       
     </div>  
     <button class='button-salvar' type="submit">Salvar</button>    
 </form>
