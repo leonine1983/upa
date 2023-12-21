@@ -7,24 +7,14 @@
     <link rel="stylesheet" href=" {% static 'global/css/tabela-div.css' %}">
     <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %}">
     <style>
-        .select2 {
-            width:35rem !important;
-            margin-right:-20rem;
-            margin-left:20%;  
-            margin-bottom:3rem;
-          }
-          .btn btn-sm btn-primary{
-            margin-bottom:2rem;          
-          }
-          td .hours48{
-            position: absolute;
-            margin-bottom: 0rem;
-            font-size: 0.7rem;
-            margin-left: -9.5rem;
-            padding: 0.1rem;
-            color:rgb(255, 255, 255) ;
-          }
-          .select2-selection{margin-left:-15%!important; width:100%!important; padding:0.3rem 0 !important}
+        td .hours48{
+        position: absolute;
+        margin-bottom: 0rem;
+        font-size: 0.7rem;
+        margin-left: -9.5rem;
+        padding: 0.1rem;
+        color:rgb(255, 255, 255) ;
+        }    
     </style>
 {% endblock css %}    
 {% block script %}
@@ -66,7 +56,7 @@ $(document).ready(function() {
 <a href="{% url 'Atendimento:lista-paciente' %}" class='btn btn-sm btn-secondary mb-3'><i class="fa-duotone fa-list-ul"></i> Buscar paciente | Ir para Listagem</a>
 {% endif %}
 <!-- FIM Botão adicionar a <b>Fila de Espera</b>-->
-<div class='btn btn-sm border mb-3'><span class='fs-3'>{{lista_db.count}}</span> pessoas aguardando passar pela classificação</div>
+<div class='btn btn-sm border'><span class='fs-3'>{{lista_db.count}}</span> pessoas aguardando passar pela classificação</div>
 <table class='table table-striped border border-secondary'>
     <tr class='bg-primary-subtle fs-6'>
         <th class='border border-success linha-titulo text-center'>Codigo</th>
@@ -82,7 +72,7 @@ $(document).ready(function() {
     {% for db in lista_db %}     
         <tr class='fs-7  m-0 fs-7 p-0 {% if db.retornou_em_menos_de_48_horas %}bg-danger-subtle text-light {% else %}bg-primary-subtle{% endif %} '>
             <td class='text-center '>
-                <div class="hours48 bg-danger border p-1 rounded-start-5">{% if db.retornou_em_menos_de_48_horas %}Retornou em menos de 48{% endif %} {{ paciente.nome_do_campo_do_modelo }}</div>
+                <!--<div class="hours48 bg-danger border p-1 rounded-start-5">{% if db.retornou_em_menos_de_48_horas %}Retornou em menos de 48{% endif %} {{ paciente.nome_do_campo_do_modelo }}</div>-->
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
             </td>
             <td class='text-center'>
