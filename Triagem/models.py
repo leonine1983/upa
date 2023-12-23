@@ -1,9 +1,8 @@
 from django.db import models
-from django.utils import timezone
 # libs executadas para no pos migrate
-from django.db.models.signals import post_migrate
+from django.db.models.signals import post_migrate, post_save
 from django.dispatch import receiver
-from Atendimento.models import envio_triagem, ficha_de_atendimento
+from Atendimento.models import envio_triagem
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, User
 from ckeditor.fields import RichTextField
 
@@ -107,6 +106,12 @@ class triagem(models.Model):
     altura = models.FloatField(null=True, blank=True) 
     data_triagem = models.DateField(auto_now_add=True, null=False)
     hora_triagem = models.TimeField(auto_now_add=True, null=True )
+    
+    #Campo a serem utilizado para filtrar os pacientes na triagem
+    hora_envio_a_classificao = models.TimeField(null=True, blank=True)
+    data_envio_a_classificao = models.DateField(null=True, blank=True)
+    # -------------------------------------------------------------------
+
     classifica_tipo = models.ForeignKey(Classifica_risco_model, null=True, on_delete=models.PROTECT, verbose_name='Classificação de Emergência')
     observacao = RichTextField(null=True, blank=True)
     choices=(    
@@ -130,8 +135,7 @@ class triagem(models.Model):
 
     def __str__ (self):
         return '{}'.format(self.paciente_triagem.paciente_envio_triagem.nome_social)
-
-
+    
 # Aplica ao paciente determinado tipo de atendimento   
 choice = {
     ('Aguardando', 'Aguardando'),

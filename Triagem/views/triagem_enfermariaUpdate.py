@@ -20,6 +20,7 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
     template_name = 'Triagem/triagem.html'
     success_message = "Avaliação Concluída ✔️ Sinais vitais registrados com sucesso!👩‍⚕️"
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context ['nome_paciente'] = self.object.paciente_triagem.paciente_envio_triagem.nome_social        
@@ -28,12 +29,13 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
         return context
 
     # Pega o valor do id do paciente no model envio_triagem
-    def get_success_url(self):
-        paciente_envio_triagem_id = self.object.paciente_triagem.paciente_envio_triagem_id
-        return reverse_lazy('Triagem:triagem-enfermaria-alergia-update', args=[paciente_envio_triagem_id])   
-
 
     def form_valid(self, form):
+        hora = self.object.paciente_triagem.horario_triagem
+        data = self.object.paciente_triagem.data_envio_triagem
+        self.object.hora_envio_a_classificao = hora
+        self.object.data_envio_a_classificao = data
+
         self.object = form.save(commit=False)
         nome = self.request.user.first_name
         sobrenome = self.request.user.last_name
@@ -60,3 +62,18 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
             self.object.nome_da_enfermeira = f'{nome} {sobrenome} | {enf_grupo} coren nº: {coren}'
         self.object.save()
         return super().form_valid(form)
+
+        
+    def get_success_url(self):
+        pk_envio_triagem = self.object.paciente_triagem.id
+        hora = self.object.paciente_triagem.horario_triagem.strftime('%H:%M:%S')
+        data = self.object.paciente_triagem.data_envio_triagem.strftime('%Y-%m-%d')
+        paciente_envio_triagem_id = self.object.paciente_triagem.paciente_envio_triagem_id
+
+        # Adicione os parâmetros diretamente na string da URL
+        url = reverse_lazy('Triagem:triagem-enfermaria-alergia-update', args=[pk_envio_triagem, hora, data, paciente_envio_triagem_id])
+
+        return url
+
+
+ 

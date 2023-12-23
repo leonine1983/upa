@@ -5,7 +5,7 @@ from Atendimento.models import ficha_de_atendimento
 class paciente_lista(LoginRequiredMixin, ListView):
     model = ficha_de_atendimento
     template_name = 'Atendimento/pacientes.html'
-    paginate_by = 20
+    paginate_by = 10
 
     # Fazer a pesquisa
     def get_queryset(self):

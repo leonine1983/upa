@@ -7,22 +7,15 @@ from .models import triagem, Classifica_risco_model
 class TriagemEnfermariaForm(forms.ModelForm):
     data_hoje = date.today()
     paciente_triagem = forms.ModelChoiceField( label='Paciente aguardando ser chamado para a CLASSIFICAÇÃO', queryset=envio_triagem.objects.filter(data_envio_triagem=data_hoje).exclude(triagem_concluida=1))    
-
+    
     class Meta:
         model = triagem
-        fields = ['paciente_triagem']  
+        fields = ['paciente_triagem']
+
+    
 
 
-# Recebe o Id da view 'triagem_enfermaria' e busca o restante dos campos para serem preenchidos
-#class TriagemEnfermariaUpdateForm(forms.ModelForm):
- #   class Meta:
-  #      model = triagem
-   #     fields = ['frequencia_cardiaca_FC', 'pressao_arterial_PA_2', 'pressao_arterial_PA', 'frequencia_respiratoria_FR',
-    #              'saturacao_de_oxigenio_SPO2', 'hemoglicoteste_HGT', 'temperatura_TEMP', 'peso', 'altura',
-     #             'observacao']
-      #  labels = {
-       #     'observacao': 'Sintomas relatados pelo paciente',
-        #}        
+        
 
 class TriagemEnfermariaUpdateForm(forms.ModelForm):
     class Meta:
