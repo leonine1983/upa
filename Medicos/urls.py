@@ -11,7 +11,9 @@ urlpatterns = [
 
     # Chama Paciente
     path('medico_chama_paciente/<int:pk>/', views.MedicoChamaPacienteView.as_view(), name='medico_chama_paciente'),
+    path('enfermeira_chama_paciente/<int:pk>/', views.EnfermeiroChamaPacienteView.as_view(), name='enfermagem_chama_paciente'),
     path('medico_avisa_atendimentoo/<int:pk>/', views.chamar_pacientee.update_chama_paciente.Update_chama_usuarioo, name='medico_avisa_pacientee'),
+    path('enfermagem_avisa_atendimentoo/<int:pk>/', views.Update_chama_usuario_triagem, name='enfermagem_avisa_pacientee'),
     path('medico_avisa_atendimentoo/<int:pk>/', views.Update_chama_usuario_pos_atendimento, name='medico_avisa_paciente_pos_atendimento'),
 
     

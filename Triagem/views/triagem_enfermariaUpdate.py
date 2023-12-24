@@ -3,13 +3,15 @@ from django.contrib.auth.decorators import user_passes_test
 #Restringir acesso
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 from Triagem.models import  triagem
 from Triagem.forms import TriagemEnfermariaUpdateForm
 from django.contrib.auth.models import Group
-#from .forms import MedicoSignUpForm
-from Medicos.models import CustomUser
+from Medicos.models import CustomUser, Chamar_P_para_atendimento
+from datetime import datetime
+
 
 
 # Recebe o Id da view 'triagem_enfermaria' e busca o restante dos campos para serem preenchidos e redireciona para verificar se o paciente possui alergia
@@ -22,10 +24,47 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
 
 
     def get_context_data(self, **kwargs):
+
+     
+        pk = self.kwargs['pk']  
+    
+        # Evitar Erros
+        exibe_b = {}
+        exibe_id = None
+        try:
+            # Usar o método first() para pegar o primeiro registro
+            chamado = Chamar_P_para_atendimento.objects.filter(nome_paciente=self.object.pk, data_chamada__date=datetime.now().date()).first()
+            exibe_b = chamado.chamado
+            exibe_id = chamado.pk
+
+        except AttributeError:
+            # Tratamento de erros: Informar ao medico a inexistencia de chamado de paciente
+            messages.add_message(self.request, messages.DEBUG, f"Nenhuma chamada foi encontrada para o paciente {self.kwargs['pk']} na data de hoje")
+
+
+        # Se exibe_b for True, mostrar uma mensagem
+        if exibe_b:
+            pass
+        else:
+            chamado = False
+            exibe_b = False
+
+
+
+
+
+
+
         context = super().get_context_data(**kwargs)
         context ['nome_paciente'] = self.object.paciente_triagem.paciente_envio_triagem.nome_social        
         context ['tipo_select'] = 'Pré-atendimento'
         context['triagem_andamento'] = "ok" 
+        context['triagem'] = triagem.objects.filter(id = self.object.pk) 
+        # Parte qeu ativa o botão chamar paciente
+        context['triagem'] = triagem.objects.filter(id = pk)
+        context['chamado'] = chamado
+        context['exibe_b'] = exibe_b     
+        context['exibe_id'] = exibe_id   
         return context
 
     # Pega o valor do id do paciente no model envio_triagem

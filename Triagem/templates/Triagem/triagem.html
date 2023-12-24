@@ -67,7 +67,65 @@
 
     {% endif %}
     .form-body div:last-child{width:132.5%!important}
-
+    .floating-form-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+  }
+ 
+  /* Estilo dos botões */
+  .modal-buttons {
+       display: flex;
+       justify-content: center;
+       margin-top: 20px;
+  }
+  .modal-buttons button {
+       margin: 0 5px;
+  }
+  .floating-form-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+  }
+  .floating-button {
+      background-color: #3498db;
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .floating-form {
+      display: none;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  } 
+  .floating-form label,
+  .floating-form input,
+  .floating-form button {
+      display: block;
+      margin-bottom: 10px;
+  } 
+  .floating-form button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+  } 
+  .floating-form button:hover {
+      background-color: #2980b9;
+  }
   </style>
 {% endblock css %}
 
@@ -401,6 +459,44 @@
         <div>&nbsp;</div> 
     </div>
    </div>  
+   
+   <!--Botão chamar paciente-->
+ 
+
+{% if triagem_andamento %}
+<div class="floating-form-container">
+  {% if exibe_id is None or exibe_b == True %}
+         <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
+                <i class="fa-solid fa-microphone-lines"></i>
+         </div>
+  {% endif %}
+  {% for t  in triagem %}
+         <!-- seu_template.html -->
+         <div class='d-flex'>
+                <form action="{% url 'Medicos:enfermagem_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
+                       {% csrf_token %}
+                       <p>
+                              <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
+                                     <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
+                              </select>
+                       </p>
+                       <p>
+                              <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+                                     <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user.get_full_name }}</option>
+                              </select><button type="submit">Chamar Paciente</button>
+                       </p>
+                </form>
+                {% if not exibe_b %}
+                       {% if exibe_id is not None %}
+                       <a href="{% url 'Medicos:enfermagem_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
+                       {% endif %}
+                {% else %}
+                {% endif %}
+         </div>
+  {% endfor %}
+  </div>
+{% endif %}
+</div>
 
    
 
@@ -449,6 +545,17 @@
  document.getElementById("id_frequencia_cardiaca_FC").addEventListener("change", function(){
   this.value = parseFloat(this.value).toFixed(2);
 });
+</script>
+
+
+
+<!--Alterna entre chamar e cancelar paciente-->
+<script>
+  function toggleForm() {
+      var floatingForm = document.getElementById('floatingForm');
+      floatingForm.style.display = (floatingForm.style.display === 'none' || floatingForm.style.display === '') ? 'block' : 'none';
+    }
+    
 </script>
 
 {% endblock script %}

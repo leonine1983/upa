@@ -1,2 +1,4 @@
 from .update_chama_paciente import Update_chama_usuarioo
 from .update_chama_paciente_pos_atendimento import Update_chama_usuario_pos_atendimento
+from .enfermeiro_cadastroChamad import EnfermeiroChamaPacienteView
+from .update_chama_paciente_triagem import Update_chama_usuario_triagem
