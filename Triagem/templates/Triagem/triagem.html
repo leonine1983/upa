@@ -15,6 +15,7 @@
   <link rel="stylesheet" href=" {% static 'global/css/tabela.css' %}">
   <link rel="stylesheet" href=" {% static 'global/css/modal.css' %}">
   <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %}">
+  <link rel="stylesheet" href=" {% static 'global/css/abas_especiais_pcss3t.css' %}">
   <style>
       .modal{
           width: 80%;
@@ -126,6 +127,8 @@
   .floating-form button:hover {
       background-color: #2980b9;
   }
+
+
   </style>
 {% endblock css %}
 
@@ -229,9 +232,42 @@
           </div>          
             
             {% csrf_token %}
-            <div class="form-body">   
-              {{ form.media }}             
+            <div class="{% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}form-body{% endif %} bg-secondary-subtle">   
+              {{ form.media }}      
+              {% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}
                 {{form.as_div}} 
+                {% else %}
+                <!-- tabs -->
+                <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 shadow"  {% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}form-body{% endif %}>
+                  <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
+                  <label for="tab1"><i class="fa-solid fa-person-dots-from-line"></i> Alergias:</label>
+                  
+                  <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+                  <label for="tab2"><i class="fa-sharp fa-solid fa-person-running-fast"></i> Comorbidades:</label>
+                  <ul>
+                    <li class="tab-content tab-content-first typography bg-dark-subtle">
+                        <div class="fs-4" >{{form.alergias.label_tag}}</div>
+                        {% for error in form.alergias.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}                            
+                        <p>{{form.alergias}}</p>
+                        {{form.conteudo_alergia}}
+                    </li>
+                    
+                    <li class="tab-content tab-content-2 typography bg-dark-subtle">
+                        <div class="fs-4" >{{form.comorbidades.label_tag}}</div>
+                        {% for error in form.comorbidades.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}                            
+                        <p>{{form.comorbidades}}</p>
+                        {{form.conteudo_comorbidades}}
+                    </li>
+                  </ul>
+                </div>
+                <!--/ tabs -->
+              
+              {% endif %}     
+                
                 {% comment "Classificação de risco automatica desativada" %} 
                 {% if info_extra == 'Analisando...' %}   
                   <div >
@@ -462,14 +498,14 @@
    
    <!--Botão chamar paciente-->
  
-
-{% if triagem_andamento %}
+{% if triagem_andamento == 'exibe' %}
 <div class="floating-form-container">
   {% if exibe_id is None or exibe_b == True %}
          <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
                 <i class="fa-solid fa-microphone-lines"></i>
          </div>
   {% endif %}
+
   {% for t  in triagem %}
          <!-- seu_template.html -->
          <div class='d-flex'>

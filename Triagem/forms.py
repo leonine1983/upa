@@ -12,10 +12,6 @@ class TriagemEnfermariaForm(forms.ModelForm):
         model = triagem
         fields = ['paciente_triagem']
 
-    
-
-
-        
 
 class TriagemEnfermariaUpdateForm(forms.ModelForm):
     class Meta:
@@ -93,8 +89,6 @@ class TriagemEnfermariaUpdateForm(forms.ModelForm):
         peso = cleaned_data.get('peso')
         altura = cleaned_data.get('altura')
 
-        # Adicione lógica adicional se necessário para validação combinada
-
         return cleaned_data
 
     def __init__(self, *args, **kwargs):
@@ -112,27 +106,26 @@ class TriagemEnfermariaUpdateForm(forms.ModelForm):
         self.fields['altura'].initial=0
         self.fields['observacao'].required = True
 
-        
+choices=(      
+        ('0', 'Não'),
+        ('1','Sim'),
+    )
 class TriagemEnfermaria_Alergias_UpdateForm(forms.ModelForm):   
-     
-    conteudo_alergia = forms.CharField(required=False)
 
     class Meta:
         model = ficha_de_atendimento
         fields = [ 'alergias', 'conteudo_alergia', 'comorbidades', 'conteudo_comorbidades' ]
         labels = {
             'alergias' : 'O paciente possui algum tipo de alergia?',
-            'conteudo_alergia': 'Descreva a alergia do paciente'
+            'conteudo_alergia': 'Descreva a alergia do paciente',
+            'comorbidades': 'O paciente possui alguma comorbidade?',
+            'conteudo_comorbidades' : 'Descreva a alergia do paciente',
         }
+        
+       
 
-        widgets = {
-            'conteudo_alergia': forms.Textarea(attrs={
-                 'rows': 100,
-                 'cols':500,
-                 }),
-            
-        }       
 
+    
 
 class Classifica_form(forms.ModelForm):
 
