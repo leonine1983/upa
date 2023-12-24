@@ -65,10 +65,12 @@ class triagem_enfermariaUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
 
         
     def get_success_url(self):
-        pk_envio_triagem = self.object.paciente_triagem.id
+        # pk_envio_triagem pega o valor do id da ficha do paciente diretamente pela triagem
+        pk_envio_triagem = self.object.paciente_triagem.paciente_envio_triagem.id
+        
         hora = self.object.paciente_triagem.horario_triagem.strftime('%H:%M:%S')
         data = self.object.paciente_triagem.data_envio_triagem.strftime('%Y-%m-%d')
-        paciente_envio_triagem_id = self.object.paciente_triagem.paciente_envio_triagem_id
+        paciente_envio_triagem_id = self.object.id
 
         # Adicione os parâmetros diretamente na string da URL
         url = reverse_lazy('Triagem:triagem-enfermaria-alergia-update', args=[pk_envio_triagem, hora, data, paciente_envio_triagem_id])
