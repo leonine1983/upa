@@ -188,7 +188,6 @@
 
   
     <div>
-      {% if not licenca_ativa == None %}
         <form action="" method='POST' class="" id='classifica_form'> 
           <div class="" style='margin-top:-1.8rem '>
             <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100' >
@@ -204,7 +203,29 @@
             
             {% if info_extra == 'Analisando...' %}
             {% comment "dados tabela" %}
-            <table class="bg-secondary mt-4">
+            <table class="bg-secondary mt-4">   
+              <caption><b>Classificação de Risco:</b> LEGENDA</caption>         
+              <thead>
+                <tr>
+                  
+                  <th class="red col-2 text-center">Vermelho</td>
+                  <th class="orange col-2 text-center">Laranja</th>
+                  <th class="yellow col-2 text-center">Amarelo</th>
+                  <th class="green col-2 text-center">Verde</th>
+                  <th class="bg-primary col-2 text-center">Azul</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">Emergência Imediata</th>
+                  <td class="text-center">Muito Urgente</td>
+                  <td class="text-center">Urgente</td>
+                  <td class="text-center">Pouco Urgente</td>
+                  <td class="text-center">Não Urgente</td>
+                  <td class="text-center">
+                  </td>
+                </tr>
+              </tbody>
             </table>{% endcomment %}
 
             {% endif %}
@@ -250,7 +271,127 @@
                 {% comment "Classificação de risco automatica desativada" %} 
                 {% if info_extra == 'Analisando...' %}   
                   <div >
-                   
+                    <h1>{{info_extra}}</h1>
+                    {% if info_extra == 'Analisando...' %}
+                    <button type="button" class="cancelar btn btn-secondary" style='width:100% !important;margin-left:0 ' data-toggle="modal" data-target="#myModal">Nossa análise para a classificação de risco para o paciente</button>
+                      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog "   role="document">
+                          <div class="modal-content ">
+                              <div class="modal-header cancelar ">
+                                
+                              </div>
+                              <div class="modal-body" style='width:90%'>
+                                <div class="
+                                    {% if sistem_sugestao_cor == 'Vermelho' %}red{% endif %}
+                                    {% if sistem_sugestao_cor == 'Laranja' %}orange{% endif %}
+                                    {% if sistem_sugestao_cor == 'Amarelo' %}yellow font2{% endif %}
+                                    {% if sistem_sugestao_cor == 'Verde' %}green font2{% endif %} 
+                                    font">                  
+                                      <div>
+                                        {{sistem_sugestao}}
+                                      </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endif %}
+                    <p>Com base nas informações fornecidas no formulário anterior e utilizando como base a "Classificação de Risco do Protocolo de Manchesters", podemos identificar as seguintes situações:</p>
+                    <hr>
+                    
+                    <h3>Pressão Arterial</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if pAcor == 'Vermelho' %}red{% endif %}
+                      {% if pAcor == 'Laranja' %}orange{% endif %}
+                      {% if pAcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if pAcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{pAcor}} | <b> PA = {{pa_enviado}} mmHg (Milímetros de mercúrio)</div>
+                        <div>{{pressao_arterial_PA}}</div>                   
+                      <hr>
+                    </div>
+
+                    <h3>Frequência Cardíaca</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if fCor == 'Vermelho' %}red{% endif %}
+                      {% if fCor == 'Laranja' %}orange{% endif %}
+                      {% if fCor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if fCor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{fCor}} | <b> FC = {{fc_enviado}} bpm (Batimentos por minuto)</div>
+                        <div>{{frequencia_cardiaca_FC}}</div>                    
+                      <hr>
+                    </div>
+
+                    <h3>Frequência Respiratória</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if fRcor == 'Vermelho' %}red{% endif %}
+                      {% if fRcor == 'Laranja' %}orange{% endif %}
+                      {% if fRcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if fRcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{fRcor}} | <b> FR = {{fr_enviado}} rpm (Repirações por minuto)</div>
+                        <div>{{frequencia_respiratoria_FR}}</div>                    
+                      <hr>
+                    </div>
+                    
+                    <h3>Saturação de Oxigênio</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if spOcor == 'Vermelho' %}red{% endif %}
+                      {% if spOcor == 'Laranja' %}orange{% endif %}
+                      {% if spOcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if spOcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{spOcor}} | <b> SPO² = {{spo_enviado}}% oxigênio </div>
+                        <div>{{saturacao_de_oxigenio_SPO2}}</div>                    
+                      <hr>
+                    </div>
+                    
+                    <h3>Hemiglicoteste</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if hgTcor == 'Vermelho' %}red{% endif %}
+                      {% if hgTcor == 'Laranja' %}orange{% endif %}
+                      {% if hgTcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if hgTcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{hgTcor}} | <b> HGT = {{hgt_enviado}}mg/dL (3,9 mmol/L) </div>
+                        <div>{{hemoglicoteste_HGT}}</div>                    
+                      <hr>
+                    </div>
+
+                    <h3>Temperatura</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if temPcor == 'Vermelho' %}red{% endif %}
+                      {% if temPcor == 'Laranja' %}orange{% endif %}
+                      {% if temPcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if temPcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{temPcor}} | <b>{{temp_enviado}} C° (graus Celsius) </div>
+                        <div>{{temp}}</div>                    
+                      <hr>
+                    </div> 
+                    
+                    <h3>IMC (Índice de Massa Corporal)</h3>
+                    <div style='margin-left:1.5rem' >                             
+                      <div class="
+                      {% if pesOcor == 'Vermelho' %}red{% endif %}
+                      {% if pesOcor == 'Laranja' %}orange{% endif %}
+                      {% if pesOcor == 'Amarelo' %}yellow font2{% endif %}
+                      {% if pesOcor == 'Verde' %}green font2{% endif %} 
+                      font">                  
+                        <b>{{pesOcor}} | <b> IMC = {{pesO_value}} kg/m² ({{peso_enviado}}kg &divide; {{altura_info}}²m)</div>
+                        <div>{{peso}}</div>                    
+                      <hr>
+                    </div>
                   </div>                
                 {% endif %}
                 {% endcomment %}
@@ -259,6 +400,7 @@
                 {% endif %}
             </div>
             
+           
             {% if tipo_titulo == 'Excluir paciente da triagem' %}
             <a class="class='btn btn-sm btn-primary m-3 " href="{% url 'Triagem:triagem-enfermaria' %}">cancelar</a>
             {%endif%}          
@@ -297,20 +439,18 @@
                             {% endif %} 
                      {% endif %}
         </form> 
-        {% else %}
-        <div class='m-5 fs-3'>
-          <h3 class='h1'><i class="fa-thin fa-circle-exclamation text-danger"></i> Prezado usuário,</h3>
-          <p class='p-2'>Informamos que a licença de uso do sistema SG-UPA expirou. Para continuar utilizando o sistema, solicitamos que entre em contato com o administrador pelo seguinte número de telefone (WhatsApp): **(71) 9 8688 1943 - Rogério Cerqueira da Silva**.
-
-          Agradecemos pela compreensão e colaboração.
-
-          Atenciosamente,</p>
-
-          <p class='p-2'>Equipe de Suporte Técnico</p>
-        </div>
-      {% endif %}
-      
+        <script>
+          document.getElementById('meuFormulario').addEventListener('input', function() {
+            var nome = document.getElementById('campo_nome').value;
+            localStorage.setItem('nome', nome);
+            // Adicione linhas semelhantes para outros campos do formulário
+          });
         
+          window.onload = function() {
+            document.getElementById('campo_nome').value = localStorage.getItem('nome') || '';
+            // Adicione linhas semelhantes para outros campos do formulário
+          };
+        </script>
         
         {% if conteudo == 'paciente_na_triagem' %}
         
@@ -390,39 +530,39 @@
    
    <!--Botão chamar paciente-->
  
-      {% if triagem_andamento == 'exibe' %}
-      <div class="floating-form-container">
-        {% if exibe_id is None or exibe_b == True %}
-              <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
-                      <i class="fa-solid fa-microphone-lines"></i>
-              </div>
-        {% endif %}
+{% if triagem_andamento == 'exibe' %}
+<div class="floating-form-container">
+  {% if exibe_id is None or exibe_b == True %}
+         <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
+                <i class="fa-solid fa-microphone-lines"></i>
+         </div>
+  {% endif %}
 
-        {% for t  in triagem %}
-          <!-- seu_template.html -->
-          <div class='d-flex'>
-            <form action="{% url 'Medicos:enfermagem_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
-              {% csrf_token %}
-              <p>
-                      <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
-                            <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
-                      </select>
-              </p>
-              <p>
-                      <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-                            <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user.get_full_name }}</option>
-                      </select><button type="submit">Chamar Paciente</button>
-              </p>
-            </form>
-            {% if not exibe_b %}
-              {% if exibe_id is not None %}
-              <a href="{% url 'Medicos:enfermagem_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
-              {% endif %}
-            {% else %}
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
+  {% for t  in triagem %}
+         <!-- seu_template.html -->
+         <div class='d-flex'>
+                <form action="{% url 'Medicos:enfermagem_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
+                       {% csrf_token %}
+                       <p>
+                              <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
+                                     <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
+                              </select>
+                       </p>
+                       <p>
+                              <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+                                     <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user.get_full_name }}</option>
+                              </select><button type="submit">Chamar Paciente</button>
+                       </p>
+                </form>
+                {% if not exibe_b %}
+                       {% if exibe_id is not None %}
+                       <a href="{% url 'Medicos:enfermagem_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
+                       {% endif %}
+                {% else %}
+                {% endif %}
+         </div>
+  {% endfor %}
+  </div>
 {% endif %}
 </div>
 

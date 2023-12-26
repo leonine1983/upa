@@ -23,6 +23,7 @@
 <p>    
 </p>
 <p>&nbsp;</p>
+{% if not licenca_ativa == None %}
 <form action="" method='POST' class='pt-4' style='background:#dbecdb'>
     {% if dados %}
             <div class="border-bottom border-dark fs-3  d-flex m-3 w-75" >
@@ -136,6 +137,18 @@
     </div>  
     <button class='button-salvar' type="submit">Salvar</button>    
 </form>
+{% else %}
+<div class='m-5 fs-3'>
+    <h3 class='h1'><i class="fa-thin fa-circle-exclamation text-danger"></i> Prezado usuário,</h3>
+    <p class='p-2'>Informamos que a licença de uso do sistema SG-UPA expirou. Para continuar utilizando o sistema, solicitamos que entre em contato com o administrador pelo seguinte número de telefone (WhatsApp): **(71) 9 8688 1943 - Rogério Cerqueira da Silva**.
+
+    Agradecemos pela compreensão e colaboração.
+
+    Atenciosamente,</p>
+
+    <p class='p-2'>Equipe de Suporte Técnico</p>
+  </div>
+{% endif %}
 {% block script %}
     
    <!-- <script src="{% static 'Atendimento/js/estados_cidades.js' %}" ></script> -->

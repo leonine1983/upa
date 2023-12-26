@@ -58,6 +58,8 @@
     
 </style>   
 
+  
+
 {% include 'global/partials_template/head/head_botton.html' %} 
 
 <div class="vetor-img-aereo">{% block vetor-img-aereo %}{% endblock vetor-img-aereo %}</div>
@@ -136,17 +138,17 @@
                     <h4 class="modal-title text-center">A LICENÇA EXPIROU <i class="fa-solid fa-house-medical-circle-exclamation" style="color: #dc1840;"></i></h4>
                 </div>
                 <div class="modal-body p-5">
-                    <h2 class='h1 fs-1 mb-4'>Prezado usuário,</h2>
+                    <h2 class='h1 fs-4 mb-3'>Prezado usuário,</h2>
                     <p class='fs-5'>               
                     Informamos que a licença de uso do sistema SG-UPA expirou.
                     Para continuar utilizando o sistema, solicitamos que entre em contato com o 
                     administrador pelo seguinte número de telefone (WhatsApp): **(71) 9 8688 1943 - Rogério Cerqueira da Silva**.
                 
-                    <p class='fs-5  mt-3'>Agradecemos pela compreensão e colaboração. Em breve, o sistema será bloqueado caso não haja renovação da licença.</p>
-                    <p class='fs-5  mt-4'>               
+                    <p class='fs-5  mt-2'>Agradecemos pela compreensão e colaboração. Em breve, o sistema será bloqueado caso não haja renovação da licença.</p>
+                    <p class='fs-5  mt-3'>               
                         Atenciosamente,
                     </p>
-                    <p class='fs-5 mt-4 text-right'>
+                    <p class='fs-5 mt-3 text-right'>
                         Equipe de Suporte Técnico
                     </p>   
                 <!-- Remova o botão de fechamento -->
@@ -159,6 +161,26 @@
               $('#myModal').modal('show');
             });
           </script>  
+          <script>
+    document.addEventListener("fullscreenchange", function () {
+      if (document.fullscreenElement) {
+        // A tela está em modo tela cheia
+      } else {
+        // A tela está fora do modo tela cheia
+      }
+    });
+  
+    // Coloca a tela em modo tela cheia
+    function toggleFullscreen() {
+      if (document.fullscreenElement) {
+        // Sai do modo tela cheia
+        document.exitFullscreen();
+      } else {
+        // Entra no modo tela cheia
+        document.documentElement.requestFullscreen();
+      }
+    }
+  </script>
     {% else %}
         {{licenca_ativa}}
     {% endif %}    
