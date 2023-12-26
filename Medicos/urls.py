@@ -45,6 +45,12 @@ urlpatterns = [
     path('medicos/cadastroExames/atualizacao/<int:pk>', views.Atualiza_Exame_UpdatView.as_view(), name='exameUpdate' ),
     path('medicos/Salas/', views.Lista_Salas_ListView.as_view(), name='salas' ),    
     path('medicos/Exames/delete/<int:pk>', views.Delete_Exame_Delet.as_view(), name='exameDelete' ),
+
+    # Medicamentos
+    path('medicos/cdastraMedicamento/', views.Cadastra_Medicamento.as_view(), name='cadastroMedicamento' ),    
+    path('medicos/cadastroExames/atualizacao/<int:pk>', views.Atualiza_Exame_UpdatView.as_view(), name='exameUpdate' ),
+    path('medicos/Salas/', views.Lista_Salas_ListView.as_view(), name='salas' ),    
+    path('medicos/Exames/delete/<int:pk>', views.Delete_Exame_Delet.as_view(), name='exameDelete' ),
     # vincula Profissional
     path('medicos/Salas/profissional/', views.VinculaProfissiona_sala_view.as_view(), name='salasProfissionalCreate' ),
     path('medicos/Salas/profissional/update/<int:pk>', views.VinculaProfissiona_sala_update.as_view(), name='salasProfissionalUpdate' ),
