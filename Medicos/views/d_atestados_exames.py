@@ -6,12 +6,14 @@ from Medicos.models import Medico_atendimento
 from Atendimento.models import *
 from Triagem.models import triagem
 from django.contrib.auth.mixins import LoginRequiredMixin
+from Medicos.forms import Prescreve_Medicamentos_fomr
 
 
 # -------------------------- PREESCRIÇÃO DE EXAMES, MEDICAMENTOS, ATESTADOS ---------------------------------------------------------
 class atendimento_medico_updateview(LoginRequiredMixin, UpdateView):
     model = triagem 
-    fields = ['preescrever_medicamento_medico', 'exames', 'atestado']   
+    #fields = ['exames', 'atestado']
+    form_class = Prescreve_Medicamentos_fomr
     template_name = 'Medicos/prescrever-medicamento.html'
     
     def get_context_data(self, **kwargs):

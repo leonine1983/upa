@@ -24,19 +24,13 @@ class Prescreve_Medicamentos_fomr(forms.ModelForm):
 
     class Meta:
         model = triagem
-        fields = ['preescrever_medicamento_medico', 'exames', 'atestado']  
+        fields = ['exames', 'atestado']
         labels = {}
-        widgets = {}
-
-        '''
         widgets = {
-            'conteudo_alergia': forms.Textarea(attrs={
-                 'rows': 50,
-                 'cols':150,
-                 }),
-            
-        }'''
-       
+            'atestado': forms.NumberInput(attrs={'type': 'range', 'min': 0, 'max': 30, 'step': 1, 'oninput': 'updateTextInput(this.value)'}),
+        }
+
+     
 
 
 
