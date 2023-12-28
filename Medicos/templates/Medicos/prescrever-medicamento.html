@@ -1,575 +1,50 @@
 {% extends 'global/template_geral.html' %}
 {% block css %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
-<link rel="stylesheet" href="{% static 'global/css/abas_horizontais.css' %}">
-<link rel="stylesheet" href="{% static 'global/css/formularios.css' %}">
-
-<!--Multi Select para o form-->
-<link rel="stylesheet" href="{% static 'global/js/multi-select/css/multi-select.css' %}">
-<script src="{% static 'global/js/multi-select/js/jquery.multi-select.js' %}"></script>
-
-<link rel="stylesheet" href="{% static 'global/css/abas_especiais_pcss3t.css' %}">
-
-<!--Select2-->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>      
-   $(document).ready(function() {
-       $('#id_exames').select2();
-   });
-</script>
-   <!--end Select2-->
-
-<style> {% for dados in paciente_triagem  %} 
-              {% if dados.classifica_tipo.id == 1 %}
-              .dados-preatendimento ul li span{
-                     color: #AA0000;
-                     font-size: 1.3rem;
-              }
-              {% elif dados.classifica_tipo.id == 2  %}
-              .dados-preatendimento ul li span{
-                     color: #ff6600;
-                     font-size: 1.3rem;
-              {% elif dados.classifica_tipo.id == 3  %}
-              .dados-preatendimento ul li span{
-                     color:  #008200;
-                     font-size: 1.3rem;
-              {% elif dados.classifica_tipo.id == 4  %}
-              .dados-preatendimento ul li span{
-                     color: #008dc0;
-                     font-size: 1.3rem;
-              {% endif %}  
-       {% endfor %} 
-       form div textarea{
-              width: 100%;
-              padding: 1rem;
-       } 
-       form div select{
-              width:10rem;
-              height: 3rem;
-              padding: 1rem;
-              color: #000
-       }   
+       <link rel="stylesheet" href="{% static 'global/js/multi-select/css/multi-select.css' %}">
+       <script src="{% static 'global/js/multi-select/js/jquery.multi-select.js' %}"></script>
+       <link rel="stylesheet" href="{% static 'global/css/abas_especiais_pcss3t.css' %}">
+       <!-- Css dessa pagina -->
+       {% include "Medicos/arquivos_partes_preescrever-medicamento/css_atendimento.html" %}
+       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
        
-      
-       .prescricao{
-              background:#c8e3f3;
-              padding:1rem;
-       }
-       /**.encaminhamento{
-              background-color:#DAC8B3;              
-       }**/
-       .encaminhamento textarea, .atestado textarea, .exames textarea{
-              width:97%;
-              border:none;
-              background:none;
-              
-       }
-       .exames{
-              background:#c0c0c0;
-              padding:1rem;
-              
-       }
-       .atestado{
-             /** background:#97d3c4; **/
-              padding:1rem;
-       }
        
-       #id_preescrever_medicamento_medico{
-              background:transparent;
-              width:95%;
-       }
-       .border-radius{              
-              border-top-left-radius: 1rem;
-              
-       }
-       select[multiple] {
-              width: 100%;
-              height: auto;
-              position: relative;
-              font-size: 16px;
-              border: none;
-              appearance: none;
-              background: transparent;
-              cursor: pointer;
-              outline: none;
-            }
-            select[multiple]::-ms-expand {
-              display: none;
-            }
-            select[multiple] option {
-              position: relative;
-              padding: 0px 35px 0px 5px;
-              cursor: pointer;
-              font-weight: normal;
-            }
-            select[multiple] option:before {
-              content: "";
-              display: inline-block;
-              position: absolute;
-              top: 50%;
-              right: 15px;
-              transform: translateY(-50%);
-              width: 18px;
-              height: 18px;
-              border-radius: 50%;
-              background-color: transparent;
-              border: 2px solid #ccc;
-              transition: all 0.2s;
-            }
-            select[multiple] option:checked:before {
-              content: "\2713";
-              color: #fff;
-              background-color: #007bff;
-              border-color: #007bff;
-            }
-            #ms-id_exames{
-              width:95%;
-        }
-        #id_atestado{
-              display: block;
-              font-size: 3rem;
-              padding: 1rem;
-              width: 5rem;
-              margin: 2rem auto;
-        }
-        .button-salvar{
-              margin:0.5rem!important;
-              
-        }
-        main{
-              width:90%!important;
-              box-shadow:none!important;
-        }
-        .main-header-title, .main-header{
-              display:none !important;
-        }
-     
-        .d_none{display: none!important;}
+    <!-- Bootstrap Links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
+    <!-- select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
-
-
-        /* Adicione isso ao seu arquivo de estilo CSS */
-        #id_atestado {
-            width: 100%; /* Define a largura do controle deslizante */
-            margin-top: 10px; /* Adiciona um espaçamento acima do controle deslizante */
-            margin-bottom: 10px; /* Adiciona um espaçamento abaixo do controle deslizante */
-        }
-        
-        #id_atestado::-webkit-slider-thumb {
-            background-color: #007BFF; /* Cor do polegar (thumb) no controle deslizante para navegadores WebKit (Chrome, Safari) */
-        }
-        
-        #id_atestado::-moz-range-thumb {
-            background-color: #007BFF; /* Cor do polegar (thumb) no controle deslizante para navegadores Gecko (Firefox) */
-        }
-        
-        #id_atestado::-ms-thumb {
-            background-color: #007BFF; /* Cor do polegar (thumb) no controle deslizante para o Internet Explorer e Microsoft Edge */
-        }
-        
-        #id_atestado::-webkit-slider-runnable-track {
-            background-color: #ddd; /* Cor da faixa (track) no controle deslizante para navegadores WebKit */
-        }
-        
-        #id_atestado::-moz-range-track {
-            background-color: #ddd; /* Cor da faixa (track) no controle deslizante para navegadores Gecko */
-        }
-        
-        #id_atestado::-ms-track {
-            background-color: #ddd; /* Cor da faixa (track) no controle deslizante para o Internet Explorer e Microsoft Edge */
-        }
-        
-        #id_atestado::-ms-fill-lower,
-        #id_atestado::-ms-fill-upper {
-            background-color: #007BFF; /* Cor do preenchimento da faixa (fill) no controle deslizante para o Internet Explorer e Microsoft Edge */
-        }
-        
-</style>
-<script>
-       function updateTextInput(val) {
-           document.getElementById('atestado-display').innerHTML = val;
-       }
-       </script>
+    <!-- Semantics JSS -->
 {% endblock css %}  
-<!--Imagem Representando o setor-->
-<!--END Imagem Representando o setor-->
 {% block title_login %}ÁREA MÉDICA {% endblock title_login %}
 {% block titulo_ %} 
        ÁREA MÉDICA 
-
 {% endblock titulo_ %} 
-{% block body_title %}
-       ÁREA MÉDICA 
-       
-{% endblock body_title %}
+{% block body_title %}ÁREA MÉDICA {% endblock body_title %}
 {% block body_login %}
 <div  class='dados-preatendimento row'> 
        <!--ABAS - exibe as opções de preenchimento de documento do medico-->   
        <span class='fs-7 border-bottom'>Paciente em atendimento:</span>
        <h1 class='h3'>{{object.paciente_triagem}}</h1>
-       <div class='col mt-3'>              
-              
-       <button onclick="imprimirRelatorio()">Imprimir Relatório <i class="fa-solid fa-print"></i></button>
-              <div id='imprimir_relatorio_medico' style="box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-              padding: 2%;">
-              <style>
-
-                     @media print {
-                            body{font-family: Arial, Helvetica, sans-serif !important;}
-                            p{padding: 0rem!important;margin: 0!important;font-size: 0.7rem;}
-                            div{font-size: 0.7rem;}
-                            #cabecalho div, #cabecalho p{font-size: 0.9rem!important;}
-                            h1, h2, h3, h4, h5, h6 {
-                                          margin: 0; /* Zera as margens para títulos */
-                                          padding: 0; /* Zera o padding para títulos */
-                            }
-                            h1 {
-                            margin: 0; /* Zera as margens para h1 */
-                            padding: 0; /* Zera o padding para h1 */
-                            background-repeat: repeat-x; /* Repete a imagem horizontalmente */
-                            color: #fff; /* Cor do texto para h1 */
-                            text-align: center; /* Centraliza o texto no h1 */
-                            line-height: 20px; /* Altura da linha para centralizar verticalmente */
-                            }
-                            
-                            h2 {display: flex;width:auto; margin-right: 3%; font-size: 1.4rem !important; font-weight: lighter!important;}
-                            .comorbidade{
-                                   background-color:hsl(0, 0%, 80%)!important;
-                            }
-                     }
-              </style>
-                     <div style='display:flex'>
-                            <div id="cabecalho" style='width: 68%;'>
-                                   <div style='display:flex'><div style=' margin-right: 1rem;'>UPA VERA CRUZ</div><li>HTMAS</li></div>
-                                   <p>Av. Juvenal João Vinagre, 175. Centro. Vera Cruz - BA</p>
-                                   <p>Tel.: (71) 3633 - 2286</p>
-                                   <p>Email: servicosocial.upaveracruz@gmail.com</p>
-                            </div>
-                            <div style='display:flex;width:32%; padding-top: 0.1rem;'>
-                                   <div><img width="50" src="{% static 'brasao-veracruz.png' %}" alt=""></div>
-                                   <div><img width="160" src="{% static 'upa24.png' %}" alt=""></div>
-                            </div>
-                     </div>
-                     <div style='padding-top: 2rem;'><h1 style='font-size: 1.5rem; text-align: center !important;'>FICHA DE ATENDIMENTO DE EMERGÊNCIA</h1></div>
-                     <hr>
-                     {% for r  in resultado_medico %}
-                            <!--linha 1-->
-                            <div style="display: flex;">
-                                   <div style="display: flex;width: 70%!important;">
-                                          <p>Nome Social: </p>
-                                          <p style="font-weight: bold; border-bottom: 0.01rem solid gray !important;width:80%  !important;;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}}</p>
-                                   </div>
-                                   <div style="display: flex;width:30%">
-                                          <p>Idade: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.idade}} anos</p>
-                                   </div>
-                            </div>   
-                            <!--linha 2-->
-                            <div style="display: flex;">
-                                   <div style="display: flex;width: 40%!important;">
-                                          <p>Data de Nascimento: </p>
-                                          <p style="font-weight: bold; border-bottom: 0.01rem solid gray !important;width:60%  !important;;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.data_nascimento}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Sexo: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.sexo}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>RG: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.RG}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto;">
-                                          <p>CNS ou CPF: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.CPF}}</p>
-                                   </div>                                   
-                            </div>  
-                            <!--linha 3-->
-                            <div style="display: flex;">
-                                   <div style="display: flex;width: 40%!important;">
-                                          <p>Endereço (Rua): </p>
-                                          <p style="font-weight: bold; border-bottom: 0.01rem solid gray !important;width:60%  !important;;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.rua}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Bairro: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.bairro}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Cidade: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.cidade}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Estado: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.estado}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto;">
-                                          <p>CEP: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.CEP}}</p>
-                                   </div>                                   
-                            </div>
-                            <!--linha 4-->
-                            <div style="display: flex;">
-                                   <div style="display: flex;width: 40%!important;">
-                                          <p>Nome da Mãe: </p>
-                                          <p style="font-weight: bold; border-bottom: 0.01rem solid gray !important;width:60%  !important;;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_mae}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Nacionalidade do Paciente: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nacionalidade}}</p>
-                                   </div> 
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Nome do Acompanhante: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.nome_acompanhante}}</p>
-                                   </div>                                                                     
-                            </div>
-                            <!--linha 5-->
-                            <div style="display: flex;">
-                                   <div style="display: flex;width: 40%!important;">
-                                          <p>Nº Telefone: </p>
-                                          <p style="font-weight: bold; border-bottom: 0.01rem solid gray !important;width:60%  !important;;">&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.tel}}</p>
-                                   </div>
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Admissão: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.data_medico}}</p>
-                                   </div>   
-                                   <div style="display: flex;width:auto; margin-right: 3%;">
-                                          <p>Hora: </p>
-                                          <p style="font-weight: bold;border-bottom: 0.01rem solid gray !important;">&nbsp;{{r.hora_medico}}hs</p>
-                                   </div>                                                                    
-                            </div>
-                            <!--ENFERMAGEM-->
-                            <div style="margin-top: 5%;">
-                                   <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important;margin-bottom:-1%">Informações da classificão (Enfermagem)</h2>  
-                                   <hr>
-                                   <p>Hora: {{r.paciente_medico_atendimento.hora_triagem}}hs</p> </p>
-                                   <div style="display: flex;width:auto; font-size:0.9rem">
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">PA:</b>&nbsp; {{r.paciente_medico_atendimento.pressao_arterial_PA}}mmHg max | {{r.paciente_medico_atendimento.pressao_arterial_PA_2}}mmHg min
-                                          </div>
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FC:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_cardiaca_FC}}bpm
-                                          </div>   
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FR:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_respiratoria_FR}}bpm
-                                          </div>  
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">SPO²:</b>&nbsp; {{r.paciente_medico_atendimento.saturacao_de_oxigenio_SPO2}}%
-                                          </div>                                                                                  
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">HGT:</b>&nbsp; {{r.paciente_medico_atendimento.hemoglicoteste_HGT}}mg/dL
-                                          </div> 
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">TEMP:</b>&nbsp; {{r.paciente_medico_atendimento.temperatura_TEMP}}c°
-                                          </div> 
-                                          <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
-                                                 <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">PESO:</b>
-                                                 &nbsp;{% if r.paciente_medico_atendimento.peso == None %}33,6kg{% else %}{{r.paciente_medico_atendimento.peso}}kg{% endif %}
-                                          </div>                                           
-                                   </div> 
-                                   <div class="comorbidade" style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; border: 0.1rem solid #ccc; ">
-                                          <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;">COMORBIDADES:</b>
-                                          <style>ul{display:flex}</style>
-                                          {{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_comorbidades|safe}}
-                                   </div>  
-                                   <div style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; display:flex; border: 0.1rem solid #ccc;">
-                                          <div style="width: 50%;">
-                                                 <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;">CLASSIFICAÇÃO:</b>
-                                                 <style>ul{display:flex}</style>
-                                                 <i style='font-size: 1.5rem'>{{r.paciente_medico_atendimento.classifica_tipo}}</i>
-                                          </div>
-                                          <div>
-                                                 <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;">ENFERMEIRO (a):</b>
-                                                 <i style='font-size: 1.5rem'>{{r.paciente_medico_atendimento.nome_da_enfermeira}}</i>                                          
-                                          </div>
-                                   </div>
-                            </div>
-                            <!--MÉDICO-->                            
-                            <div style="margin-top: 3%;">
-                                   <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important; margin-bottom:-1%">Informaçõe do Atendimento Médico</h2>
-                                   <hr>
-                                   Data: {{r.data_medico}}hs | <i class="fa-duotone fa-alarm-clock"></i> Hora: {{r.hora_medico}}hs
-                                   {% if r.historico_doenca_atual_HDA %}
-                                          <div style="margin-left: 2rem; margin-top: 1%">
-                                                 <p style="background-color:#ccc; padding: 0.5rem">H.D.A: </p>
-                                                 <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
-                                                        <style>ul{display:block}</style>
-                                                        <div style="margin-bottom: 1rem;">
-                                                               {{r.historico_doenca_atual_HDA|safe}}
-                                                        </div>
-                                                 </div>
-                                          </div>
-                                   {% endif %}
-                                   {% if r.exame_fisico %}
-                                          <div style="margin-left: 2rem;">
-                                                 <p style="background-color:#ccc; padding: 0.5rem">EXAME FÍSICO: </p>
-                                                 <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
-                                                        <style>ul{display:block}</style>
-                                                        <div style="margin-bottom: 1rem;">
-                                                               {{r.exame_fisico|safe}}
-                                                        </div>
-                                                 </div>
-                                          </div>
-                                   {% endif %}
-                                   {% if r.Diagnostico %}
-                                          <div style="margin-left: 2rem;">
-                                                 <p style="background-color:#ccc; padding: 0.5rem">DIAGNÓSTICO: </p>
-                                                 <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
-                                                        <style>ul{display:block}</style>
-                                                        <div style="margin-bottom: 1rem;">
-                                                               {{r.Diagnostico|safe}}
-                                                        </div>
-                                                 </div>
-                                          </div>
-                                   {% endif %}
-                                   {% if r.conduta %}
-                                          <div style="margin-left: 2rem;">
-                                                 <p style="background-color:#ccc; padding: 0.5rem">CONDUTA: </p>
-                                                 <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
-                                                        <style>ul{display:block}</style>
-                                                        <div style="margin-bottom: 1rem;">
-                                                               {{r.conduta|safe}}
-                                                        </div>
-                                                 </div>
-                                          </div>
-                                   {% endif %}
-                                   <div style="margin-left: 2rem; display: flex; margin-top:2%">
-                                          <p style="background-color:#ccc; padding: 0.5rem">CID 10: </p>
-                                          <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
-                                                 <style>ul{display:block}</style>
-                                                 <div style="margin-bottom: 1rem;">
-                                                        {{r.classificacao_internacional_doenca_CID|safe}}
-                                                 </div>
-                                          </div>                                          
-                                   </div>
-                            </div>
-                            <!--EXTRA-->
-                            <div style="margin-top: 2%;">
-                                   <div style="margin-left: 2rem; margin-bottom:1.5rem; border: 0.1rem solid #ccc">
-                                          <p style="background-color:#ccc; padding: 0.5rem">Alergias: {% if not r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.alergias == "0" %}SIM {% else %}NÃO{% endif %}<i></i> </p>
-                                          {% if not r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.alergias == "0" %}
-                                          <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">                                               
-                                          
-                                          <div style="margin-bottom: 1rem;">
-                                                 {{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}
-                                          </div>
-                                          </div>
-                                          {% else %}                                          
-                                          {% endif %}
-                                          
-                                   </div>
-                                   <div style="margin-left: 2rem">
-                                          <p style="border:solid 0.1rem #ccc; padding: 0.9rem; font-weight: 700;">Alta:</p>
-                                   </div>
-                                   <div style="margin-left: 2rem">
-                                          <p style=" padding: 1rem; font-weight: 700; text-align: right !important; ">Médico: _____________________________________</p>
-                                   </div>
-                            </div>
-                            <div style="page-break-before: always;"></div>
-
-                            <!-- SEGUNDA PAGINA DO FORMULARIO -->
-                            <div class="d_none">
-                                   <div  style='display:flex ' >
-                                          <div id="cabecalho" style='width: 68%;'>
-                                                 <div style='display:flex'><div style=' margin-right: 1rem;'>UPA VERA CRUZ</div><li>HTMAS</li></div>
-                                                 <p>Av. Juvenal João Vinagre, 175. Centro. Vera Cruz - BA</p>
-                                                 <p>Tel.: (71) 3633 - 2286</p>
-                                                 <p>Email: servicosocial.upaveracruz@gmail.com</p>
-                                          </div>
-                                          <div style='display:flex;width:32%; padding-top: 0.1rem;'>
-                                                 <div><img width="50" src="{% static 'brasao-veracruz.png' %}" alt=""></div>
-                                                 <div><img width="160" src="{% static 'upa24.png' %}" alt=""></div>
-                                          </div>
-                                   </div>
-                                   <h1 style="margin-top: 2rem;">Anotações Complementares</h1>
-                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
-                                          <div style="display: flex !important;">
-                                                 <div style="width: 10rem;">Evolução Médica: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                   </div>
-                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
-                                          <div style="display: flex !important;">
-                                                 <div style="width: 10rem;">Enfermeiro (a): </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                   </div>
-                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
-                                          <div style="display: flex !important;">
-                                                 <div style="width: 12rem;">Tec. Enfermagem: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                   </div>
-                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
-                                          <div style="display: flex !important;">
-                                                 <div style="width: 25rem;">Laboratório - RX - Serviço Social: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                   </div>
-                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
-                                          <div style="display: flex !important;">
-                                                 <div style="width:6rem;">Nutrição: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                   </div>
-                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
-                                          <div style="display: flex !important;">
-                                                 <div style="width:15rem;">Pacientes Internados: </div>
-                                          </div>
-                                          <div style="display: flex !important;">
-                                                 <div style="width:15rem;">Telefone 1: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                                 <div style="width:10rem;">Nome: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>
-                                          <div style="display: flex !important;">
-                                                 <div style="width:15rem;">Telefone 2: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                                 <div style="width:10rem;">Nome: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>                                   
-                                   </div>
-                                   <div style="margin-top: 0.7rem; border:0.1rem solid black; padding: 0.9rem;">
-                                          <div style="display: flex !important;">
-                                                 <div style="width:18rem;">Reservado à Coordenação: </div>
-                                                 <div style=" height:1.2rem; border-bottom:solid 0.1rem gray; width: 100%;">&nbsp;</div>
-                                          </div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                          <div style=" height:1.2rem; border-bottom:solid 0.1rem gray">&nbsp;</div>
-                                   </div>
-                                   <div style="margin-top: 0.7rem;" class="st-icon-addthis"v style="margin-top: 0.7rem;"><span style="margin-right: 8rem;">Atestado Médico: __________ dias</span><span>Número da D.O: ____________________</span></div>
-                            </div>
-                     {% endfor %}
-              </div>
-
-
+       <div class='col mt-3'> 
+              <!-- Relatório do atendimento -->   
+              {% include "Medicos/arquivos_partes_preescrever-medicamento/relatorio_atendimento.html" %}             
        </div>
        <div class='col'>  
               <h1 class="h4 ml-3 w-75 bg-secondary-subtle p-3 rounded-top-1 shadow shadow-sm">Caso seja necessário gerar algum documento para o paciente, utilize os botões abaixo.</h1>
-              <hr>
-                       
+              <hr>          
               <form  method="post">                     
                      {% csrf_token %}                     
                      <div>   
-
                             <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
                                    <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
                                    <label for="tab2"><i class="fa-sharp fa-solid fa-person-running-fast"></i> Exames:</label>
@@ -580,16 +55,40 @@
                                    <!--<input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
                                    <label for="tab5"><i class="icon-globe"></i>Conduta:</label>-->
                                    
-                                   <ul>
-                                         
-                                          
+                                   <ul>  
                                           <li class="tab-content tab-content-2 typography">
+                                                  <!-- Bootstrap Links -->
+                                                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+                                                 <!-- JS, Popper.js, and jQuery -->
+                                                 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                                                 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                                                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+                                                 <!-- Jquery -->
+                                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+                                                 <!-- select2 -->
+                                                 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+                                                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+                                                 <!-- Semantics JSS -->
                                                  <p> {{form.exames}}</p>
                                                  <script>
-                                                        // Chame a função jQuery.noConflict() para liberar o símbolo $
-                                                        var jQuery = $.noConflict(true);
-                                                        $('#id_exames').multiSelect()
-                                                 </script>
+                                                        $("#id_exames").select2({
+                                                            width: '100%',
+                                                            placeholder: "Select names",
+                                                        });
+                                                 
+                                                        function btn_handler() {
+                                                            var selectedValues = $('.prompt').val();
+                                                            
+                                                            for (let value of selectedValues) {
+                                                                var optionText = $(`.prompt option[value="${value}"]`).text();
+                                                                alert(optionText);
+                                                            }
+                                                        }
+                                                    </script>   
+                                                 
                                                  <div class='bg-secondary-subtle m-2 mt-4 p-2' > 
                                                         <h5>Obs.:</h5>
                                                         <div class='fs-5'>Se precisa selecionar mais de um exame, deixa a tecla "<strong>Ctrl</strong>" pressionada ao clicar nos exames.</div>
@@ -603,14 +102,18 @@
                                                         <div class='fs-6'> Digite a quantidade de dias que o paciente permanecerá em descanso e recuperação. </div>
                                                         <div class='text-center border p-2 fs-2 bg-primary-subtle'>🕒<span id="atestado-display" class=''>{{ form.atestado.value }}</span> dias</div>
                                                         {{form.atestado}}
-                                                 </div> 
 
+                                                 </div> 
+                                                 
+
+
+
+
+
+
+
+                                                 
                                           </li>
-                                          <!--
-                                          <li class="tab-content tab-content-last typography">
-                                                 <p><strong>Descreva a conduta do paciente</strong></p>
-                                                 {{form.conduta}}
-                                          </li>-->
                                    </ul>
                             </div>                            
                             <div >
@@ -621,66 +124,12 @@
                                    <button style='width: 90%;' type="submit" class='btn btn-sm btn-secondary mt-3 fs-4'>Continuar <i class="fa-solid fa-angles-right"></i></button>
                                    <div class="m-auto mt-3 w-75">Se necessário encaminhar o paciente para atendimentos especializados, como exames de raio-x, ambulatório e outros, utilize o botão <b>Atendimento especializado</b>. 🏥
                                           <a class='btn btn-sm bg-secondary-subtle'  href="{% url 'Triagem:triagem_especializada' %}?param={{ pk }}">Atendimento especializado</a>
-                                   </div>
-                                   
-                            </div>                          
-                                                        
-                     </div>  
-                                                   
+                                   </div>  
+                            </div>                                                        
+                     </div>                          
               </form>
-             
        </div>      
-</div>     
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <!--Multi Select para o form-->
-       <link rel="stylesheet" href="{% static 'global/js/multi-select/css/multi-select.css' %}">
-       <script src="{% static 'global/js/multi-select/js/jquery.multi-select.js' %}"></script>
-     <script>
-     $(document).ready(function() {
-       $('#move').click(function() {
-         $('#id_exames option:selected').appendTo('#area');
-       });
-     });
-     </script>
+</div> 
 
 
-<script>
-       function imprimirRelatorio() {
-           var conteudoDiv = document.getElementById('imprimir_relatorio_medico').innerHTML;
-           var janelaImpressao = window.open('', '', 'width=600');
-   
-           if (janelaImpressao) {
-               janelaImpressao.document.write('<html><head><title>Relatório Médico</title></head><body>');
-   
-               // Adicione a quebra de página antes de cada nova seção
-               janelaImpressao.document.write(conteudoDiv);
-   
-               janelaImpressao.document.write('</body></html>');
-               janelaImpressao.document.close();
-               janelaImpressao.print();
-           } else {
-               alert('Erro ao abrir a janela de impressão. Verifique se as configurações do seu navegador permitem pop-ups.');
-           }
-       }
-   </script>
-
-
-   <script>
-       let slider = document.getElementById('slider')
-let selector = document.getElementById('selector')
-let selectValue = document.getElementById('selectValue')
-let progressBar = document.getElementById('progressBar')
-
-selectValue.innerHTML = slider.value
-
-slider.oninput = function() {
-  selectValue.innerHTML = this.value
-  selector.style.left = this.value + '%'
-  progressBar.style.width = this.value + '%'
-}
-
-   </script>
-   
-    
-   
 {% endblock body_login %}

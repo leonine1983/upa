@@ -1,0 +1,82 @@
+<style> {% for dados in paciente_triagem  %} 
+    {% if dados.classifica_tipo.id == 1 %}
+    .dados-preatendimento ul li span{
+           color: #AA0000;
+           font-size: 1.3rem;
+    }
+    {% elif dados.classifica_tipo.id == 2  %}
+    .dados-preatendimento ul li span{
+           color: #ff6600;
+           font-size: 1.3rem;
+    {% elif dados.classifica_tipo.id == 3  %}
+    .dados-preatendimento ul li span{
+           color:  #008200;
+           font-size: 1.3rem;
+    {% elif dados.classifica_tipo.id == 4  %}
+    .dados-preatendimento ul li span{
+           color: #008dc0;
+           font-size: 1.3rem;
+    {% endif %}  
+{% endfor %} 
+
+
+/* Adicione isso ao seu arquivo de estilo CSS */
+#id_atestado {
+  width: 100%; /* Define a largura do controle deslizante */
+  margin-top: 10px; /* Adiciona um espaçamento acima do controle deslizante */
+  margin-bottom: 10px; /* Adiciona um espaçamento abaixo do controle deslizante */
+}
+
+#id_atestado::-webkit-slider-thumb {
+  background-color: #007BFF; /* Cor do polegar (thumb) no controle deslizante para navegadores WebKit (Chrome, Safari) */
+}
+
+#id_atestado::-moz-range-thumb {
+  background-color: #007BFF; /* Cor do polegar (thumb) no controle deslizante para navegadores Gecko (Firefox) */
+}
+
+#id_atestado::-ms-thumb {
+  background-color: #007BFF; /* Cor do polegar (thumb) no controle deslizante para o Internet Explorer e Microsoft Edge */
+}
+
+#id_atestado::-webkit-slider-runnable-track {
+  background-color: #ddd; /* Cor da faixa (track) no controle deslizante para navegadores WebKit */
+}
+
+#id_atestado::-moz-range-track {
+  background-color: #ddd; /* Cor da faixa (track) no controle deslizante para navegadores Gecko */
+}
+
+#id_atestado::-ms-track {
+  background-color: #ddd; /* Cor da faixa (track) no controle deslizante para o Internet Explorer e Microsoft Edge */
+}
+
+#id_atestado::-ms-fill-lower,
+#id_atestado::-ms-fill-upper {
+  background-color: #007BFF; /* Cor do preenchimento da faixa (fill) no controle deslizante para o Internet Explorer e Microsoft Edge */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<script>
+    function updateTextInput(val) {
+        document.getElementById('atestado-display').innerHTML = val;
+    }
+</script>
