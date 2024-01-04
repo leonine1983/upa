@@ -10,6 +10,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 from django.contrib.auth.models import Group, User, Permission
 from ckeditor.fields import RichTextField
+from Triagem.models import Exames_Model
 
 
 class CustomUserManager(BaseUserManager):
@@ -251,6 +252,15 @@ class Salas_Atendimento(models.Model):
     
     def __str__(self):
         return str(self.nomeSala.nome_Sala )
+
+
+class Salva_modelo_exame(models.Model):
+    nome = models.CharField(max_length=40, null=False, default='Ex: Nome do modelo')
+    exame = models.ManyToManyField(Exames_Model)
+    conteudo = models.TextField(max_length=500, null=False, default='Ex: Solicito os seguintes exames ...')
+
+    def __init__(self):
+        return self.nome
     
 
 

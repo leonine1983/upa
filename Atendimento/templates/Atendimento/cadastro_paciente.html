@@ -10,6 +10,38 @@
     <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} "> 
      <!--FORM-->
      <link rel="stylesheet" href=" {% static 'global/css/formularios.css' %} "> 
+     <style>
+        .overlay{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,1);
+        }
+        
+        .conteudo{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .close{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            
+        }
+     </style>
+
 {% endblock css %}  
 {% block body_login %}
 <div class='menu-local-top' style='margin-top:-3%'>
@@ -82,25 +114,29 @@
         <div class="form-group">
             {{ form.rua.label_tag }}
             {{ form.rua }}
-            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar Rua' href="{% url 'Atendimento:cadastra_rua' %}"></a>
+            <p>
+                <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar Rua' href="{% url 'Atendimento:cadastra_rua' %}"></a>
+            </p>
             {{ form.rua.errors }}
         </div>
         <div class="form-group">
             {{ form.bairro.label_tag }}
             {{ form.bairro }}
-            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar bairro' href="{% url 'Atendimento:cadastra_bairro' %}"></a>
+            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar bairro' href="{% url 'Atendimento:cadastra_bairro' %}"></a></p>
             {{ form.bairro.errors }}
         </div>
         <div class="form-group">
             {{ form.cidade.label_tag }}
             {{ form.cidade }}
-            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar cidade' href="#"></a>
+            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar cidade' href="{% url 'Atendimento:cadastra_cidade' %}"></a></p>
             {{ form.cidade.errors }}
         </div>
         <div class="form-group">
             {{ form.estado.label_tag }}
             {{ form.estado }}
-            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar cidade' href="#"></a>
+            <p>
+                <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar estado' href="{% url 'Atendimento:cadastra_estado' %}"></a>
+            </p>
             {{ form.estado.errors }}
         </div>
         <div class="form-group">
@@ -135,7 +171,8 @@
             {{ form.cartao_sus.errors }}
         </div>       
     </div>  
-    <button class='button-salvar' type="submit">Salvar</button>    
+
+    <button class='button-salvar' type="submit" onclick="limpaDados()">Salvar</button>    
 </form>
 {% else %}
 <div class='m-5 fs-3'>
@@ -149,11 +186,227 @@
     <p class='p-2'>Equipe de Suporte Técnico</p>
   </div>
 {% endif %}
+{% if cadas_rua %}
+<div class='overlay' id='cadastra'>
+    <div class="conteudo">
+        
+        <span class="close" onclick="fecharModelo()">&times</span>
+        <div class='m-4'>
+        {% if cadas_rua == 'rua' %}
+        <form action="{% url 'Atendimento:cadastra_rua' %}" method="post" >
+            {% csrf_token %}
+            <p class="text-center text-uppercase"> <i class="fa-solid fa-road"></i> Digite o nome da rua:</p>
+            {{form.rua_nome}}
+            <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
+        </form>
+        {% endif %}
+        {% if cadas_rua == 'bairro' %}
+        <form action="{% url 'Atendimento:cadastra_bairro' %}" method="post" >
+            {% csrf_token %}
+            <p class="text-center text-uppercase"> <i class="fa-solid fa-road"></i> Digite o nome do bairro:</p>
+            {{form.bairro_nome}}
+            <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
+        </form>
+        {% endif %}
+        {% if cadas_rua == 'cidade' %}
+        <form action="{% url 'Atendimento:cadastra_cidade' %}" method="post" >
+            {% csrf_token %}
+            <p class="text-center text-uppercase"> <i class="fa-solid fa-tree-city"></i> Digite o nome da cidade:</p>
+            {{form.cidade}}
+            <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
+        </form>
+        {% endif %}
+        {% if cadas_rua == 'estado' %}
+        <form action="{% url 'Atendimento:cadastra_estado' %}" method="post" >
+            {% csrf_token %}
+            <p class="text-center text-uppercase"> <i class="fa-solid fa-tree-city"></i> Digite o nome da estado:</p>
+            {{form.estado}}
+            <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
+        </form>
+        {% endif %}
+        
+        </div>
+    </div>
+</div>
+{% endif %}
 {% block script %}
+<script>
+    //Se tive algun dado armazenado no localStorange, ele sera armazenado no campo do formulario
+    document.getElementById('id_nome_social').value = localStorage.getItem('id_nome_social') || '';
+    document.getElementById('id_data_nascimento').value = localStorage.getItem('id_data_nascimento') || '';
+    document.getElementById('id_sexo').value = localStorage.getItem('id_sexo') || '';
+
+    id_data_nascimento
+    
+    // Função que salva dados no localStorange durante a digitação
+    function salvarDados () {
+        localStorage.setItem('id_nome_social', document.getElementById('id_nome_social').value);
+        localStorage.setItem('id_data_nascimento', document.getElementById('id_data_nascimento').value)
+        localStorage.setItem('id_sexo', document.getElementById('id_sexo').value)
+    }
+    document.getElementById('id_nome_social').addEventListener('input', salvarDados);
+    document.getElementById('id_data_nascimento').addEventListener('input', salvarDados);
+    document.getElementById('id_sexo').addEventListener('change', salvarDados);
+
+
+    // Função para limpar os dados do localStorange
+    function limpaDados(){
+        salvarDados();
+        localStorage.removeItem('id_nome_social');
+        localStorage.removeItem('id_data_nascimento');
+        localStorage.removeItem('id_sexo');
+    }
+</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            abrirModelo();
+        })
+        function abrirModelo(){
+            var modelo = document.getElementById('cadastra');
+            modelo.style.display = 'block'
+        }
+        function fecharModelo(){
+            var modelo = document.getElementById('cadastra');
+            modelo.style.display = 'none'
+            
+            //Redirecionar para a pagina de Cadastro
+            window.location.href = '{% url "Atendimento:registro-paciente" %}';
+        }
+    </script>
+    <!--
+    
+ 
+        <div class="form-group">
+            <label for="id_etnia">Etnia:</label>
+            <select name="etnia" required="" id="id_etnia" data-select2-id="select2-data-id_etnia" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+  <option value="" selected="" data-select2-id="select2-data-12-v2em">---------</option>
+
+  <option value="1">Negro</option>
+
+  <option value="2">Pardo</option>
+
+  <option value="3">Branco</option>
+
+</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-11-npv6" style="width: 259.531px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_etnia-container" aria-controls="select2-id_etnia-container"><span class="select2-selection__rendered" id="select2-id_etnia-container" role="textbox" aria-readonly="true" title="---------">---------</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            
+        </div>
+        <div class="form-group">
+            <label for="id_RG">RG:</label>
+            <input type="text" name="RG" class="form-control" maxlength="13" required="" id="id_RG">
+            
+        </div>
+        <div class="form-group">
+            <label for="id_CPF">CPF:</label>
+            <input type="text" name="CPF" class="form-control" maxlength="14" required="" id="id_CPF">
+            
+        </div>
+        <div class="form-group">
+            <label for="id_nacionalidade">Nacionalidade:</label>
+            <input type="text" name="nacionalidade" class="form-control " maxlength="30" required="" id="id_nacionalidade">
+            
+        </div>
+        <div class="form-group">
+            <label for="id_rua">Rua:</label>
+            <select name="rua" class="form-select select2-hidden-accessible" required="" id="id_rua" data-select2-id="select2-data-id_rua" tabindex="-1" aria-hidden="true">
+  <option value="" selected="" data-select2-id="select2-data-4-rih2">---------</option>
+
+  <option value="1">Av. Ernesto Carneiro Ribeiro</option>
+
+</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-3-azcn" style="width: 259.531px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_rua-container" aria-controls="select2-id_rua-container"><span class="select2-selection__rendered" id="select2-id_rua-container" role="textbox" aria-readonly="true" title="---------">---------</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title="Adicionar Rua" href="/atendimento/cadastro/Rua"></a>
+            
+        </div>
+        <div class="form-group">
+            <label for="id_bairro">Bairro:</label>
+            <select name="bairro" class="form-select select2-hidden-accessible" required="" id="id_bairro" data-select2-id="select2-data-id_bairro" tabindex="-1" aria-hidden="true">
+
+
+</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-1-cl3r" style="width: 259.547px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_bairro-container" aria-controls="select2-id_bairro-container"><span class="select2-selection__rendered" id="select2-id_bairro-container" role="textbox" aria-readonly="true" title="---------">---------</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title="Adicionar bairro" href="/atendimento/cadastro/bairro"></a>
+            
+        </div>
+        <div class="form-group">
+            <label for="id_cidade">Cidade:</label>
+            <select name="cidade" required="" id="id_cidade" data-select2-id="select2-data-id_cidade" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+  <option value="" selected="" data-select2-id="select2-data-8-wx4i">---------</option>
+
+  <option value="1">Vera Cruz</option>
+
+</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-7-98y6" style="width: 259.547px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_cidade-container" aria-controls="select2-id_cidade-container"><span class="select2-selection__rendered" id="select2-id_cidade-container" role="textbox" aria-readonly="true" title="---------">---------</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title="Adicionar cidade" href="#"></a>
+            
+        </div>
+        <div class="form-group">
+            <label for="id_estado">Estado:</label>
+            <select name="estado" required="" id="id_estado" data-select2-id="select2-data-id_estado" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+  <option value="" selected="" data-select2-id="select2-data-6-wewo">---------</option>
+
+  <option value="1">Bahia</option>
+
+</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-5-ulr1" style="width: 259.547px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_estado-container" aria-controls="select2-id_estado-container"><span class="select2-selection__rendered" id="select2-id_estado-container" role="textbox" aria-readonly="true" title="---------">---------</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title="Adicionar cidade" href="#"></a>
+            
+        </div>
+        <div class="form-group">
+            <label for="id_pais">Pais:</label>
+            <select name="pais" required="" id="id_pais" data-select2-id="select2-data-id_pais" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+  <option value="" selected="" data-select2-id="select2-data-10-iu17">---------</option>
+
+  <option value="1">Brasil</option>
+
+</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-9-x3zg" style="width: 259.531px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_pais-container" aria-controls="select2-id_pais-container"><span class="select2-selection__rendered" id="select2-id_pais-container" role="textbox" aria-readonly="true" title="---------">---------</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title="Adicionar pais" href="#"></a>
+            
+        </div>
+        <div class="form-group">
+            <label for="id_CEP">CEP:</label>
+            <input type="text" name="CEP" class="form-control" maxlength="9" required="" id="id_CEP">
+            
+        </div>
+        <div class="form-group">
+            <label for="id_nome_mae">Nome mae:</label>
+            <input type="text" name="nome_mae" class="form-control " maxlength="40" required="" id="id_nome_mae">
+            
+        </div>
+        <div class="form-group">
+            <label for="id_responsavel">Responsavel:</label>
+            <input type="text" name="responsavel" class="form-control " maxlength="30" required="" id="id_responsavel">
+            
+        </div>
+        <div class="form-group">
+            <label for="id_tel">Tel:</label>
+            <input type="text" name="tel" class="form-control " maxlength="14" required="" id="id_tel">
+            
+        </div>
+        <div class="form-group">
+            <label for="id_cartao_sus">Cartao sus:</label>
+            <input type="text" name="cartao_sus" class="form-control" maxlength="15" required="" id="id_cartao_sus">
+            
+        </div>       
+    </div>  
+    <button class="button-salvar" type="submit">Salvar</button>    
+</form>-->
+    <!--Conservar os dados do formulario ate qeu seja fieto o post-->
+    <script>
+        //Se tive algun dado armazenado no localStorange, ele sera armazenado no campo do formulario
+        document.getElementById('id_nome_social').value = localStorage.getItem('id_nome_social') || '';
+        
+        // Função que salva dados no localStorange durante a digitação
+        function salvarDados () {
+            localStorage.setItem('id_nome_social', document.getElementById('id_nome_social').value);
+        }
+        // Função para limpar os dados do localStorange
+        function limpaDados(){
+            salvarDados();
+            localStorage.removeItem('id_nome_social');
+        }
+    </script>
+
+
     
    <!-- <script src="{% static 'Atendimento/js/estados_cidades.js' %}" ></script> -->
     <script src="{% static 'global/js/jquery.mask.min.js' %}"></script>
-        <script>
+    <script>
         $(document).ready(function(){
             $("#id_data_nascimento").mask("00/00/0000")
         })
@@ -167,6 +420,7 @@
             $("#id_RG").mask("000.000.00-00")
         })
     </script>
+
     <script src="{% static 'global/js/select2.min.js' %}"></script>
     <script>
         // In your Javascript (external .js resource or <script> tag)

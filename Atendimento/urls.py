@@ -18,12 +18,19 @@ urlpatterns = [
     path('painel_atendimento_Medico', views.chamar_paciente, name='chamar_paciente'),
     #path('painel_tiragem', views.chamar_paciente, name='chamar_paciente_triagem'),
 
-    #Cadastro Bairro
+    # Cadastro Estado
+    path('cadastro/estado', views.Estado_CreateView.as_view(), name='cadastra_estado'),    
+
+
+    # Cadastro Cidade
+    path('cadastro/cidade', views.Cidade_CreateView.as_view(), name='cadastra_cidade'),    
+
+    # Cadastro Bairro
     path('cadastro/bairro', views.Bairro_CreateView.as_view(), name='cadastra_bairro'),    
     path('bairro/lista', views.Bairro_ListView.as_view(), name='list_bairro'),
     path('bairro/update/<int:pk>', views.Bairro_UpadateView.as_view(), name='Update_bairro'),
     path('bairro/deleta/<int:pk>', views.Bairro_Delete.as_view(), name='delete_bairro'),
-    #Cadastro rua
+    # Cadastro rua
     path('cadastro/Rua', views.Rua_CreateView.as_view(), name='cadastra_rua'),    
     path('Rua/lista', views.Rua_ListView.as_view(), name='list_rua'),
     path('Rua/update/<int:pk>', views.Rua_UpadateView.as_view(), name='Update_rua'),
