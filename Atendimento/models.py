@@ -114,7 +114,10 @@ class Etnia(models.Model):
     def __str__(self):
         return self.etnia
 
-
+choices=(      
+        ('0', 'Não'),
+        ('1','Sim'),
+    )
 class ficha_de_atendimento(models.Model):
     nome_social = models.CharField(max_length=40, null=False, default='')
     codigo_pacient = models.CharField(max_length=8, null=True, verbose_name="Código do paciente")
@@ -138,10 +141,6 @@ class ficha_de_atendimento(models.Model):
     horario_cadastro = models.TimeField(null=True, auto_now_add=True)
     cartao_sus = models.CharField(max_length=15, null=True)
     ultimo_pk = None
-    choices=(      
-        ('0', 'Não'),
-        ('1','Sim'),
-    )
     alergias = models.CharField(max_length=3, default='0', choices= choices, )
     conteudo_alergia = models.TextField(max_length=500, null=True, blank=True, default='Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)')
     comorbidades = models.CharField(max_length=3, default='0', choices= choices )
@@ -166,17 +165,14 @@ class envio_triagem(models.Model):
     nome_acompanhante = models.CharField(max_length=50, null=True, default='Ele mesmo')  
     data_envio_triagem = models.DateField(auto_now_add=True, null=True)
     horario_triagem = models.TimeField(auto_now_add=True, null=True)
-    TRIAGEM_CHOICES = (
-        ("1", "Sim"),
-        ("0", "Não")
-    )
     triagem_concluida = models.CharField(max_length=1, null=True)
     data_triagem_concluida = models.DateField(auto_now=True, null=True)
-    retornou_em_menos_de_48_horas = models.BooleanField(null=False, default=False)
+    retornou_em_menos_de_48_horas =  models.BooleanField(default=False, null=False)
+    horas48 =  models.BooleanField(default=False, null=False)
  
 
     class Meta:
-        ordering = ['horario_triagem', 'data_envio_triagem']
+        ordering = ['-horario_triagem', '-data_envio_triagem']
         permissions = [('Acesso_permitido_envio_Tri', 'Acesso permitido para envio à Fila de Triagem')]
 
     def __str__ (self):

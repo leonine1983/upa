@@ -89,11 +89,13 @@
         <div class="form-group">
             {{ form.sexo.label_tag }}
             {{ form.sexo }}
+            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar sexo' href="{% url 'Atendimento:cadastra_sexo' %}"></a></p>
             {{ form.sexo.errors }}
         </div>
         <div class="form-group">
             {{ form.etnia.label_tag }}
             {{ form.etnia }}
+            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar etnia' href="{% url 'Atendimento:cadastra_etnia' %}"></a></p>
             {{ form.etnia.errors }}
         </div>
         <div class="form-group">
@@ -114,9 +116,7 @@
         <div class="form-group">
             {{ form.rua.label_tag }}
             {{ form.rua }}
-            <p>
-                <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar Rua' href="{% url 'Atendimento:cadastra_rua' %}"></a>
-            </p>
+            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar Rua' href="{% url 'Atendimento:cadastra_rua' %}"></a></p>
             {{ form.rua.errors }}
         </div>
         <div class="form-group">
@@ -134,15 +134,13 @@
         <div class="form-group">
             {{ form.estado.label_tag }}
             {{ form.estado }}
-            <p>
-                <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar estado' href="{% url 'Atendimento:cadastra_estado' %}"></a>
-            </p>
+            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar estado' href="{% url 'Atendimento:cadastra_estado' %}"></a></p>
             {{ form.estado.errors }}
         </div>
         <div class="form-group">
             {{ form.pais.label_tag }}
             {{ form.pais }}
-            <a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar pais' href="#"></a>
+            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar pais' href="{% url 'Atendimento:cadastra_pais' %}"></a></p>
             {{ form.pais.errors }}
         </div>
         <div class="form-group">
@@ -221,6 +219,30 @@
             {% csrf_token %}
             <p class="text-center text-uppercase"> <i class="fa-solid fa-tree-city"></i> Digite o nome da estado:</p>
             {{form.estado}}
+            <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
+        </form>
+        {% endif %}
+        {% if cadas_rua == 'pais' %}
+        <form action="{% url 'Atendimento:cadastra_pais' %}" method="post" >
+            {% csrf_token %}
+            <p class="text-center text-uppercase"> <i class="fa-solid fa-tree-city"></i> Digite o nome da pais:</p>
+            {{form.pais}}
+            <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
+        </form>
+        {% endif %}
+        {% if cadas_rua == 'sexo' %}
+        <form action="{% url 'Atendimento:cadastra_sexo' %}" method="post" >
+            {% csrf_token %}
+            <p class="text-center text-uppercase"> <i class="fa-solid fa-tree-city"></i> Digite o nome da gênero sexual:</p>
+            {{form.nome_genero}}
+            <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
+        </form>
+        {% endif %}
+        {% if cadas_rua == 'etnia' %}
+        <form action="{% url 'Atendimento:cadastra_etnia' %}" method="post" >
+            {% csrf_token %}
+            <p class="text-center text-uppercase"> <i class="fa-solid fa-tree-city"></i> Digite o nome da gênero etnia:</p>
+            {{form.etnia}}
             <p><button type="submit" class="btn btn-primary btn-sm m-2">Salvar</button></p>
         </form>
         {% endif %}

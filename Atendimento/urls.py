@@ -18,6 +18,15 @@ urlpatterns = [
     path('painel_atendimento_Medico', views.chamar_paciente, name='chamar_paciente'),
     #path('painel_tiragem', views.chamar_paciente, name='chamar_paciente_triagem'),
 
+    # Cadastro Etnia
+    path('cadastro/sexo', views.Etnia_CreateView.as_view(), name='cadastra_etnia'),    
+
+    # Cadastro Sexo
+    path('cadastro/sexo', views.Sexo_CreateView.as_view(), name='cadastra_sexo'),    
+
+    # Cadastro Pais
+    path('cadastro/pais', views.Pais_CreateView.as_view(), name='cadastra_pais'),    
+
     # Cadastro Estado
     path('cadastro/estado', views.Estado_CreateView.as_view(), name='cadastra_estado'),    
 
