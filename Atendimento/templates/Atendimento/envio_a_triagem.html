@@ -9,13 +9,17 @@
     <style>
         td .hours48{
         position: absolute;
-        margin-bottom: 0rem;
-        font-size: 0.7rem;
-        margin-left: -9.5rem;
-        padding: 0.1rem;
+        font-size: 0.6rem;
+        margin-left: -0.6rem;
+        margin-top: 1.2rem!important;
         color:rgb(255, 255, 255) ;
-        }    
-    </style>
+        padding-right: 3rem!important;
+        border-top-right-radius: 6rem;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        } 
+</style>
+
+
     
     
 {% endblock css %}    
@@ -66,15 +70,22 @@ $(document).ready(function() {
         <th class='border border-success linha-titulo text-center'>Perfil</th>
         <th class='border border-success linha-titulo text-center'>Acompanhante</th>
         <th class='border border-success linha-titulo text-center'>Alergias</th>
-        <th class='border border-success linha-titulo text-center'>Data Entrada na <b>Fila de Espera</b></th>
-        <th class='border border-success linha-titulo text-center'>Excluir paciente da <b>Fila de Espera</b></th>
+        <th class='border border-success linha-titulo text-center'>Entrada na <b>Fila de Espera</b></th>
+        <th class='border border-success linha-titulo text-center'>Excluir da <b>Fila de Espera</b></th>
     </tr>
     
     {% if not get_id %}
     {% for db in lista_db %}     
-        <tr class='fs-7  m-0 fs-7 p-0 {% if db.retornou_em_menos_de_48_horas %}bg-danger-subtle text-light {% else %}bg-primary-subtle{% endif %} '>
+        <tr class='m-0 fs-7 p-0  {% if db.horas48 %}bg-danger-subtle {% else %}bg-primary-subtle{% endif %}'>
             <td class='text-center '>
-                <!--<div class="hours48 bg-danger border p-1 rounded-start-5">{% if db.retornou_em_menos_de_48_horas %}Retornou em menos de 48{% endif %} {{ paciente.nome_do_campo_do_modelo }}</div>-->
+                {% if db.horas48 %}
+                
+                    <button class="hours48 bg-danger border p-1">O paciente retornou em menos de 48</button>
+
+                
+                {% endif %}
+                   
+                {{ paciente.nome_do_campo_do_modelo }}
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
             </td>
             <td class='text-center'>
@@ -144,11 +155,7 @@ $(document).ready(function() {
                         </div>
                         <div class='col m-1 pt-3 bg-secondary-subtle'>
                             <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Nome do acompanhate</label>
-                            {{form.nome_acompanhante}}  
-                        </div>
-                        <div class='col m-1 pt-3 bg-secondary-subtle'>
-                            <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Nome do acompanhate</label>
-                            {{form.retornou_em_menos_de_48_horas}}  
+                            <p>{{form.nome_acompanhante}}</p>
                         </div>
                         {% endif %}
                     </div>       
@@ -213,13 +220,6 @@ $(document).ready(function() {
                     <div class='fs-4'>Se sim, digite o nome do acompanhante </div>
                    <i class="fa-solid fa-people-pulling"></i> {{form.nome_acompanhante}} 
                    {% for error in form.nome_acompanhante.errors  %}
-                        <div class='alert alert-danger '>{{error}}</div>
-                   {% endfor %}
-                </div>
-                <div class='text-center p-3 bg-secondary-subtle'>
-                    <div class='fs-4'>Retornou em menos</div>
-                   <i class="fa-solid fa-people-pulling"></i> {{form.retornou_em_menos_de_48_horas}} 
-                   {% for error in form.retornou_em_menos_de_48_horas.errors  %}
                         <div class='alert alert-danger '>{{error}}</div>
                    {% endfor %}
                 </div>

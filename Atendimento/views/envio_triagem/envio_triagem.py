@@ -15,8 +15,8 @@ from Triagem.models import triagem
 
 class envio_paciente_a_triagem(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = envio_triagem
-    fields = ['paciente_envio_triagem', 'nome_acompanhante']   
-    #form_class = Envio_Form
+    #fields = ['paciente_envio_triagem', 'nome_acompanhante']   
+    form_class = Envio_Form
     template_name = 'Atendimento/envio_a_triagem.html'    
     success_url = reverse_lazy('Atendimento:lista_de_paciente_na_triagem')
     success_message = "Paciente enviado com sucesso para a fila de classificação! 🚀"
@@ -39,21 +39,18 @@ class envio_paciente_a_triagem(LoginRequiredMixin, SuccessMessageMixin, CreateVi
             data = ultima_triagem_obj.data_envio_triagem
             hoje = datetime.today().date()
             diferenca = (hoje - data).days
+            
+            print(f'Valor da diferença: {diferenca}')
 
-            if diferenca < 4:
+            if diferenca < 2:
                 form.instance.horas48 = True
                 mensagem = mark_safe(f'<i class="fa-thin fa-skull-crossbones"></i> Paciente {paciente.nome_social} atendido em menos de 48 horas. Tratar como maior urgência.')
                 messages.warning(self.request, mensagem, extra_tags='alert-warning')
             else:
                 form.instance.horas48 = False
 
-        # Adicione um print para depuração
-        print(f'Valor do campo antes de salvar: {form.instance.horas48}')
 
         # Salve o paciente
         form.save()
-
-        # Adicione um print para depuração
-        print(f'Valor do campo após salvar: {form.instance.horas48}')
 
         return super().form_valid(form)

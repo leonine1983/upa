@@ -127,7 +127,14 @@
   .floating-form button:hover {
       background-color: #2980b9;
   }
-
+ #retorned{
+  position: relative;
+  border-top-left-radius: 1rem;
+  top:-0.3rem;
+  left: -1rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  
+ }
 
   </style>
 {% endblock css %}
@@ -147,6 +154,7 @@
     </div> 
     <!--Avisa se o paciente tem ALERGIAS--> 
     {% if object %} 
+    <div id="retorned" class="bg-danger text-dark-emphasis w-25 p-1">Paciente retornou em menos de 48 horas</div>
       {% if not object.paciente_triagem.paciente_envio_triagem.alergias == '0' %}      
         {% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
           <div style='text-align:center; margin-bottom:2rem'>
