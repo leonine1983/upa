@@ -1,3 +1,31 @@
+_________________________________________________________
+Sistema de Chamada de Pacientes por Voz e Nome:
+
+O sistema de chamada de pacientes foi projetado para otimizar o processo de atendimento, oferecendo funcionalidades avançadas de chamada por voz e nome. Abaixo estão as principais características do sistema:
+
+Chamada por Voz e Nome:
+
+O sistema permite a chamada de pacientes de forma eficiente, tanto por meio de comandos de voz quanto pelo nome registrado no sistema.
+Utilizando a tecnologia de reconhecimento de voz, os profissionais de saúde podem chamar pacientes de maneira rápida e precisa, melhorando a experiência global no ambiente de atendimento.
+Registro dos Últimos 5 Pacientes Chamados:
+
+Mantém uma lista atualizada dos últimos cinco pacientes chamados, proporcionando uma visão rápida do histórico recente de atendimentos.
+Facilita o acompanhamento do fluxo de pacientes, permitindo uma gestão mais eficiente do tempo e dos recursos disponíveis.
+Funcionalidade Integrada de Chamada em Todas as Etapas:
+
+Tanto na etapa de classificação quanto na etapa de atendimento médico, o sistema oferece a funcionalidade de chamada de pacientes.
+Isso assegura que, em todas as fases do processo de atendimento, os profissionais possam convocar pacientes de maneira direta, promovendo uma transição suave entre as diferentes etapas do cuidado médico.
+Personalização de Chamadas:
+
+Permite a personalização de chamadas de acordo com as preferências e necessidades específicas da equipe de atendimento.
+Os profissionais podem escolher entre chamadas por voz ou nome, adaptando o sistema às práticas preferenciais de sua unidade de saúde.
+Registro de Histórico de Chamadas:
+
+Armazena um histórico completo de todas as chamadas realizadas, incluindo data, hora e detalhes relevantes.
+Facilita a revisão de atividades passadas, possibilitando análises retrospectivas e aprimoramento contínuo do processo de atendimento.
+
+
+---------------------------------------------------------------------
 Controle Eficiente de Retornos: Sistema SG-UPA Notifica e Sinaliza Atendimento Emergencial Recorrente
 
 
