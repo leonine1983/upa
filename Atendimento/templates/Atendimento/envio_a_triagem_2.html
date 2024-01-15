@@ -8,6 +8,18 @@
     
     <script src="{% static 'global/multiselect-20/js/chosen.jquery.min.js' %}"></script>
     <script src="{% static 'global/multiselect-20/js/popper.min.js' %}"></script>
+    <style>
+        td .hours48{
+        position: absolute;
+        font-size: 0.6rem;
+        margin-left: -0.6rem;
+        margin-top: 1.2rem!important;
+        color:rgb(255, 255, 255) ;
+        padding-right: 3rem!important;
+        border-top-right-radius: 6rem;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        } 
+</style>
     
 {% endblock css %}    
 {% block script %}
@@ -50,6 +62,9 @@ $(document).ready(function() {
 {% endif %}
     <tr>
         <td class>
+            {% if db.horas48 %}
+                <button class="hours48 bg-danger border p-1">O paciente retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></button>
+            {% endif %}  
             <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>                                                      
         </td>
         <td>

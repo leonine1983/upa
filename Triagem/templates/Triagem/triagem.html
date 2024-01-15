@@ -154,7 +154,15 @@
     </div> 
     <!--Avisa se o paciente tem ALERGIAS--> 
     {% if object %} 
-    <div id="retorned" class="bg-danger text-dark-emphasis w-25 p-1">Paciente retornou em menos de 48 horas</div>
+
+    <!--menu info usuario hamburger-->
+    
+    <!--end menu info usuario hamburger-->
+
+      {% if object.paciente_triagem.horas48 %}
+      <div id="retorned" class="bg-danger text-dark-emphasis w-25 p-1">Paciente retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></div>
+      {% endif %}
+
       {% if not object.paciente_triagem.paciente_envio_triagem.alergias == '0' %}      
         {% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
           <div style='text-align:center; margin-bottom:2rem'>
@@ -198,10 +206,10 @@
     <div>
       {% if not licenca_ativa == None %}
         <form action="" method='POST' class="" id='classifica_form'> 
-          <div class="" style='margin-top:-1.8rem '>
+          <div class="pt-4" style='margin-top:-1.8rem '>
             <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100' >
               {% if nome_paciente %}
-                <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer "></i>&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}}</b>{% if retorno48 %}| <span class='mx-3 text-danger'><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</span>{% endif %}</h3>
+                <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer "></i>&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}}</b></h3>
                 {% else %}            
                 <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer"></i>&nbsp;Pacientes</h3>
               {% endif %}              
@@ -222,7 +230,9 @@
             <div class="{% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}form-body{% endif %} bg-secondary-subtle">   
               {{ form.media }}      
               {% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}
-                {{form.as_div}} 
+                {% if exibe_id is not None %}{% if  chamado.chamado %} 
+                  {{form.as_div}}
+                {% endif %} {% endif %}
                 {% else %}
                 <!-- tabs -->
                 <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 shadow"  {% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}form-body{% endif %}>
@@ -269,13 +279,14 @@
             
             {% if tipo_titulo == 'Excluir paciente da triagem' %}
             <a class="class='btn btn-sm btn-primary m-3 " href="{% url 'Triagem:triagem-enfermaria' %}">cancelar</a>
-            {%endif%}          
+            {%endif%}  
+            {% if exibe_id is not None %}{% if not chamado.chamado %}        
             <button style='margin-left:10%!important' class='btn btn-sm btn-primary m-3 w-75 fs-5
             {% if tipo_titulo == 'Excluir paciente da triagem' %}
              btn-danger
              {% endif %}
             
-            ' type="submit" {% if exibe_id is not None %}{% if not chamado.chamado %}  disabled {% endif %} {% endif %}>
+            ' type="submit" 
               {% if tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}
               Salvar informações do paciente
               {% elif tipo_titulo == 'Excluir paciente da triagem' %}
@@ -285,6 +296,7 @@
               Iniciar Classificação do Paciente
               {% endif %}     
               <i class="fa-solid fa-person-walking-arrow-right"></i></button> 
+              {% endif %} {% endif %}>
               {% if exibe_id is not None %}
                             {% if not chamado.chamado %}
                             <div class="card text-center m-auto">
@@ -292,7 +304,6 @@
                                    ATENÇÃO!!!
                                    </div>
                                    <div class="card-body">
-                                   <h5 class="card-title">Antes de Continuar...</h5>
                                    <p class="card-text">🔄 Para prosseguir ou cancelar o atendimento,
                                           é necessário cancelar a chamada do paciente no painel. 
                                           Pressione o botão localizado na parte inferior à direita da tela.</p>
@@ -321,7 +332,6 @@
         
         
         {% if conteudo == 'paciente_na_triagem' %}
-        
         <h1 class='h2 h-100 bg-purple mt-5 p-2'><i class="fa-solid fa-arrow-trend-up"></i> Pacientes em atendimento pela triagem</h1>
         <table class='table table-striped'>
           <thead>
@@ -334,8 +344,9 @@
           </thead>
           <tbody>
             {% for pac in paciente_na_triagem  %}
-            <tr>
+            <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
               <td>
+                {% if pac.paciente_triagem.horas48 %}<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 "><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</div>{% endif %}
                 {{pac.paciente_triagem}}
               </td>
               <td>
@@ -372,9 +383,9 @@
           </thead>
           <tbody>
             {% for pac in paciente_na_triagem_concluidos %}
-            <tr {% if pac.paciente_triagem.retornou_em_menos_de_48_horas %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}>
+            <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}>
               <td >
-                <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if pac.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div>
+                {% if pac.paciente_triagem.horas48 %}<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 "><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</div>{% endif %}
                 {{pac.paciente_triagem}}
               </td>
               <td>
@@ -396,44 +407,10 @@
     </div>
    </div>  
    
-   <!--Botão chamar paciente-->
- 
-      {% if triagem_andamento == 'exibe' %}
-      <div class="floating-form-container">
-        {% if exibe_id is None or exibe_b == True %}
-              <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
-                      <i class="fa-solid fa-microphone-lines"></i>
-              </div>
-        {% endif %}
-
-        {% for t  in triagem %}
-          <!-- seu_template.html -->
-          <div class='d-flex'>
-            <form action="{% url 'Medicos:enfermagem_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
-              {% csrf_token %}
-              <p>
-                      <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
-                            <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
-                      </select>
-              </p>
-              <p>
-                      <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-                            <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user.get_full_name }}</option>
-                      </select><button type="submit">Chamar Paciente</button>
-              </p>
-            </form>
-            {% if not exibe_b %}
-              {% if exibe_id is not None %}
-              <a href="{% url 'Medicos:enfermagem_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
-              {% endif %}
-            {% else %}
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
-{% endif %}
+  <!--Botão chamar paciente-->
+  {% if triagem_andamento == 'exibe' %}{% include "Triagem/triagem_partes/botao_chamar.html" %}{% endif %}
+  <!--END Botão chamar paciente-->
 </div>
-
    
 
 {% block script %}   

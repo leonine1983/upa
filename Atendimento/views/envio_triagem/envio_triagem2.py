@@ -32,6 +32,33 @@ class envio_paciente_a_triagem_2(LoginRequiredMixin, SuccessMessageMixin, Create
     success_message = "Paciente enviado com sucesso para a fila de classificação! 🚀"
 
 
+    def form_valid(self, form):
+            paciente = form.cleaned_data['paciente_envio_triagem']
+
+            ultima_triagem = envio_triagem.objects.filter(
+                paciente_envio_triagem=paciente
+            )
+
+            if ultima_triagem.exists():
+                ultima_triagem_obj = ultima_triagem.order_by('-data_envio_triagem', '-horario_triagem').first()
+                data = ultima_triagem_obj.data_envio_triagem
+                hoje = datetime.today().date()
+                diferenca = (hoje - data).days
+                
+                print(f'Valor da diferença: {diferenca}')
+
+                if diferenca < 2:
+                    form.instance.horas48 = True
+                    mensagem = mark_safe(f'<i class="fa-thin fa-skull-crossbones"></i> Paciente {paciente.nome_social} atendido em menos de 48 horas. Tratar como maior urgência.')
+                    messages.warning(self.request, mensagem, extra_tags='alert-warning')
+                else:
+                    form.instance.horas48 = False
+
+
+            # Salve o paciente
+            form.save()
+
+            return super().form_valid(form)
 
 
 

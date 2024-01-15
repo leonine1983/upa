@@ -75,14 +75,11 @@ $(document).ready(function() {
     </tr>
     
     {% if not get_id %}
-    {% for db in lista_db %}     
+    {% for db in lista_db %}    
         <tr class='m-0 fs-7 p-0  {% if db.horas48 %}bg-danger-subtle {% else %}bg-primary-subtle{% endif %}'>
             <td class='text-center '>
                 {% if db.horas48 %}
-                
-                    <button class="hours48 bg-danger border p-1">O paciente retornou em menos de 48</button>
-
-                
+                    <button class="hours48 bg-danger border p-1">O paciente retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></button>
                 {% endif %}
                    
                 {{ paciente.nome_do_campo_do_modelo }}
