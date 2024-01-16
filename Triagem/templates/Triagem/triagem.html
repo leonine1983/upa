@@ -230,9 +230,9 @@
             <div class="{% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}form-body{% endif %} bg-secondary-subtle">   
               {{ form.media }}      
               {% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}
-                {% if exibe_id is not None %}{% if  chamado.chamado %} 
+                
                   {{form.as_div}}
-                {% endif %} {% endif %}
+               
                 {% else %}
                 <!-- tabs -->
                 <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 shadow"  {% if not tipo_titulo == 'Pré-atendimento | ALERGIAS e COMORBIDADES' %}form-body{% endif %}>
