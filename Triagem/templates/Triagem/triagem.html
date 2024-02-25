@@ -294,8 +294,17 @@
                       Deletar {{ nome_objeto}} da triagem
                     {% else %}                
                       Iniciar Classificação do Paciente
-                  {% endif %}>     
+                  {% endif %}
+                  
+              {% if exibe_id is not None %}
+                {% if not chamado.chamado %}
+                disabled
+                {% endif %}
+              {% endif %}
+                  
+                  >     
                   <i class="fa-solid fa-person-walking-arrow-right"></i> 
+                  
                   Salvar e Prosseguir
               </button> 
             

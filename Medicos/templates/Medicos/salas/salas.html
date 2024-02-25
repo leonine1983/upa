@@ -44,9 +44,6 @@
     }
 </style>
 {% endblock css %}  
-<!--Imagem Representando o setor-->
-{% block vetor-img-aereo %}<img src=" {% static 'home/doctor.fw.png' %} " alt="">{% endblock vetor-img-aereo %}
-<!--END Imagem Representando o setor-->
 {% block title_login %}ÁREA MÉDICA {% endblock title_login %}
 {% block titulo_ %} ÁREA MÉDICA - Salas de Atendimento {% endblock titulo_ %} 
 {% block body_title %}<i class="fa-duotone fa-house-medical-flag"></i> Dependências do Hospital {% endblock body_title %}
@@ -54,7 +51,6 @@
     <!--Relação de Salas Cadastradas-->
 <div class='row'>
     <div class='col bg-secondary-subtle mt--2 p-3'>
-       
         {% if object_list %}
             {% if not vinculo_sala %}
                 <h1 style="font-size: 1.8rem !important;"><i class="fa-solid fa-house-medical"></i> Salas de Atendimento</h1>
@@ -158,11 +154,11 @@
         <h1>Formulário de Atualização de Salas</h1>  
         <hr> 
         {% elif salaProfissional %}
-        <div class='p-4'>&nbsp;</div>
+        <div class='p-4' >&nbsp;</div>
             {% if salaProfissional == 'vinculaSalaUpdate' %}
                 <h1 class="fs-5 pt-5 uppercase"><i class="fa-duotone fa-house-medical-flag"></i>Atualizar Vinculo Profissional à Sala de Atendimento</h1>
                 {% else %}
-                <h1 class="fs-5 pt-5 uppercase"><i class="fa-duotone fa-house-medical-flag"></i> Vincular Profissional à Sala de Atendimento</h1>
+                <h1 class="fs-5 pt-5 uppercase" style='margin-top:-8rem !important'><i class="fa-duotone fa-house-medical-flag"></i> Vincular Profissional à Sala de Atendimento</h1>
             {% endif %}
         <div style='text-align: right; margin-right:5rem'>
             <a class="btn btn-sm btn-secondary m-3" href="{% url 'Medicos:cadastroSala' %}"><i class="fas fa-solid  fa-person-shelter"></i> Cadastro de Salas</a>        
