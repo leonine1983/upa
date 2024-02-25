@@ -50,11 +50,11 @@
         
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
         <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>        
-        <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
-        <label for="tab3"><i class="icon-cogs"></i>Todos os Atendimentos Médico do Dia </label>
+        <input type="radio" name="pcss3t" id="tab3" class="tab-content-3 ">
+        <label for="tab3" class='bg-primary-subtle'><i class="icon-cogs"></i>Atendimentos Finalizados </label>
         {% if not nao_finalizado == '1' %}
             <input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
-            <label for="tab5"><i class="icon-globe"></i>0{{atend_aguarda_final|length}} - Pacientes não finalizados </label>
+            <label for="tab5"  class='bg-danger-subtle'><i class="icon-globe"></i>0{{atend_aguarda_final|length}} - Pacientes não finalizados </label>
         {% endif %}
         
         <ul>
@@ -182,7 +182,7 @@
                 </table>
             </li>
             
-            <li class="tab-content tab-content-3 typography">
+            <li class="tab-content tab-content-3 typography bg-primary-subtle">
 
                 <h1 class='fs-4'><i class="fa-thin fa-hashtag"></i> 0{{atendimentos_hoje|length}} - Atendimentos Médicos do Dia / FINALIZADOS </h1>
                 <!--<p>Esta tabela registra os pacientes que foram atendidos por um médico no dia atual.</p>
@@ -232,7 +232,7 @@
                 </table>
             </li>
             {% if not nao_finalizado == '1' %}
-            <li class="tab-content tab-content-last typography">
+            <li class="tab-content tab-content-last typography bg-danger-subtle" >
                 <h1 class="fs-3 bg-danger-subtle p-1 rounded-top-2"><i class="fa-duotone fa-circle-exclamation text-danger ml-2"></i> 0{{atend_aguarda_final|length}} - Atenção! Pacientes não finalizados</h1>
 				<p class='fs-5 p-4'><strong>Atenção, Dr.!</strong> Nesta seção, são listados os atendimentos que, por alguma razão, não foram finalizados e, portanto, não constarão na relação final de atendimentos. Isso pode causar erro no cálculo total. Solicitamos a sua atenção especial a esta página para a conclusão dos atendimentos listados. Se não houver nenhum, ficamos felizes em informar que os atendimentos pelo sistema estão transcorrendo de maneira eficiente.</p>
 
