@@ -17,7 +17,13 @@
           </p>
           <p>
                   <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-                        <option value="{{ request.user}}" selected="2">Dr.(a) {{ request.user.get_full_name }}</option>
+                        <option value="{{ request.user}}" selected="2">
+                          Enfemeira
+                          {% if request.user.get_full_name == '' %}
+                            {{request.user}}
+                            {% else %}
+                            {{ request.user }}
+                          {% endif %} </option>
                   </select><button type="submit">Chamar Paciente</button>
           </p>
         </form>

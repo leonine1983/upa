@@ -247,7 +247,7 @@ class CadastroSala(models.Model):
 
 
 class Salas_Atendimento(models.Model):
-    nomeSala = models.OneToOneField(CadastroSala, on_delete=models.CASCADE)
+    nomeSala = models.ForeignKey(CadastroSala, on_delete=models.CASCADE)
     profissionalSaude = models.ForeignKey(User, limit_choices_to={'groups__name__in':['group_Medicos', 'group_Enfermagem']}, on_delete=models.CASCADE)
     
     def __str__(self):
