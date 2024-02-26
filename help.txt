@@ -30,3 +30,6 @@ Controle Eficiente de Retornos: Sistema SG-UPA Notifica e Sinaliza Atendimento E
 
 
 O Sistema de Gerenciamento de Urgências e Pronto Atendimento (SG-UPA) realiza a verificação da reincidência do paciente no atendimento em um intervalo inferior a 48 horas. Caso seja identificado que o paciente retornou, o SG-UPA emite um alerta e adiciona uma indicação visual, sinalizada por uma tarja, informando que o mesmo regressou à emergência. Essa funcionalidade visa proporcionar aos profissionais de saúde a oportunidade de oferecer um atendimento consistente e personalizado, levando em consideração a rapidez com que o paciente buscou novamente os serviços de saúde.
+
+-------------------------------
+Antes de tudo, é necessário definir a função do usuario e em seguida, a sala que ele irá utilizar

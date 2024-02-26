@@ -1,7 +1,7 @@
 {% extends 'global/template_geral.html' %}
 {% load static %}
 {% block titulo_ %}
-    Página Inicial                    
+    RESUMO DIÁRIO                  
 {% endblock titulo_ %} 
 {% block css %}
 <link rel="stylesheet" href=" {% static 'Atendimento/css/atendimento-pag-inicial.css' %} ">
@@ -9,17 +9,7 @@
 {% endblock css %}   
 {% block body_title %} Informações sobre o {{nome_sistema}}:{% endblock body_title %} 
 {% block body_login %}
-<!--Menu futuristico diagonal-->
-{% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' or grupo_usuario == 'group_Tec_Enfermagem' %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                <div class="page-title  home text-center"></div>                                  
-            </div>
-        </div>
-    </div>
-{% endif %}
-<!--Fim menu futuristico-->
+
 <div>
     <!--Cards-info: Aqui fica todos os cards informativos do sistema-->
     {% include 'Atendimento/pagina_inicial_complementos/cards-info.html' %}
@@ -27,25 +17,239 @@
 
 
 
-
-
-
-
 <div>
     <h1 class="h3">Quantidades de Registros por Faixa Etária</h1>
-    <div class="d-flex">
-    {% for dia, object_list in resultados_por_dia.items %}
-        <div class="" style="text-align: center !important;;">
-            {{ dia }}
-            <div>
-            {% for obj in object_list %}
-            <div>{{ obj.paciente_envio_triagem.idade }}</div>
+
+<table class='table table-responsive table-striped border border-secondary'>
+    
+    <tr class="text-center">
+        <th>Faixa Etária</th>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <th>{{ dia }}</th>
+        {% endfor %}
+        <th>TOTAL</th>
+    </tr>
+    <tr class="text-center">
+        <td>0 a 1 ano </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+            {% if object_list %}
+                {% if obj.paciente_envio_triagem.idade >= 0 and obj.paciente_envio_triagem.idade < 1 %}
+                    {{ object_list|length }}
+                {% else %}
+                    0
+                {% endif %}
+            {% else %}
+                0
+            {% endif %}
+        </td>
+        {% endfor %}
+        <td>
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 40 and obj.paciente_envio_triagem.idade <= 49 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
-            
-        </div>
-    {% endfor %}
-    </div> 
-</div>
+        </td>
+    </tr>
+    <tr class="text-center">
+        <td>1 a 4 anos </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+            {% if object_list %}
+                {% if obj.paciente_envio_triagem.idade >= 1 and obj.paciente_envio_triagem.idade <= 4 %}
+                    {{ object_list|length }}
+                {% else %}
+                    0
+                {% endif %}
+            {% else %}
+                0
+            {% endif %}
+        </td>
+        {% endfor %}
+        <td>
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 1 and obj.paciente_envio_triagem.idade <= 4 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </td>
+    </tr>
+    <tr class="text-center">
+        <td>05 a 09 anos </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+            {% if object_list %}
+                {% if obj.paciente_envio_triagem.idade >= 5 and obj.paciente_envio_triagem.idade <= 9 %}
+                    {{ object_list|length }}
+                {% else %}
+                    0
+                {% endif %}
+            {% else %}
+                0
+            {% endif %}
+        </td>
+        {% endfor %}
+        <td>
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 05 and obj.paciente_envio_triagem.idade <= 09 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </td>
+    </tr>
+    <tr class="text-center">
+        <td>10 a 14 anos </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+            {% if object_list %}
+                {% if obj.paciente_envio_triagem.idade >= 10 and obj.paciente_envio_triagem.idade <= 14 %}
+                    {{ object_list|length }}
+                {% else %}
+                    0
+                {% endif %}
+            {% else %}
+                0
+            {% endif %}
+        </td>
+        {% endfor %}
+        <td>
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 10 and obj.paciente_envio_triagem.idade <= 14 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </td>
+    </tr>
+    <tr class="text-center">
+        <td>15 a 19 anos </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+            {% if object_list %}
+                {% if obj.paciente_envio_triagem.idade >= 15 and obj.paciente_envio_triagem.idade <= 19 %}
+                    {{ object_list|length }}
+                {% else %}
+                    0
+                {% endif %}
+            {% else %}
+                0
+            {% endif %}
+        </td>
+        {% endfor %}
+        <td>
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 15 and obj.paciente_envio_triagem.idade <= 19 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </td>
+    </tr>
+    <tr class="text-center">
+        <td>20 a 29 anos </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+            {% if object_list %}
+                {% if obj.paciente_envio_triagem.idade >= 20 and obj.paciente_envio_triagem.idade <= 29 %}
+                    {{ object_list|length }}
+                {% else %}
+                    0
+                {% endif %}
+            {% else %}
+                0
+            {% endif %}
+        </td>
+        {% endfor %}
+        <td>
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 20 and obj.paciente_envio_triagem.idade <= 29 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </td>
+    </tr>
+    <tr class="text-center">
+        <td>30 a 39 anos </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+           
+            {% if object_list %}
+                {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 30 and obj.paciente_envio_triagem.idade <= 39 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                0
+            {% endif %}
+        </td>        
+        {% endfor %}
+        <td >
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 30 and obj.paciente_envio_triagem.idade <= 39 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </td>   
+    </tr>
+    <tr class="text-center">
+        <td>40 a 49 anos </td>
+        {% for dia, object_list in resultados_por_dia.items %}
+        <td>
+            {% if object_list %}
+                {% if obj.paciente_envio_triagem.idade >= 40 and obj.paciente_envio_triagem.idade <= 49 %}
+                    {{ object_list }}
+                {% else %}
+                    0
+                {% endif %}
+            {% else %}
+                0
+            {% endif %}
+        </td>
+        {% endfor %}
+        <td>
+            {% for dia, object_list in resultados_por_dia.items %}
+            {% for obj in object_list  %}
+                    {% if obj.paciente_envio_triagem.idade >= 40 and obj.paciente_envio_triagem.idade <= 49 %}
+                        {{ object_list|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </td>
+    </tr>
+    
+</table>
 
 
 

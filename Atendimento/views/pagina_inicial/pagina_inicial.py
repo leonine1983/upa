@@ -5,10 +5,6 @@ from django.urls import reverse_lazy
 from django.db.models import Count
 from Atendimento.models import envio_triagem, ficha_de_atendimento
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.db.models import Count
-from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 import io
