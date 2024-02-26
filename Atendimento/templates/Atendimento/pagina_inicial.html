@@ -25,6 +25,31 @@
     {% include 'Atendimento/pagina_inicial_complementos/cards-info.html' %}
 </div>
 
+
+
+
+
+
+
+<div>
+    <h1 class="h3">Quantidades de Registros por Faixa Etária</h1>
+    <div class="d-flex">
+    {% for dia, object_list in resultados_por_dia.items %}
+        <div class="" style="text-align: center !important;;">
+            {{ dia }}
+            <div>
+            {% for obj in object_list %}
+            <div>{{ obj.paciente_envio_triagem.idade }}</div>
+            {% endfor %}
+            
+        </div>
+    {% endfor %}
+    </div> 
+</div>
+
+
+
+
 <div>&nbsp</div>
 <!--
 <div class='content-info-home'>

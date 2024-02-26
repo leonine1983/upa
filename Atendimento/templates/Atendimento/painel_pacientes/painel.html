@@ -226,35 +226,17 @@
           {% for n in nome_paciente_chamado %}
             {{n}}
           {% endfor %}
-          <div id='ultimo_chamado'>           
-          </div>    
-          
-          <ul>
-
-
-
-        
-          </ul>
-
-          </div>
-
+          <div id='ultimo_chamado'></div>    
         </div>
       </div>
-
-
-
-
-      
+    </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>...
       <script>
-        var audio = $('#audio-player')[0]; // seleciona o elemento de áudio
-        var audioSource = $('#audio-source'); // seleciona o elemento source do áudio
-        var audioBase64Anterior = ''; // variável para armazenar o áudio da chamada anterior
-        var audioRepeticoes = 0; // contador para controlar as repetições do áudio 
-
-      
+      var audio = $('#audio-player')[0]; // seleciona o elemento de áudio
+      var audioSource = $('#audio-source'); // seleciona o elemento source do áudio
+      var audioBase64Anterior = ''; // variável para armazenar o áudio da chamada anterior
+      var audioRepeticoes = 0; // contador para controlar as repetições do áudio 
       function atualizarDadosChamada(data) {
-
         $('#nome-paciente').text('' + data.nome_paciente2); 
         $('#sala').text('' + data.nome_sala); 
         $('#sala_sala').text('' + data.nome_sala); 

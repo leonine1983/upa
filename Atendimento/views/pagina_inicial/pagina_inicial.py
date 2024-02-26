@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 import io
 import base64
@@ -47,34 +48,37 @@ def pagina_inicial(request):
     buffer.seek(0)
 
     # Converta a imagem para base64 para incluí-la no contexto do Django
-    imagem_base64 = base64.b64encode(buffer.read()).decode('utf-8')"""
+    imagem_base64 = base64.b64encode(buffer.read()).decode('utf-8')
     
+    
+    
+    
+    
+    
+    
+    
+    """
+    import calendar
+
+
+    # Obter o ano e o mes
+    ano_atual = datetime.today().year
+    mes_atual = datetime.today().month
+
+    # Obter todos os dias do mês atual
+    _, num_dias = calendar.monthrange(ano_atual, mes_atual)
+    dias_do_mes = [datetime(ano_atual, mes_atual, dia) for dia in range(1, num_dias + 1)]
+
+    resultados_por_dia = {}  # Dicionário para armazenar os resultados por dia
+
+    for d in dias_do_mes:
+        object_list = envio_triagem.objects.filter(data_envio_triagem=d, triagem_concluida=1)
+        dia = d.day
+        resultados_por_dia[dia] = object_list
+
     # Renderize a página
     return render(request, 'Atendimento/pagina_inicial.html', {
-        #'imagem_base64': imagem_base64,
-        'quant' : int(len(ficha_de_atendimento.objects.all())),
-        'quant_homem' : len(ficha_de_atendimento.objects.filter(sexo = 1)),
-        'quant_mulher' : len(ficha_de_atendimento.objects.filter(sexo = 2)),
-        'nome_sistema' : "SG-UPA Sistema de Gerenciamento de Pronto Atendimento",
-        'nome_estabelecimento': 'UPA',
-        'quant_atendimentos_diario': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data)),
-        
-        'quant_atendimentos_diario_H': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = h)),         
-        'quant_H_idosos': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = h) & envio_triagem.objects.filter(paciente_envio_triagem__idade__gte=60, paciente_envio_triagem__idade__lte=130)),
-        'quant_H_adultos': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = h) & envio_triagem.objects.filter(paciente_envio_triagem__idade__gte=18, paciente_envio_triagem__idade__lte=59.99)), 
-        'quant_H_adolescentes': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = h) & envio_triagem.objects.filter(paciente_envio_triagem__idade__gte=12, paciente_envio_triagem__idade__lte=17.9)), 
-        'quant_H_criancas': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = h) & envio_triagem.objects.filter(paciente_envio_triagem__idade__gte=1, paciente_envio_triagem__idade__lte=11.9)), 
-        'quant_H_bebe': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = h) & envio_triagem.objects.filter(paciente_envio_triagem__idade=0)), 
-        #'quant_H_adultos': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo = 1) & envio_triagem.objects.filter(paciente_envio_triagem__sexo = 1) ),
-        'quant_atendimentos_diario_F': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = m)),        
-        'quant_F_idosos': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = m) & envio_triagem.objects.filter(paciente_envio_triagem__idade__gte=60, paciente_envio_triagem__idade__lte=130)),
-        'quant_F_adultos': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = m) & envio_triagem.objects.filter(paciente_envio_triagem__idade__gte=18, paciente_envio_triagem__idade__lte=59.99)), 
-        'quant_F_criancas': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = m) & envio_triagem.objects.filter(paciente_envio_triagem__idade__gte=1, paciente_envio_triagem__idade__lte=12)), 
-        'quant_F_bebe': len(envio_triagem.objects.filter(triagem_concluida = 1) & envio_triagem.objects.filter(data_triagem_concluida = data) & envio_triagem.objects.filter(paciente_envio_triagem__sexo__nome_genero = m ) & envio_triagem.objects.filter(paciente_envio_triagem__idade=0)), 
-      
-        'qquant_localidades': envio_triagem.objects.values('paciente_envio_triagem__bairro').annotate(total=Count('paciente_envio_triagem__bairro')),
-        'quant_localidades': pacient_localidade,
-        'ontem'    : paciente_ontem,
-        'ontem_quantidade' : pacient_localidade_ontem
-        
+        'resultados_por_dia': resultados_por_dia,
+        'ano_atual': ano_atual,
+        'mes_atual': mes_atual,
     })
