@@ -162,12 +162,12 @@ class ficha_de_atendimento(models.Model):
 
 class envio_triagem(models.Model):
     paciente_envio_triagem = models.ForeignKey(ficha_de_atendimento, related_name='rel_ficha_atendimento', null=False, on_delete=models.PROTECT)       
+    cod_triagem = models.CharField(max_length=50, null=True) 
     nome_acompanhante = models.CharField(max_length=50, null=True, default='Ele mesmo')  
     data_envio_triagem = models.DateField(auto_now_add=True, null=True)
     horario_triagem = models.TimeField(auto_now_add=True, null=True)
     triagem_concluida = models.CharField(max_length=1, null=True)
     data_triagem_concluida = models.DateField(auto_now=True, null=True)
-    retornou_em_menos_de_48_horas =  models.BooleanField(default=False, null=False)
     horas48 =  models.BooleanField(default=False, null=False)
  
 
