@@ -44,17 +44,7 @@
             {% endif %}
         </td>
         {% endfor %}
-        <td>
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 40 and obj.paciente_envio_triagem.idade <= 49 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>
+
     </tr>
     <tr class="text-center">
         <td>1 a 4 anos </td>
@@ -71,17 +61,6 @@
             {% endif %}
         </td>
         {% endfor %}
-        <td>
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 1 and obj.paciente_envio_triagem.idade <= 4 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>
     </tr>
     <tr class="text-center">
         <td>05 a 09 anos </td>
@@ -98,17 +77,6 @@
             {% endif %}
         </td>
         {% endfor %}
-        <td>
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 05 and obj.paciente_envio_triagem.idade <= 09 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>
     </tr>
     <tr class="text-center">
         <td>10 a 14 anos </td>
@@ -125,17 +93,6 @@
             {% endif %}
         </td>
         {% endfor %}
-        <td>
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 10 and obj.paciente_envio_triagem.idade <= 14 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>
     </tr>
     <tr class="text-center">
         <td>15 a 19 anos </td>
@@ -152,17 +109,7 @@
             {% endif %}
         </td>
         {% endfor %}
-        <td>
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 15 and obj.paciente_envio_triagem.idade <= 19 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>
+        
     </tr>
     <tr class="text-center">
         <td>20 a 29 anos </td>
@@ -179,17 +126,7 @@
             {% endif %}
         </td>
         {% endfor %}
-        <td>
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 20 and obj.paciente_envio_triagem.idade <= 29 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>
+   
     </tr>
     <tr class="text-center">
         <td>30 a 39 anos </td>
@@ -208,18 +145,7 @@
                 0
             {% endif %}
         </td>        
-        {% endfor %}
-        <td >
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 30 and obj.paciente_envio_triagem.idade <= 39 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>   
+        {% endfor %} 
     </tr>
     <tr class="text-center">
         <td>40 a 49 anos </td>
@@ -227,7 +153,7 @@
         <td>
             {% if object_list %}
                 {% if obj.paciente_envio_triagem.idade >= 40 and obj.paciente_envio_triagem.idade <= 49 %}
-                    {{ object_list }}
+                    {{ object_list|length }}
                 {% else %}
                     0
                 {% endif %}
@@ -236,17 +162,6 @@
             {% endif %}
         </td>
         {% endfor %}
-        <td>
-            {% for dia, object_list in resultados_por_dia.items %}
-            {% for obj in object_list  %}
-                    {% if obj.paciente_envio_triagem.idade >= 40 and obj.paciente_envio_triagem.idade <= 49 %}
-                        {{ object_list|length }}
-                    {% else %}
-                        0
-                    {% endif %}
-                {% endfor %}
-            {% endfor %}
-        </td>
     </tr>
     
 </table>

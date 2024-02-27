@@ -36,7 +36,10 @@ def chamar_paciente(request):
         for n in nome_paciente_chamado:
             data_chamada = n.data_chamada
             hora_formato = data_chamada.strftime('%H:%M')
-            nome_paciente_chamado_data = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato}</li>"
+            data_formato = data_chamada.strftime('%d/%m/%Y')
+            # nome_paciente_chamado_data[n.id] = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} em {data_formato}</li>"
+            nome_paciente_chamado_data = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} em {data_formato}</li>"
+           
      
 
         sala = Salas_Atendimento.objects.filter(profissionalSaude=profissional_id)
@@ -62,7 +65,7 @@ def chamar_paciente(request):
         for n in nome_paciente_chamado:
             data_chamada = n.data_chamada
             hora_formato = data_chamada.strftime('%H:%M')
-            nome_paciente_chamado_data = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato}</li>"
+            nome_paciente_chamado_data = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} </li> "
      
         
         nome_paciente_nome = "Atualizando..."
