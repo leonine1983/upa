@@ -5,7 +5,8 @@ rem Obter o nome do usuário
 set "nome_do_usuario=%USERNAME%"
 
 rem Construir o caminho para a pasta upa
-set "caminho_upa=C:\Users\!nome_do_usuario!\AppData\Local\site\upa"
+set "caminho_upa=C:\Users\!nome_do_usuario!\AppData\Local\Comms\site\upa"
+
 
 cd %caminho_upa%
 
