@@ -5,36 +5,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'global/css/modal.css' %}">
 <link rel="stylesheet" href="{% static 'global/css/formularios.css' %}">
-<style>
-    /* Estilos para a etiqueta */
-    .etiqueta {
-        background-color: rgb(238, 238, 236);
-        text-align: center;
-        padding: 1rem;
-        border-radius: 1rem;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-    }
-
-    #etiquetaContainer {
-        margin-top: 1rem;
-    }
-
-  
-    /* Estilos para a impressão */
-    @media print {
-        body {
-            background-color: rgb(223, 223, 219);
-            background-image: url("{% static 'vera cruz.png' %}");
-            background-repeat: no-repeat;
-        }
-        .etiqueta {
-        }
-    }
-</style>
 {% endblock css %}
-<!--Imagem Representando o setor-->
-{% block vetor-img-aereo %}<img src="{% static 'home/enfermagem-mulher.fw.png' %}" alt="">{% endblock vetor-img-aereo %}
-<!--END Imagem Representando o setor-->
 {% block body_title %}IMPRESSÃO DE ETIQUETA PARA O PACIENTE <b class='uppercase'>{{envio_triagem}}</b>{% endblock body_title %}
 {% block body_login %}
 <div class="top-info">  
@@ -58,54 +29,55 @@
                 margin: 0;
                 padding: 0;
             }
+
+            @media print {
+                /* Ocultar a data e o número da página */
+                .date, .pageNumber {
+                    display: none;
+                }
+                /* Ocultar o cabeçalho/rodapé */
+                @page {
+                    size: auto; /* Usar o tamanho padrão do papel */
+                    margin: 0; /* Remover margens padrão */
+                }
+            }
         
     </style>
     <ul id="controles" class="d-grid gap-4 my-5 list-unstyled small"> 
-        <div class="form-body">
-            <div>
-                <label for="tamanhoPredefinido"><h5 class="mb-0">Escolha um dos tamanhos predefinidos:</h5></label>
-                <select id="tamanhoPredefinido" onchange="escolherTamanhoPredefinido()">
-                    <option value="">Selecione um tamanho</option>            
-                    <option value="100x85">100x85mm</option>                    
-                    <option value="100x60">100x60mm</option>   
-                    <option value="100x50">100x50mm</option>                     
-                    <option value="70x30">70x30mm</option>                   
-                    <option value="70x40">70x40mm</option>
-                    <option value="60x40">60x40mm</option>                    
-                    <option value="60x50">60x50mm</option>                     
-                    <option value="50x30">50x30mm</option>                      
-                    <option value="34x23">34x23mm</option>  
-                    <option value="24x23">24x23mm</option>
-                </select>
-                <p>&nbsp;</p>
-                <h2>Se preferir, pode personalizar o tamanho da etiqueta</h2>
-                <div style="border-radius:1rem; padding:1rem;
-                
-                box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-                display: flex;
-                
-                ">  
-               
-                <div>                 
-                    <label for="largura2"><h5 class="mb-0">Largura:</h5></label>
-                    <input type="number" id="largura2" value="100" min="1" onchange="atualizarEtiqueta()">
-                </div>
-                <div>
-                    <label for="altura2"><h5 class="mb-0">Altura:</h5></label>
-                    <input type="number" id="altura2" value="50" min="1" onchange="atualizarEtiqueta()">
-                </div>
-                    <p>&nbsp;</p>
-                <div>
-                    <label for="bordas">Incluir bordas:</label>
-                    <input type="checkbox" id="bordas" onchange="atualizarEtiqueta()">
-                </div>
-                </div>
-                
+        <div class="">
+            <div class='form-body'>
+                <h2 class='fs-2'><i class="fa-solid fa-user-tag mr-5"></i> 
+                    Personalizar o tamanho da etiqueta</h2>
+                <div style="
+                    border-radius:1rem; 
+                    padding:1rem;
+                    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+                    display: flex;">  
+                    <div>                 
+                        <label for="largura2"><h5 class="mb-0">Largura:</h5></label>
+                        <input type="number" id="largura2" value="100" min="1" onchange="atualizarEtiqueta()">
+                    </div>
+                    <div>
+                        <label for="altura2"><h5 class="mb-0">Altura:</h5></label>
+                        <input type="number" id="altura2" value="50" min="1" onchange="atualizarEtiqueta()">
+                    </div>
+                    <div>
+                        <label for="bordas">Incluir bordas:</label>
+                        <input type="checkbox" id="bordas" onchange="atualizarEtiqueta()">
+                    </div>
+                </div>    
             </div>
-            <div id="etiquetaContainer"></div>
-            
-            <div>
-                <button onclick="imprimirEtiqueta()" class='mt-4 p-4 fs-5 shadow-sm'><i class="fa-thin fa-print"></i> Imprimir Etiqueta</button>  
+            <div class='text-center'>
+                <div id="etiquetaContainer">
+                    <!-- Conteúdo da etiqueta -->
+                    <p>Data: <span class="no-print">28/02/2024</span></p>
+                    <p>About: <span class="no-print">Informações sobre a etiqueta</span></p>
+                    <!-- Restante do conteúdo da etiqueta -->
+                </div>
+                
+                <div class='m-auto'>
+                    <button onclick="imprimirEtiqueta()" class='mt-4  fs-5 shadow-sm btn btn-sm btn-success'><i class="fa-thin fa-print"></i> Imprimir Etiqueta</button>  
+                </div>
             </div>
         </div>    
     </div>
@@ -136,31 +108,28 @@
             var classificacaoRisco = '{{ classificacao_risco }}';  // Substitua por variáveis do contexto Django
 
             etiqueta.innerHTML = `
-               <div class="dados-paciente" style='position: relative; background-image: url("{% static '' %}"); background-repeat: no-repeat;
-               padding: 20px;background-position:center;              
-               
-               background-color: rgb(238, 238, 236);
-                text-align: left;
-                padding: 1rem;
-                border-radius: 1rem;
-                box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;           
-               
-               
-               '>
-                                      
-                    <div style="text-transform:uppercase; background:rgb(228, 226, 226, 0.9); padding:0.5rem; magin-top:-1rem;
-                    
-                   
-                    
-                    
-                    
-                    "><h1 style='font-size:100%; '>{{ nome_paciente }}</h1></div>
-                    <h2 style='font-size:95%; margin:2%'>Idade: {{idade}} anos</h>
-                    <p style='font-size:100%; margin:2%'>Data Nascimento: {{ horario_entrada }}</p>
-                    <div style='text-align:center; margin-top:1rem; font-size:100%'>Classificação de risco</div>                    
-                    <div style='width:100%; text-align:center; font-size:120%'><b style='text-transform:uppercase'>{{ classificacao_risco }}</b></div>
-                    <div style="width:1rem; position:absolute;bottom:0; right:0; opacity: 0.9;z-index:1" >
-                        <div style=" position:absolute;bottom:0; right:0; " >
+            
+            <div class="dados-paciente" 
+                style='
+                    position: relative; 
+                    padding: 10px;
+                    background-position:center; 
+                    background-color: rgb(238, 238, 236); 
+                    text-align: left; padding: 1rem; 
+                    border-radius: 1rem; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;'>
+                <div 
+                    style="
+                        text-transform:uppercase; 
+                        background:rgb(228, 226, 226, 0.9); 
+                        magin-top:-1rem">
+                        <h1 style='font-size:150%; '>{{ nome_paciente }}</h1></div>
+                        <h2 style='font-size:95%; margin:2%'>Idade: {{idade}} anos</h>
+                        <div style='text-align:center; margin-top:0.1rem; font-size:100%'>Classificação de risco</div>                    
+                        <div style='width:100%; text-align:center; font-size:120%'>
+                            <b style='text-transform:uppercase'>{{ classificacao_risco }}</b>
+                        </div>
+                        <div style="width:1rem; position:absolute;bottom:0; right:0; opacity: 0.9;z-index:1" >
+                            <div style=" position:absolute;bottom:0; right:0; " >
                             <img style="width:7rem ;" src="{% static 'vera cruz.png' %}") alt="">                       
                         </div>                       
                     </div>  
@@ -180,58 +149,18 @@
             criarEtiqueta(largura, altura);
         }
 
-        function escolherTamanhoPredefinido() {
-            var tamanhoPredefinidoSelect = document.getElementById('tamanhoPredefinido');
-            var tamanhoPredefinido = tamanhoPredefinidoSelect.value;
-
-            if (tamanhoPredefinido === '50x30') {
-                document.getElementById('largura2').value = 50;
-                document.getElementById('altura2').value = 30;
-            } else if (tamanhoPredefinido === '70x30') {
-                document.getElementById('largura2').value = 70;
-                document.getElementById('altura2').value = 30;
-            } else if (tamanhoPredefinido === '100x60') {
-                document.getElementById('largura2').value = 100;
-                document.getElementById('altura2').value = 60;
-            } else if (tamanhoPredefinido === '34x23') {
-                document.getElementById('largura2').value = 34;
-                document.getElementById('altura2').value = 23;
-            } else if (tamanhoPredefinido === '100x50') {
-                document.getElementById('largura2').value = 100;
-                document.getElementById('altura2').value = 50;
-            } else if (tamanhoPredefinido === '70x40') {
-                document.getElementById('largura2').value = 70;
-                document.getElementById('altura2').value = 40;
-            } else if (tamanhoPredefinido === '60x40') {
-                document.getElementById('largura2').value = 60;
-                document.getElementById('altura2').value = 40;
-            } else if (tamanhoPredefinido === '60x50') {
-                document.getElementById('largura2').value = 60;
-                document.getElementById('altura2').value = 50;
-            } else if (tamanhoPredefinido === '70x30') {
-                document.getElementById('largura2').value = 70;
-                document.getElementById('altura2').value = 30;
-            } else if (tamanhoPredefinido === '24x23') {
-                document.getElementById('largura2').value = 24;
-                document.getElementById('altura2').value = 23;
-            } else if (tamanhoPredefinido === '100x85') {
-                document.getElementById('largura2').value = 100;
-                document.getElementById('altura2').value = 85;
-            }
-
-            atualizarEtiqueta();
-        }
-
+        
         function imprimirEtiqueta() {
             var etiquetaContainer = document.getElementById('etiquetaContainer');
             var conteudo = etiquetaContainer.innerHTML;
         
             var printWindow = window.open('', '_blank');
             printWindow.document.open();
-            printWindow.document.write('<html><head><title>Conteúdo da Etiqueta</title></head><body>' + conteudo + '</body></html>');
+            printWindow.document.write('<html><head><style>@media print { .no-print { display: none; } }</style></head><body>' + conteudo + '</body></html>');
             printWindow.document.close();
             printWindow.print();
         }
+        
         
 
         atualizarEtiqueta();
