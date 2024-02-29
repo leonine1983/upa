@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'global/css/footer.css' %}">
     <style>
         body{}
-        .video{
+        .video, #img_back{
           position: fixed;
           z-index: -1;
           width: 100%;
@@ -65,10 +65,12 @@
   <source src="{% static  videoUpa  %}">
 </video>
 {% else %}
-<video controls autoplay loop muted class="video" >
+<!--<video controls autoplay loop muted class="video" >
+  <source src="{% static 'videos/comunica.mp4'  %}">
   <source src="{% static 'videos/Risco.mp4'  %}">
-  <!--<source src="{% static 'videos/enfermeira_orando.mp4'  %}">-->
-</video>
+  <source src="{% static 'videos/enfermeira_orando.mp4'  %}">
+</video>-->
+<img id="img_back" src="{% static 'front.jpg' %}" alt="" width="100%" srcset="">
 {% endif %}
 <div class="container">     
     
