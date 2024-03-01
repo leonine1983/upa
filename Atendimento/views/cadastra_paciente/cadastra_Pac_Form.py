@@ -14,7 +14,7 @@ class CadastraPacienteForm(forms.ModelForm):  # Renomeie a classe do formulário
             'RG': forms.TextInput(attrs={'class': 'form-control '}),
             'CPF': forms.TextInput(attrs={'class': 'form-control'}),
             'nacionalidade': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
-            'rua': forms.Select(attrs={'class': 'form-select text-uppercase'}),
+            'rua': forms.TextInput(attrs={'class': 'form-control text-uppercase bg-primary'}),
             'bairro': forms.Select(attrs={'class': 'form-select text-uppercase'}),
             'cidade': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
             'estado': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),

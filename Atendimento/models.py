@@ -128,7 +128,7 @@ class ficha_de_atendimento(models.Model):
     RG = models.CharField(max_length=13, null=True, default='')
     CPF = models.CharField(max_length=14, null=True, default='')
     nacionalidade = models.CharField(max_length=30, null=True, default='')
-    rua = models.ForeignKey(Rua, null=True, on_delete=models.PROTECT)
+    rua = models.CharField(max_length=40, null=True, default='')
     bairro = models.ForeignKey(Bairro, on_delete=models.CASCADE, related_name='fichas_atendimento_bairro')
     cidade = models.ForeignKey(Cidade, null=True, on_delete=models.CASCADE)
     estado = models.ForeignKey(Estado, null=True, on_delete=models.CASCADE)

@@ -37,7 +37,7 @@ class PacienteForm(forms.ModelForm):
             'RG': forms.TextInput(attrs={'class': 'form-control'}),
             'CPF': forms.TextInput(attrs={'class': 'form-control'}),
             'nacionalidade': forms.TextInput(attrs={'class': 'form-control '}),
-            'rua': forms.Select(attrs={'class': 'form-select '}),
+            'rua': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
             'bairro': forms.Select(attrs={'class': 'form-select '}),
             'CEP': forms.TextInput(attrs={'class': 'form-control'}),
             'nome_mae': forms.TextInput(attrs={'class': 'form-control '}),
