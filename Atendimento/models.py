@@ -173,7 +173,7 @@ class envio_triagem(models.Model):
  
 
     class Meta:
-        ordering = ['-horario_triagem', '-data_envio_triagem']
+        ordering = ['horario_triagem']
         permissions = [('Acesso_permitido_envio_Tri', 'Acesso permitido para envio à Fila de Triagem')]
 
     def __str__ (self):
