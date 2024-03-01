@@ -35,7 +35,6 @@ END Imagem Representando o setor-->
        <div class="form-body bg-secondary-subtle shadow-sm">
            {% csrf_token %}
            {{ form.media }}
-           
               {% for dados  in triagem %}
               <div class='d-flex'> 
                      <div class='w-100'>
@@ -57,7 +56,9 @@ END Imagem Representando o setor-->
                             </div> 
                      </div>       
                      {% for error in form.paciente_medico_atendimento.errors %}
-                     <div class='p-2 bg-danger-subtle rounded-2'><i class="fa-duotone fa-circle-exclamation"></i>  {{error}} </div> 
+                     <div  class='p-2 bg-danger-subtle rounded-2'><i class="fa-duotone fa-circle-exclamation"></i>{{error}}
+                            <a href="{% url 'Medicos:dados do paciente' dados.pk %}" class="btn btn-primary">clique aqui</a>
+                     </div> 
                      {% endfor %}                        
               </div>
               {% endfor %}

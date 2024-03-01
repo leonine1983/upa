@@ -147,7 +147,7 @@ class ficha_de_atendimento(models.Model):
     conteudo_comorbidades = models.TextField(max_length=500, null=True, blank=True, default='Não possui comobirdades (Para tornar editável essa área, é necessário informar que o paciente possui comobirdades)')
     
     class Meta:
-        ordering = ['-data_cadastro']          
+        ordering = ['nome_social']          
     
     def save(self, *args, **kwargs):
         
@@ -173,7 +173,7 @@ class envio_triagem(models.Model):
  
 
     class Meta:
-        ordering = ['-horario_triagem', '-data_envio_triagem']
+        ordering = ['horario_triagem']
         permissions = [('Acesso_permitido_envio_Tri', 'Acesso permitido para envio à Fila de Triagem')]
 
     def __str__ (self):
