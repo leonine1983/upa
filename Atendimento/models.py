@@ -147,7 +147,7 @@ class ficha_de_atendimento(models.Model):
     conteudo_comorbidades = models.TextField(max_length=500, null=True, blank=True, default='Não possui comobirdades (Para tornar editável essa área, é necessário informar que o paciente possui comobirdades)')
     
     class Meta:
-        ordering = ['-data_cadastro']          
+        ordering = ['nome_social']          
     
     def save(self, *args, **kwargs):
         

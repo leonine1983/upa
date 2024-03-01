@@ -26,7 +26,6 @@
     ul {
         list-style: none !important;
     }
-
 </style>
 {% endblock css %}  
 <!--Imagem Representando o setor-->
@@ -43,7 +42,6 @@
 
 <p>&nbsp;</p>
 	<!-- tabs -->
-    
     <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 border shadow bg-dark-subtle p-2">
         <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
         <label for="tab1"><i class="icon-bolt"></i>Aguardando Atendimento</label>
@@ -85,6 +83,7 @@
                     <thead>
                         <tr class="bg-dark-subtle ">
                             <td class="top text-center">Nome</td>
+                            <td class="top text-center">Data e Horário de chegada</td>
                             <td class="top text-center">Classificação de Emergência</td>
                             <td class="top text-center">Atendimento</td>
                         </tr>
@@ -98,7 +97,8 @@
                                     <td class="fs-6">
                                         <span>{{campo.paciente_triagem}}</span>
                                         <!--<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if campo.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div> -->
-                                    </td>                                                        
+                                    </td>        
+                                    <td><i class="fa-regular fa-calendar"></i> {{campo.data_triagem}} <i class="fa-regular fa-clock"></i> {{campo.hora_triagem}}h</td>
                                     <td align="center" class=' {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
                                                                     prosseguir-red
                                                                     {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}

@@ -109,7 +109,14 @@
             <td>{{groups.endereco}}</td>
             <td>{{groups.user__groups__name}}</td>-->
             <td>{{groups.crm}}</td>
-            <td><a href="{% url 'Medicos:medico_signup_atualiza' groups.user__id %}" title='Edita as informações de ACESSO AO SISTEMA do usuario'><span><i class="fa-solid fa-user-pen"></i></span></a> | <a title='Edita as informações PESSOAIS do usuario' href="{% url 'Medicos:medico_signup_atualiza_extras' groups.id %}"><span><i class="fa-solid fa-file-pen"></i></span></a> | <a href='{% url "Medicos:medico_delete" groups.user__id  %}' title='Exclui o usuario do sistema' ><span><i class="fa-solid fa-user-xmark" style="color:crimson!important"></i></span></a></td>
+            <td>
+              <a href="{% url 'Medicos:medico_signup_atualiza' groups.user__id %}" title='Edita as informações de ACESSO AO SISTEMA do usuario'>
+                <span><i class="fa-solid fa-user-pen"></i></span>
+              </a> | 
+              <a title='Edita as informações PESSOAIS do usuario' href="{% url 'Medicos:medico_signup_atualiza_extras' groups.id %}">
+                <span><i class="fa-solid fa-file-pen"></i></span></a> | 
+              <!--<a href='{% url "Medicos:medico_delete" groups.user__id  %}' title='Exclui o usuario do sistema' >
+                <span><i class="fa-solid fa-user-xmark" style="color:crimson!important"></i></span></a></td>-->
         </tr>
         {% endfor %}
     </table>
@@ -163,7 +170,7 @@
       </p>
       <p>
         <label for="id_crm">
-           nº COREN:
+           nº CRM:
         </label>            
         <div class='border-radius-left d-flex'><div class="icone border-radius-left"><i class="fa-solid fa-hashtag"></i></div><input type="text" name="crm" placeholder="Digite o nº CRM" maxlength="19" id="id_crm"></div>            
       </p>
@@ -188,21 +195,12 @@
       </p>
     </div>
     <p>&nbsp;</p>
-    
- 
     </div>
     {% if form.instance.pk %}
     <button style="width:97% ;" class="button-salvar" type="submit"> Atualizar dados de {{up}} <i class="fa-solid fa-floppy-disk"></i></button>
     {% else %}
     <button style="width:97% ;" class="button-salvar" type="submit"> Cadastrar Profissional de Saude <i class="fa-solid fa-floppy-disk"></i></button>
     {% endif %}
-
-
-
-
-
-
-
 </form>
 
 {% if form.errors %}
