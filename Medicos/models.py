@@ -129,7 +129,7 @@ class Medico_atendimento (models.Model):
     exame_fisico = RichTextField(null=True, blank=True)
     Diagnostico = RichTextField(null=True, blank=True)
     classificacao_internacional_doenca_CID = models.ForeignKey(cid_10, null=True, default='Não se aplica', on_delete=models.CASCADE)
-    medicamento = models.ManyToManyField(Medicamento)
+    medicamento = models.ManyToManyField(Medicamento, blank=True)
     conduta = RichTextField(null=True, blank=True)
     data_medico = models.DateField(auto_now_add=True, null=False)
     hora_medico = models.TimeField(auto_now_add=True, null=True )
