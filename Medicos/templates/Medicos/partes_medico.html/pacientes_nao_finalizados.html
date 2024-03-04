@@ -1,0 +1,37 @@
+<h1 class="fs-3 bg-danger-subtle p-1 rounded-top-2"><i class="fa-duotone fa-circle-exclamation text-danger ml-2"></i> 0{{atend_aguarda_final|length}} - Atenção! Pacientes não finalizados</h1>
+<p class='fs-5 p-4'><strong>Atenção, Dr.!</strong> Nesta seção, são listados os atendimentos que, por alguma razão, não foram finalizados e, portanto, não constarão na relação final de atendimentos. Isso pode causar erro no cálculo total. Solicitamos a sua atenção especial a esta página para a conclusão dos atendimentos listados. Se não houver nenhum, ficamos felizes em informar que os atendimentos pelo sistema estão transcorrendo de maneira eficiente.</p>
+
+<table class='table border'>
+    <thead>
+        <tr class="text-center bg-secondary-subtle">
+            <th scope="col" style='padding:0.5rem;  font-weight: normal !important'>Nome do paciente</th>
+            <th scope="col" style='padding:0.5rem;  font-weight: normal !important'>Classificação de Risco</th>
+            <th scope="col" style='padding:0.5rem; font-weight: normal !important'>Médico Responsável</th>
+            <th scope="col" style='padding:0.5rem;  font-weight: normal !important; width: 35%' >Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ated_espec in atend_aguarda_final %}
+            {% if  ated_espec.medico_atendimento.paciente_medico_atendimento %}
+                <tr class="text-center">
+                    <td scope="row" style='text-align:center' >{{ated_espec.paciente_triagem}}</td>
+                    <td scope="row" style='text-align:center' ><div
+                        class='  
+                    {% if ated_espec.classifica_tipo.classifica_tipo == "Vermelho" %}
+                    prosseguir-red
+                    {% elif ated_espec.classifica_tipo.classifica_tipo == "Laranja"  %}
+                    prosseguir-laranja
+                    {% elif ated_espec.classifica_tipo.classifica_tipo == "Verde"  %}
+                    prosseguir-green                                            
+                    {% elif ated_espec.classifica_tipo.classifica_tipo == "Azul"  %}
+                    prosseguir-azul
+                {% endif %}'
+                        >{{ated_espec.classifica_tipo}} <i class="fa-thin fa-alarm-clock"></i></div> {{ated_espec.hora_medico}}</td>          
+                    <td scope="row" style='text-align:center'>Dr.(a) {{ated_espec.medico_atendimento.medico_nome}}</td>
+                    <th scope="col" style='text-align:center'><a href="{% url 'Medicos:dados_do_paciente_atualiza' ated_espec.medico_atendimento.id %}" style=' font-weight: normal;'>Finalizar atendimento<i class="fa-regular fa-paper-plane"></i>  </a></th>
+                    
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>

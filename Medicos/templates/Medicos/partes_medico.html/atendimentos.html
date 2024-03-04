@@ -1,0 +1,80 @@
+{% load custom_filters %}
+<h3 class='fs-4 rounded-top-3 border-bottom mb-2'>Aguardando atendimento: <b>0{{object_list|length}}</b> pacientes.</h3>
+<div class="row gap-0 row ">
+    <div class="m-1 col-4 ">
+        <button type="submit" onclick="exibe_info()" class="btn btn-secondary p-1 text-center m-auto">
+            <span class="text-light">Clique aqui para acessar informações úteis</span>
+            <i class="fa-solid fa-angles-down"></i>
+        </button>
+        <ul id='info' class="text-left border border-secondary m-0 mx-3 rounded-bottom-3 p-2 bg-secondary-subtle" style="margin-top: -0.3rem!important">
+            <li class="text-left">Na tabela abaixo, temos um dos pacientes aguardando atendimento.</li>
+            <li class="text-left">À medida que o atendimento a um paciente for finalizado, o nome do próximo paciente é exibido na tabela abaixo.</li>
+            <li>O nome de cada paciente é exibido de acordo com a classificação de risco, atribuido a ele durante o processo de TRIAGEM.</li>
+            <li> Para iniciar o atendimento, clique no botão PROSSEGUIR</li>
+        </ul>
+    </div>
+    <div class='col row row-cols-3   mx-3 rounded-start-5 m-1'>
+        <button class='p-0 text-light btn  btn-primary rounded-start-5 col-3 '>Ordem de atendimento:</button>
+        <button  class='pt-1 border-end border-primary col-3 bg-primary-subtle text-center '>1º Classificação</button >
+        <button  class='pt-1 border-end border-primary col-3 bg-primary-subtle text-center '>2º Horario de chegada</button >
+        <button  class='pt-1 border-end border-primary col-3 bg-primary-subtle text-center '>3º Idade</button >
+    </div> 
+</div>
+<table  class='table  table-striped table-bordered mt-2' border="0" cellpadding="0" cellspacing="0" width="100%">                
+    <thead>
+        <tr class="bg-dark-subtle ">
+            <td class="top text-center">Nome</td>
+            <td class="top text-center">Data e Horário de chegada</td>
+            <td class="top text-center">Classificação</td>
+            <td class="top text-center">Atendimento</td>
+        </tr>
+    </thead>       
+    <tbody> 
+        {% for campo in object_list %}  
+            {% if not campo.medico_atendimento.paciente_medico_atendimento %}
+                <tr class="align-middle"> 
+                    <td class="fs-7">
+                        <span>{{campo.paciente_triagem}}</span>
+                        <!--<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if campo.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div> -->
+                    </td>        
+                    <td>
+                        <i class="fa-regular fa-calendar"></i> {{campo.data_triagem}} <i class="fa-regular fa-clock"></i> {{campo.hora_triagem}}h | {{ campo.hora_triagem|diff_hours }}
+                    </td>
+                    
+                    <td align="center" class=' {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
+                                                    prosseguir-red
+                                                    {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
+                                                    prosseguir-laranja
+                                                    {% elif campo.classifica_tipo.classifica_tipo == "Amarelo"  %}
+                                                    prosseguir-yellow text-dark
+                                                    {% elif campo.classifica_tipo.classifica_tipo == "Verde"   %}
+                                                    prosseguir-green                                            
+                                                    {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
+                                                    prosseguir-blue btn-primary
+                                                {% endif %}' href=""> {{campo.classifica_tipo}}</td>   
+                    <td align="center" href=""><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}} <span class='shadow shadow-sm prosseguir  
+                        {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
+                            prosseguir-red
+                            {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
+                            prosseguir-laranja
+                            {% elif campo.classifica_tipo.classifica_tipo == "Amarelo"  %}
+                            prosseguir-yellow text-dark
+                            {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
+                            prosseguir-green                                            
+                            {% else %}
+                                bg-primary
+                        {% endif %}'
+                    > Seguir com o atendimento <i class="fa-regular fa-paper-plane "></i> </span></a></td>   
+                                    
+             
+                </tr> 
+                {% else %}
+                
+            {% endif %} 
+        {% empty%}
+            <tr>
+                <td colspan='7'>Nenhum registro informado</td>        
+            </tr>                       
+        {% endfor %}
+    </tbody>                
+</table>  

@@ -1,0 +1,94 @@
+{% load custom_filters %}
+<div class="w-100 p-2 shadow shadow-sm m-2 ">
+    <h1 class="fs-3">Pacientes em Classificação Amarelo com tempo de espera superior a 1 hora</h1>
+    {% for campo in object_list %}  
+        {% if campo.classifica_tipo.classifica_tipo == "Amarelo" %}
+            {% with hours_diff=campo.hora_triagem|diff_hours %}
+                {% if "horas" in hours_diff %}
+                    {% with hours=hours_diff|slice:":1" %}
+                        {% if hours|add:"0" >= 1 %}
+                            <div>
+                                <div class="row border m-1 p-1 middle">
+                                    <div class="col-5">{{campo.paciente_triagem}}</div>
+                                    <div class="col">{{ campo.classifica_tipo.classifica_tipo }} </div>
+                                    <div class="col">{{ campo.hora_triagem|diff_hours }}</div>
+                                    <div class="col">
+                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-yellow text-light text-center text-decoration-none'> 
+                                            {{campo.paciente_envio_triagem_id}} 
+                                            <span >
+                                                Seguir com o atendimento 
+                                                <i class="fa-regular fa-paper-plane "></i> 
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>                                    
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="w-100 p-2 shadow shadow-sm m-2 ">
+    <h1 class="fs-3">Pacientes em Classificação Verde com tempo de espera superior a 2 horas</h1>
+    {% for campo in object_list %}  
+        {% if campo.classifica_tipo.classifica_tipo == "Verde" %}
+            {% with hours_diff=campo.hora_triagem|diff_hours %}
+                {% if "horas" in hours_diff %}
+                    {% with hours=hours_diff|slice:":1" %}
+                        {% if hours|add:"0" >= 2 %}
+                            <div>
+                                <div class="row border m-1 p-1 middle">
+                                    <div class="col-5">{{campo.paciente_triagem}}</div>
+                                    <div class="col">{{ campo.classifica_tipo.classifica_tipo }} </div>
+                                    <div class="col">{{ campo.hora_triagem|diff_hours }}</div>
+                                    <div class="col">
+                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-green  text-secondary text-center text-decoration-none'> 
+                                            {{campo.paciente_envio_triagem_id}} 
+                                            <span >
+                                                Seguir com o atendimento 
+                                                <i class="fa-regular fa-paper-plane "></i> 
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>                                    
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="w-100 p-2 shadow shadow-sm m-2 ">
+    <h1 class="fs-3">Pacientes em Classificação Azul com tempo de espera superior a 3 horas</h1>
+    {% for campo in object_list %}  
+        {% if campo.classifica_tipo.classifica_tipo == "Azul"  %}
+            {% with hours_diff=campo.hora_triagem|diff_hours %}
+                {% if "horas" in hours_diff %}
+                    {% with hours=hours_diff|slice:":1" %}
+                        {% if hours|add:"0" >= 3 %}
+                            <div>
+                                <div class="row border m-1 p-1 middle">
+                                    <div class="col-5">{{campo.paciente_triagem}}</div>
+                                    <div class="col">{{ campo.classifica_tipo.classifica_tipo }} </div>
+                                    <div class="col">{{ campo.hora_triagem|diff_hours }}</div>
+                                    <div class="col">
+                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-green  text-secondary text-center text-decoration-none'> 
+                                            {{campo.paciente_envio_triagem_id}} 
+                                            <span >
+                                                Seguir com o atendimento 
+                                                <i class="fa-regular fa-paper-plane "></i> 
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>                                    
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+    {% endfor %}
+</div>

@@ -1,0 +1,37 @@
+<h1 class='fs-4'><i class="fa-thin fa-hashtag"></i> 0{{atendimentos_hoje|length}} - Atendimentos Médicos do Dia / FINALIZADOS </h1>
+                
+<table class="table table-striped border bg-white" cellpadding="0" cellspacing="0" width="100%" >
+    <thead>
+        <tr  class="bg-info">
+            <th scope="col" class="center text-dark-emphasis text-center">Nome do paciente</th>
+            <th scope="col" class="center text-dark-emphasis text-center">Data</th>                         
+            <th scope="col" class="center text-dark-emphasis text-center">Médico Responsável</th>
+            <th scope="col" class="center text-dark-emphasis text-center">Possibilidade de Reavaliação</th>
+        </tr>
+    </thead>    
+    <tbody>
+        {% for ated_espec in atendimentos_hoje %}
+        <tr>
+            <td scope="row" style='text-align:center' >{{ated_espec.paciente_medico_atendimento.paciente_triagem}}</td>
+            <td scope="row" style='text-align:center'>{{ated_espec.data_medico}} <i class="fa-thin fa-alarm-clock"></i> {{ated_espec.hora_medico}}</td>          
+            <td scope="row" style='text-align:center'>{{ated_espec.nome_medico}}</td>
+            <th scope="col" style='text-align:center'><a class=
+                "prosseguir 
+                {% for campo in object_list %}  
+                    {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
+                    prosseguir-red
+                    {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
+                    prosseguir-laranja
+                    {% elif campo.classifica_tipo.classifica_tipo == "Verde"  %}
+                    prosseguir-green                                            
+                    {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
+                    prosseguir-azul
+                    {% endif %}
+                {% endfor %}"                   
+                
+            
+                href="{% url 'Medicos:dados_do_paciente_atualiza' ated_espec.id %}" style=' font-weight: normal;'>Reavaliar paciente <i class="fa-regular fa-paper-plane"></i>  </a></th>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -554,10 +554,10 @@ height: 100%;
 }
 /*Classificação de Risco*/
 .prosseguir-red{background-color: #AA0000; color: white;}
-
 .prosseguir-laranja{background-color: #ff6600}
+.prosseguir-yellow{background-color:yellow}
 .prosseguir-green{background-color: #008200}
-.prosseguir-azul{background-color:#008dc0;}
+.prosseguir-blue{background-color:#008dc0;}
 
 /*Imagem suspenso representando o setor*/
 .vetor-img-aereo{
