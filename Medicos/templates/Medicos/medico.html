@@ -1,6 +1,7 @@
 {% extends 'global/template_geral.html' %}
 {% block css %}
 {% load static %}
+{% load humanize %}
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" />
 
@@ -97,7 +98,22 @@
                                         <span>{{campo.paciente_triagem}}</span>
                                         <!--<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if campo.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div> -->
                                     </td>        
-                                    <td><i class="fa-regular fa-calendar"></i> {{campo.data_triagem}} <i class="fa-regular fa-clock"></i> {{campo.hora_triagem}}h</td>
+                                    <td>
+                                        <i class="fa-regular fa-calendar"></i>
+                                         {{campo.data_triagem}} 
+                                        <i class="fa-regular fa-clock"></i> 
+                                        {{campo.hora_triagem}}h
+
+                                        hora passada:
+                                        {# No seu template Django #}
+
+{% load custom_filters %}
+
+A hora da triagem foi {{ campo.hora_triagem }} ({{ campo.hora_triagem|diff_hours }})
+
+                                    
+                                    </td>
+
                                     <td align="center" class=' {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
                                                                     prosseguir-red
                                                                     {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}
