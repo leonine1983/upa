@@ -24,7 +24,7 @@ class Prescreve_Medicamentos_fomr(forms.ModelForm):
 
     class Meta:
         model = triagem
-        fields = ['exames', 'atestado']
+        fields = ['exames', 'atestado', 'preescrever_medicamento_medico']
         labels = {}
         widgets = {
             'atestado': forms.NumberInput(attrs={'type': 'range', 'min': 0, 'max': 30, 'step': 1, 'oninput': 'updateTextInput(this.value)'}),

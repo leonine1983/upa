@@ -119,8 +119,8 @@ class triagem(models.Model):
         ('0', 'Não'),
         ('1','Sim'),
     )    
-    #preescrever_medicamento_medico = RichTextField(null=True, blank=True)
-#    preescrever_medicamento_medico = models.TextField(max_length=500, null=True, default='Preescreva o medicamento para o paciente')
+    preescrever_medicamento_medico = RichTextField(null=True, blank=True, default='Preescreva o medicamento para o paciente')
+    # preescrever_medicamento_medico = models.TextField(max_length=500, null=True, default='Preescreva o medicamento para o paciente')
     encaminhamento = models.TextField(max_length=500, null=True, blank=True, default='Digite o encaminhamento do paciente')
     atestado = models.CharField(max_length=2, null=True,blank=True, default='0')
     exames = models.ManyToManyField(Exames_Model, null=True, blank=True)    
