@@ -1,0 +1,45 @@
+{% load static %}
+{% if not t.preescrever_medicamento_medico == "" %}      
+                                          <section class='prescricao' id="tab1" class="active"> 
+                                                 <nav class="menu-vertical-medico w-100 ">
+                                                        <ul>                                          
+                                                               <li><a class='btn btn-sm btn-secondary  w-25 right mx-4 mt-1'  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarPDF(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
+                                                               <li><a class='btn btn-sm btn-primary w-25 right mx-4 mt-1' href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  Concluir Atendimento Médico </a></li>
+                                                        </ul>
+                                                 </nav> 
+                                                 <!--Imprimir medicamentos-->
+                                                 <div id="tab11" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
+                                                 box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                                 -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+                                                 -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
+                                                        <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
+                                                        <div class='card-medico' style="              
+                                                               position: relative;
+                                                               z-index: 10;
+                                                               top: -45rem;
+                                                               padding: 2rem;
+                                                               padding-bottom:0.1rem;
+                                                               height:42rem">                                                                                     
+                                                               <h3>Nome do(a) paciente:</h3>                                                                                              
+                                                               <hr style="width: 50%;">
+                                                               <div style='margin-left:2rem; margin-bottom:2rem;' class='uppercase'><strong>{{t}}</strong></div>
+                                                               <h3>Preescrição de Medicamentos:</h3>                                                 
+                                                               <hr style="width: 50%;">
+                                                               <div style='margin:1rem 2rem; max-height:15rem; height:15rem; font-weight: bold;'>
+                                                               {{t.preescrever_medicamento_medico | safe}}
+                                                               </div>
+                                                        <div style='text-align:center; width: 100%; '>                                          
+                                                               <span >Dr.(a) {{request.user.first_name}} {{request.user.last_name}}</span><br>
+                                                               <hr style="width: 75%;margin: auto;">
+                                                               Médico que fez o atendimento
+                                                        </div>
+                                                        <div style='font-size:0.6rem; margin-top:9rem; '>
+                                                               <b>UPA VERA CRUZ</b>
+                                                               <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
+                                                               <BR/>Tel.: (71) 3633-2286\
+                                                               <BR/>Email: servicosocial.upaveracruz@gmail.com
+                                                        </div>  
+                                                 </div> 
+                                                 <!--FIM Imprimir medicamentos-->
+                                          </section>
+                                   {% endif %}

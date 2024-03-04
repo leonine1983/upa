@@ -1,0 +1,43 @@
+<div id="myModal" class="modal">
+    <div class="modal-content w-75 m-auto mt-5 p-3">              
+     <div class='text-right'><span class="close right">&times;</span></div>
+      {% for t in triagem_now %}    
+      <h1>Atenção</h1>   
+      <p>&nbsp;</p>    
+
+      <p>Apos realizar a impressão, você deverá clicar no botão
+           FINALIZAR ATENDIMENTO, para que o nome do paciente saia
+           da fila de atendimento do dia e seus dados sejam armazenados 
+           em seu histórico hospitalar .
+      </p> 
+      <p>
+           Se ainda não imprimiu todos os documentos do paciente <b class='uppercase'>{{t.paciente_triagem}}</b>, utilize os links abaixo para 
+                  imprimir o restante dos documentos ou clique no &times; para visualiza-los na tela: 
+                  <ul>{% if not t.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %}
+                         <li>                                   
+                         <a href="#tab1" onclick="gerarPDF(); return false;" ><b>Prescrição de medicamentos</b></a>                                   
+                         </li>
+                         {% endif %}
+                         {% if not t.encaminhamento == 'Digite o encaminhamento do paciente' %}
+                         <li>                                          
+                         <a href="#tab2" onclick="gerarPDF(); return false;" ><b>Encaminhamento</b></a>                                          
+                         </li>
+                         {% endif %}
+                         {% if  not t.exames == 'Preencha com a relação de exames' %}
+                         <li>    
+                                <a href="#tab3" onclick="gerarPDF_exame(); return false;" > <b>Solicitação de exames</b></a> 
+                         </li>
+                         {% endif %}
+                         <li>
+                         {% if not t.atestado == 'Digite a quantidade de dias que o paciente irá ficar de repouso' %}
+                         <a href="#tab4" onclick="gerarAtestPDF(); return false;" ><b>Atestado<b></a>
+                         {% endif %}
+                         </li>                            
+                         
+                         
+                  </ul>
+      </p>           
+     
+    {% endfor %} 
+    </div>  
+  </div>   
