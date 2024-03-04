@@ -156,7 +156,54 @@
         </table>                    
     </div><!--tabela-->   
 
-</div>     
+</div>
+
+<style>
+ 
+    .container_nav {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+    }
+  
+    .container_nav.expanded {
+      width: 300px;
+    }
+  
+    .content {
+      display: none;
+      margin-top: 10px;
+      transition: all 0.5s ease;
+    }
+  
+    .container_nav.expanded .content {
+      display: block;
+    }
+  </style>
+<div class="container_nav bg-dark-subtle shadow" onclick="expandDiv()">
+    <span class="fs-3"><i class="fa-solid fa-computer-mouse text-shadow-2"> </i></span>
+    <div class="content rounded-3 p-2 shadow shadow-sm border">
+        <div class="text-center bg-light-subtle">
+            <span>Cancelar chamados.</span>
+            <a class="d-block fs-3" href="{% url 'Atendimento:excluir_registros' %}"><i class="fa-solid fa-microphone-slash text-danger-emphasis"></i></a>
+        </div>
+      
+      </p>
+    </div>
+  </div>
+  
+  <script>
+    function expandDiv() {
+      var container = document.querySelector('.container_nav');
+      container.classList.toggle('expanded');
+    }
+  </script>
 
 <script>
     function exibe_info(){

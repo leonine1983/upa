@@ -16,6 +16,7 @@ urlpatterns = [
 
     path('painel', views.painel, name='painel'), 
     path('painel_atendimento_Medico', views.chamar_paciente, name='chamar_paciente'),
+    path('excluir-registros/', views.del_all_call, name='excluir_registros'),
     #path('painel_tiragem', views.chamar_paciente, name='chamar_paciente_triagem'),
 
     # Cadastro Etnia
