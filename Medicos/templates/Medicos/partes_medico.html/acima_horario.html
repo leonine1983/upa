@@ -13,7 +13,7 @@
                                     <div class="col">{{ campo.classifica_tipo.classifica_tipo }} </div>
                                     <div class="col">{{ campo.hora_triagem|diff_hours }}</div>
                                     <div class="col">
-                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-yellow text-light text-center text-decoration-none'> 
+                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-yellow text-secondary text-center text-decoration-none'> 
                                             {{campo.paciente_envio_triagem_id}} 
                                             <span >
                                                 Seguir com o atendimento 
@@ -44,7 +44,7 @@
                                     <div class="col">{{ campo.classifica_tipo.classifica_tipo }} </div>
                                     <div class="col">{{ campo.hora_triagem|diff_hours }}</div>
                                     <div class="col">
-                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-green  text-secondary text-center text-decoration-none'> 
+                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-green  text-light text-center text-decoration-none'> 
                                             {{campo.paciente_envio_triagem_id}} 
                                             <span >
                                                 Seguir com o atendimento 
@@ -75,7 +75,7 @@
                                     <div class="col">{{ campo.classifica_tipo.classifica_tipo }} </div>
                                     <div class="col">{{ campo.hora_triagem|diff_hours }}</div>
                                     <div class="col">
-                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  prosseguir-green  text-secondary text-center text-decoration-none'> 
+                                        <a href="{% url 'Medicos:medico_atendimento' campo.pk %}" class='shadow shadow-sm prosseguir  bg-primary text-light text-center text-decoration-none'> 
                                             {{campo.paciente_envio_triagem_id}} 
                                             <span >
                                                 Seguir com o atendimento 
