@@ -31,7 +31,7 @@ def lista_de_paciente_na_triagem(request):
         print(date_format)  
         
         if date_format:
-            object_list = envio_triagem.objects.filter(data_envio_triagem = date_format) & envio_triagem.objects.exclude(triagem_concluida = 1)
+            object_list = envio_triagem.objects.filter(data_envio_triagem = date_format) 
         else:             
             object_list = envio_triagem.objects.all() & envio_triagem.objects.exclude(triagem_concluida = 1)
     else:
