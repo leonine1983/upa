@@ -10,3 +10,4 @@ from .cadastra_Rua import *
 from .pefil_usuario_simples import *
 from .envio_triagem import *
 from .painel import *
+from .outras_listagens import *

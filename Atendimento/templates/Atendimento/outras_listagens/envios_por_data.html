@@ -1,0 +1,250 @@
+{% extends 'global/template_geral.html' %}
+
+<!-- titulo Web da pagina-->
+{% block title_login %} Pacientes {% endblock title_login %}
+{% load static %}
+
+<!--CSS local-->
+{% block css %} 
+    <!--Tabela-->
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--Menu Local-->
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} ">     
+    <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
+
+    <style>
+ 
+        .container_nav {
+          position: fixed;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          background-color: #f0f0f0;
+          padding: 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded {
+          width: 300px;
+        }
+      
+        .content {
+          display: none;
+          margin-top: 10px;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded .content {
+          display: block;
+        }
+
+
+            /* Estilos para a visualização normal */
+    #envios_triagem {
+        width: 1000px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        padding: 2%;
+        background-color: #ffffff;
+    }
+
+    #envios_triagem table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #envios_triagem th,
+    #envios_triagem td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #envios_triagem th {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para impressão */
+    @media print {
+        #envios_triagem {
+            width: auto;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        #envios_triagem table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #envios_triagem th,
+        #envios_triagem td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #envios_triagem th {
+            background-color: #f2f2f2;
+        }
+    }
+
+      </style>
+{% endblock css %} 
+
+<!--Titulo da Pagina-->
+{% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
+
+{% block body_login %}    
+<div class='menu-local-top' style='margin-top:-3rem'>
+    <ul>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem </a></li>
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>     
+    </ul> 
+</div>   
+<div class='mt-5 pt-5'>   
+    <div class="border-bottom border-dark fs-3 d-flex">
+        <i class="fa-duotone fa-list-ul"></i>
+        Lista de Envios à Fila, Ordenados por Data
+    </div>
+    <form class='m-1 row g-4'>
+        {% csrf_token %}
+        <div class="col-auto">
+            <label for="start_date" >::CALENDÁRIO::</label>
+        </div>
+        <div class="col-auto">
+            <input type="date" name='busca_data' class='form-control'>
+        </div>
+        <div class="col-auto">         
+            <button class="btn btn-sm btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+          </svg> Selecionar data</button>
+        </div>
+        <div class="col-auto">
+            <button onclick="imprimir()" class="btn btn-sm btn-secondary">Imprimir <i class="fa-solid fa-print"></i></button>
+        </div>
+    </form>
+
+  
+
+    <div id="envios_triagem" style="
+        width: 1000px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        padding: 2%;" class="m-auto bg-light shadow">
+        <div style='display:flex'>
+            <div style='display:flex; margin-right:0.5rem'>
+                <img src="{% static "brasao-veracruz.png" %}" alt="" sizes="" srcset="" style='width:4rem'>
+                <div style='font-size:0.75rem; padding:0.5rem 0.5rem 0 0.8rem'>
+                    UPA - Unidade de Pronto Atendimento de Vera Cruz</br>
+                    Av. Juvenal João Vinagre, 175. Centro | Vera Cruz - BA</br>
+                    Tel. (71) 3633 - 2286 | Email: servicossocial.upaveracruz@gmail.com
+                </div>
+            </div>
+            <img src="{% static "upa24.png" %}" alt="" sizes="" srcset="" style='width:9rem; margin-left:1rem'>
+        </div>
+
+        <h1>Relatório</h1>
+        <hr>
+
+        {% for d in object_list %}
+            <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
+                <div style="background-color: gray; padding: 0.2rem;"><b>Informações Pessoais do Paciente</b></div>
+                    <Table style="font-size: 0.7rem!important;">
+                        <thead>
+                            <tr style="text-align: center; background-color:rgb(243, 238, 238);">
+                                <th style="padding: 0.2rem 0.5rem;">Registro</th>
+                                <th style="padding: 0.2rem 0.5rem;">Nome Social</th>
+                                <th style="padding: 0.2rem 0.5rem;">Data do Atendimento</th>
+                                <th style="padding: 0.2rem 0.5rem;">Horário do Atendimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align: center;background-color:  rgb(243, 238, 238);">
+                                <td style="padding: 0.2rem 0.5rem;">{% if d.cod_triagem %}{{d.cod_triagem}}{% else %}{% endif %}</td>
+                                <td style="padding: 0.2rem 0.5rem;">{{d.paciente_envio_triagem.nome_social}}</td>
+                                <td style="padding: 0.2rem 0.5rem;">{{d.data_envio_triagem}}</td>
+                                <td style="padding: 0.2rem 0.5rem;">{{d.horario_triagem}}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                    <div style="padding: 0.2rem;display: flex;margin-top: 0.5rem;">
+                        <div style="margin-right: 0.5rem;">
+                            <div><b>Idade:</b> {{d.paciente_envio_triagem.idade}}</div>
+                            <div><b>Etnia:</b> {{d.paciente_envio_triagem.etnia}}</div>
+                            <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
+                            <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
+                            <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
+                            <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
+                            
+                        </div>
+                        <div style="margin-right: 0.5rem;">
+                            <div><b>Nacionalidade:</b> {{d.paciente_envio_triagem.nacionalidade}}</div>
+                            <div><b>Cartão do Sus:</b> {{d.paciente_envio_triagem.cartao_sus}}</div>
+                            <div><b>Rua:</b> {{d.paciente_envio_triagem.rua}}</div>
+                            <div><b>Bairro:</b> {{d.paciente_envio_triagem.bairro}}</div>
+                            <div><b>Cidade:</b> {{d.paciente_envio_triagem.cidade}}</div>
+                            <div><b>Pais:</b> {{d.paciente_envio_triagem.pais}}</div>   
+                        </div>
+                        <div>
+                            <div><b>CEP:</b> {{d.paciente_envio_triagem.CEP}}</div>
+                            <div><b>Telefone:</b> {{d.paciente_envio_triagem.tel}}</div>
+                            <div><b>Nome da mãe:</b> {{d.paciente_envio_triagem.nome_mae}}</div>
+                            <div><b>Responsável (Acompanhante):</b> {{d.paciente_envio_triagem.responsavel}}</div>
+                        </div>
+                    <div>        
+                </div>
+            </div>        
+            </div>
+        {% endfor %}   
+</div>
+
+
+</div>
+
+
+<div class="container_nav bg-dark-subtle shadow" onclick="expandDiv()">
+    <span class="fs-3"><i class="fa-solid fa-computer-mouse text-shadow-2"> </i></span>
+    <div class="content rounded-3 p-2 shadow shadow-sm border">
+        <div class=" bg-light-subtle">
+            <span>Cancelar chamados.</span>
+            <a class="d-block fs-3" href="{% url 'Atendimento:excluir_registros' %}"><i class="fa-solid fa-microphone-slash text-danger-emphasis"></i></a>
+        </div>
+    </div>
+    <div class="content rounded-3 p-2 shadow shadow-sm border">
+        <div class=" bg-light-subtle">
+            <span>Listagem por Data.</span>
+            <a class="d-block fs-3" href="{% url 'Atendimento:listagem_envio' %}">cliqaue</a>
+        </div>
+    </div>
+  </div>
+  
+  <script>
+    function expandDiv() {
+      var container = document.querySelector('.container_nav');
+      container.classList.toggle('expanded');
+    }
+  </script>
+
+<script>
+    function exibe_info(){
+        var div_info = document.getElementById('info');
+        var disp = div_info.style.display;
+        div_info.style.display = disp === 'none' ? 'block' : 'none';
+    }
+</script>
+
+<script>
+    // Função para imprimir apenas o conteúdo da div envios_triagem
+    function imprimir() {
+        var conteudoDiv = document.getElementById('envios_triagem').innerHTML;
+        var janelaImprimir = window.open('', '', 'width=800, height=600');
+        janelaImprimir.document.write('<html><head><title>Impressão</title></head><body>');
+        janelaImprimir.document.write(conteudoDiv);
+        janelaImprimir.document.write('</body></html>');
+        janelaImprimir.document.close();
+        janelaImprimir.print();
+    }
+</script>
+{% endblock body_login %}
