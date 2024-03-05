@@ -67,9 +67,9 @@
               </form>
         </div>
         <div class="">         
-            <div class='btn btn-sm border'><span class='fs-3'>{{object_list.count}}</span> registros de paciente no sistema</div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
+            <div class='btn btn-sm border'><span class='fs-3'>{{object_list.count}}</span> registros exibido por página | Total de {{quant_registros}} registros no sistema</div>
+            <nav aria-label="Page navigation example ">
+                <ul class="pagination justify-content-end flex-wrap">
                 {% if page_obj.has_previous %}
                 <li class="page-item">
                     <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">

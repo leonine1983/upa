@@ -1,3 +1,4 @@
+from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from Atendimento.models import ficha_de_atendimento
@@ -5,7 +6,7 @@ from Atendimento.models import ficha_de_atendimento
 class paciente_lista(LoginRequiredMixin, ListView):
     model = ficha_de_atendimento
     template_name = 'Atendimento/pacientes.html'
-    paginate_by = 10
+    paginate_by = 15
 
     # Fazer a pesquisa
     def get_queryset(self):
@@ -26,5 +27,10 @@ class paciente_lista(LoginRequiredMixin, ListView):
         form.instance.usuario = self.request.user
         url = super().form_valid(form)
         return url
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['quant_registros'] = ficha_de_atendimento.objects.all().count
+        return context
 
     
