@@ -203,37 +203,13 @@
 
 </div>
 
+<!--Menu suplementos-->
+{% include "Atendimento/outras_listagens/partes/partes_pacientes/menu_suplementos.html" %}
+<!--Menu suplementos-->
 
-<div class="container_nav bg-dark-subtle shadow" onclick="expandDiv()">
-    <span class="fs-3"><i class="fa-solid fa-computer-mouse text-shadow-2"> </i></span>
-    <div class="content rounded-3 p-2 shadow shadow-sm border">
-        <div class=" bg-light-subtle">
-            <span>Cancelar chamados.</span>
-            <a class="d-block fs-3" href="{% url 'Atendimento:excluir_registros' %}"><i class="fa-solid fa-microphone-slash text-danger-emphasis"></i></a>
-        </div>
-    </div>
-    <div class="content rounded-3 p-2 shadow shadow-sm border">
-        <div class=" bg-light-subtle">
-            <span>Listagem por Data.</span>
-            <a class="d-block fs-3" href="{% url 'Atendimento:listagem_envio' %}">cliqaue</a>
-        </div>
-    </div>
-  </div>
-  
-  <script>
-    function expandDiv() {
-      var container = document.querySelector('.container_nav');
-      container.classList.toggle('expanded');
-    }
-  </script>
 
-<script>
-    function exibe_info(){
-        var div_info = document.getElementById('info');
-        var disp = div_info.style.display;
-        div_info.style.display = disp === 'none' ? 'block' : 'none';
-    }
-</script>
+
+
 
 <script>
     // Função para imprimir apenas o conteúdo da div envios_triagem

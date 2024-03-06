@@ -48,15 +48,7 @@
         {% endif %}   
         <!--Visto por Admin, por Enfermagem-->
         {% if grupo_usuario == 'group_UPA-Admin' or grupo_usuario == 'group_Enfermagem' %}     
-            <li>
-                <a href="{% url 'Atendimento:pagina-inicial' %}">  
-                                    
-                    <i class="fa fa-2x  fa-solid fa-chart-simple"></i>
-                    <span class="nav-text">
-                        Resumo Gráfico
-                    </span>
-                </a>              
-            </li>
+            
             <li class="has-subnav">
                 <a href=" {% url 'Triagem:triagem-enfermaria' %} ">
                     
@@ -115,6 +107,30 @@
                     <i class="fa-solid "></i>
                     <span class="nav-text">
                         Cadastra Medicos
+                    </span>
+                </a>
+            </li>
+        {% endif %}
+        <hr>
+
+        <!--Visto por Admin, por Medicos-->
+        {% if  grupo_usuario == 'group_UPA-Admin' %}
+            <li>
+                <a href="{% url 'Atendimento:pagina-inicial' %}">  
+                                    
+                    <i class="fa fa-2x  fa-solid fa-chart-simple"></i>
+                    <span class="nav-text">
+                        Resumo Gráfico
+                    </span>
+                </a>              
+            </li>
+            <li class="has-subnav">
+                <a href=" {% url 'Atendimento:listagem_envio' %} ">
+                <i class="fa fa-solid fa-list-check fa-2x"></i>
+                <i class="fa-solid "></i>
+                
+                    <span class="nav-text">
+                        Exibir lista de entrada de pacientes por data
                     </span>
                 </a>
             </li>
