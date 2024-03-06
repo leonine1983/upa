@@ -43,9 +43,11 @@
     <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 border shadow bg-dark-subtle p-2">
         <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
         <label for="tab1"><i class="icon-bolt"></i>Aguardando Atendimento</label>
-        
+
+
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
-        <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>        
+        <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
+
         <input type="radio" name="pcss3t" id="tab3" class="tab-content-3 ">
         <label for="tab3" class='bg-primary-subtle'><i class="icon-cogs"></i>Atendimentos Finalizados </label>
         {% if not nao_finalizado == '1' %}
@@ -54,7 +56,7 @@
         {% endif %}
         <!--Fora de horari-->
         <input type="radio" name="pcss3t" id="tab6" class="tab-content-6">
-        <label for="tab6" class='text-danger'><i class="fa-solid fa-circle-exclamation "></i> Atenção: Tolerância de Tempo Excedida para Pacientes Amarelos, Verdes e Azuis</label>      
+        <label for="tab6" class='text-danger'><i class="fa-solid fa-circle-exclamation "></i> Tempo previsto pela classificação, excedido</label>      
         <!--FIM Fora de horari-->
         
         <ul>
@@ -63,7 +65,7 @@
                 {% include "Medicos/partes_medico.html/atendimentos.html" %}
                 <!--FIM Atendimento-->
             </li>
-            
+         
             <li class="tab-content tab-content-2 typography">
                 <!--Encaminhamentos-->
                 {% include "Medicos/partes_medico.html/encaminhamentos.html" %}
