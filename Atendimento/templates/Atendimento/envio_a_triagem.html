@@ -246,11 +246,18 @@ $(document).ready(function() {
                     </button>
                 </div>  
                 <div class='text-center p-3 bg-secondary-subtle'>
-                    <div class='fs-4'>Se sim, digite o nome do acompanhante </div>
+                    <div class='fs-4'>Se sim, digite o nome do acompanhante</div>
                    <i class="fa-solid fa-people-pulling"></i> {{form.nome_acompanhante}} 
                    {% for error in form.nome_acompanhante.errors  %}
                         <div class='alert alert-danger '>{{error}}</div>
                    {% endfor %}
+                </div>
+                <div class="wrapper">
+                    <div id='cod_registro' class='col m-1 pt-3 bg-secondary-subtle border border-danger text-center'>
+                        <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
+                        {{form.cod_triagem}}
+                    </div>
+                    <div class="overlay"></div>
                 </div>
             {% endfor %}                 
         </form>       
