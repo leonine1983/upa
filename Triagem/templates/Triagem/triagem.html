@@ -348,6 +348,7 @@
               <th class="text-center">Nome do paciente</th>
               <th>Mãe</th>                   
               <th class="text-center">Classificação de risco atribuída</th>    
+              <th class="text-center">Situação pós classificação</th>    
               <th>Ação</th> 
             </tr>
           </thead>
@@ -365,8 +366,17 @@
               <td class="text-center ">
                 {{pac.classifica_tipo}}
               </td>
+              <td class="text-center ">
+                {% if pac.passou_por_atend_medico %}
+                <i class="fa-solid fa-stethoscope text-success fs-4" title='Paciente atendido ou em atendimento'></i>
+                   {% else %}
+                   Aguardando atendimento
+                {% endif %}
+              </td>
               <td>
-                <a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem_classifica_Risco_update' pac.id %}">Reavaliar Paciente</a>               
+                
+                  <a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem_classifica_Risco_update' pac.id %}">Reavaliar Paciente</a> 
+                          
               </td>
             </tr>
             {% endfor %}
