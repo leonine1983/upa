@@ -219,7 +219,7 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 # 3º Define o tempo de sessão para 1 hora (3600 segundos)
-SESSION_COOKIE_AGE = 3600
+#SESSION_COOKIE_AGE = 3600
 
 # Por fim definir a pagina para onde será redirecionada o usuario apos finalizar a sessão
 LOGIN_URL = 'Access_Login:access_login_page'

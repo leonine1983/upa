@@ -33,7 +33,7 @@ class Envio_Form(forms.ModelForm):
             if ultimo_codigo is not None:
                 # Se houver registro com cod_triagem
                 ano, mes, sequencia = ultimo_codigo.split('-')
-                ano_atual = str(datetime.datetime.now().year)
+                ano_atual = str(datetime.datetime.now().year)[-2:]
                 mes_atual = str(datetime.datetime.now().month).zfill(2)
                 if ano != ano_atual:
                     novo_codigo = f"{ano_atual}-{mes_atual}-01"
@@ -42,42 +42,13 @@ class Envio_Form(forms.ModelForm):
                     novo_codigo = f"{ano_atual}-{mes_atual}-{nova_sequencia}"
                     self.initial['cod_triagem'] = novo_codigo
             else:
-                ano_atual = str(datetime.datetime.now().year)
+                ano_atual = str(datetime.datetime.now().year)[-2:]
                 mes_atual = str(datetime.datetime.now().month).zfill(2)
-                ultimo_codigo = f"{ano_atual}-{mes_atual}-01"
+                ultimo_codigo = f"{ano_atual}-{mes_atual}-3520"
                 novo_codigo = ultimo_codigo
                 self.initial['cod_triagem'] = novo_codigo
                 return
-                
-
-            
-
-
-            """
-           
-           
-
-        # Se houver registros, continue com o código para obter o novo código
         
-        
-        # Verifica se o ano e mês atual são diferentes dos do último registro
-        ano_atual = str(datetime.datetime.now().year)
-        mes_atual = str(datetime.datetime.now().month).zfill(2)
-        if ano != ano_atual or mes != mes_atual:
-            # Se for diferente, atualiza o ano e mês atual e redefine a sequência para '01'
-            novo_codigo = f"{ano_atual}-{mes_atual}-01"
-        else:
-            # Caso contrário, incrementa a sequência em 1
-            nova_sequencia = str(int(sequencia) + 1).zfill(len(sequencia))
-            novo_codigo = f"{ano_atual}-{mes_atual}-{nova_sequencia}"
-        
-        # Define o valor inicial do campo cod_triagem
-        self.initial['cod_triagem'] = novo_codigo
-            
-            
-            """
-        
-
     class Meta:
         model = envio_triagem
         fields = ['paciente_envio_triagem', 'nome_acompanhante', 'cod_triagem']
@@ -85,4 +56,5 @@ class Envio_Form(forms.ModelForm):
         widgets = {
             #'paciente_envio_triagem': forms.Select(attrs={'class': 'form-control'}),
             'nome_acompanhante': forms.TextInput(attrs={'class': 'form-control text-center'}),
+            'cod_triagem': forms.TextInput(attrs={'class': 'form-control text-center'}),
         }

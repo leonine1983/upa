@@ -17,6 +17,27 @@
         border-top-right-radius: 6rem;
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
         } 
+
+
+        .wrapper {
+            position: relative;
+        }
+        
+        #cod_registro {
+            position: relative;
+            z-index: 1; /* Garante que esta div esteja acima da div overlay */
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2; /* Garante que esta div esteja sobreposta à div cod_registro */
+            background-color: rgba(0, 0, 0, 0); /* Faz a div transparente */
+        }
+        
 </style>
 
 
@@ -154,11 +175,13 @@ $(document).ready(function() {
                             <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Nome do acompanhate</label>
                             <p>{{form.nome_acompanhante}}</p>
                         </div>
-                        <div class='col m-1 pt-3 bg-secondary-subtle'>
-                            <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
-                            <p>{{form.cod_triagem}}</p>
+                        <div class="wrapper">
+                            <div id='cod_registro' class='col m-1 pt-3 bg-secondary-subtle border border-danger text-center'>
+                                <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
+                                {{form.cod_triagem}}
+                            </div>
+                            <div class="overlay"></div>
                         </div>
-                        
                         {% endif %}
                     </div>       
                     {% if not url == 'Atendimento:envio_paciente_a_triagem'%}                      
