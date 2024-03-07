@@ -28,16 +28,38 @@ class Envio_Form(forms.ModelForm):
             # Obtém o último registro cadastrado
             ultimo_registro = envio_triagem.objects.latest('id')
             ultimo_codigo = ultimo_registro.cod_triagem
-        else:
-            # Se não houver registros na base de dados, define o código inicial para o mês atual
-            ano_atual = str(datetime.datetime.now().year)
-            mes_atual = str(datetime.datetime.now().month).zfill(2)
-            novo_codigo = f"{ano_atual}-{mes_atual}-01"
-            self.initial['cod_triagem'] = novo_codigo
-            return  # Interrompe a execução do método __init__
+            novo_codigo = ""
+
+            if ultimo_codigo is not None:
+                # Se houver registro com cod_triagem
+                ano, mes, sequencia = ultimo_codigo.split('-')
+                ano_atual = str(datetime.datetime.now().year)
+                ano_atual_slice = str(datetime.datetime.now().year)[-2:]
+                mes_atual = str(datetime.datetime.now().month).zfill(2)
+                if ano != ano_atual:
+                    novo_codigo = f"{ano_atual_slice}-{mes_atual}-01"
+                else:       
+                    nova_sequencia = str(int(sequencia) + 1).zfill(len(sequencia))
+                    novo_codigo = f"{ano_atual_slice}-{mes_atual}-{nova_sequencia}"
+                    self.initial['cod_triagem'] = novo_codigo
+            else:
+                ano_atual = str(datetime.datetime.now().year)[-2:]
+                mes_atual = str(datetime.datetime.now().month).zfill(2)
+                ultimo_codigo = f"{ano_atual}-{mes_atual}-01"
+                novo_codigo = ultimo_codigo
+                self.initial['cod_triagem'] = novo_codigo
+                return
+                
+
+            
+
+
+            """
+           
+           
 
         # Se houver registros, continue com o código para obter o novo código
-        ano, mes, sequencia = ultimo_codigo.split('-')
+        
         
         # Verifica se o ano e mês atual são diferentes dos do último registro
         ano_atual = str(datetime.datetime.now().year)
@@ -52,6 +74,10 @@ class Envio_Form(forms.ModelForm):
         
         # Define o valor inicial do campo cod_triagem
         self.initial['cod_triagem'] = novo_codigo
+            
+            
+            """
+        
 
     class Meta:
         model = envio_triagem

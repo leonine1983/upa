@@ -154,6 +154,11 @@ $(document).ready(function() {
                             <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Nome do acompanhate</label>
                             <p>{{form.nome_acompanhante}}</p>
                         </div>
+                        <div class='col m-1 pt-3 bg-secondary-subtle'>
+                            <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
+                            <p>{{form.cod_triagem}}</p>
+                        </div>
+                        
                         {% endif %}
                     </div>       
                     {% if not url == 'Atendimento:envio_paciente_a_triagem'%}                      
