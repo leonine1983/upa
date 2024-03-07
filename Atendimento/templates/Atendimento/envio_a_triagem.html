@@ -87,6 +87,7 @@ $(document).ready(function() {
 <table class='table table-striped border border-secondary'>
     <tr class='bg-primary-subtle fs-6'>
         <th class='border border-success linha-titulo text-center'>Codigo</th>
+        <th class='border border-success linha-titulo text-center'>Registro de Entrada</th>
         <th class='border border-success linha-titulo text-center'>Nome do Paciente</th><i class="fa-duotone fa-square-user"></i>
         <th class='border border-success linha-titulo text-center'>Perfil</th>
         <th class='border border-success linha-titulo text-center'>Acompanhante</th>
@@ -106,6 +107,9 @@ $(document).ready(function() {
                 {{ paciente.nome_do_campo_do_modelo }}
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
             </td>
+            <td class='text-center'>
+                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.cod_triagem}}</span></a>
+            </td> 
             <td class='text-center'>
                 <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>
             </td> 
