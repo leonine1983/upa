@@ -34,16 +34,15 @@ class Envio_Form(forms.ModelForm):
                 # Se houver registro com cod_triagem
                 ano, mes, sequencia = ultimo_codigo.split('-')
                 ano_atual = str(datetime.datetime.now().year)
-                ano_atual_slice = str(datetime.datetime.now().year)[-2:]
                 mes_atual = str(datetime.datetime.now().month).zfill(2)
                 if ano != ano_atual:
-                    novo_codigo = f"{ano_atual_slice}-{mes_atual}-01"
+                    novo_codigo = f"{ano_atual}-{mes_atual}-01"
                 else:       
                     nova_sequencia = str(int(sequencia) + 1).zfill(len(sequencia))
-                    novo_codigo = f"{ano_atual_slice}-{mes_atual}-{nova_sequencia}"
+                    novo_codigo = f"{ano_atual}-{mes_atual}-{nova_sequencia}"
                     self.initial['cod_triagem'] = novo_codigo
             else:
-                ano_atual = str(datetime.datetime.now().year)[-2:]
+                ano_atual = str(datetime.datetime.now().year)
                 mes_atual = str(datetime.datetime.now().month).zfill(2)
                 ultimo_codigo = f"{ano_atual}-{mes_atual}-01"
                 novo_codigo = ultimo_codigo
