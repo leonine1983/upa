@@ -9,7 +9,7 @@ class CadastraPacienteForm(forms.ModelForm):  # Renomeie a classe do formulário
         widgets = {
             'nome_social': forms.TextInput(attrs={'class': 'form-control text-uppercase bg-primary fs-1'}),
             'codigo_pacient':forms.TextInput(attrs={'class': 'form-control'}),
-            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'DD/MM/AAAA'}),
+            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'DD/MM/AAAA', 'autocomplete': 'off'}),
             'sexo': forms.Select(attrs={'class': 'form-select text-uppercase'}),
             'RG': forms.TextInput(attrs={'class': 'form-control '}),
             'CPF': forms.TextInput(attrs={'class': 'form-control'}),
