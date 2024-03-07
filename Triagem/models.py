@@ -94,6 +94,7 @@ class Tipos_Atendimento(models.Model):
 # Create your models here.
 class triagem(models.Model):
     paciente_triagem = models.OneToOneField(envio_triagem, related_name='rel_envio_triagem', null=False, on_delete=models.PROTECT)
+    passou_por_atend_medico = models.BooleanField(default=False, null=True)
     exames = models.ManyToManyField(Exames_Model, blank=True)
     pressao_arterial_PA = models.FloatField(null=True, blank=True, verbose_name='Pressão arterial (mínima) PA-1')
     pressao_arterial_PA_2 = models.FloatField(null=True, blank=True, verbose_name='Pressão arterial (máxima) PA-2')

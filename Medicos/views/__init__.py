@@ -11,7 +11,9 @@ from .h_perfil_paciente_perfil_completo import *
 from .i_lista_paciente_busca import *
 from .j_chamarPaciente import *
 from .l_cadastroChamad import *
+from .m_aponta_paciente_atendimento import *
 from .importar_CID10 import *
+
 # pastas
 from .salas import *
 from .exames import *

@@ -1,5 +1,5 @@
 {% load custom_filters %}
-<h3 class='fs-4 rounded-top-3 border-bottom mb-2'>Aguardando atendimento: <b>0{{object_list|length}}</b> pacientes.</h3>
+<!--<h3 class='fs-4 rounded-top-3 border-bottom mb-2'>Aguardando atendimento: <b>0{{object_list|length}}</b> pacientes.</h3>-->
 <div class="row gap-0 row ">
     <div class="m-1 col-4 ">
         <button type="submit" onclick="exibe_info()" class="btn btn-secondary p-1 text-center m-auto">
@@ -32,11 +32,12 @@
     <tbody> 
         {% for campo in object_list %}  
             {% if not campo.medico_atendimento.paciente_medico_atendimento %}
+                {% if not campo.passou_por_atend_medico %}
                 <tr class="align-middle"> 
                     <td class="fs-7">
                         <span>{{campo.paciente_triagem}}</span>
                         <!--<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if campo.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div> -->
-                    </td>        
+                    </td>  
                     <td>
                         <i class="fa-regular fa-calendar"></i> {{campo.data_triagem}} <i class="fa-regular fa-clock"></i> {{campo.hora_triagem}}h | {{ campo.hora_triagem|diff_hours }}
                     </td>
@@ -52,6 +53,7 @@
                                                     {% elif campo.classifica_tipo.classifica_tipo == "Azul"  %}
                                                     prosseguir-blue btn-primary
                                                 {% endif %}' href=""> {{campo.classifica_tipo}}</td>   
+                                                
                     <td align="center" href=""><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}} <span class='shadow shadow-sm prosseguir  
                         {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
                             prosseguir-red
@@ -68,6 +70,7 @@
                                     
              
                 </tr> 
+                {% endif %}
                 {% else %}
                 
             {% endif %} 

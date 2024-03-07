@@ -44,6 +44,8 @@
         <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
         <label for="tab1"><i class="icon-bolt"></i>Aguardando Atendimento</label>
 
+        <input type="radio" name="pcss3t" checked  id="tab7"class="tab-content-7 ">
+        <label for="tab7" class='bg-success-subtle'><i class="icon-bolt"></i>Em Atendimento</label>
 
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
         <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
@@ -63,6 +65,11 @@
             <li class="tab-content tab-content-first typography">             
                 <!--Atendimento-->
                 {% include "Medicos/partes_medico.html/atendimentos.html" %}
+                <!--FIM Atendimento-->
+            </li>
+            <li class="tab-content tab-content-7 typography bg-success-subtle">             
+                <!--Atendimento-->
+                {% include "Medicos/partes_medico.html/Em_atendimento.html" %}
                 <!--FIM Atendimento-->
             </li>
          

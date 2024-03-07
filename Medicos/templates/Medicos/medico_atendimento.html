@@ -126,7 +126,7 @@
 
        {% endfor %}
        <hr>
-       <a style='text-align: center' href="{% url 'Medicos:dados do paciente' dados.pk %}"> {{dados.paciente_envio_triagem_id}} <span class='prosseguir 
+       <a style='text-align: center' href="{% url 'Medicos:iniciar_atendimento' dados.pk %}"> {{dados.paciente_envio_triagem_id}} <span class='prosseguir 
               {% if dados.classifica_tipo.classifica_tipo == "Vermelho" %}
               prosseguir-red
               {% elif dados.classifica_tipo.classifica_tipo == "Laranja"  %}
@@ -135,7 +135,7 @@
               prosseguir-green                                            
               {% elif dados.classifica_tipo.classifica_tipo == "Azul"  %}
               prosseguir-azul
-          {% endif %}'> Seguir com o atendimento <i class="fa-regular fa-paper-plane"></i> </span></a>
+          {% endif %}'> Iniciar o atendimento <i class="fa-regular fa-paper-plane"></i> </span></a>
 
           {% endfor %}
 
