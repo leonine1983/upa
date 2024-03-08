@@ -108,7 +108,13 @@ $(document).ready(function() {
                 <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
             </td>
             <td class='text-center'>
-                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.cod_triagem}}</span></a>
+                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}">
+                    <span>
+                        {% if db.cod_triagem %}
+                            {{db.cod_triagem}}
+                            {% else %}
+                        {% endif %}
+                </span></a>
             </td> 
             <td class='text-center'>
                 <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>
