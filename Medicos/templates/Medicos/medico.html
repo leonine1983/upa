@@ -41,10 +41,10 @@
 <p>&nbsp;</p>
 	<!-- tabs -->
     <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 border shadow bg-dark-subtle p-2">
-        <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
+        <input type="radio" name="pcss3t" {% if checked5 %}{% else %}checked{% endif %}  id="tab1"class="tab-content-first">
         <label for="tab1"><i class="icon-bolt"></i>Aguardando Atendimento</label>
 
-        <input type="radio" name="pcss3t" checked  id="tab7"class="tab-content-7 ">
+        <input type="radio" name="pcss3t"   id="tab7"class="tab-content-7 ">
         <label for="tab7" class='bg-success-subtle'><i class="icon-bolt"></i>Em Atendimento</label>
 
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
@@ -53,7 +53,7 @@
         <input type="radio" name="pcss3t" id="tab3" class="tab-content-3 ">
         <label for="tab3" class='bg-primary-subtle'><i class="icon-cogs"></i>Atendimentos Finalizados </label>
         {% if not nao_finalizado == '1' %}
-            <input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
+            <input type="radio" name="pcss3t" id="tab5" {{checked5}} class="tab-content-last">
             <label for="tab5"  class='bg-danger-subtle'><i class="icon-globe"></i>0{{atend_aguarda_final|length}} - Pacientes não finalizados </label>
         {% endif %}
         <!--Fora de horari-->

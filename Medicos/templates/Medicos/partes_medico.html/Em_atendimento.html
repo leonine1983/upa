@@ -1,5 +1,6 @@
 {% load custom_filters %}
 <!--<h3 class='fs-4 rounded-top-3 border-bottom mb-2'>Aguardando atendimento: <b>0{{object_list|length}}</b> pacientes.</h3>-->
+
 <div class="row gap-0 row ">
     <div class="m-1 col-4 ">
         <button type="submit" onclick="exibe_info()" class="btn btn-secondary p-1 text-center m-auto">
@@ -65,9 +66,10 @@
                             {% else %}
                                 bg-primary
                         {% endif %}'
-                    > Seguir com o atendimento <i class="fa-regular fa-paper-plane "></i> </span></a></td>   
-                                    
-             
+                    > Seguir com o atendimento <i class="fa-regular fa-paper-plane "></i> </span></a> 
+
+                
+                </td> 
                 </tr> 
                 {% endif %}
                 {% else %}
