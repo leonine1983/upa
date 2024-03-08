@@ -32,7 +32,7 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
             object_list = envio_triagem.objects.filter(data_envio_triagem = date_hoje) & envio_triagem.objects.exclude(triagem_concluida = 1)
 
         return object_list
-           
-
+    
+   
 
 

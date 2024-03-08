@@ -1,5 +1,6 @@
 {% load custom_filters %}
 <!--<h3 class='fs-4 rounded-top-3 border-bottom mb-2'>Aguardando atendimento: <b>0{{object_list|length}}</b> pacientes.</h3>-->
+
 <div class="row gap-0 row ">
     <div class="m-1 col-4 ">
         <button type="submit" onclick="exibe_info()" class="btn btn-secondary p-1 text-center m-auto">
@@ -7,10 +8,9 @@
             <i class="fa-solid fa-angles-down"></i>
         </button>
         <ul id='info' class="text-left border border-secondary m-0 mx-3 rounded-bottom-3 p-2 bg-secondary-subtle" style="margin-top: -0.3rem!important">
-            <li class="text-left">Na tabela abaixo, temos um dos pacientes aguardando atendimento.</li>
             <li class="text-left">À medida que o atendimento a um paciente for finalizado, o nome do próximo paciente é exibido na tabela abaixo.</li>
             <li>O nome de cada paciente é exibido de acordo com a classificação de risco, atribuido a ele durante o processo de TRIAGEM.</li>
-            <li> Para iniciar o atendimento, clique no botão PROSSEGUIR</li>
+            <li> Para continuar o atendimento, clique no botão PROSSEGUIR</li>
         </ul>
     </div>
     <div class='col row row-cols-3   mx-3 rounded-start-5 m-1'>
@@ -32,7 +32,7 @@
     <tbody> 
         {% for campo in object_list %}  
             {% if not campo.medico_atendimento.paciente_medico_atendimento %}
-                {% if not campo.passou_por_atend_medico %}
+                {% if campo.passou_por_atend_medico %}
                 <tr class="align-middle"> 
                     <td class="fs-7">
                         <span>{{campo.paciente_triagem}}</span>
@@ -66,9 +66,10 @@
                             {% else %}
                                 bg-primary
                         {% endif %}'
-                    > Seguir com o atendimento <i class="fa-regular fa-paper-plane "></i> </span></a></td>   
-                                    
-             
+                    > Seguir com o atendimento <i class="fa-regular fa-paper-plane "></i> </span></a> 
+
+                
+                </td> 
                 </tr> 
                 {% endif %}
                 {% else %}

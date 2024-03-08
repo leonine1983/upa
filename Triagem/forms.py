@@ -16,7 +16,7 @@ class TriagemEnfermariaForm(forms.ModelForm):
 class TriagemEnfermariaUpdateForm(forms.ModelForm):
     class Meta:
         model = triagem
-        fields = ['frequencia_cardiaca_FC', 'pressao_arterial_PA_2', 'pressao_arterial_PA', 'frequencia_respiratoria_FR',
+        fields = ['frequencia_cardiaca_FC','pressao_arterial_PA', 'pressao_arterial_PA_2',  'frequencia_respiratoria_FR',
                  'saturacao_de_oxigenio_SPO2', 'hemoglicoteste_HGT', 'temperatura_TEMP', 'peso', 'altura',
                 'observacao']
     
@@ -25,15 +25,16 @@ class TriagemEnfermariaUpdateForm(forms.ModelForm):
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
         widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
     )
-    pressao_arterial_PA_2 = forms.FloatField(
-        label='Pressão Arterial DIASTÓLICA:',
-        #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
-        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase '}),
-    )
+    
     pressao_arterial_PA = forms.FloatField(
         label='Pressão Arterial SISTÓLICA:',
         #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
         widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase'}),
+    )
+    pressao_arterial_PA_2 = forms.FloatField(
+        label='Pressão Arterial DIASTÓLICA:',
+        #queryset=Pessoas.objects.none(),  # Query to fetch all Pessoas objects
+        widget=forms.NumberInput(attrs={'class': ' p-1 mb-3 text-uppercase '}),
     )
     frequencia_respiratoria_FR = forms.FloatField(
         label='Frequência Respiratória (FC):',
@@ -94,8 +95,8 @@ class TriagemEnfermariaUpdateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['frequencia_cardiaca_FC'].required = True
-        self.fields['pressao_arterial_PA_2'].required = True
         self.fields['pressao_arterial_PA'].required = True
+        self.fields['pressao_arterial_PA_2'].required = True
         self.fields['frequencia_respiratoria_FR'].required = True
         self.fields['saturacao_de_oxigenio_SPO2'].required = True
         self.fields['hemoglicoteste_HGT'].required = True
@@ -123,10 +124,6 @@ class TriagemEnfermaria_Alergias_UpdateForm(forms.ModelForm):
         }
         
        
-
-
-    
-
 class Classifica_form(forms.ModelForm):
 
     classifica_tipo = forms.CharField(

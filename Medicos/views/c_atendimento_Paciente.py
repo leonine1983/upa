@@ -47,15 +47,7 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         else:
             chamado = False
             exibe_b = False
-
-        # Inicializar a variável exibe_b
-        print(f'esse é o chamado : {chamado}')
-        print(f'esse é o exibe_b : {exibe_b}')
-        print(f'esse o id do chamado: {exibe_id}')
-
            
-            
-        #context['paciente_medico'] = Medico_atendimento.objects.filter(pk=pk)        
         context['triagem'] = triagem.objects.filter(id = pk)
         context['chamado'] = chamado
         context['exibe_b'] = exibe_b  
@@ -89,7 +81,7 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
                 medico_group = "Medico"
             
             #self.object.medico_nome += f' | {medico_group} | CRM nº: {crm}'
-            #self.object.medico_nome = self.request.user.username  # Substitua 'username' pelo campo que contém o nome do médico no modelo User
+            #self.object.medico_nome = self.request.user.username  
         
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
