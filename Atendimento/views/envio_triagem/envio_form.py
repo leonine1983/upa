@@ -44,7 +44,7 @@ class Envio_Form(forms.ModelForm):
             else:
                 ano_atual = str(datetime.datetime.now().year)[-2:]
                 mes_atual = str(datetime.datetime.now().month).zfill(2)
-                ultimo_codigo = f"{ano_atual}-{mes_atual}-3520"
+                ultimo_codigo = f"{ano_atual}-{mes_atual}-01"
                 novo_codigo = ultimo_codigo
                 self.initial['cod_triagem'] = novo_codigo
                 return
