@@ -204,7 +204,7 @@
                     {% for item in pacientes_por_sexo %}
                         <tr >
                             <th style="text-align: center; background-color:rgb(177, 177, 175);">
-                                
+                                {{ item.paciente_envio_triagem__sexo__nome_genero }}
                             </th>
                             <th class="text-center">
                                 {{ item.total }}
