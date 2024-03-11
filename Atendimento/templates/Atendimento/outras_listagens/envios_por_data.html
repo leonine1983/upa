@@ -145,12 +145,84 @@
             <img src="{% static "upa24.png" %}" alt="" sizes="" srcset="" style='width:9.2rem; margin-left:1rem'>
         </div>
 
-        <h1 style='font-size:1.2rem; margin-top:2rem'>Relatório de Ingresso de Pacientes (Recepção)</h1>
+        <h1 style='font-size:1.2rem; margin-top:2rem'>Relatório de Ingresso de Pacientes (Recepção) </h1>
         <hr>
+        <h2>{{total_paciente}} pacientes em {{data}}</h2>
+        <!--Quantidade de paciente por idade-->
+        <div style="display: flex;">
+            {% for faixa_etaria in pacientes_por_idade %}
+            <div style="border: 0.1rem solid #666;">
+                <div style="text-align: center; background-color:rgb(221, 245, 133); font-size: 0.7rem;padding: 0.25rem">
+                    {{ faixa_etaria.faixa_etaria }}
+                </div>
+                <div style="text-align: center">
+                    {{ faixa_etaria.total }}
+                </div>
+            </div>
+            {% endfor %}
+        </div> 
+        <!--fim Quantidade de paciente por idade-->
+        <div style="display: flex;gap: 1%;margin-top: 0.3rem;">
+            <div style="width: auto;font-size:0.8rem">
+                <!--Cidades-->
+                <table>
+                    <thead>
+                        <tr style="text-align: center; background-color:rgb(221, 245, 133);">
+                            <td class="text-center">Cidade</td>
+                            <td class="text-center">Quant.</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in pacientes_por_localidade %}
+                            <tr >
+                                <th style="text-align: center; background-color:rgb(177, 177, 175);">
+                                    {{ item.paciente_envio_triagem__cidade__cidade }}
+                                </th>
+                                <th class="text-center">
+                                    {{ item.total }}
+                                </th>
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!--Idade-->
+            <div style="width: auto;font-size:0.8rem">
+                           
+            </div>
+
+            <!--Sexo-->
+            <div style="width: auto;font-size:0.8rem">
+                <table>
+                    <thead>
+                        <tr style="text-align: center; background-color:rgb(221, 245, 133);">
+                            <td class="text-center">Sexo</td>
+                            <td class="text-center">Quant.</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in pacientes_por_sexo %}
+                        <tr >
+                            <th style="text-align: center; background-color:rgb(177, 177, 175);">
+                                
+                            </th>
+                            <th class="text-center">
+                                {{ item.total }}
+                            </th>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
         
+
+
 
         {% for d in object_list %}
             <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
+                
                 <div style="background-color: gray; padding: 0.2rem;"><b>Informações Pessoais do Paciente</b></div>
                     <Table style="font-size: 0.7rem!important;">
                         <thead>
