@@ -38,7 +38,8 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         # Processar a queryset para obter contagens
-        pacientes_por_localidade = self.object_list.values('paciente_envio_triagem__cidade__cidade').annotate(total=Count('id'))
+        pacientes_por_localidade = self.object_list.values('paciente_envio_triagem__bairro__bairro_nome').annotate(total=Count('id')).filter(paciente_envio_triagem__cidade__cidade='Vera Cruz')
+        pacientes_por_cidade = self.object_list.values('paciente_envio_triagem__cidade__cidade').annotate(total=Count('id'))
         pacientes_por_sexo = self.object_list.values('paciente_envio_triagem__sexo__nome_genero').annotate(total=Count('id'))
         
 

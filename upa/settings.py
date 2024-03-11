@@ -53,8 +53,6 @@ INSTALLED_APPS = [
    
 ]
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     # SessionMiddleware é o responsável gerenciar as sessões de usuarios
@@ -109,10 +107,6 @@ DATABASES = {
         'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
-
-
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -225,8 +219,6 @@ CSRF_COOKIE_SECURE = False
 LOGIN_URL = 'Access_Login:access_login_page'
 
 """
-
-
 # Definições de seguranção para sessões. PERSONALIZADAS POR ROGERIO
 
 # Defina o mecanismo de armazenamento de sessão para 'django.contrib.sessions.backends.cache' ou 'django.contrib.sessions.backends.db' conforme sua preferência.
