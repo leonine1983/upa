@@ -34,4 +34,6 @@ urlpatterns = [
     path('triagem/Enfermeros_e_Tec/atualiza/<int:pk>', views.EnfermUpdateView.as_view(), name='user_atualiza'),
     path('triagem/Enfermeros_e_Tec/deleta/<int:pk>', views.DeleteUserDelet.as_view(), name='user_delete'),
    
+   # Paciente não atendeu ao chamdo
+   path('triagem/chama_paciente/n_atende/<int:pk>', views.paciente_nao_atende, name='n_atendeu')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
