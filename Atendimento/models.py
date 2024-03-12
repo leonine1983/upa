@@ -171,7 +171,6 @@ class envio_triagem(models.Model):
     retornou_em_menos_de_48_horas =  models.BooleanField(default=False, null=False)
     horas48 =  models.BooleanField(default=False, null=False)
  
-
     class Meta:
         ordering = ['horario_triagem']
         permissions = [('Acesso_permitido_envio_Tri', 'Acesso permitido para envio à Fila de Triagem')]

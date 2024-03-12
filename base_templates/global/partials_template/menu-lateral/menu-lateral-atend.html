@@ -115,6 +115,7 @@
 
         <!--Visto por Admin, por Medicos-->
         {% if  grupo_usuario == 'group_UPA-Admin' %}
+        <!--
             <li>
                 <a href="{% url 'Atendimento:pagina-inicial' %}">  
                                     
@@ -123,7 +124,7 @@
                         Resumo Gráfico
                     </span>
                 </a>              
-            </li>
+            </li>-->
             <li class="has-subnav">
                 <a href=" {% url 'Atendimento:listagem_envio' %} ">
                 <i class="fa fa-solid fa-list-check fa-2x"></i>

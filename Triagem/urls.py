@@ -16,8 +16,6 @@ urlpatterns = [
     name='triagem-enfermaria-alergia-update'
 ),
 
-
-    
     path('classifica_risco/<int:pk>', triagem_classifica_Risco_update.as_view(), name='triagem_classifica_Risco_update'),
     path('etiqueta/<int:pk>', views.EtiquetaView.as_view(), name='triagem_Etiqueta'),    
     # Atendimento especializado
@@ -26,7 +24,6 @@ urlpatterns = [
     path('atend_especializado/retorno/<int:pk>', views.Atend_especializado_UpdateView.as_view(), name='triagem_especializada_UpdateView'),
     path('triagem_concluida/<int:pk>', views.triagem_concluida_Update.as_view(), name='triagem_concluida'),
     path('triagem/delete/<int:pk>', Triagem_Delete.as_view(), name='triagem-delete'),
-
 
     # Classifica risco
     path('classifica-risco', Classifica_risco_view.as_view(), name='classifica-risco'),

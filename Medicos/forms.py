@@ -30,9 +30,6 @@ class Prescreve_Medicamentos_fomr(forms.ModelForm):
             'atestado': forms.NumberInput(attrs={'type': 'range', 'min': 0, 'max': 30, 'step': 1, 'oninput': 'updateTextInput(this.value)'}),
         }
 
-     
-
-
 
 class ChamarPacienteForm(forms.Form):
     class Meta:

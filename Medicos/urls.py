@@ -8,9 +8,7 @@ urlpatterns = [
     path('', views.medico_protuario_view_, name='medico_prontuario'),
     #path('', views.medico_prontuario_view.as_view(), name='medico_prontuario'),
     path('atendimento/<int:pk>', views.medico_atendimento_view, name='medico_atendimento'), 
-
     # Chama Paciente
-    
     path('iniciar-atendimento/<int:pk>/', views.iniciar_atendimento_view, name='iniciar_atendimento'),
     path('medico_chama_paciente/<int:pk>/', views.MedicoChamaPacienteView.as_view(), name='medico_chama_paciente'),
     path('enfermeira_chama_paciente/<int:pk>/', views.EnfermeiroChamaPacienteView.as_view(), name='enfermagem_chama_paciente'),
@@ -18,7 +16,6 @@ urlpatterns = [
     path('enfermagem_avisa_atendimentoo/<int:pk>/', views.Update_chama_usuario_triagem, name='enfermagem_avisa_pacientee'),
     path('medico_avisa_atendimentoo/<int:pk>/', views.Update_chama_usuario_pos_atendimento, name='medico_avisa_paciente_pos_atendimento'),
 
-    
     #perfil completo do paciente / historico
     path('medico/lista_historico_paciente/', views.paciente_lista_historico.as_view(), name='lista_paciente_medico'),  
     path('medico/historico_paciente/<int:pk>', views.paciente_perfil_completo, name='perfil_completo_paciente'),  
@@ -58,7 +55,6 @@ urlpatterns = [
     path('medicos/Salas/profissional/update/<int:pk>', views.VinculaProfissiona_sala_update.as_view(), name='salasProfissionalUpdate' ),
     path('medicos/Salas/profissional/delete/<int:pk>', views.DeleteProfissionaSala_Delet.as_view(), name='salasProfissionalDelete' ),
   
-
     path('cadastrar-chamada/', views.cadastrar_chamada, name='cadastrar_chamada'),
     # importar csv para cid 10
     path('importar_csv/', views.import_csv, name='importa_csv'),
