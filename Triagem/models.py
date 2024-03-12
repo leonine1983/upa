@@ -111,7 +111,11 @@ class triagem(models.Model):
     #Campo a serem utilizado para filtrar os pacientes na triagem
     hora_envio_a_classificao = models.TimeField(null=True, blank=True)
     data_envio_a_classificao = models.DateField(null=True, blank=True)
-    # -------------------------------------------------------------------
+
+    # Cotabilização de chamadas -------------------------------------
+    respondeu_ao_chamado = models.BooleanField(default=True, null=True)
+    chamadas_contabilizadas = models.IntegerField(default=0, null=True)
+    # Fim Cotabilização de chamadas -------------------------------------
 
     classifica_tipo = models.ForeignKey(Classifica_risco_model, null=True, on_delete=models.PROTECT, verbose_name='Classificação de Emergência')
     observacao = RichTextField(null=True, blank=True)

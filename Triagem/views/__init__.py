@@ -10,3 +10,4 @@ from .atend_especializado import *
 from .atend_especializado_ListView import *
 from .atend_especializado_UpdateView import *
 from .triagem_delete import *
+from .nao_atendeu_chamado import *
