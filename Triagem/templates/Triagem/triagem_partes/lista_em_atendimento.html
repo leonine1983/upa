@@ -13,24 +13,26 @@
     <tbody>
       {% for pac in paciente_na_triagem  %}
         {% if  conteudo == 'paciente_na_triagem' %}
-        <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
-          <td>
-            {% if pac.paciente_triagem.horas48 %}<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 "><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</div>{% endif %}
-            {{pac.paciente_triagem}}
-          </td>
-          <td>
-            {{pac.data_triagem}} || {{pac.hora_triagem}}
-          </td>
-          
-          <td>
-            {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
-          </td>
-          
-          <td >
-            <a class='btn btn-sm btn-secondary' href="{% url 'Triagem:triagem-enfermaria-update' pac.id %}">Continua atendimento</a>                
-            <a class='btn btn-sm btn-danger' href="{% url 'Triagem:triagem-delete' pac.id %}">Excluir da triagem</a>
-          </td>
-        </tr>
+          {% if pac.respondeu_ao_chamado %}
+          <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
+            <td>
+              {% if pac.paciente_triagem.horas48 %}<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 "><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</div>{% endif %}
+              {{pac.paciente_triagem}}
+            </td>
+            <td>
+              {{pac.data_triagem}} || {{pac.hora_triagem}}
+            </td>
+            
+            <td>
+              {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
+            </td>
+            
+            <td >
+              <a class='btn btn-sm btn-secondary' href="{% url 'Triagem:triagem-enfermaria-update' pac.id %}">Continua atendimento</a>                
+              <a class='btn btn-sm btn-danger' href="{% url 'Triagem:triagem-delete' pac.id %}">Excluir da triagem</a>
+            </td>
+          </tr>
+          {% endif %}
         {% else %}
         <tr>
           <td></td>
