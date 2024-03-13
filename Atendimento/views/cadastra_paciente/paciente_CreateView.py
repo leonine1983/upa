@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django import forms
 import uuid
 import random
+from django.contrib import messages
 
 class PacienteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -55,9 +56,42 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
     form_class = PacienteForm
     template_name = 'Atendimento/cadastro_paciente.html'
 
+    """
     def form_valid(self, form):
         self.object = form.save()
+        return super().form_valid(form)"""
+    
+    def form_valid(self, form):
+        # Verifica se o RG ou CPF já existe no banco de dados
+        rg_existente = ficha_de_atendimento.objects.filter(RG=form.cleaned_data['RG']).exists()
+        cpf_existente = ficha_de_atendimento.objects.filter(CPF=form.cleaned_data['CPF']).exists()
+
+        if rg_existente:
+            messages.error(self.request, 'Já existe um paciente cadastrado com este RG.')
+        if cpf_existente:
+            messages.error(self.request, 'Já existe um paciente cadastrado com este CPF.')
+
+        # Se RG ou CPF já existem, renderize o template novamente com uma mensagem de erro e os dados do formulário
+        if rg_existente or cpf_existente:
+            return render(self.request, self.template_name, {'form': form})
+
+        # Se nenhum RG ou CPF já existe, continue com a criação do paciente
+        self.object = form.save()
         return super().form_valid(form)
+
+    def get_success_url(self):
+        url = reverse_lazy('Atendimento:envio_paciente_a_triagem_2', args=[self.object.pk])
+        print('ID do objeto criado:', self.object.pk)
+        return url
+    
+    #Se o usuario nao estiver logado
+    login_url = reverse_lazy('Access_Login:access_login_page')
+    redirect_field_name = 'next'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return redirect (self.login_url + '?next=' + request.path)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         url = reverse_lazy('Atendimento:envio_paciente_a_triagem_2', args=[self.object.pk])
