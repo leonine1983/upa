@@ -31,7 +31,7 @@
           {% if exibe_id is not None %}
           <a href="{% url 'Medicos:enfermagem_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
           <!--Avisa que o paciente não atendeu a chamada-->
-          <a href="{% url 'Triagem:n_atendeu' t.pk %}" title="Informar que o paciente não atendeu ao chamado" class='floating-button bg-secondary m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
+          <a href="{% url 'Triagem:n_atendeu' t.pk %}" title="Informar que o paciente não atendeu ao chamado" class='floating-button bg-secondary m-2 rounded-5'><i class="fa-solid fa-comment-slash"></i></a>          
           
           {% endif %}
         {% else %}

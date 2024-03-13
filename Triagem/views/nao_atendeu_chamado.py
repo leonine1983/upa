@@ -1,4 +1,5 @@
 from Triagem.models import triagem
+from Medicos.models import Chamar_P_para_atendimento
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse
@@ -17,6 +18,9 @@ def paciente_nao_atende (request, pk):
     paciente_triagem.save()
     messages.info(request, "O paciente não respondeu ao chamado")
 
-    return redirect(reverse("Triagem:triagem-enfermaria-update", kwargs={'pk': pk}))
+    # Exclui os registros de chamado do paciente ativo
+    Chamar_P_para_atendimento.objects.filter(nome_paciente=paciente_triagem).delete()
+
+    return redirect(reverse("Triagem:triagem-enfermaria"))
 
     

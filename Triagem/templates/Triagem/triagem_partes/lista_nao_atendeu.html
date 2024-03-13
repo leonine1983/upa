@@ -1,0 +1,45 @@
+<div class='border bg-danger-subtle shadow shadow-sm p-3'>
+    <div class="d-flex">
+      <h1 class='h2 h-100 bg-purple mt-1 p-2'><i class="fa-solid fa-comment-slash"></i> Não atendeu ao chamado</h1>
+      <h2 class='h3 h-100 bg-purple mt-3 p-2'>( Espere um tempo para chama-los novamente )</h2>
+    </div>
+    <table class='table table-light table-striped shadow'>
+      <thead >
+        <tr>
+          <th class="bg-secondary text-center">Nome</th>
+          <th class="bg-secondary text-center">Data e horário de inicio</th>                
+          <th class="bg-secondary text-center">Mãe</th>                       
+          <th class="bg-secondary text-center">Ação</th> 
+        </tr>
+      </thead>
+      <tbody>
+        {% for pac in paciente_na_triagem  %}
+          {% if not pac.respondeu_ao_chamado %}
+          {{pac.respondeu_ao_chamado}} cout {{chamadas_contabilizadas}}
+
+            <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
+              <td>
+                {% if pac.paciente_triagem.horas48 %}<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 "><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</div>{% endif %}
+                {{pac.paciente_triagem}}
+              </td>
+              <td>
+                {{pac.data_triagem}} || {{pac.hora_triagem}}
+              </td>
+              <td>
+                {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
+              </td>
+              
+              <td >
+                <a class='btn btn-sm btn-secondary' href="{% url 'Triagem:triagem-enfermaria-update' pac.id %}">Continua atendimento</a>                
+                <!--<a class='btn btn-sm btn-danger' href="{% url 'Triagem:triagem-delete' pac.id %}">Excluir da triagem</a>-->
+              </td>
+            </tr>
+          {% endif %}
+        {% empty %}
+        <tr>
+          <td colspan="4">Nenhum paciente encontrado.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table> 
+</div>
