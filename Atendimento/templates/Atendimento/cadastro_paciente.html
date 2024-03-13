@@ -40,6 +40,31 @@
             cursor: pointer;
             
         }
+
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .modal-content button {
+        margin: 5px;
+    }
      </style>
 
 {% endblock css %}  
@@ -68,109 +93,11 @@
             <i id="fa-hospital-user" class="fa-duotone fa-hospital-user m-1"></i> 
             Cadastro de pacientes
         </div>
-    {% endif %}        
-    <div class="form-body">        
-        {% csrf_token %}                
-        <div class="form-group">
-            {{ form.nome_social.label_tag }}
-            {{ form.nome_social }}
-            {{ form.nome_social.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.codigo_pacient.label_tag }}
-            {{ form.codigo_pacient }}
-            {{ form.codigo_pacient.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.data_nascimento.label_tag }}
-            {{ form.data_nascimento }}
-            {{ form.data_nascimento.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.sexo.label_tag }}
-            {{ form.sexo }}
-            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar sexo' href="{% url 'Atendimento:cadastra_sexo' %}"></a></p>
-            {{ form.sexo.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.etnia.label_tag }}
-            {{ form.etnia }}
-            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar etnia' href="{% url 'Atendimento:cadastra_etnia' %}"></a></p>
-            {{ form.etnia.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.RG.label_tag }}
-            {{ form.RG }}
-            {{ form.RG.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.CPF.label_tag }}
-            {{ form.CPF }}
-            {{ form.CPF.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.nacionalidade.label_tag }}
-            {{ form.nacionalidade }}
-            {{ form.nacionalidade.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.rua.label_tag }}
-            {{ form.rua }}
-            {{ form.rua.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.bairro.label_tag }}
-            {{ form.bairro }}
-            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar bairro' href="{% url 'Atendimento:cadastra_bairro' %}"></a></p>
-            {{ form.bairro.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.cidade.label_tag }}
-            {{ form.cidade }}
-            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar cidade' href="{% url 'Atendimento:cadastra_cidade' %}"></a></p>
-            {{ form.cidade.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.estado.label_tag }}
-            {{ form.estado }}
-            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar estado' href="{% url 'Atendimento:cadastra_estado' %}"></a></p>
-            {{ form.estado.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.pais.label_tag }}
-            {{ form.pais }}
-            <p><a class="fa-sharp fa-solid fa-circle-plus rounded-5 shadow " title='Adicionar pais' href="{% url 'Atendimento:cadastra_pais' %}"></a></p>
-            {{ form.pais.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.CEP.label_tag }}
-            {{ form.CEP }}
-            {{ form.CEP.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.nome_mae.label_tag }}
-            {{ form.nome_mae }}
-            {{ form.nome_mae.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.responsavel.label_tag }}
-            {{ form.responsavel }}
-            {{ form.responsavel.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.tel.label_tag }}
-            {{ form.tel }}
-            {{ form.tel.errors }}
-        </div>
-        <div class="form-group">
-            {{ form.cartao_sus.label_tag }}
-            {{ form.cartao_sus }}
-            {{ form.cartao_sus.errors }}
-        </div>       
-    </div>  
+    {% endif %}    
+    <!-- Form para cadastrar os pacientes-->    
+    {% include "Atendimento/partes_cadastro_pacientes/parte_form_cadastra_paciente.html" %}
+    <!-- end Form para cadastrar os pacientes-->  
 
-    <button class='button-salvar' type="submit" onclick="limpaDados()">Salvar</button>    
-</form>
 {% else %}
 <div class='m-5 fs-3'>
     <h3 class='h1'><i class="fa-thin fa-circle-exclamation text-danger"></i> Prezado usuário,</h3>

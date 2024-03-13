@@ -1,0 +1,66 @@
+<style>
+    /* Estilos de modal simples para fins de demonstração */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .modal-content button {
+        margin: 5px;
+    }
+</style>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <h1 class="text-center h3">Olá {% if request.user.first_name  %}{{request.user.first_name}} {{request.user.last_name}} {% else %}<span class='text-capitalize'>{{request.user}}</span>{% endif %}! Deseja iniciar o formulário limpo ou com informações anteriores?</h1>
+        <div class="d-flex justify-content-center">
+            <button id="cleanFormBtn" class='btn btn-sm btn-primary' type='button'>Limpar Formulário</button>
+            <button id="keepFormBtn" class='btn btn-sm btn-secondary'>Manter Informações Anteriores</button>
+        </div>
+    </div>
+</div>
+<script>
+    // Função para esconder o modal
+    function hideModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    // Função a ser executada quando o usuário escolher limpar o formulário
+    function cleanForm() {
+        // Lógica para limpar o formulário
+        console.log("Formulário limpo!");
+        hideModal();
+    }
+
+    // Função a ser executada quando o usuário escolher manter informações anteriores
+    function keepForm() {
+        // Lógica para manter as informações anteriores no formulário
+        console.log("Manter informações anteriores!");
+        hideModal();
+    }
+
+    // Adicionando eventos aos botões do modal
+    document.getElementById("cleanFormBtn").addEventListener("click", cleanForm);
+    document.getElementById("keepFormBtn").addEventListener("click", keepForm);
+
+    // Mostrar o modal quando a página for carregada
+    window.addEventListener('load', function() {
+        document.getElementById("myModal").style.display = "block"; // Mostra o modal
+    });
+</script>

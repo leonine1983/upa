@@ -145,6 +145,7 @@ class ficha_de_atendimento(models.Model):
     conteudo_alergia = models.TextField(max_length=500, null=True, blank=True, default='Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)')
     comorbidades = models.CharField(max_length=3, default='0', choices= choices )
     conteudo_comorbidades = models.TextField(max_length=500, null=True, blank=True, default='Não possui comobirdades (Para tornar editável essa área, é necessário informar que o paciente possui comobirdades)')
+    nome_recepcionista = models.CharField(max_length=40, null=True, default='')
     
     class Meta:
         ordering = ['nome_social']          
@@ -170,6 +171,7 @@ class envio_triagem(models.Model):
     data_triagem_concluida = models.DateField(auto_now=True, null=True)
     retornou_em_menos_de_48_horas =  models.BooleanField(default=False, null=False)
     horas48 =  models.BooleanField(default=False, null=False)
+    prioridade = models.CharField(max_length=3, default='0', choices= choices )
  
     class Meta:
         ordering = ['horario_triagem']
