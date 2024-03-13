@@ -113,6 +113,7 @@
                     <td class="top center fs-7"><strong>SUS</strong></td>
                     <td class="top center fs-7"><strong>Alergias</strong></td>
                     <td class="top center fs-7"><strong>Comorbidades</strong></td>
+                    <td class="top center fs-7"><strong>Resp. Cadastro</strong></td>
                     <td class="top center fs-7" colspan="2" ><strong>Atualizar</strong></td>
                     </tr>
                 </thead> 
@@ -144,6 +145,7 @@
                             {% else %} 
                             <td align="center" class="text-danger">SIM</td>
                         {% endif %}
+                        <td align="center"> <span class='text-capitalize'>{{campo.nome_recepcionista}}</span> </td>                
                         <td align="center"> <a href="{% url 'Atendimento:atualizar-paciente' campo.pk   %}" class="editar fa fa-check-circle" title="Editar"></a> </td>                
                     </tr>       
                     

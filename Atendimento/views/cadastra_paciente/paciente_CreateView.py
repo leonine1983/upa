@@ -20,6 +20,7 @@ class PacienteForm(forms.ModelForm):
         self.fields['codigo_pacient'].initial = codigo_aleatorio
         #self.fields['codigo_pacient'].widget.attrs['disabled'] = 'disabled'
         self.fields['codigo_pacient'].required = False
+        
 
     def gerar_codigo_aleatorio(self):
         codigo_inteiro = random.randint(0, 99999)
@@ -28,7 +29,7 @@ class PacienteForm(forms.ModelForm):
 
     class Meta:
         model = ficha_de_atendimento
-        fields = ['nome_social', 'codigo_pacient', 'data_nascimento', 'sexo', 'etnia', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado', 'pais', 'CEP', 'nome_mae', 'responsavel', 'tel', 'cartao_sus']
+        fields = ['nome_social', 'codigo_pacient', 'data_nascimento', 'sexo', 'etnia', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado', 'pais', 'CEP', 'nome_mae',  'tel', 'cartao_sus']
 
         widgets = {
             'nome_social': forms.TextInput(attrs={'class': 'form-control '}),
@@ -62,6 +63,11 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
         return super().form_valid(form)"""
     
     def form_valid(self, form):
+        # Definir o nome do responsavel pelo cadastro do paciente
+        if self.request.user.first_name:
+            form.instance.nome_recepcionista = f"{self.request.user.first_name} {self.request.user.last_name}"
+        else:
+            form.instance.nome_recepcionista = self.request.user.username
         # Verifica se o RG ou CPF já existe no banco de dados
         rg_existente = ficha_de_atendimento.objects.filter(RG=form.cleaned_data['RG']).exists()
         cpf_existente = ficha_de_atendimento.objects.filter(CPF=form.cleaned_data['CPF']).exists()
