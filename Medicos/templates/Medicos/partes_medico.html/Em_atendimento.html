@@ -33,8 +33,21 @@
         {% for campo in object_list %}  
             {% if not campo.medico_atendimento.paciente_medico_atendimento %}
                 {% if campo.passou_por_atend_medico %}
-                <tr class="align-middle"> 
-                    <td class="fs-7">
+                <tr class="align-middle" {% if campo.paciente_triagem.prioridade == '1'  %} style="border-top:0.13rem solid #800080 !important;border-bottom:0.13rem solid #800080 !important;"  {% endif %}> 
+                    <td class="fs-7" {% if campo.paciente_triagem.prioridade == '1'  %} style="border-left:0.13rem solid #800080 !important;"  {% endif %}>
+                        <div class='row row-cols-2'>
+                            {% if campo.paciente_triagem.horas48 %}
+                                <div id="retorned" class="col-4 bg-danger text-light p-1 px-2" style="margin-top: -2%">Retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></div>
+                            {% endif %}
+                            {% if campo.paciente_triagem.prioridade == '1'  %}
+                                <div id="retorned" class="col-8 text-light  p-1 px-2" style="background:#800080;margin-top: -2%">
+                                    <i class="fa-solid fa-triangle-exclamation"></i> 
+                                    <span class='uppercase'>Prioridade</span> 
+                                    <span class='fs-7 me-2'>( Maiores informações: <i class="fa-solid fa-user-nurse"></i> Enfermeiro(a): 
+                                        <span class='text-capitalize'>{% if campo.nome_da_enfermeira == "" %} {{campo.nome_da_enfermeira}}{% else %} Usou login Admin {% endif %}</span>)</span> 
+                                </div>
+                            {% endif %}
+                        </div>
                         <span>{{campo.paciente_triagem}}</span>
                         <!--<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">{% if campo.paciente_triagem.retornou_em_menos_de_48_horas %}<i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas{% endif %}</div> -->
                     </td>  
@@ -54,7 +67,7 @@
                                                     prosseguir-blue btn-primary
                                                 {% endif %}' href=""> {{campo.classifica_tipo}}</td>   
                                                 
-                    <td align="center" href=""><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}} <span class='shadow shadow-sm prosseguir  
+                    <td align="center" href="" {% if campo.paciente_triagem.prioridade == '1'  %} style="border-right:0.13rem solid #800080 !important;"  {% endif %}><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}} <span class='shadow shadow-sm prosseguir  
                         {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}
                             prosseguir-red
                             {% elif campo.classifica_tipo.classifica_tipo == "Laranja"  %}

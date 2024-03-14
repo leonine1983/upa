@@ -8,7 +8,18 @@
                     {% with hours=hours_diff|slice:":1" %}
                         {% if hours|add:"0" >= 1 %}
                             <div>
-                                <div class="row border m-1 p-1 middle">
+                                <div class="row border m-1 p-1 middle" {% if campo.paciente_triagem.prioridade == '1'  %} style="border:0.1rem solid #800080 !important;"  {% endif %}>
+                                    {% if campo.paciente_triagem.horas48 %}
+                                        <div id="retorned" class="col-4 bg-danger text-light p-1 px-2" style='margin-top:-0.3%' >Retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></div>
+                                    {% endif %}
+                                    {% if campo.paciente_triagem.prioridade == '1'  %}
+                                        <div id="retorned" class="col-8 text-light  p-1 px-2" style="background:#800080;margin-top:-0.3%">
+                                            <i class="fa-solid fa-triangle-exclamation"></i> 
+                                            <span class='uppercase'>Prioridade</span> 
+                                            <span class='fs-7 me-2'>( Maiores informações: <i class="fa-solid fa-user-nurse"></i> Enfermeiro(a): 
+                                                <span class='text-capitalize'>{% if campo.nome_da_enfermeira == "" %} {{campo.nome_da_enfermeira}}{% else %} Usou login Admin {% endif %}</span>)</span> 
+                                        </div>
+                                    {% endif %}
                                     <div class="col-5">{{campo.paciente_triagem}}</div>
                                     <div class="col">{{ campo.classifica_tipo.classifica_tipo }} </div>
                                     <div class="col">{{ campo.hora_triagem|diff_hours }}</div>
