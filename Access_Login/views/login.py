@@ -9,9 +9,6 @@ from django.contrib import messages
 # Create your views here.
 def access_login(request):
     form = LoginForm()
-    if logout:
-        messages.success(request, f'Parabéns! Você efetuou o login no sistema com sucesso! 🎉')
-
 
     return render(request, 'Access_Login/sign-in/index.html',  {
         'form' : form,

@@ -45,7 +45,8 @@
           {% endif %}
         </td>
         <td class='fs-7'>
-            <a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem_classifica_Risco_update' pac.id %}">Reavaliar Paciente</a>       
+            <a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem-enfermaria-update' pac.id %}">Reavaliar Paciente</a>
+            <!--<a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem_classifica_Risco_update' pac.id %}">Reavaliar Paciente</a>       -->
         </td>
       </tr>
       {% endfor %}
