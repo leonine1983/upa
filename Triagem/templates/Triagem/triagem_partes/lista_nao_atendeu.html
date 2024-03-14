@@ -16,21 +16,21 @@
       <tbody>
         {% for pac in paciente_na_triagem  %}
           {% if not pac.respondeu_ao_chamado %}
-            <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
+            <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}{% if pac.paciente_triagem.prioridade == '1' %} style="border: solid #800080 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
               <td class='fs-7'>
                 {% if pac.paciente_triagem.horas48 %}
-                  <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">
+                  <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 " >
                     <i class="fa-thin fa-skull-crossbones"></i> 
                     Retornou em menos de 48 horas
                   </div>
                 {% endif %}
                 {% if pac.paciente_triagem.prioridade == '1'  %}
-                <div id="retorned" class="text-light  w-auto p-1 px-3 fs-7" style="background:#800080; {% if  pac.paciente_triagem.horas48 %}  margin-left: 36%; margin-top:-2.7%{% endif %}">
-                  <i class="fa-solid fa-triangle-exclamation"></i> 
-                  <span class='uppercase'>Prioridade</span> 
-                 <i class="fa-solid fa-font-awesome "></i> Recepcionista: 
-                  <span class='text-capitalize'> {{pac.paciente_triagem.nome_recepcionista}}</span>
-                </div>
+                  <div id="retorned" class="text-light  w-auto p-1 px-3 fs-7 rounded-0" style="background:#800080; margin-top:-1%; {% if  pac.paciente_triagem.horas48 %}  margin-left: 36%; {% endif %}">
+                    <i class="fa-solid fa-triangle-exclamation"></i> 
+                    <span class='uppercase'>Prioridade</span> 
+                  <i class="fa-solid fa-font-awesome "></i> Recepcionista: 
+                    <span class='text-capitalize'> {{pac.paciente_triagem.nome_recepcionista}}</span>
+                  </div>
                 {% endif %}
                 {{pac.paciente_triagem}}
               </td>
