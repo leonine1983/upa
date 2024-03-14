@@ -119,7 +119,8 @@ choices=(
         ('1','Sim'),
     )
 class ficha_de_atendimento(models.Model):
-    nome_social = models.CharField(max_length=40, null=False, default='')
+    nome_social = models.CharField(max_length=40, null=False, default='', verbose_name="Nome Social (Como a pessoa que ser chamada no painel)")
+    nome_completo = models.CharField(max_length=50, null=False, default='', verbose_name="Nome completo (Como está escrito no RG)")
     codigo_pacient = models.CharField(max_length=8, null=True, verbose_name="Código do paciente")
     idade = models.IntegerField(null=False, default='00')    
     etnia = models.ForeignKey(Etnia, null=True, on_delete=models.CASCADE)

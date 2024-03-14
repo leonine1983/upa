@@ -167,43 +167,10 @@ $(document).ready(function() {
 
         <div>  
             {% if not lista_db %}   
-            <div>         
-                <form action="" method='POST' class='d-flex'>      
-                        {% csrf_token %} 
-                        <style>
-                            .select2 {
-                                width:90% !important;
-                            }
-                        </style>
-                    <div class='col row p-0'>
-                        {% if envio_triagem %}
-                        <div class='col p-3 bg-secondary-subtle m-3'>
-                            <label for="id_paciente_envio_triagem"><i class="fa-solid fa-person"></i> Selecione o nome do paciente &nbsp;&nbsp;&nbsp;</label>
-                            {{form.paciente_envio_triagem}}  
-                        </div>
-                        <div class='col m-1 pt-3 bg-secondary-subtle'>
-                            <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Nome do acompanhate</label>
-                            <p>{{form.nome_acompanhante}}</p>
-                        </div>
-                        <div class="wrapper">
-                            <div id='cod_registro' class='col m-1 pt-3 bg-secondary-subtle border border-danger text-center'>
-                                <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
-                                {{form.cod_triagem}}
-                            </div>
-                            <div class="overlay"></div>
-                        </div>
-                        {% endif %}
-                    </div>       
-                    {% if not url == 'Atendimento:envio_paciente_a_triagem'%}                      
-                    <button class='btn btn-sm btn-primary col-3 m-3' type="submit">
-                        <i class="fa-thin fa-diagram-successor"></i>
-                        Salvar Paciente na <b>Fila de Espera</b> para classificação
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    {% else %}
-                    <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='btn btn-sm btn-primary col'><i class="fa-thin fa-diagram-successor"></i> Adicionar a(o) paciente a <b>Fila de Espera</b> <i class="fa-solid fa-plus"></i></a>                   
-                    {% endif %}                
-                </form>        
+            <div>
+                <!--Form do envio2-->
+                {% include "Atendimento/partes_Envio_Triagem/parte_envio2.html" %}
+                <!-- end Form do envio2-->
                 <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastrar Paciente</a>
                 <p>Utilize o sistema de busca no campo <b>Busca paciente</b> 
                     para pequisar o cadastro do paciente no sistema e em seguida envia-lo à <b>Fila de Espera</b>. Caso não encontre o nome do paciente, clique no link 
@@ -236,48 +203,37 @@ $(document).ready(function() {
             <a href="?page={{ page_obj.next_page_number }}">Próxima página <i class="fa-solid fa-angles-right"></i></a>    
         {% endif %}    
     {% else %}
-    <!--Aqui entra o codigo que enviar os pacientes recem cadastrados para a <b>Fila de Espera</b>-->
     <div style="text-align: center;" >         
-        <form action="" method='POST' >  
-            {% csrf_token %}
-            {% for n in get_id  %}
-                <input name="paciente_envio_triagem" type="hidden" value="{{n.id}}">  
-                <span class='fs-5'>Deseja enviar <b class="uppercase">{{n.nome_social}}</b> para a <b>Fila de Espera</b> para a classficação?</span>           
-                 
-                <div class="flex w-75 m-auto p-2" >
-                    <a href="{% url 'Atendimento:registro-paciente' %}" class="btn btn-sm btn-danger col m-1">Não (Manter somente o cadastro)</a>   
-                    <button class='col btn btn-sm btn-primary m-1' type="submit">
-                        SIM <i class="fa-duotone fa-person-seat"></i>
-                    <i class="fa-solid fa-plus"></i>
-                    </button>
-                </div>  
-                <div class='text-center p-3 bg-secondary-subtle'>
-                    <div class='fs-4'>Se sim, digite o nome do acompanhante</div>
-                   <i class="fa-solid fa-people-pulling"></i> {{form.nome_acompanhante}} 
-                   {% for error in form.nome_acompanhante.errors  %}
-                        <div class='alert alert-danger '>{{error}}</div>
-                   {% endfor %}
-                </div>
-                <div class="wrapper">
-                    <div id='cod_registro' class='col m-1 pt-3 bg-secondary-subtle border border-danger text-center'>
-                        <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
-                        {{form.cod_triagem}}
-                    </div>
-                    <div class="overlay"></div>
-                </div>
-            {% endfor %}                 
-        </form>       
+        <!-- Form do envio triagem1 -->
+        {% include "Atendimento/partes_Envio_Triagem/parte_envio1.html" %}
+        <!-- END Form do envio triagem1 -->
     </div>
 {% endif %}
 </div>
 <p>&nbsp;</p>
 <script src="{% static 'global/js/select2.min.js' %}"></script>
-    <script>
-        // In your Javascript (external .js resource or <script> tag)
-    $(document).ready(function() {
-        $('#id_paciente_envio_triagem').select2();
+<script>
+    // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('#id_paciente_envio_triagem').select2();
+
+});
+</script>
+<script>
+    // Obtendo o select
+    const select = document.getElementById('id_prioridade');
   
+    // Adicionando um ouvinte de evento para mudanças no select
+    select.addEventListener('change', function() {
+      // Verificando se o valor selecionado é 1
+      if (this.value === '1') {
+        // Se for 1, adicione a classe 'red'
+        this.classList.add('red');
+      } else {
+        // Caso contrário, remova a classe 'red'
+        this.classList.remove('red');
+      }
     });
-    </script>
+  </script>
 
 {% endblock body_login %}

@@ -1,0 +1,53 @@
+<form action="" method='POST'>      
+    {% csrf_token %} 
+    <style>
+        .select2 {
+            width:90% !important;
+        }
+        .red {
+            color:white;
+            background:red
+          }
+    </style>
+    
+    {% if envio_triagem %}
+    <div class='col p-3 bg-secondary-subtle m-3'>
+        <label for="id_paciente_envio_triagem" class='fs-3'><i class="fa-solid fa-person"></i> Selecione o nome do paciente &nbsp;&nbsp;&nbsp;</label>
+        {{form.paciente_envio_triagem}}  
+        {{form.paciente_envio_triagem.errors}}  
+    </div>
+    
+    <div class='row row-cols-3 bg-light-subtle rounded-2 shadow p-4'>
+        <div class='col-5 m-1 pt-3 '>
+            <label for="id_nome_acompanhante"> Nome do acompanhante</label>
+            <p>{{form.nome_acompanhante}}</p>
+            <p>{{form.nome_acompanhante.errors}}</p>
+        </div>
+        <div class='col-3 m-1 pt-3'>
+            <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> Classificar como prioridade?</label>
+            <p>{{form.prioridade}}</p>
+            <p>{{form.prioridade.errors}}</p>
+        </div>
+        <div class="col-2 wrapper">
+            <div id='cod_registro' class='col m-1 pt-3 bg-secondary-subtle border border-danger text-center'>
+                <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
+                {{form.cod_triagem}}
+            </div>
+            <div class="overlay"></div>
+        </div>
+    </div>
+        {% endif %}      
+    {% if not url == 'Atendimento:envio_paciente_a_triagem'%}  
+    <div class='text-center mt-5 p-4'>                    
+        <button class='btn btn-sm btn-primary col-3 m-3 w-75' type="submit">
+            <i class="fa-thin fa-diagram-successor"></i>
+            Salvar Paciente na <b>Fila de Espera</b> para classificação
+            <i class="fa-solid fa-plus"></i>
+        </button>
+    </div>
+    {% else %}
+    <a href="{% url 'Atendimento:envio_paciente_a_triagem' %}" class='btn btn-sm btn-primary col'><i class="fa-thin fa-diagram-successor"></i> Adicionar a(o) paciente a <b>Fila de Espera</b> <i class="fa-solid fa-plus"></i></a>                   
+    {% endif %}                
+</form>        
+
+

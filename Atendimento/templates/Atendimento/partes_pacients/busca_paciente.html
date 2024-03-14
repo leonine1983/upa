@@ -1,0 +1,7 @@
+<form action="?" method="GET" class="form-inline bg-light rounded-5">
+    {% csrf_token %}            
+    <div class="search-wrapper rounded-5">
+      <input type="text" class="search-input rounded-5 m-0" placeholder=" CODIGO | Nº SUS | NOME DO PACIENTE | RG | CPF" name="busca-paciente">
+      <button class="search-button" type="submit" style="width: 2.8rem;"><i class="fa-solid fa-search"></i></button>
+    </div>
+  </form>

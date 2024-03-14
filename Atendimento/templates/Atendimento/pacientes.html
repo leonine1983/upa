@@ -53,109 +53,21 @@
                             </ul>
                         </li>
                     </ul>
-                
             </div>
              <div style='text-align:right !important'><i class="fs-3 fa-duotone fa-hand-holding-medical"></i></div>
         </div>
         <div class="w-50" style="margin-left:25%; " >
-            <form action="?" method="GET" class="form-inline bg-light rounded-5">
-                {% csrf_token %}            
-                <div class="search-wrapper rounded-5">
-                  <input type="text" class="search-input rounded-5 m-0" placeholder=" CODIGO | Nº SUS | NOME DO PACIENTE | RG | CPF" name="busca-paciente">
-                  <button class="search-button" type="submit" style="width: 2.8rem;"><i class="fa-solid fa-search"></i></button>
-                </div>
-              </form>
+            <!-- Busca pacientes -->
+            {% include "Atendimento/partes_pacients/busca_paciente.html" %}
+            <!-- end Busca pacientes -->
         </div>
         <div class="">         
-            <div class='btn btn-sm border'><span class='fs-3'>{{object_list.count}}</span> registros exibido por página | Total de {{quant_registros}} registros no sistema</div>
-            <nav aria-label="Page navigation example ">
-                <ul class="pagination justify-content-end flex-wrap">
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-                {% endif %}
-                {% for page in paginator.page_range %}
-                    {% if page_obj.number|add:"-10" <= page <= page_obj.number|add:"10" %}
-                    <li class="page-item {% if page == page_obj.number %}active{% endif %}">
-                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                    </li>
-                    {% endif %}
-                {% endfor %}
-
-                {% if page_obj.has_next %}  
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                    </a>
-                </li>
-                {% endif %}
-                </ul>
-            </nav>
-        </div>
-       
-        
-        <table class='table table-black table-striped'>                
-                <thead>
-                    <tr>
-                    <td class="top center fs-7"><strong>Codigo</strong></td>
-                    <td class="top center fs-7"><strong>Nome Social</strong></td>                       
-                    <td class="top center fs-7"><strong>Perfil</strong></td>                 
-                    <td class="top center fs-7"><strong>Telefone</strong></td>
-                    <td class="top center fs-7"><strong>Idade</strong></td>
-                    <td class="top center fs-7"><strong>Bairro</strong></td>
-                    <td class="top center fs-7"><strong>Data de Nascimento</strong></td>
-                    <td class="top center fs-7"><strong>RG</strong></td>
-                    <td class="top center fs-7"><strong>SUS</strong></td>
-                    <td class="top center fs-7"><strong>Alergias</strong></td>
-                    <td class="top center fs-7"><strong>Comorbidades</strong></td>
-                    <td class="top center fs-7"><strong>Resp. Cadastro</strong></td>
-                    <td class="top center fs-7" colspan="2" ><strong>Atualizar</strong></td>
-                    </tr>
-                </thead> 
-                <tbody> 
-                   
-                    {% for campo in object_list %}  
-                    <tr> 
-                        <td align="center" href="">{{campo.codigo_pacient}}</td>
-                        <td class="fs-7 text-uppercase"><a class="link-color" href="{% url 'Atendimento:perfil-paciente' campo.pk %}"><span>{{campo.nome_social}}</span></a></td>    
-                        <td class='text-center'>
-                            <a class="link-color text-uppercase fs-4" title='Ver perfil do paciente' href="{% url 'Atendimento:perfil-paciente' campo.id %}"><span><i class="fa-duotone fa-square-user"></i> </span></a>
-                        </td>                                                    
-                        <td align="center" href="" class="fs-7 text-uppercase">{{campo.tel}}</td>
-                        <td align="center" href="" class="fs-7 text-uppercase">{{campo.idade}}</td>                        
-                        <td align="center" class="fs-7 text-uppercase">{{campo.bairro}}</td>
-                        <td align="center" class="fs-7 text-uppercase">{{campo.data_nascimento}}</td>
-                        <td align="center" class="fs-7 text-uppercase">{{campo.RG}}</td>
-                        <td align="center" class="fs-7 text-uppercase">{{campo.cartao_sus}}</td>
-                        
-                        <td align="center" class="fs-7 text-uppercase">
-                            {% if campo.alergias == '0'  %}
-                                <span class="text-primary">Nâo</span>
-                            {% else %}
-                                <span class='text-danger'>Sim <i class="fa-sharp fa-solid fa-circle-exclamation"></i></span>
-                            {% endif %}
-                        </td>
-                        {% if campo.comorbidades == '0' %}
-                            <td align="center" class="text-primary">NÃO</td>                                
-                            {% else %} 
-                            <td align="center" class="text-danger">SIM</td>
-                        {% endif %}
-                        <td align="center"> <span class='text-capitalize'>{{campo.nome_recepcionista}}</span> </td>                
-                        <td align="center"> <a href="{% url 'Atendimento:atualizar-paciente' campo.pk   %}" class="editar fa fa-check-circle" title="Editar"></a> </td>                
-                    </tr>       
-                    
-                    {% empty%}
-                        <tr>
-                            <td colspan='11' class='text-center'>"Nenhum paciente foi cadastrado até o momento."</td>        
-                        </tr>                       
-                    {% endfor %}
-                </tbody>                
-        </table>                    
+            <div class='btn btn-sm border'><span class='fs-3'>{{object_list.count}}</span> registros exibido por página | Total de <b class="fs-5">{{quant_registros}}</b> registros no sistema</div>
+            <hr>
+            <!-- Tabela com lista de pacinetes -->
+            {% include "Atendimento/partes_pacients/lista_de_pacientes.html" %}
+            <!-- End Tabela com lista de pacinetes -->
+        </div> 
     </div> 
 </div>
 <!--Menu suplementos-->

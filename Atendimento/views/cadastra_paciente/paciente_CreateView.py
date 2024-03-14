@@ -29,18 +29,23 @@ class PacienteForm(forms.ModelForm):
 
     class Meta:
         model = ficha_de_atendimento
-        fields = ['nome_social', 'codigo_pacient', 'data_nascimento', 'sexo', 'etnia', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado', 'pais', 'CEP', 'nome_mae',  'tel', 'cartao_sus']
+        fields = ['nome_social', 'nome_completo', 'codigo_pacient', 'data_nascimento', 'sexo', 'etnia', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado', 'pais', 'CEP', 'nome_mae',  'tel', 'cartao_sus']
 
         widgets = {
             'nome_social': forms.TextInput(attrs={'class': 'form-control '}),
+            'nome_completo': forms.TextInput(attrs={'class': 'form-control '}),
             'codigo_pacient': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
-            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'DD/MM/AAAA'}),
+            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'DD/MM/AAAA', 'type':'date'}),
             'sexo': forms.Select(attrs={'class': 'form-select '}),
+            'etnia': forms.Select(attrs={'class': 'form-select '}),
             'RG': forms.TextInput(attrs={'class': 'form-control'}),
             'CPF': forms.TextInput(attrs={'class': 'form-control'}),
             'nacionalidade': forms.TextInput(attrs={'class': 'form-control '}),
             'rua': forms.TextInput(attrs={'class': 'form-control text-uppercase'}),
             'bairro': forms.Select(attrs={'class': 'form-select '}),
+            'cidade': forms.Select(attrs={'class': 'form-select '}),
+            'estado': forms.Select(attrs={'class': 'form-select '}),
+            'pais': forms.Select(attrs={'class': 'form-select '}),
             'CEP': forms.TextInput(attrs={'class': 'form-control'}),
             'nome_mae': forms.TextInput(attrs={'class': 'form-control '}),
             'responsavel': forms.TextInput(attrs={'class': 'form-control '}),
@@ -56,11 +61,6 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
     model = ficha_de_atendimento
     form_class = PacienteForm
     template_name = 'Atendimento/cadastro_paciente.html'
-
-    """
-    def form_valid(self, form):
-        self.object = form.save()
-        return super().form_valid(form)"""
     
     def form_valid(self, form):
         # Definir o nome do responsavel pelo cadastro do paciente

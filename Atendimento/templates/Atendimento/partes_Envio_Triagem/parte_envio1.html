@@ -1,0 +1,35 @@
+<form action="" method='POST' >  
+    {% csrf_token %}
+    {% for n in get_id  %}
+        <input name="paciente_envio_triagem" type="hidden" value="{{n.id}}">  
+        <div class='fs-4 p-2'>Deseja enviar <b class="uppercase">{{n.nome_social}}</b> para a <b>Fila de Espera</b> para a classficação?</div>           
+        <div class='row row-cols-3 bg-light-subtle'>
+            <div class='col-5 text-center p-3 '>
+                <div class='fs-5'>Se sim, digite o nome do acompanhante</div>
+                {{form.nome_acompanhante}} 
+               {% for error in form.nome_acompanhante.errors  %}
+                    <div class='alert alert-danger '>{{error}}</div>
+               {% endfor %}
+            </div>
+            <div class='col-3 m-1 pt-3 '>
+                <label for="id_nome_acompanhante"><i class="fa-solid fa-people-pulling "></i> É prioridade?</label>
+                <p>{{form.prioridade}}</p>
+                <p>{{form.prioridade.errors}}</p>
+            </div>
+            <div class="col-2 wrapper">
+                <div id='cod_registro' class='col m-1 pt-3 mt-2 bg-secondary-subtle border border-danger text-center'>
+                    <label for="id_nome_acompanhante"><i class="fa-solid fa-code"></i> Registro de entrada</label>
+                    {{form.cod_triagem}}
+                </div>
+                <div class="overlay"></div>
+            </div>
+        </div>
+        <div class="flex w-75 m-auto p-2 mt-5 p-4" >
+            <a href="{% url 'Atendimento:registro-paciente' %}" class="btn btn-sm btn-danger col m-1">Não (Manter somente o cadastro)</a>   
+            <button class='col btn btn-sm btn-primary m-1' type="submit">
+                SIM <i class="fa-duotone fa-person-seat"></i>
+            <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+    {% endfor %}                 
+</form>       
