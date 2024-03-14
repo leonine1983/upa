@@ -9,7 +9,7 @@
     <style>
         td .hours48{
         position: absolute;
-        font-size: 0.6rem;
+        font-size: 0.65rem;
         margin-left: -0.6rem;
         margin-top: 1.2rem!important;
         color:rgb(255, 255, 255) ;
@@ -84,131 +84,9 @@ $(document).ready(function() {
 {% endif %}
 <!-- FIM Botão adicionar a <b>Fila de Espera</b>-->
 <div class='btn btn-sm border'><span class='fs-3'>{{lista_db.count}}</span> pessoas aguardando passar pela classificação</div>
-<table class='table table-striped border border-secondary'>
-    <tr class='bg-primary-subtle fs-6'>
-        <th class='border border-success linha-titulo text-center'>Codigo</th>
-        <th class='border border-success linha-titulo text-center'>Registro de Entrada</th>
-        <th class='border border-success linha-titulo text-center'>Nome do Paciente</th><i class="fa-duotone fa-square-user"></i>
-        <th class='border border-success linha-titulo text-center'>Perfil</th>
-        <th class='border border-success linha-titulo text-center'>Acompanhante</th>
-        <th class='border border-success linha-titulo text-center'>Alergias</th>
-        <th class='border border-success linha-titulo text-center'>Entrada na <b>Fila de Espera</b></th>
-        <th class='border border-success linha-titulo text-center'>Excluir da <b>Fila de Espera</b></th>
-    </tr>
-    
-    {% if not get_id %}
-    {% for db in lista_db %}    
-        <tr class='m-0 fs-7 p-0  {% if db.horas48 %}bg-danger-subtle {% else %}bg-primary-subtle{% endif %}'>
-            <td class='text-center '>
-                {% if db.horas48 %}
-                    <button class="hours48 bg-danger border p-1">O paciente retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></button>
-                {% endif %}
-                   
-                {{ paciente.nome_do_campo_do_modelo }}
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem.codigo_pacient}}</span></a>                                                      
-            </td>
-            <td class='text-center'>
-                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}">
-                    <span>
-                        {% if db.cod_triagem %}
-                            {{db.cod_triagem}}
-                            {% else %}
-                        {% endif %}
-                </span></a>
-            </td> 
-            <td class='text-center'>
-                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.paciente_envio_triagem}}</span></a>
-            </td> 
-            <td class='text-center'>
-                <a class="link-color  fs-4" title='Ver perfil do paciente' href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span><i class="fa-duotone fa-square-user"></i> </span></a>
-            </td>    
-            <td class='text-center'>
-                <a class="link-color " href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>{{db.nome_acompanhante }}</span></a>                                                     
-            </td>             
-            <td class='text-center'>
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}">
-                    
-                    {% if db.paciente_envio_triagem.alergias == '0'  %}
-                    <span>Nâo</span>
-                    {% else %}
-                    <span>Sim <i class="fa-sharp fa-solid fa-circle-exclamation text-danger"></i></span>
-                    {% endif %}
-                </a>                                                      
-            </td>
-            <td class='text-center'>
-                <a class="link-color" href="{% url 'Atendimento:perfil-paciente' db.paciente_envio_triagem_id %}"><span>  {{db.data_envio_triagem}} {{db.horario_triagem}} </span></a>                                                      
-            </td>
-            <td class='text-center'>                
-                <a href="{% url 'Atendimento:delete_de_paciente_na_triagem' db.id %}" class=" text-danger" title="Deletar"> <i class="fa-solid fa-user-xmark excluir"></i> Excluir da fila</a> 
-            </td>            
-        </tr>
-        {% empty%} 
-        {% endfor %}
-        {{q3}}{{q3}}
-    </table>
-    <div>&nbsp;</div>
-    <div class="bloco flex">
-        <div class="calendario">
-            {% if  url == 'Atendimento:envio_paciente_a_triagem'%}   
-            <form>
-                <label for="start_date" >::CALENDÁRIO::</label>
-                <div>Utilize o calendário para acompanhar os lançamentos na
-                    <b><b>Fila de Espera</b></b> de datas anteriores à atual            
-                </div>  
-                <p>&nbsp;</p>          
-                <p><input type="date" name='start_date'>
-                <button class="btn" type="submit" style='margin-top:1rem; background-color:cadetblue'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                  </svg> Exibir por data</button></p>
-            </form>
-            {% endif %}
-        </div>   
-
-        <div>  
-            {% if not lista_db %}   
-            <div>
-                <!--Form do envio2-->
-                {% include "Atendimento/partes_Envio_Triagem/parte_envio2.html" %}
-                <!-- end Form do envio2-->
-                <a href=" {% url 'Atendimento:registro-paciente' %} "> Cadastrar Paciente</a>
-                <p>Utilize o sistema de busca no campo <b>Busca paciente</b> 
-                    para pequisar o cadastro do paciente no sistema e em seguida envia-lo à <b>Fila de Espera</b>. Caso não encontre o nome do paciente, clique no link 
-                    <b>Cadastrar Paciente</b> para ir para a página de cadastro de paciente para lançá-lo no sistema. Em seguida, 
-                        retorne a essa página para adicioná-lo à <b>Fila de Espera</b>. 
-                </p>
-            </div>
-            {% endif %}
-        </div>
-
-    <!--TABELA COM RELAÇÃO DE PACIENTES NA TRIAGEM-->
-    {% if lista_db %}
-        <div class="top-info m-2 rounded-3 shadow shadow-sm p-4 bg-info-subtle ">         
-            <div class='col-10 text-primary display-5'><i class="fs-3 fa-duotone fa-quote-left"></i> Atenção <i class="fa-sharp fa-regular fa-exclamation"></i><i class="fa-sharp fa-regular fa-exclamation"></i><i class="fa-sharp fa-regular fa-exclamation"></i></div>           
-            Na tabela acima está listado todos os pacientes que estão aguardando para passar
-            pela etapa de CLASSIFICAÇÃO. Se houver necessidade de excluir algum nome, basta clicar no botão com um X.            
-        </div>
-    </div>  
-    <div class="style-tabela">        
-        <a  href="{% url 'Atendimento:lista_de_paciente_na_triagem' %}">Voltar <i class="fa-solid fa-person-walking-arrow-loop-left"></i></a>    
-    {% endif %}
-    <!--tabela-->  
-
-    <div class="controle_tabela">
-        {% if page_obj.has_previous %}
-            <a class="" href="?page={{page_obj.previous_page_number}}"><i class="fa-solid fa-angles-left"></i> Voltar</a>    
-                            
-        {% endif %}
-        {% if page_obj.has_next %}               
-            <a href="?page={{ page_obj.next_page_number }}">Próxima página <i class="fa-solid fa-angles-right"></i></a>    
-        {% endif %}    
-    {% else %}
-    <div style="text-align: center;" >         
-        <!-- Form do envio triagem1 -->
-        {% include "Atendimento/partes_Envio_Triagem/parte_envio1.html" %}
-        <!-- END Form do envio triagem1 -->
-    </div>
-{% endif %}
+    <!--Tabela com lista de envios triagem e include do form-->
+    {% include "Atendimento/partes_Envio_Triagem/tabela_envio_triagem.html" %}
+    <!-- FIM Tabela com lista de envios triagem e include do form-->
 </div>
 <p>&nbsp;</p>
 <script src="{% static 'global/js/select2.min.js' %}"></script>

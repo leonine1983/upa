@@ -140,74 +140,38 @@
 {% endblock css %}
 
 {% block body_login %}
-
-
-<div class='flex' style='color: var(--cor-background-titulo); margin-bottom:-2rem '>
-  {% if object.paciente_triagem %}<!-- Modal para exibir a mensagem 
-    <div>Paciente em Atendimento: <hr> </div>  
-        <h2 class='uppercase' style=''>
-            <i class="fa-solid fa-syringe"></i>
-         {% for dados in paciente_triagem %}           
-                {{dados}} 
-         {% endfor %}         
-        </h2>       -->
-    </div> 
-    <!--Avisa se o paciente tem ALERGIAS--> 
+<div class='flex' style='color: var(--cor-background-titulo); margin-bottom:-2rem '></div> 
+  {% if object.paciente_triagem %}
     {% if object %} 
-
-    <!--menu info usuario hamburger-->
-    
-    <!--end menu info usuario hamburger-->
-
       {% if object.paciente_triagem.horas48 %}
-      <div id="retorned" class="bg-danger text-dark-emphasis w-25 p-1">Paciente retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></div>
+      <div id="retorned" class="bg-danger text-light w-25 p-1 px-2">Paciente retornou em menos de 48 horas <i class="fa-thin fa-skull-crossbones"></i></div>
       {% endif %}
-
+      {% if object.paciente_triagem.prioridade == '1'  %}
+        <div id="retorned" class="text-light  w-auto p-1 px-5" style="background:#800080; {% if  object.paciente_triagem.horas48 %}  margin-left: 27%; margin-top:-1.8%{% endif %}">
+          <i class="fa-solid fa-triangle-exclamation"></i> 
+          <span class='uppercase'>Paciente prioridade</span> 
+          <span class='fs-7 me-5'>(Procure a recepção para saber o motivo)</span> 
+          <i class="fa-solid fa-font-awesome "></i> Recepcionista Responsável: 
+          <span class='text-capitalize'> {{object.paciente_triagem.nome_recepcionista}}</span>
+        </div>
+      {% endif %}
+      {% if db.%}
+        <span class="hours48 border p-1 w-25 " > </span>
+      {% endif %}
       {% if not object.paciente_triagem.paciente_envio_triagem.alergias == '0' %}      
-        {% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
-          <div style='text-align:center; margin-bottom:2rem'>
-            <!-- Botão para abrir o modal -->
-            <button type="button" class="cancelar btn btn-primary" style='background:red' data-toggle="modal" data-target="#myModal_alergia">
-              Paciente Alérgico <i class="fa-solid fa-person-dots-from-line"></i>
-            </button>          
-            </div>
-              <div class="modal fade " id="myModal_alergia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog " role="document">
-                  <div class="modal-content ">
-                      <div class="modal-header cancelar ">
-                      <h3 class="modal-title" style='color:#fff' id="exampleModalLabel"><i class="fa-solid fa-hand-dots"></i> Paciente Alégico</h3>
-                      <button type="button" class="close excluir" data-dismiss="modal" aria-label="Fechar">
-                        <h1 class='h3 text-danger text-center text-u'>Paciente Alégico <i class="fa-solid fa-hand-dots"></i></h1>
-                      </button>
-                      </div>
-                      <div class="modal-body p-3 fs-5">
-                        <i class="fa-duotone fa-quote-left fa-fade" style="--fa-primary-color: #e50606; --fa-secondary-color: #e50606;"></i>
-                          
-                          {{object.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}
-                      </div>
-                  </div>
-                </div>
-              </div> 
-              <script>
-                var jQuery = $.noConflict();
-                jQuery(document).ready(function(){
-                  jQuery('#myModal_alergia').modal('show');
-               });               
-              </script>  
-          </div>             
-        {% endif %}
+        <!-- Modal Alergia -->
+          {% include "Triagem/triagem_partes/modal_alergia" %}
+        <!-- Fim Modal Alergia -->
       {% endif %} 
     {% endif %}
     <!--FIM Avisa se o paciente tem ALERGIAS--> 
   {% endif %}
 <div class="top-info ">      
-
-  
     <div>
       {% if not licenca_ativa == None %}
         <form action="" method='POST' class="" id='classifica_form'> 
           <div class="pt-4" style='margin-top:-1.8rem '>
-            <div style='margin-bottom:-0.01rem' class='p-1 border rounded-2 w-100' >
+            <div style='margin-bottom:-0.01rem' class='p-1 mt-3 border rounded-2 w-100' >
               {% if nome_paciente %}
                 <h3 class='fs-3'><i class="fa-duotone fa-face-thermometer "></i>&nbsp; Nome do(a) paciente: <b class='uppercase'>{{nome_paciente}} {{ nome_objeto}}</b></h3>
                 {% else %}            
@@ -259,14 +223,10 @@
                 {% if not chamado.chamado %}
                 disabled
                 {% endif %}
-              {% endif %}
-                  
-                  >     
-                  <i class="fa-solid fa-person-walking-arrow-right"></i> 
-                  
+              {% endif %}>     
+                  <i class="fa-solid fa-person-walking-arrow-right"></i>
                   Salvar e Prosseguir
               </button> 
-            
               {% if exibe_id is not None %}
                             {% if not chamado.chamado %}
                             <div class="card text-center m-auto">
@@ -278,7 +238,6 @@
                                           é necessário cancelar a chamada do paciente no painel. 
                                           Pressione o botão localizado na parte inferior à direita da tela.</p>
                                    </div>
-                                   
                                    <div class="card-footer text-danger">
                                           Chamada Ativa <i class="fa-solid fa-volume-xmark"></i>
                                    </div>
@@ -298,7 +257,6 @@
           <p class='p-2'>Equipe de Suporte Técnico</p>
         </div>
       {% endif %}
-
           {% if conteudo == 'paciente_na_triagem' %}
             <!-- Não atendeu ao chamado -->
               {% include "Triagem/triagem_partes/lista_nao_atendeu.html" %}

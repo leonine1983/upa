@@ -1,0 +1,32 @@
+{% if not dados.conteudo_alergia == 'Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)' %}
+          <div style='text-align:center; margin-bottom:2rem'>
+            <!-- Botão para abrir o modal -->
+            <button type="button" class="cancelar btn btn-primary" style='background:red' data-toggle="modal" data-target="#myModal_alergia">
+              Paciente Alérgico <i class="fa-solid fa-person-dots-from-line"></i>
+            </button>          
+            </div>
+              <div class="modal fade " id="myModal_alergia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog " role="document">
+                  <div class="modal-content ">
+                      <div class="modal-header cancelar ">
+                      <h3 class="modal-title" style='color:#fff' id="exampleModalLabel"><i class="fa-solid fa-hand-dots"></i> Paciente Alégico</h3>
+                      <button type="button" class="close excluir" data-dismiss="modal" aria-label="Fechar">
+                        <h1 class='h3 text-danger text-center text-u'>Paciente Alégico <i class="fa-solid fa-hand-dots"></i></h1>
+                      </button>
+                      </div>
+                      <div class="modal-body p-3 fs-5">
+                        <i class="fa-duotone fa-quote-left fa-fade" style="--fa-primary-color: #e50606; --fa-secondary-color: #e50606;"></i>
+                          
+                          {{object.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}
+                      </div>
+                  </div>
+                </div>
+              </div> 
+              <script>
+                var jQuery = $.noConflict();
+                jQuery(document).ready(function(){
+                  jQuery('#myModal_alergia').modal('show');
+               });               
+              </script>  
+          </div>             
+        {% endif %}

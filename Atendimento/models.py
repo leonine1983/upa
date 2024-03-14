@@ -173,6 +173,7 @@ class envio_triagem(models.Model):
     retornou_em_menos_de_48_horas =  models.BooleanField(default=False, null=False)
     horas48 =  models.BooleanField(default=False, null=False)
     prioridade = models.CharField(max_length=3, default='0', choices= choices )
+    nome_recepcionista = models.CharField(max_length=40, null=True, default='')
  
     class Meta:
         ordering = ['horario_triagem']

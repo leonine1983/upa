@@ -1,0 +1,14 @@
+{% if  url == 'Atendimento:envio_paciente_a_triagem'%}   
+    <form>
+        <label for="start_date" >::CALENDÁRIO::</label>
+        <div>Utilize o calendário para acompanhar os lançamentos na
+            <b><b>Fila de Espera</b></b> de datas anteriores à atual            
+        </div>  
+        <p>&nbsp;</p>          
+        <p><input type="date" name='start_date'>
+        <button class="btn" type="submit" style='margin-top:1rem; background-color:cadetblue'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+            </svg> Exibir por data</button></p>
+    </form>
+{% endif %}

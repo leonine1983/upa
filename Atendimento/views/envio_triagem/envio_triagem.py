@@ -39,8 +39,6 @@ class envio_paciente_a_triagem(LoginRequiredMixin, SuccessMessageMixin, CreateVi
             data = ultima_triagem_obj.data_envio_triagem
             hoje = datetime.today().date()
             diferenca = (hoje - data).days
-            
-            print(f'Valor da diferença: {diferenca}')
 
             if diferenca < 2:
                 form.instance.horas48 = True
@@ -48,8 +46,13 @@ class envio_paciente_a_triagem(LoginRequiredMixin, SuccessMessageMixin, CreateVi
                 messages.warning(self.request, mensagem, extra_tags='alert-warning')
             else:
                 form.instance.horas48 = False
+        
+        if self.request.user.first_name:
+            form.instance.nome_recepcionista = f'{self.request.user.first_name} {self.request.user.last_name}'
+        else:
+            form.instance.nome_recepcionista = self.request.user.username
 
-
+        
         # Salve o paciente
         form.save()
 
