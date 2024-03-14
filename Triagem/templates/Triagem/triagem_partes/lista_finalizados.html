@@ -15,7 +15,21 @@
       {% for pac in paciente_na_triagem_concluidos %}
       <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}>
         <td >
-          {% if pac.paciente_triagem.horas48 %}<div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 "><i class="fa-thin fa-skull-crossbones"></i> Retornou em menos de 48 horas</div>{% endif %}
+          {% if pac.paciente_triagem.horas48 %}
+            <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">
+              <i class="fa-thin fa-skull-crossbones"></i> 
+              Retornou em menos de 48 horas
+            </div>
+          {% endif %}
+          {% if pac.paciente_triagem.prioridade == '1'  %}
+                <div id="retorned" class="text-light  w-auto p-1 px-3 fs-7" style="background:#800080; {% if  pac.paciente_triagem.horas48 %}  margin-left: 40%; margin-top:-2.7%{% endif %}">
+                  <i class="fa-solid fa-triangle-exclamation"></i> 
+                  <span class='uppercase'>Paciente prioridade</span> 
+                  <span class='fs-7 me-2'>(Procurar a recepção)</span> 
+                  <p class='text-light'><i class="fa-solid fa-font-awesome "></i> Recepcionista: 
+                  <span class='text-capitalize'> {{pac.paciente_triagem.nome_recepcionista}}</span></p>
+                </div>
+              {% endif %}
           {{pac.paciente_triagem}}
         </td>
         <td>
