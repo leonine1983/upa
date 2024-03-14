@@ -4,10 +4,10 @@
   <table class='table table-striped'>
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Data e horário de inicio</th>                
-        <th>Mãe</th>                       
-        <th>Ação</th> 
+        <th class='fs-7'>Nome</th>
+        <th class='fs-7'>Data e horário de inicio</th>                
+        <th class='fs-7'>Mãe</th>                       
+        <th class='fs-7'>Ação</th> 
       </tr>
     </thead>
     <tbody>
@@ -15,7 +15,7 @@
         {% if  conteudo == 'paciente_na_triagem' %}
           {% if pac.respondeu_ao_chamado %}
           <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
-            <td>
+            <td class='fs-7'>
               {% if pac.paciente_triagem.horas48 %}
                 <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">
                   <i class="fa-thin fa-skull-crossbones"></i> 
@@ -25,21 +25,21 @@
               {% if pac.paciente_triagem.prioridade == '1'  %}
                 <div id="retorned" class="text-light  w-auto p-1 px-3 fs-7" style="background:#800080; {% if  pac.paciente_triagem.horas48 %}  margin-left: 36%; margin-top:-2.7%{% endif %}">
                   <i class="fa-solid fa-triangle-exclamation"></i> 
-                  <span class='uppercase'>Prioridade</span><i class="fa-solid fa-font-awesome "></i> Recepcionista: 
+                  <span class='uppercase me-2'>Prioridade</span><i class="fa-solid fa-font-awesome "></i> Recepcionista: 
                   <span class='text-capitalize'> {{pac.paciente_triagem.nome_recepcionista}}</span>
                 </div>
               {% endif %}
               {{pac.paciente_triagem}}
             </td>
-            <td>
+            <td class='fs-7'>
               {{pac.data_triagem}} || {{pac.hora_triagem}}
             </td>
             
-            <td>
+            <td class='fs-7'>
               {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
             </td>
             
-            <td >
+            <td class='fs-7'>
               <a class='btn btn-sm btn-secondary' href="{% url 'Triagem:triagem-enfermaria-update' pac.id %}">Continua atendimento</a>                
               <a class='btn btn-sm btn-danger' href="{% url 'Triagem:triagem-delete' pac.id %}">Excluir da triagem</a>
             </td>

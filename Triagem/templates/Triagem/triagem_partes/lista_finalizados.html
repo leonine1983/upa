@@ -14,7 +14,7 @@
     <tbody>
       {% for pac in paciente_na_triagem_concluidos %}
       <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}>
-        <td >
+        <td class='fs-7'>
           {% if pac.paciente_triagem.horas48 %}
             <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">
               <i class="fa-thin fa-skull-crossbones"></i> 
@@ -30,24 +30,22 @@
               {% endif %}
           {{pac.paciente_triagem}}
         </td>
-        <td>
+        <td class='fs-7'>
           {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
         </td>
         
-        <td class="text-center ">
+        <td class="text-center fs-7">
           {{pac.classifica_tipo}}
         </td>
-        <td class="text-center ">
+        <td class="text-center fs-7 ">
           {% if pac.passou_por_atend_medico %}
           <i class="fa-solid fa-stethoscope text-success fs-4" title='Paciente atendido ou em atendimento'></i>
               {% else %}
               Aguardando atendimento
           {% endif %}
         </td>
-        <td>
-          
-            <a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem_classifica_Risco_update' pac.id %}">Reavaliar Paciente</a> 
-                    
+        <td class='fs-7'>
+            <a class='btn btn-sm btn-primary' href="{% url 'Triagem:triagem_classifica_Risco_update' pac.id %}">Reavaliar Paciente</a>       
         </td>
       </tr>
       {% endfor %}

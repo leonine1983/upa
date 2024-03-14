@@ -17,7 +17,7 @@
         {% for pac in paciente_na_triagem  %}
           {% if not pac.respondeu_ao_chamado %}
             <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
-              <td>
+              <td class='fs-7'>
                 {% if pac.paciente_triagem.horas48 %}
                   <div class="hours48 bg-danger border p-1 pe-3 px-3 rounded-end-5 ">
                     <i class="fa-thin fa-skull-crossbones"></i> 
@@ -34,17 +34,16 @@
                 {% endif %}
                 {{pac.paciente_triagem}}
               </td>
-              <td class='text-center'>
+              <td class='text-center fs-7'>
                 {{pac.chamadas_contabilizadas}} vez
               </td >
-              <td class='text-center'>
+              <td class='text-center fs-7'>
                 {{pac.data_triagem}} || {{pac.hora_triagem}}
               </td>
-              <td class='text-center'>
+              <td class='text-center fs-7'>
                 {{pac.paciente_triagem.paciente_envio_triagem.nome_mae}}
               </td>
-              
-              <td >
+              <td class='fs-7'>
                 <a class='btn btn-sm btn-secondary' href="{% url 'Triagem:triagem-enfermaria-update' pac.id %}">Continua atendimento</a>                
                 <!--<a class='btn btn-sm btn-danger' href="{% url 'Triagem:triagem-delete' pac.id %}">Excluir da triagem</a>-->
               </td>
