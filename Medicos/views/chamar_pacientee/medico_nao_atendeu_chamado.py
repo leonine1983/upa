@@ -10,7 +10,7 @@ def medico_paciente_nao_atende (request, pk):
     paciente_triagem = get_object_or_404(triagem, pk = pk)
 
     # Informar que o paciente não respondeu ao chamado
-    paciente_triagem.medico_respondeu_ao_chamado = False
+    paciente_triagem.medico_respondeu_ao_chamado = True
 
     # Indica a quantidade de chamadas para o paciente
     paciente_triagem.medico_chamadas_contabilizadas += 1

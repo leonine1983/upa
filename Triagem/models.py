@@ -113,9 +113,9 @@ class triagem(models.Model):
     data_envio_a_classificao = models.DateField(null=True, blank=True)
 
     # Cotabilização de chamadas -------------------------------------
-    respondeu_ao_chamado = models.BooleanField(default=True, null=True)
+    respondeu_ao_chamado = models.BooleanField(default=False, null=True)
     chamadas_contabilizadas = models.IntegerField(default=0, null=True)
-    medico_respondeu_ao_chamado = models.BooleanField(default=True, null=True)
+    medico_respondeu_ao_chamado = models.BooleanField(default=False, null=True)
     medico_chamadas_contabilizadas = models.IntegerField(default=0, null=True)
     # Fim Cotabilização de chamadas -------------------------------------
 

@@ -49,21 +49,16 @@
 
         
         <input type="radio" name="pcss3t"   id="tab8"class="tab-content-8 ">
-        <label for="tab8" class='bg-success-subtle'><i class="fa-solid fa-comment-slash"></i>NR (Não Respondeu)</label>
+        <label for="tab8" class='bg-success-subtle'><i class="fa-solid fa-comment-slash"></i> NR Médico (Não Respondeu)</label>
+        
+        <input type="radio" name="pcss3t"   id="tab9"class="tab-content-9 ">
+        <label for="tab9" class='bg-success-subtle'><i class="fa-solid fa-comment-slash"></i><i class="fa-solid fa-user-nurse"></i> NR Classificação (Não Respondeu)</label>
 
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
         <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
 
         <input type="radio" name="pcss3t" id="tab3" class="tab-content-3 ">
         <label for="tab3" class='bg-primary-subtle'><i class="icon-cogs"></i>Atendimentos Finalizados </label>
-        {% if not nao_finalizado == '1' %}
-            <input type="radio" name="pcss3t" id="tab5" {{checked5}} class="tab-content-last">
-            <label for="tab5"  class='bg-danger-subtle'><i class="icon-globe"></i>0{{atend_aguarda_final|length}} - Pacientes não finalizados </label>
-        {% endif %}
-        <!--Fora de horari-->
-        <input type="radio" name="pcss3t" id="tab6" class="tab-content-6">
-        <label for="tab6" class='text-danger'><i class="fa-solid fa-circle-exclamation "></i> Tempo previsto pela classificação, excedido</label>      
-        <!--FIM Fora de horari-->
         
         <ul>
             <li class="tab-content tab-content-first typography">             
@@ -81,6 +76,11 @@
                 {% include "Medicos/partes_medico.html/nao_respondeu.html" %}
                 <!--FIM Atendimento-->
             </li>
+            <li class="tab-content tab-content-9 typography bg-success-subtle">             
+                <!--Atendimento-->
+                {% include "Medicos/partes_medico.html/nao_respondeu_classificacao.html" %}
+                <!--FIM Atendimento-->
+            </li>
          
             <li class="tab-content tab-content-2 typography">
                 <!--Encaminhamentos-->
@@ -93,6 +93,28 @@
                 {% include "Medicos/partes_medico.html/pacientes_finalizados.html" %}
                 <!--FIM Pacientes finalizados-->
             </li>
+        </ul>
+    </div>
+    <!--/ tabs -->
+
+
+    <!-- tabs -->
+    <div class="pcss3t pcss3t-effect-scale pcss3t-theme-7 border shadow bg-dark-subtle p-2">
+        <!--Fora de horari-->
+        <input type="radio" name="pcss3t" id="tab6" class="tab-content-6" >
+        <label for="tab6" class='text-danger'><i class="fa-solid fa-circle-exclamation "></i> Tempo previsto pela classificação, excedido</label>      
+        <!--FIM Fora de horari-->
+        {% if not nao_finalizado == '1' %}
+            <input type="radio" name="pcss3t" id="tab5" {{checked5}} class="tab-content-last">
+            <label for="tab5"  class='bg-danger-subtle'><i class="icon-globe"></i>0{{atend_aguarda_final|length}} - Pacientes não finalizados </label>
+        {% endif %}
+        
+        <ul>
+            <li class="tab-content tab-content-6 typography " >
+                <!--Pacientes acima horario-->
+                 {% include "Medicos/partes_medico.html/acima_horario.html" %}
+                <!--Fim acima horario-->
+            </li> 
             {% if not nao_finalizado == '1' %}
             <li class="tab-content tab-content-last typography bg-danger-subtle" >
                 <!--Pacientes não finalizados-->
@@ -100,14 +122,14 @@
                 <!--Fim Pacientes não finalizados-->
             </li>            
             {% endif %} 
-            <li class="tab-content tab-content-6 typography " >
-                <!--Pacientes acima horario-->
-                 {% include "Medicos/partes_medico.html/acima_horario.html" %}
-                <!--Fim acima horario-->
-            </li> 
+            
         </ul>
     </div>
     <!--/ tabs -->
+
+
+
+
 
             
         </div>

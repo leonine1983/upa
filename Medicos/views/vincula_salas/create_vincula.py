@@ -17,6 +17,12 @@ class VinculaProfissiona_sala_view(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('Medicos:salasProfissionalCreate')
     paginate_by = 5
 
+    def get_initial(self):
+        initial = super().get_initial()
+        # Set the initial value of profissionalSaude to the logged-in user
+        initial['profissionalSaude'] = self.request.user
+        return initial
+
     def form_valid(self, form):
         sala = form.save(commit=False)
         profissional = sala.profissionalSaude

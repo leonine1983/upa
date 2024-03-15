@@ -33,6 +33,7 @@
         {% for campo in object_list %}  
             {% if not campo.medico_atendimento.paciente_medico_atendimento %}
                 {% if not campo.passou_por_atend_medico %}
+                {% if not campo.classifica_tipo == None %}
                 <tr class="align-middle  "  {% if campo.paciente_triagem.prioridade == '1'  %} style="border-top:0.13rem solid #800080 !important;border-bottom:0.13rem solid #800080 !important;"  {% endif %}>
                     <td class="fs-7 " {% if campo.paciente_triagem.prioridade == '1'  %} style="border-left:0.2rem solid #800080 !important;"  {% endif %}>
                         <div class='row row-cols-2'>
@@ -84,6 +85,7 @@
                                     
              
                 </tr> 
+                {% endif %}
                 {% endif %}
                 {% else %}
                 
