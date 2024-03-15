@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         {% for pac in paciente_na_triagem  %}
-          {% if not pac.respondeu_ao_chamado %}
+          {% if pac.respondeu_ao_chamado %}
             <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}{% if pac.paciente_triagem.prioridade == '1' %} style="border: solid #800080 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
               <td class='fs-7'>
                 {% if pac.paciente_triagem.horas48 %}

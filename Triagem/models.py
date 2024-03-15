@@ -22,7 +22,8 @@ class Classifica_risco_model(models.Model):
                         'Emergência: Atendimento médico é urgente, mas não imediatamente para salvar a vida.',
                         'Urgência: O paciente precisa de atendimento, mas pode esperar um pouco. Não há risco imediato de vida.',
                         'Semi-urgência: O paciente precisa de atendimento, mas pode esperar mais tempo. Não há risco significativo de vida.',
-                        'Não urgente: O paciente precisa de atendimento, mas pode esperar. Não há risco significativo de vida.'
+                        'Não urgente: O paciente precisa de atendimento, mas pode esperar. Não há risco significativo de vida.',
+                        'Nao_Respondeu: Classificação para pacientes que não responderam ao chamado para a classificação'
                     ]
         
         if not Classifica_risco_model.objects.exists():

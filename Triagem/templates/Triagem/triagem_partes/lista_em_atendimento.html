@@ -13,7 +13,7 @@
     <tbody>
       {% for pac in paciente_na_triagem  %}
         {% if  conteudo == 'paciente_na_triagem' %}
-          {% if pac.respondeu_ao_chamado %}
+          {% if not pac.respondeu_ao_chamado %}
           <tr {% if pac.paciente_triagem.horas48 %} style="border: solid red 0.125rem;" class='bg-danger-subtle  '{% endif %}> 
             <td class='fs-7'>
               {% if pac.paciente_triagem.horas48 %}
