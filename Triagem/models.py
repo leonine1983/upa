@@ -115,6 +115,8 @@ class triagem(models.Model):
     # Cotabilização de chamadas -------------------------------------
     respondeu_ao_chamado = models.BooleanField(default=True, null=True)
     chamadas_contabilizadas = models.IntegerField(default=0, null=True)
+    medico_respondeu_ao_chamado = models.BooleanField(default=True, null=True)
+    medico_chamadas_contabilizadas = models.IntegerField(default=0, null=True)
     # Fim Cotabilização de chamadas -------------------------------------
 
     classifica_tipo = models.ForeignKey(Classifica_risco_model, null=True, on_delete=models.PROTECT, verbose_name='Classificação de Emergência')

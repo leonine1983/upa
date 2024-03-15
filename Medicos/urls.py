@@ -58,7 +58,8 @@ urlpatterns = [
     path('cadastrar-chamada/', views.cadastrar_chamada, name='cadastrar_chamada'),
     # importar csv para cid 10
     path('importar_csv/', views.import_csv, name='importa_csv'),
-    
+     # Paciente não atendeu ao chamdo
+   path('medico/chama_paciente/n_atende/<int:pk>', views.medico_paciente_nao_atende, name='medio_n_atendeu')
 
 ]
 

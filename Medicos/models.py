@@ -136,6 +136,11 @@ class Medico_atendimento (models.Model):
     tempo_espera_paciente = models.DurationField(blank=True, null=True)
     medico_nome = models.CharField(max_length=40, null=True)
     
+    # Cotabilização de chamadas -------------------------------------
+    respondeu_ao_chamado = models.BooleanField(default=True, null=True)
+    chamadas_contabilizadas = models.IntegerField(default=0, null=True)
+    # Fim Cotabilização de chamadas -------------------------------------
+    
     class Meta:
         permissions = [('Acesso_permitido_Admin', 'Acesso permitido ao admin do sistema na UPA'),\
                        ('Acesso_permitido_medic', 'Acesso permitido aos médicos') ]

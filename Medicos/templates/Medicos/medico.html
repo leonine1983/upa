@@ -38,7 +38,7 @@
 	<hr>
 	<p class='fs-6'><strong>Bem-vindo, Dr. {{request.user}}!</strong> Nesta página, você terá acesso a todos os pacientes aguardando atendimento. Além disso, nas abas adicionais, pode revisar atendimentos não finalizados, casos encaminhados para outros setores e os registros de todos os atendimentos realizados no dia. Facilitamos sua gestão de pacientes para uma prática médica mais eficiente e organizada.</p>
 
-<p>&nbsp;</p>
+    <p>&nbsp;</p>
 	<!-- tabs -->
     <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 border shadow bg-dark-subtle p-2">
         <input type="radio" name="pcss3t" {% if checked5 %}{% else %}checked{% endif %}  id="tab1"class="tab-content-first">
@@ -46,6 +46,10 @@
 
         <input type="radio" name="pcss3t"   id="tab7"class="tab-content-7 ">
         <label for="tab7" class='bg-success-subtle'><i class="icon-bolt"></i>Em Atendimento</label>
+
+        
+        <input type="radio" name="pcss3t"   id="tab8"class="tab-content-8 ">
+        <label for="tab8" class='bg-success-subtle'><i class="fa-solid fa-comment-slash"></i>NR (Não Respondeu)</label>
 
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
         <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
@@ -70,6 +74,11 @@
             <li class="tab-content tab-content-7 typography bg-success-subtle">             
                 <!--Atendimento-->
                 {% include "Medicos/partes_medico.html/Em_atendimento.html" %}
+                <!--FIM Atendimento-->
+            </li>
+            <li class="tab-content tab-content-8 typography bg-success-subtle">             
+                <!--Atendimento-->
+                {% include "Medicos/partes_medico.html/nao_respondeu.html" %}
                 <!--FIM Atendimento-->
             </li>
          

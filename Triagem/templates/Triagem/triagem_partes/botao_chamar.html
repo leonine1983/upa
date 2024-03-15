@@ -1,41 +1,41 @@
 <div class="floating-form-container">
-    {% if exibe_id is None or exibe_b == True %}
-          <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
-                  <i class="fa-solid fa-microphone-lines"></i>
-          </div>
-    {% endif %}
+  {% if exibe_id is None or exibe_b == True %}
+        <div class="floating-button" onclick="toggleForm()" title="Chamar paciente">
+                <i class="fa-solid fa-microphone-lines"></i>
+        </div>
+  {% endif %}
 
-    {% for t  in triagem %}
-      <!-- seu_template.html -->
-      <div class='d-flex'>
-        <form action="{% url 'Medicos:enfermagem_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
-          {% csrf_token %}
-          <p>
-                  <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
-                        <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
-                  </select>
-          </p>
-          <p>
-                  <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
-                        <option value="{{ request.user}}" selected="2">
-                          Enfemeira
-                          {% if request.user.get_full_name == '' %}
-                            {{request.user}}
-                            {% else %}
-                            {{ request.user }}
-                          {% endif %} </option>
-                  </select><button type="submit">Chamar Paciente</button>
-          </p>
-        </form>
-        {% if not exibe_b %}
-          {% if exibe_id is not None %}
-          <a href="{% url 'Medicos:enfermagem_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
-          <!--Avisa que o paciente não atendeu a chamada-->
-          <a href="{% url 'Triagem:n_atendeu' t.pk %}" title="Informar que o paciente não atendeu ao chamado" class='floating-button bg-secondary m-2 rounded-5'><i class="fa-solid fa-comment-slash"></i></a>          
-          
-          {% endif %}
-        {% else %}
+  {% for t  in triagem %}
+    <!-- seu_template.html -->
+    <div class='d-flex'>
+      <form action="{% url 'Medicos:enfermagem_chama_paciente' t.pk %}" method="post" class="floating-form center" id="floatingForm">
+        {% csrf_token %}
+        <p>
+          <select class="form-class m-1 text-capitalize border-0" name="nome_paciente" required="" id="id_nome_paciente">
+                <option value="{{ t.pk }}" selected="2">Chamar Paciente {{ t.paciente_triagem.paciente_envio_triagem.nome_social }}</option>
+          </select>
+        </p>
+        <p>
+          <select class="form-class m-1 text-capitalize border-0" name="profissionalSaude_id" required="" id="profissionalSaude_id">
+                <option value="{{ request.user}}" selected="2">
+                  Enfemeira
+                  {% if request.user.get_full_name == '' %}
+                    {{request.user}}
+                    {% else %}
+                    {{ request.user }}
+                  {% endif %} </option>
+          </select><button type="submit">Chamar Paciente</button>
+        </p>
+      </form>
+      {% if not exibe_b %}
+        {% if exibe_id is not None %}
+        <a href="{% url 'Medicos:enfermagem_avisa_pacientee' exibe_id %}" title="Desistir da Chamada" class='floating-button bg-danger m-2 rounded-5'><i class="fa-solid fa-volume-xmark"></i></a>          
+        <!--Avisa que o paciente não atendeu a chamada-->
+        <a href="{% url 'Triagem:n_atendeu' t.pk %}" title="Informar que o paciente não atendeu ao chamado" class='floating-button bg-secondary m-2 rounded-5'><i class="fa-solid fa-comment-slash"></i></a>          
+        
         {% endif %}
-      </div>
-    {% endfor %}
+      {% else %}
+      {% endif %}
+    </div>
+  {% endfor %}
 </div>
