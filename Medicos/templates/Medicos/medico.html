@@ -45,20 +45,20 @@
         <label for="tab1"><i class="icon-bolt"></i>Aguardando Atendimento</label>
 
         <input type="radio" name="pcss3t"   id="tab7"class="tab-content-7 ">
-        <label for="tab7" class='bg-success-subtle'><i class="icon-bolt"></i>Em Atendimento</label>
+        <label for="tab7" class='bg-success-subtle text-dark'><i class="icon-bolt"></i>Em Atendimento</label>
 
         
         <input type="radio" name="pcss3t"   id="tab8"class="tab-content-8 ">
-        <label for="tab8" class='bg-success-subtle'><i class="fa-solid fa-comment-slash"></i> NR Médico (Não Respondeu)</label>
+        <label for="tab8" class='bg-brown'><i class="fa-solid fa-comment-slash"></i> NR Médico (Não Respondeu)</label>
         
         <input type="radio" name="pcss3t"   id="tab9"class="tab-content-9 ">
-        <label for="tab9" class='bg-success-subtle'><i class="fa-solid fa-comment-slash"></i><i class="fa-solid fa-user-nurse"></i> NR Classificação (Não Respondeu)</label>
+        <label for="tab9" class='bg-brown-subtle'><i class="fa-solid fa-comment-slash"></i><i class="fa-solid fa-user-nurse"></i> NR Classificação (Não Respondeu)</label>
 
         <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
-        <label for="tab2"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
+        <label for="tab2" class="text-dark"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
 
         <input type="radio" name="pcss3t" id="tab3" class="tab-content-3 ">
-        <label for="tab3" class='bg-primary-subtle'><i class="icon-cogs"></i>Atendimentos Finalizados </label>
+        <label for="tab3" class='bg-primary-subtle text-dark'><i class="icon-cogs"></i>Atendimentos Finalizados </label>
         
         <ul>
             <li class="tab-content tab-content-first typography">             
@@ -71,12 +71,12 @@
                 {% include "Medicos/partes_medico.html/Em_atendimento.html" %}
                 <!--FIM Atendimento-->
             </li>
-            <li class="tab-content tab-content-8 typography bg-success-subtle">             
+            <li class="tab-content tab-content-8 typography bg-brown">             
                 <!--Atendimento-->
                 {% include "Medicos/partes_medico.html/nao_respondeu.html" %}
                 <!--FIM Atendimento-->
             </li>
-            <li class="tab-content tab-content-9 typography bg-success-subtle">             
+            <li class="tab-content tab-content-9 typography bg-brown-subtle">             
                 <!--Atendimento-->
                 {% include "Medicos/partes_medico.html/nao_respondeu_classificacao.html" %}
                 <!--FIM Atendimento-->

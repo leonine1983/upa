@@ -108,10 +108,10 @@ padding: 2%;">
                 </div>   
                 
                 <div style="width: auto!important;margin-right:0.5rem">
-                        Admissão: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.data_medico}}&nbsp;&nbsp;</span>
+                        Admissão: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.data_envio_triagem}}&nbsp;&nbsp;</span>
                 </div>  
                 <div style="width: auto!important;margin-right:0.5rem">
-                        Hora: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.hora_medico}}hs&nbsp;&nbsp;</span>
+                        Hora: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.horario_triagem}}hs&nbsp;&nbsp;</span>
                 </div>  
                 <div style="width: auto!important;">
                         Registro: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{% if r.paciente_medico_atendimento.paciente_triagem.cod_triagem %}{{r.paciente_medico_atendimento.paciente_triagem.cod_triagem}}{% else %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}&nbsp;&nbsp;</span>
