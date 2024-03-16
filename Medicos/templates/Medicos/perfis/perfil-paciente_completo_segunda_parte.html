@@ -10,15 +10,12 @@
     <link rel="stylesheet" href=" {% static 'global/css/abas_verticais.css' %} "> 
     <link rel="stylesheet" href="{% static 'global/css/footer.css' %}">
     <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
-
-
-
     <style>
         /* Checkbox Hack */
         .toggle {
             display: none;
         }
-    
+
         label {
             -webkit-appearance: push-button;
             -moz-appearance: button;
@@ -26,14 +23,14 @@
             cursor: pointer;
             padding: 5px;
         }
-    
+
         /* CSS padrão da div */
         .mostra {
             display: none;
             opacity: 0;
             transition: ease-in-out 300ms all;
         }
-    
+
         /* CSS quando o checkbox está marcado */
         .toggle:checked ~ .mostra {
             display: block;
@@ -46,12 +43,8 @@
         footer{
             display: none !important;
         }
-
     </style>
-    
-
-    {% endblock css %}   
-
+{% endblock css %}   
 <!--Titulo da Pagina-->
 {% block body_title %}  
 <div class='flex'>
@@ -78,11 +71,10 @@ padding: 0.5rem;
     {% endif %}  
     </div> 
 </div>
-    
 {% endblock body_title %}
 <!--Inicio do perfil-->
 {% block body_login %} 
-<div class="perfil-user w-100" style='height: 70rem;box-shadow:none; margin-top: -3rem; '> 
+<div class="perfil-user w-100" style='height: auto;box-shadow:none; margin-top: -3rem; '> 
     <div class='flex ' style='height:2.8rem; background:#d0d1d3; margin: -2rem -2rem 2rem;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; ' >
         <div style='background:#d0d1d3; height:3rem; padding: 1rem; width: 75%;transform:skew(-10deg); text-align:center; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'><i class="fa-solid fa-hospital-user"></i> Histórico Hospitalar</div>
         <div style='background:#bfbfbf; border-bottom: 0.5rem solid #d0d1d3; height:3rem; padding: 1rem; width: 30%;transform:skew(-10deg);text-align:center; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;'class='' ><a href="{% url 'Medicos:perfil_completo_paciente' pkK %}"><i class="fa-solid fa-person-breastfeeding"></i> Dados Pessoais do paciente</a></div>
@@ -90,200 +82,96 @@ padding: 0.5rem;
     <p>&nbsp;</p>   
     <div class="dados-pessoais">
         {% if link_medico %}
-<div class="">
-    <div>
-        <div>
-            <form action="?" method="GET" class="form-inline">
-                {% csrf_token %}            
-                <div class="search-wrapper">
-                <input type="text" class="search-input" placeholder="Buscar por paciente" name="busca-paciente">
-                <button class="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
+            <div class="">
+                <div>
+                    <div>
+                        <form action="?" method="GET" class="form-inline">
+                            {% csrf_token %}            
+                            <div class="search-wrapper">
+                            <input type="text" class="search-input" placeholder="Buscar por paciente" name="busca-paciente">
+                            <button class="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
+                            </div>
+                        </form> 
+                    </div>
+                    <div> 
+                        <table class="table table-striped shadow shadow-sm border m-3">
+                            <thead>
+                                <tr class="{% include 'Medicos/perfis/codicional_cores.html' %} table-secondary">
+                                    <th>Data</th>
+                                    <th>Classificação de Risco</th>
+                                    <th>Nome do paciente</th>
+                                </tr>
+                            </thead>
+                            {% for medico_atendimento in link_medico %}
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div>
+                                            <label for="toggle-{{ medico_atendimento.pk }}">{{ medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem }}</label>
+                                        </div>
+                                    </td>
+                                    <td class="{% include 'Medicos/perfis/codicional_cores.html' %}">
+                                        <div>
+                                            {{ medico_atendimento.paciente_medico_atendimento.classifica_tipo }}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ medico_atendimento.paciente_medico_atendimento }} 
+                                    </td>
+                                </tr>
+                                <tr>                        
+                                    <td colspan="3" style="  overflow: auto;">                            
+                                        <input type="checkbox" id="toggle-{{ medico_atendimento.pk }}" class="toggle {% include 'Medicos/perfis/codicional_cores.html' %}">
+                                        <div class="{% include 'Medicos/perfis/codicional_cores.html' %}" style="height:0.5rem !important; margin:-0.5rem !important; "></div>
+                                            <div class="mostra shadow-sm {% include 'Medicos/perfis/codicional_cores.html' %}" style="width:101.3%; margin:auto; margin:-0.5rem !important; margin-bottom: 2rem!important;">
+                                                <div class="bg-light"   style="width:98%; margin:-1rem auto !important">
+                                                <div class="text-secondary mt-3 shadow">
+                                                    <div class="m-3">{% include "Medicos/perfis/PARTE_perfil_completo_segunda_parte.html" %}</div>
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
-            </form> 
-        </div>
-        <div> 
-            <table class="table table-striped shadow shadow-sm border m-3">
-                <thead>
-                    <tr class="{% include 'Medicos/perfis/codicional_cores.html' %} table-secondary">
-                        <th>Data</th>
-                        <th>Classificação de Risco</th>
-                        <th>Nome do paciente</th>
-                    </tr>
-                </thead>
-                {% for medico_atendimento in link_medico %}
-                <tbody>
-                    <tr>
-                        <td>
-                            <div>
-                                <label for="toggle-{{ medico_atendimento.pk }}">{{ medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem }}</label>
-                            </div>
-                        </td>
-                        <td class="{% include 'Medicos/perfis/codicional_cores.html' %}">
-                            <div>
-                                {{ medico_atendimento.paciente_medico_atendimento.classifica_tipo }}
-                            </div>
-                        </td>
-                        <td>
-                            {{ medico_atendimento.paciente_medico_atendimento }} 
-                        </td>
-                    </tr>
-                    <tr>                        
-                        <td colspan="3" style="  overflow: auto;">                            
-                            <input type="checkbox" id="toggle-{{ medico_atendimento.pk }}" class="toggle {% include 'Medicos/perfis/codicional_cores.html' %}">
-                            <div class="{% include 'Medicos/perfis/codicional_cores.html' %}" style="height:0.5rem !important; margin:-0.5rem !important; "></div>
-                                <div class="mostra shadow-sm {% include 'Medicos/perfis/codicional_cores.html' %}" style="width:101.3%; margin:auto; margin:-0.5rem !important; margin-bottom: 2rem!important;">
-                                    <div class="bg-light"   style="width:98%; margin:-1rem auto !important">
-                                    <!-- Inf Básico-->    
-                                    <h2 style="font-size:1.5rem!important;padding:1rem!important;margin:1rem 0rem!important;background:rgb(231, 226, 226)!important; color:rgb(46, 30, 30)!important; ">Informações básica <h2>
-                                    <div class="text-secondary p-3 w-100">
-                                        <div><strong>Data e horário em que o paciente passou pela Recepção: </strong><span>{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem}} | {{medico_atendimento.paciente_medico_atendimento.paciente_triagem.horario_triagem}}h</span></div>
-                                        <div><strong>Data e horário em que o paciente passou pelo pré-atendimento (Triagem): </strong><span>{{medico_atendimento.paciente_medico_atendimento.data_triagem}} | {{medico_atendimento.paciente_medico_atendimento.hora_triagem}}h</span></div>
-                                        <div><strong>Data e horário em que o paciente foi atendido pelo médico: </strong><span>{{medico_atendimento.data_medico}} | {{medico_atendimento.hora_medico}}h</span></div>                                    
-                                        <hr>
-                                    </div>
-                                    <!-- Fim Inf Básico-->
-                                    <!-- Secção enfermagem--> 
-                                    <h2 style="font-size:1.5rem!important;padding:1rem!important;margin:1rem 0rem!important;background:rgb(231, 226, 226)!important; color:rgb(46, 30, 30)!important; ">Informações do Pré-atendimento - <b>Profissional</b>: {{medico_atendimento.paciente_medico_atendimento.nome_da_enfermeira}} </h2>                                          
-                                    <div class="flex  text-secondary" >
-                                        
-                                        <div style="border-right: 0.1rem solid #666; padding: 1rem;">
-                                            <div class=""><strong>Pressão Arterial:</strong>
-                                                <p class="p-1 ms-5">Mínima <i class="fa-solid fa-caret-down fa-rotate-270"></i>{{PA}} mmHg</p>
-                                                <p class="p-1 ms-5">Mínima <i class="fa-solid fa-caret-down fa-rotate-270"></i>{{PA}} mmHg</p>
-                                            </div>
-                                            
-                                            <div class="mt-3"><strong>Frequência Cardiaca (FC): </strong> <i class="fa-solid fa-caret-down fa-rotate-270"></i> {{FC}} bpm
-                                            </div>
-                                            
-                                            <div><strong>Frequência Respiratória (FR): </strong><i class="fa-solid fa-caret-down fa-rotate-270"></i> {{FR}} mrm </div>                                    
-                                        </div>
-                                        <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
-                                            <div><strong>Saturação de Oxigênio (SPO²): </strong><i class="fa-solid fa-caret-down fa-rotate-270"></i> {{SPO2}}</div>
-                                            <div><strong>Hemiglicoteste (HGT): </strong><i class="fa-solid fa-caret-down fa-rotate-270"></i> {{HGT}}</div>                                    
-                                        </div>                                
-                                        <div style="margin:0 1.5; border-right: 0.1rem solid #666; padding: 1rem;">
-                                            <div><strong>Temperatura (C°): </strong> <i class="fa-solid fa-caret-down fa-rotate-270"></i> {{TEMP}}</div>
-                                            <div><strong>Peso (Kg): </strong><i class="fa-solid fa-caret-down fa-rotate-270"></i> {{peso}} kg</div>
-                                        </div>
-                                        <div style="margin:0 1.5; border-right: 0.1rem; padding: 1rem;">
-                                            <div><strong class="uppercase"> Sitomas relatados pelo paciente: </strong></div>
-                                            <div class="border p-3">
-                                                <i class="fa-solid fa-person-chalkboard"></i>:
-                                                {{observacao}}
-                                            </div>
-                                            
-                                        </div>                                    
-                                    </div>  
-                                    <div class="text-secondary p-3"><strong>Classificação de Risco Atribuída no pré-atendimento: </strong><p><span class='uppercase h2 center'>{{medico_atendimento.paciente_medico_atendimento.classifica_tipo}}</span></p></div>             
-                                    <div>&nbsp;</div>
-                                    <hr>
-                                    <h2 style="font-size:1.5rem!important;padding:1rem!important;margin:1rem 0rem!important;background:rgb(231, 226, 226)!important; color:rgb(46, 30, 30)!important; ">Informações Médicas - <b>Profissional</b> Dr. {{medico_atendimento.medico_nome}}</h2>
-                                    <p></p>
-                                    <!-- Fim Secção enfermagem-->                                      
-                                    <div class="text-secondary">  
-                                    <!-- Secção médica-->                                      
-                                        {% if not medico_atendimento.historico_doenca_atual_HDA == 'Não se aplica' %}
-                                            <div style="margin:0 1.5;  padding: 1rem;">
-                                                <span class=''><strong>Histórico da Doença Atual (HDA):</strong></span>                     
-                                                <p href="">{{medico_atendimento.hemorragia_digestiva_alta_HDA}}</p>                                                          
-                                            </div>
-                                        {% endif %}
-                                        {% if not medico_atendimento.exame_fisico == 'Não se aplica' %}
-                                        <div style="margin:0 1.5;  padding: 1rem;">
-                                            <span class=''><strong>Exame Físico:</strong></span>                     
-                                            <p href="">{{medico_atendimento.exame_fisico}}</p>                                                          
-                                        </div>
-                                        {% endif %}
-                                        {% if not medico_atendimento.Diagnostico == 'Não se aplica' %}
-                                            <div style="margin:0 1.5;  padding: 1rem;">
-                                                <span class=''><strong>Diagnóstico:</strong></span>                     
-                                                <p href="">{{medico_atendimento.Diagnostico}}</p>                                                          
-                                            </div>
-                                        {% endif %}
-                                        {% if not medico_atendimento.classificacao_internacional_doenca_CID == 'Não se aplica' %}
-                                            <div style="margin:0 1.5;  padding: 1rem;">
-                                                <span class=''><strong>CID - Classificação Internacional de Doenças:</strong></span>                     
-                                                <p href="">{{medico_atendimento.classificacao_internacional_doenca_CID}}</p>                                                          
-                                            </div>
-                                        {% endif %}
-                                        {% if not medico_atendimento.conduta == 'Não se aplica' %}
-                                            <div style="margin:0 1.5;  padding: 1rem;">
-                                                <span class=''><strong>Conduta:</strong></span>                     
-                                                <p href="">{{medico_atendimento.conduta}}</p>                                                          
-                                            </div>
-                                        {% endif %}
-                                        {% if not medico_atendimento.paciente_medico_atendimento.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %}
-                                            <div style="margin:0 1.5;  padding: 1rem;">
-                                                <hr>
-                                                <span class=''><strong>Medicamento receitado pelo médico:</strong></span>                     
-                                                <p href="">{{medico_atendimento.paciente_medico_atendimento.preescrever_medicamento_medico}}</p>   
-                                            </div>
-                                        {% endif %}    
-                                        <div style="text-align:center; font-size:2rem">
-                                            <label for="toggle-{{ medico_atendimento.pk }}">                                            
-                                                <i  for="toggle-{{ medico_atendimento.pk }}" class="fa-solid fa-angles-down fa-rotate-180" ></i></label>
-                                        </div>
-                                        <div class="{% include 'Medicos/perfis/codicional_cores.html' %} p-2"></div>
-                                    <!-- FIM Secção médica-->
-                                    </div> 
-                                   
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <div></div>
-</div>
-{% endif %}
-<script>
-    // Obter todas as células da coluna "Data"
-const cells = document.querySelectorAll('.table-striped tbody td:first-child');
+                <div></div>
+            </div>
+        {% endif %}
+        <script>
+            // Obter todas as células da coluna "Data"
+        const cells = document.querySelectorAll('.table-striped tbody td:first-child');
 
-// Adicionar evento de clique a cada célula
-cells.forEach((cell) => {
-    cell.addEventListener('click', function () {
-        // Obter o checkbox correspondente à linha clicada
-        const checkbox = this.parentElement.nextElementSibling.querySelector('.toggle');
+        // Adicionar evento de clique a cada célula
+        cells.forEach((cell) => {
+            cell.addEventListener('click', function () {
+                // Obter o checkbox correspondente à linha clicada
+                const checkbox = this.parentElement.nextElementSibling.querySelector('.toggle');
 
-        // Obter o elemento "mostra" correspondente ao checkbox
-        const mostra = checkbox.parentElement.nextElementSibling.querySelector('.mostra');
+                // Obter o elemento "mostra" correspondente ao checkbox
+                const mostra = checkbox.parentElement.nextElementSibling.querySelector('.mostra');
 
-        // Verificar se o checkbox está marcado
-        if (checkbox.checked) {
-            // Ocultar o conteúdo "mostra"
-            mostra.style.display = 'none';
-            mostra.style.opacity = 0;
+                // Verificar se o checkbox está marcado
+                if (checkbox.checked) {
+                    // Ocultar o conteúdo "mostra"
+                    mostra.style.display = 'none';
+                    mostra.style.opacity = 0;
 
-            // Desmarcar o checkbox
-            checkbox.checked = false;
-        } else {
-            // Mostrar o conteúdo "mostra"
-            mostra.style.display = 'block';
-            mostra.style.opacity = 1;
+                    // Desmarcar o checkbox
+                    checkbox.checked = false;
+                } else {
+                    // Mostrar o conteúdo "mostra"
+                    mostra.style.display = 'block';
+                    mostra.style.opacity = 1;
 
-            // Marcar o checkbox
-            checkbox.checked = true;
-        }
-    });
-});
-
-</script>
-  
-
-
-
-
-
-
-
-
-
-
-        </div> 
-    </div>  
-</div>    
-
+                    // Marcar o checkbox
+                    checkbox.checked = true;
+                }
+            });
+        });
+        </script>
+    </div> 
+</div>  
 {% endblock body_login %}
