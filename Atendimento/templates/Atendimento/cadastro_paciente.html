@@ -93,6 +93,23 @@
             <i id="fa-hospital-user" class="fa-duotone fa-hospital-user m-1"></i> 
             Cadastro de pacientes
         </div>
+        <div class='me-5 p-3 d-block'>
+            {% if paciente_existe %}
+            <ul class="me-5 list-group"></ul>
+                <h2 class='fs-4'>Paciente encontrado</h2>
+               {% for item in paciente_existe %}
+                <li class="me-5 list-group-item p-4 m-3 bg-brown rounded-3 shadow">
+                    <span class='text-capitalize'><i class="fa-solid fa-person-walking"></i> {{item.nome_social}}</span> | 
+                    {% if item.nome_completo %} Nome completo: {{item.nome_completo}} {% endif %} | RG: {{item.RG}} | CPF: {{item.CPF}}
+                    | Endereço: {{item.rua}}, {{item.bairro}}, {{item.cidade}}
+                    <a class = 'mx-5 btn btn-sm btn-primary' href="{% url 'Atendimento:envio_paciente_a_triagem_2' item.pk %}"> 
+                        Enviar <span class='text-capitalize'>{{item.nome_social}}</span>
+                         para a FILA DE ESPERA</a>
+                </li>
+               {% endfor %} 
+            </ul>
+            {% endif %}
+        </div>
     {% endif %}    
     <!-- Form para cadastrar os pacientes-->    
     {% include "Atendimento/partes_cadastro_pacientes/parte_form_cadastra_paciente.html" %}

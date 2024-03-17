@@ -48,15 +48,20 @@ padding: 2%;">
                 <div style="width: auto!important;margin-right:0.5rem">
                         Nome Social:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important; font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}} &nbsp;&nbsp;</span>
                 </div>
+                {% if medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_completo %}
+                <div style="width: auto!important;margin-right:0.5rem">
+                        Nome Completo:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important; font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_completo}} &nbsp;&nbsp;</span>
+                </div>
+                {% endif %}
                 <div style="width:auto;margin-right:0.5rem">
                         Idade:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.idade}} anos&nbsp;&nbsp;</span>
-                </div>
-                <div style="width: auto!important;">
-                        Data de Nascimento:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.data_nascimento}}&nbsp;&nbsp;</span>
                 </div>
         </div>   
         <!--linha 2-->
         <div style="display: flex;">
+                <div style="width: auto!important;">
+                        Data de Nascimento:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.data_nascimento}}&nbsp;&nbsp;</span>
+                </div>
                 <div style="width: auto!important;margin-right:0.6rem">
                         Sexo:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.sexo}}&nbsp;&nbsp;</span>
                 </div>
@@ -65,10 +70,7 @@ padding: 2%;">
                 </div>
                 <div style="width: auto!important;margin-right:0.6rem">
                         CNS ou CPF: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.CPF}}&nbsp;&nbsp;</span>
-                </div>    
-                <div style="width: auto!important;margin-right:0.6rem">
-                        Cartão do Sus: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.cartao_sus}}&nbsp;&nbsp;</span>
-                </div>                              
+                </div>                                 
         </div>  
         <!--linha 3-->
         <div style="display: flex;">
@@ -106,7 +108,6 @@ padding: 2%;">
                 <div style="width: auto!important;margin-right:0.5rem">
                         Acompanhante: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.nome_acompanhante}}&nbsp;&nbsp;</span>
                 </div>   
-                
                 <div style="width: auto!important;margin-right:0.5rem">
                         Admissão: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem}}&nbsp;&nbsp;</span>
                 </div>  
@@ -115,10 +116,11 @@ padding: 2%;">
                 </div>  
                 <div style="width: auto!important;">
                         Registro: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{% if medico_atendimento.paciente_medico_atendimento.paciente_triagem.cod_triagem %}{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.cod_triagem}}{% else %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}&nbsp;&nbsp;</span>
-                </div>  
-               
-                                                                            
+                </div>                                                               
         </div>
+        <div style="width: auto!important;margin-right:0.6rem">
+                Cartão do Sus: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{medico_atendimento.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.cartao_sus}}&nbsp;&nbsp;</span>
+        </div> 
         <!--ENFERMAGEM-->
         <div style="margin-top: 3%;">
                 <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important;margin-bottom:-2%">Informações da classificação (Enfermagem)</h2>  

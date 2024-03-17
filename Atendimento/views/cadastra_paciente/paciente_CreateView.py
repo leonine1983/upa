@@ -70,7 +70,9 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
             form.instance.nome_recepcionista = self.request.user.username
         # Verifica se o RG ou CPF já existe no banco de dados
         rg_existente = ficha_de_atendimento.objects.filter(RG=form.cleaned_data['RG']).exists()
+        print(f'paciente é {rg_existente}')
         cpf_existente = ficha_de_atendimento.objects.filter(CPF=form.cleaned_data['CPF']).exists()
+        print(f'paciente é {cpf_existente}')
 
         if rg_existente:
             messages.error(self.request, 'Já existe um paciente cadastrado com este RG.')
@@ -79,7 +81,11 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
 
         # Se RG ou CPF já existem, renderize o template novamente com uma mensagem de erro e os dados do formulário
         if rg_existente or cpf_existente:
-            return render(self.request, self.template_name, {'form': form})
+            if rg_existente:
+                paciente_cadastro = ficha_de_atendimento.objects.filter(RG=form.cleaned_data['RG'])
+            else:
+                paciente_cadastro = ficha_de_atendimento.objects.filter(CPF=form.cleaned_data['CPF'])
+            return render(self.request, self.template_name, {'form': form, 'paciente_existe':paciente_cadastro})
 
         # Se nenhum RG ou CPF já existe, continue com a criação do paciente
         self.object = form.save()
@@ -87,7 +93,7 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         url = reverse_lazy('Atendimento:envio_paciente_a_triagem_2', args=[self.object.pk])
-        print('ID do objeto criado:', self.object.pk)
+        #print('ID do objeto criado:', self.object.pk)
         return url
     
     #Se o usuario nao estiver logado
