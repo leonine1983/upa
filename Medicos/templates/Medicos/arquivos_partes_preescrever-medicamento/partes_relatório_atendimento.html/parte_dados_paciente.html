@@ -1,0 +1,79 @@
+<!--linha 1-->
+<div style="display: flex;">
+    <div style="width: auto!important;margin-right:0.5rem">
+            Nome Social:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important; font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}} &nbsp;&nbsp;</span>
+    </div>
+    {% if r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_completo %}
+    <div style="width: auto!important;margin-right:0.5rem">
+        Nome Completo (RG):<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important; font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_completo}} &nbsp;&nbsp;</span>
+    </div>
+    {% endif %}
+    <div style="width:auto;margin-right:0.5rem">
+            Idade:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.idade}} anos&nbsp;&nbsp;</span>
+    </div>
+</div>   
+<!--linha 2-->
+<div style="display: flex;">
+    <div style="width: auto!important;">
+        Data de Nascimento:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.data_nascimento}}&nbsp;&nbsp;</span>
+    </div>
+    <div style="width: auto!important;margin-right:0.6rem">
+            Sexo:<span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.sexo}}&nbsp;&nbsp;</span>
+    </div>
+    <div style="width: auto!important;margin-right:0.6rem">
+            RG: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.8rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.RG}}&nbsp;&nbsp;</span>
+    </div>
+    <div style="width: auto!important;margin-right:0.6rem">
+            CNS ou CPF: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.CPF}}&nbsp;&nbsp;</span>
+    </div>                             
+</div>  
+<!--linha 3-->
+<div style="display: flex;">
+    <div style="width: auto!important;margin-right:0.6rem">
+            Endereço (Rua): <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem; ">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.rua}}&nbsp;&nbsp;</span>
+    </div>  
+    <div style="margin-right:0.6rem;width:auto!important;">
+            Bairro: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.bairro}}&nbsp;&nbsp;</span>
+    </div>  
+    <div style="margin-right:0.6rem;width: auto!important;">
+            Cidade: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.cidade}}&nbsp;&nbsp;</span>
+    </div> 
+    <div style="width: auto!important;">
+            Estado: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.estado}}&nbsp;&nbsp;</span>
+    </div> 
+                                     
+</div>
+<!--linha 4-->
+<div style="display: flex;">
+    <div style="width: auto!important;margin-right:0.6rem">
+            CEP: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.CEP}}&nbsp;&nbsp;</span>
+    </div> 
+    <div style="width: auto!important;margin-right:0.6rem">
+            Nome da Mãe: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_mae}}&nbsp;&nbsp;</span>
+    </div> 
+    <div style="width: auto!important;margin-right:0.6rem">
+            Nacionalidade: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nacionalidade}}&nbsp;&nbsp;</span>
+    </div>  
+    <div style="width: auto!important;">
+            Telefone: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.tel}}&nbsp;&nbsp;</span>
+    </div>                                                                  
+</div>
+<!--linha 5-->
+<div style="display: flex;">
+    <div style="width: auto!important;margin-right:0.5rem">
+            Acompanhante: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.nome_acompanhante}}&nbsp;&nbsp;</span>
+    </div>   
+    
+    <div style="width: auto!important;margin-right:0.5rem">
+            Admissão: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.data_envio_triagem}}&nbsp;&nbsp;</span>
+    </div>  
+    <div style="width: auto!important;margin-right:0.5rem">
+            Hora: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.horario_triagem}}hs&nbsp;&nbsp;</span>
+    </div>  
+    <div style="width: auto!important;">
+            Registro: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{% if r.paciente_medico_atendimento.paciente_triagem.cod_triagem %}{{r.paciente_medico_atendimento.paciente_triagem.cod_triagem}}{% else %}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}&nbsp;&nbsp;</span>
+    </div>                                                                     
+</div>
+<div style="width: auto!important;margin-right:0.6rem">
+    Cartão do Sus: <span style="font-weight: bold;border-bottom: 0.01rem solid gray !important;font-size:0.9rem">&nbsp;&nbsp;{{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.cartao_sus}}&nbsp;&nbsp;</span>
+</div>

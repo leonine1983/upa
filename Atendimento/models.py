@@ -196,7 +196,7 @@ class Licenca(models.Model):
     def create_registros(sender, **kwargs):
         if not Licenca.objects.exists():
             # Obtenha a data atual com informações de fuso horário
-            expiracao = datetime.now() + timedelta(days=35)
+            expiracao = datetime.now() + timedelta(days=20)
             
             # Crie a instância de Licenca
             Licenca.objects.create(

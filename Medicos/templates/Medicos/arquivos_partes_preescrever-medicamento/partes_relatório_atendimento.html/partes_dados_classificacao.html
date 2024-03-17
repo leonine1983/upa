@@ -1,0 +1,58 @@
+<div style="margin-top: 3%;">
+    <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important;margin-bottom:-2%">Informações da classificação (Enfermagem)</h2>  
+    <hr>
+    <p>Hora: {{r.paciente_medico_atendimento.hora_triagem}}hs</p> </p>
+    <div style="display: flex;width:auto; font-size:0.9rem">
+        <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
+                <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">PA:</b>&nbsp;  {{r.paciente_medico_atendimento.pressao_arterial_PA}}mmHg max  | {{r.paciente_medico_atendimento.pressao_arterial_PA_2}}mmHg  min
+        </div>
+        <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
+                <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FC:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_cardiaca_FC}}bpm
+        </div>   
+        <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
+                <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">FR:</b>&nbsp; {{r.paciente_medico_atendimento.frequencia_respiratoria_FR}}bpm
+        </div>  
+        <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
+                <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">SPO²:</b>&nbsp; {{r.paciente_medico_atendimento.saturacao_de_oxigenio_SPO2}}%
+        </div>                                                                                  
+        <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
+                <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">HGT:</b>&nbsp; {{r.paciente_medico_atendimento.hemoglicoteste_HGT}}mg/dL
+        </div> 
+        <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
+                <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">TEMP:</b>&nbsp; {{r.paciente_medico_atendimento.temperatura_TEMP}}c°
+        </div> 
+        <div style="border: 0.1rem solid gray;padding: 0.5rem; display:flex;">
+                <b style="font-size: 0.8rem;margin-bottom: 1rem; display: block;">PESO:</b>
+                &nbsp;{% if r.paciente_medico_atendimento.peso == None %}33,6kg{% else %}{{r.paciente_medico_atendimento.peso}}kg{% endif %}
+        </div>                                           
+    </div> 
+    <div class="comorbidade" style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; border: 0.1rem solid #ccc; ">
+            <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;" >SINTOMAS RELATADOS PELO PACIENTE:</b>
+            {{r.paciente_medico_atendimento.observacao|safe}}
+    </div>
+    {% if not r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_comorbidades|safe == "Não possui comobirdades (Para tornar editável essa área, é necessário informar que o paciente possui comobirdades)" %}
+        <div class="comorbidade" style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; border: 0.1rem solid #ccc; ">
+            <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;">COMORBIDADES:</b>
+            <style>ul{display:flex}</style>
+            {{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_comorbidades|safe}}
+        </div>
+    {% endif %}
+    {% if not  r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_alergia|safe == "Não possui alergias (Para tornar editável essa área, é necessário informar que o paciente possui alergias)" %}
+        <div class="comorbidade" style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; border: 0.1rem solid #ccc; ">
+            <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;">Alergias:</b>
+            <style>ul{display:flex}</style>
+            {{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_alergia|safe}}
+        </div>
+    {% endif %}
+    <div style="font-size: 0.8rem; padding:0.2rem 0.5rem; margin:0.5rem 0; background-color:#ccc; display:flex; border: 0.1rem solid #ccc;">
+            <div style="width: 50%;">
+                    <b style="font-size: 0.8rem;margin-top: 0.5rem; display: block;">CLASSIFICAÇÃO:</b>
+                    <style>ul{display:flex}</style>
+                    <i style='font-size: 1.5rem'>{{r.paciente_medico_atendimento.classifica_tipo}}</i>
+            </div>
+            <div>
+                    <b style="font-size: 0.8rem;margin-top: 0.8rem; display: block;">ENFERMEIRO (a):</b>
+                    <i style='font-size: 0.8rem'>{{r.paciente_medico_atendimento.nome_da_enfermeira}}</i>                                          
+            </div>
+    </div>
+</div>
