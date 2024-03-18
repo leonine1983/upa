@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'configUPA.middleware.OnlineUsersMiddleare'
 ]
 
 #Trecho configurado para usar o armazenamento de sessão em cache
@@ -85,7 +86,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'Atendimento.context_processors.licenca_context'
+                'Atendimento.context_processors.licenca_context',
+                'configUPA.context_processors.online_users'
             ],
         },
     },

@@ -2,6 +2,7 @@ from .models import Licenca
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+# Atividade da lincença
 def licenca_context(request):
     licenca_ativa = Licenca.objects.filter(ativa=True, expiracao__gt=timezone.now()).first()
     """
@@ -19,3 +20,5 @@ def licenca_context(request):
 
     """
     return {'licenca_ativa': licenca_ativa}
+
+# Atividade da lincença

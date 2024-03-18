@@ -34,11 +34,20 @@
                 Cancelar chamados.
             </a>
         </div>
-        <div class="fs-6 m-2 shadow shadow-sm p-1">
-            <a class="px-2" href="{% url 'Atendimento:listagem_envio' %}">
-                <i class="fa-solid fa-list-check "></i>
-                Exibir lista de entrada de pacientes por data
-            </a>
+        <div class="fs-6 m-2 shadow shadow-sm p-1 bg-primary-subtle border border-2 border-primary">
+            <div class="p-2 bg-primary text-light shadom shadow-sm"><h2><i class="fa-solid fa-signal"></i> Usuários Online </h2></div>
+            <ul class="list-group">
+                {% for on in online_users %}
+                <li class="list-group-item">
+                  <input class="form-check-input me-1 bg-success" type="checkbox" value="" aria-label="...">
+                  {% if on.first_name %}
+                    <span class='text-capitalize'>{{on.first_name}} {{on.last_name}}</span>
+                  {% else %}
+                  <span class='text-capitalize'>{{on.username}}</span>
+                  {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
         </div>
       </p>
     </div>
