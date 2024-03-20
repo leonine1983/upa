@@ -61,7 +61,7 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
     model = ficha_de_atendimento
     form_class = PacienteForm
     template_name = 'Atendimento/cadastro_paciente.html'
-    
+    """
     def form_valid(self, form):
         # Definir o nome do responsavel pelo cadastro do paciente
         if self.request.user.first_name:
@@ -73,7 +73,7 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
         print(f'paciente é {rg_existente}')
         cpf_existente = ficha_de_atendimento.objects.filter(CPF=form.cleaned_data['CPF']).exists()
         print(f'paciente é {cpf_existente}')
-
+        
         if rg_existente:
             messages.error(self.request, 'Já existe um paciente cadastrado com este RG.')
         if cpf_existente:
@@ -90,7 +90,7 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
         # Se nenhum RG ou CPF já existe, continue com a criação do paciente
         self.object = form.save()
         return super().form_valid(form)
-
+    """
     def get_success_url(self):
         url = reverse_lazy('Atendimento:envio_paciente_a_triagem_2', args=[self.object.pk])
         #print('ID do objeto criado:', self.object.pk)

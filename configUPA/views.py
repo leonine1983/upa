@@ -34,13 +34,9 @@ class letreiroCreateView(LoginRequiredMixin, CreateView):
         context['letreiroCreate'] = 'oi'
         return context
 
-
 def handler404(request, exception=None):
     context = {'error_message': 'Oops! A página que você está procurando não foi encontrada.'}
     return render(request, 'configUPA/error-404.html', context, status=404)
-
-
-
 
 def handler500(request):
     context = {'error_message': 'Oops! Houve um erro interno no servidor.'}
