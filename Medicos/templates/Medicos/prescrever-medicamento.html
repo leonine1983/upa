@@ -39,94 +39,126 @@
               <!-- Relatório do atendimento -->   
               {% include "Medicos/arquivos_partes_preescrever-medicamento/relatorio_atendimento.html" %}             
        </div>
-       <div class='col'>  
-              <h1 class="h4 ml-3 w-75 bg-secondary-subtle p-3 rounded-top-1 shadow shadow-sm">Caso seja necessário gerar algum documento para o paciente, utilize os botões abaixo.</h1>
-              <hr>          
-              <form  method="post">                     
-                     {% csrf_token %}    
-                     {{form.media}}                 
-                     <div>   
-                            <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
-                                   <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
-                                   <label for="tab2"><i class="fa-sharp fa-solid fa-person-running-fast"></i> Exames:</label>
-                                   
-                                   <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
-                                   <label for="tab3"><i class="fa-sharp fa-light fa-stethoscope"></i> Atestado Paciente:</label>
+       <div class='col'> 
+              <div class="border border-dark p-4">
+                     <h1 class="h4 ml-3 w-75 bg-secondary-subtle p-3 rounded-top-1 fw-bold">Se precisar emitir documentos para o paciente, utilize as guias abaixo e clique em "Continuar".</h1>
+                     <hr>          
+                     <form  method="post">                     
+                            {% csrf_token %}    
+                            {{form.media}}                 
+                            <div>   
+                                   <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
+                                          <input type="radio" name="pcss3t"checked  id="tab4" class="tab-content-4">
+                                          <label for="tab4"><i class="fa-sharp fa-light fa-stethoscope"></i> Prescrever Medicamento:</label>
+                                          <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+                                          <label for="tab2"><i class="fa-sharp fa-solid fa-person-running-fast"></i> Exames:</label>                                   
+                                          <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
+                                          <label for="tab3"><i class="fa-sharp fa-light fa-stethoscope"></i> Atestado Paciente:</label>                                   
+                                          <ul>  
+                                                 <li class="tab-content tab-content-4 typography">     
+                                                        <div class='text-center'>
+                                                               {{form.preescrever_medicamento_medico}}
+                                                        </div>     
+                                                 </li>
+                                                 <li class="tab-content tab-content-2 typography">
+                                                        <!-- Bootstrap Links -->
+                                                        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+                                                        <!-- JS, Popper.js, and jQuery -->
+                                                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                                                        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+                                                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-                                   <input type="radio" name="pcss3t" id="tab4" class="tab-content-4">
-                                   <label for="tab4"><i class="fa-sharp fa-light fa-stethoscope"></i> Prescrever Medicamento:</label>
-                                   
-                                   <!--<input type="radio" name="pcss3t" id="tab5" class="tab-content-last">
-                                   <label for="tab5"><i class="icon-globe"></i>Conduta:</label>-->
-                                   
-                                   <ul>  
-                                          <li class="tab-content tab-content-2 typography">
-                                                  <!-- Bootstrap Links -->
-                                                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-                                                 <!-- JS, Popper.js, and jQuery -->
-                                                 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-                                                 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-                                                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+                                                        <!-- Jquery -->
+                                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-                                                 <!-- Jquery -->
-                                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                                                        <!-- select2 -->
+                                                        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+                                                        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
-                                                 <!-- select2 -->
-                                                 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-                                                 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
-                                                 <!-- Semantics JSS -->
-                                                 <p> {{form.exames}}</p>
-                                                 <script>
-                                                        $("#id_exames").select2({
-                                                            width: '100%',
-                                                            placeholder: "Select names",
-                                                        });
+                                                        <!-- Semantics JSS -->
+                                                        <p> {{form.exames}}</p>
+                                                        <script>
+                                                               $("#id_exames").select2({
+                                                               width: '100%',
+                                                               placeholder: "Select names",
+                                                               });
+                                                        
+                                                               function btn_handler() {
+                                                               var selectedValues = $('.prompt').val();
+                                                               
+                                                               for (let value of selectedValues) {
+                                                                      var optionText = $(`.prompt option[value="${value}"]`).text();
+                                                                      alert(optionText);
+                                                               }
+                                                               }
+                                                        </script>   
+                                                        
+                                                        <div class='bg-secondary-subtle m-2 mt-4 p-2' > 
+                                                               <h5>Obs.:</h5>
+                                                               <div class='fs-5'>Se precisa selecionar mais de um exame, deixa a tecla "<strong>Ctrl</strong>" pressionada ao clicar nos exames.</div>
+                                                        </div> 
+                                                 </li>
+                                                 <li class="tab-content tab-content-3 typography">     
+                                                        <div class='text-center'>
+                                                               <div class='fs-6'> Digite a quantidade de dias que o paciente permanecerá em descanso e recuperação. </div>
+                                                               <div class='text-center border p-2 fs-2 bg-primary-subtle'>🕒<span id="atestado-display" class=''>{{ form.atestado.value }}</span> dias</div>
+                                                               {{form.atestado}}
+                                                        </div>     
+                                                 </li>
                                                  
-                                                        function btn_handler() {
-                                                            var selectedValues = $('.prompt').val();
-                                                            
-                                                            for (let value of selectedValues) {
-                                                                var optionText = $(`.prompt option[value="${value}"]`).text();
-                                                                alert(optionText);
-                                                            }
-                                                        }
-                                                    </script>   
-                                                 
-                                                 <div class='bg-secondary-subtle m-2 mt-4 p-2' > 
-                                                        <h5>Obs.:</h5>
-                                                        <div class='fs-5'>Se precisa selecionar mais de um exame, deixa a tecla "<strong>Ctrl</strong>" pressionada ao clicar nos exames.</div>
+                                          </ul>
+                                   </div>                            
+                                   <div >
+                                          {% if form.enviar_ambulatorio %}
+                                          <h3>Enviar o paciente para o ambulatório:</h3>
+                                          {{form.enviar_ambulatorio}}     
+                                          {% endif %}         
+                                          <button style='width: 90%;' type="submit" class='btn btn-sm btn-secondary mt-3 fs-4'>Continuar <i class="fa-solid fa-angles-right"></i></button>
+                                          <!--<div class="m-auto mt-3 w-75">Se necessário encaminhar o paciente para atendimentos especializados, como exames de raio-x, ambulatório e outros, utilize o botão <b>Atendimento especializado</b>. 🏥
+                                                 <a class='btn btn-sm bg-secondary-subtle'  href="{% url 'Triagem:triagem_especializada' %}?param={{ pk }}">Atendimento especializado</a>
+                                          </div>  -->
+                                   </div>                                                        
+                            </div>                          
+                     </form>
+              </div>
+              <div class='m-5 p-3'>
+                     <div class="card w-100">
+                            <h5 class="card-header">Finalização de atendimento</h5>
+                            <div class="card-body">
+                                   {% for r  in resultado_medico %}
+                                          <form method='POST' action="{% url "Medicos:final_medico_concluida" r.paciente_medico_atendimento.id %}">
+                                          {% csrf_token %}              
+                                                 <div class='bg-danger-subtle
+                                                 shadow-sm p-3 text-center'> 
+                                                        <label  for="id_final_triagem">
+                                                               Completado o atendimento ao paciente <strong class='text-uppercase'>{{triagem}}</strong>.
+                                                               <p class="fs-6">Confirmo que todos os procedimentos necessários foram realizados de acordo com os padrões estabelecidos.
+                                                               O paciente foi devidamente assistido e encontra-se pronto para seguir sua próxima etapa de cuidados médicos, se necessário.</p>
+                                                               
+                                                        </label>
+                                                        <div class='m-2 p-2 btn btn-secondary'>Clique no quadrado à direita para confirmar: 
+                                                               <input  style="scale:5" type="checkbox" name="final_medico_atendimento" value="1" maxlength="3" required="" id="id_final_medico_atendimento"> 
+                                                        </div>                             
                                                  </div> 
-                                          </li>
-                                          <li class="tab-content tab-content-3 typography">     
-                                                 <div class='text-center'>
-                                                        <div class='fs-6'> Digite a quantidade de dias que o paciente permanecerá em descanso e recuperação. </div>
-                                                        <div class='text-center border p-2 fs-2 bg-primary-subtle'>🕒<span id="atestado-display" class=''>{{ form.atestado.value }}</span> dias</div>
-                                                        {{form.atestado}}
-                                                 </div>     
-                                          </li>
-                                          <li class="tab-content tab-content-4 typography">     
-                                                 <div class='text-center'>
-                                                        {{form.preescrever_medicamento_medico}}
-                                                 </div>     
-                                          </li>
-                                   </ul>
-                            </div>                            
-                            <div >
-                                   {% if form.enviar_ambulatorio %}
-                                   <h3>Enviar o paciente para o ambulatório:</h3>
-                                   {{form.enviar_ambulatorio}}     
-                                   {% endif %}         
-                                   <button style='width: 90%;' type="submit" class='btn btn-sm btn-secondary mt-3 fs-4'>Continuar <i class="fa-solid fa-angles-right"></i></button>
-                                   <div class="m-auto mt-3 w-75">Se necessário encaminhar o paciente para atendimentos especializados, como exames de raio-x, ambulatório e outros, utilize o botão <b>Atendimento especializado</b>. 🏥
-                                          <a class='btn btn-sm bg-secondary-subtle'  href="{% url 'Triagem:triagem_especializada' %}?param={{ pk }}">Atendimento especializado</a>
-                                   </div>  
-                            </div>                                                        
-                     </div>                          
-              </form>
-       </div>  
-   
-           
+                                                 <div class=' m-5 fs-5'>
+                                                        <div >
+                                                               <p class='fs-5'><strong>Observação:</strong></p>
+                                                               <p class='fs-6'>
+                                                               Após confirmar a conclusão do atendimento ao paciente <span class="text-uppercase fw-bold">{{triagem}}</span>, o nome deste paciente será removido da seção 
+                                                               <strong>Pacientes Aguardando Atendimento</strong>.
+                                                               
+                                                               Para reintegrar o nome do paciente à lista de espera, será necessário que ele passe novamente pela 
+                                                               <strong>Fila de Espera</strong> e, em seguida, pela <strong>Classificação</strong>.
+                                                               </p>
+                                                        </div>
+                                                 <button class='btn btn-sm btn-primary w-100 m-auto p-2 fs-5' type="submit">Finalizar atendimento</button>
+                                                 </div>
+                                          </form> 
+                                   {% endfor %}
+                            </div>
+                     </div>
+              </div>   
+       </div> 
 </div> 
 
 

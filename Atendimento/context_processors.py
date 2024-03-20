@@ -5,6 +5,7 @@ from django.utils import timezone
 # Atividade da lincença
 def licenca_context(request):
     licenca_ativa = Licenca.objects.filter(ativa=True, expiracao__gt=timezone.now()).first()
+    name_sistem = "SG-UPA"
     """
     if licenca_ativa is None:
         # Obtem todos os superusuários
@@ -19,6 +20,6 @@ def licenca_context(request):
         User.objects.update(is_active=True)
 
     """
-    return {'licenca_ativa': licenca_ativa}
+    return {'licenca_ativa': licenca_ativa, 'name_sistem':name_sistem}
 
 # Atividade da lincença
