@@ -18,12 +18,18 @@
 
 {% block body_login %}    
 <div class='menu-local-top' style='margin-top:-3rem'>
-    <ul>
-        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem</a></li>
-        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
-        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>     
-    </ul> 
-</div>   
+    <ul class='d-flex'>
+        <li class="col fs-6"><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-solid fa-users"></i> Listagem</a></li>
+        <li class="col fs-6"> <a href=" {% url 'Atendimento:registro-paciente' %} "><i class="fa-solid fa-user-plus"></i> Cadastro</a></li>
+        {% for dados_pessoais in db  %} 
+        <li class="col-5 btn btn-sm btn-primary fs-6"> 
+            <a  href=" {% url 'Atendimento:envio_paciente_a_triagem_2' dados_pessoais.pk %} ">
+            <i class="fa-solid fa-angles-right"></i> Enviar {{dados_pessoais.nome_social}}  para a fila de triagem  <i class=" fa-solid fa-people-arrows fa-1x "></i>
+            </a>
+        </li>   
+        {% endfor %}
+    </ul>            
+</div> 
 <div class='flex' style="margin:6% -5%;">    
     <div class="style-tabela">      
         <div class="border-bottom border-dark fs-3 d-flex">

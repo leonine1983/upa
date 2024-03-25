@@ -120,7 +120,7 @@ choices=(
     )
 class ficha_de_atendimento(models.Model):
     nome_social = models.CharField(max_length=40, null=False, default='', verbose_name="Nome Social (Como a pessoa que ser chamada no painel)")
-    nome_completo = models.CharField(max_length=50, null=False, default='', verbose_name="Nome completo (Como está escrito no RG)")
+    nome_completo = models.CharField(max_length=50, null=True, default='', verbose_name="Nome completo (Como está escrito no RG)")
     codigo_pacient = models.CharField(max_length=8, null=True, verbose_name="Código do paciente")
     idade = models.IntegerField(null=False, default='00')    
     etnia = models.ForeignKey(Etnia, null=True, on_delete=models.CASCADE)
@@ -139,6 +139,7 @@ class ficha_de_atendimento(models.Model):
     responsavel = models.CharField(max_length=30, null=True)
     tel = models.CharField(max_length=16, null=True, default='')
     data_cadastro = models.DateField(auto_now_add=True, null=False)
+    data_update = models.DateField(auto_now=True, null=True)
     horario_cadastro = models.TimeField(null=True, auto_now_add=True)
     cartao_sus = models.CharField(max_length=15, null=True)
     ultimo_pk = None

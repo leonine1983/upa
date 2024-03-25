@@ -45,7 +45,7 @@
                 <td align="center" class="text-danger">SIM</td>
             {% endif %}
             <td align="center"> <span class='text-capitalize'>{% if campo.nome_recepcionista %}{{campo.nome_recepcionista}}{% else %}Não mencionado{% endif %}</span> </td>                
-            <td align="center"> <a href="{% url 'Atendimento:atualizar-paciente' campo.pk   %}" class="editar fa fa-check-circle" title="Editar"></a> </td>                
+            <td align="center"> <a href="{% url 'Atendimento:atualizar-paciente' campo.pk   %}" class="text-primary" title="Editar"><i class="fa-solid fa-user-pen"></i> Editar</a>  </td>                
         </tr>       
         {% empty%}
             <tr>

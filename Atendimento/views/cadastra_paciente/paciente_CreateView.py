@@ -29,11 +29,11 @@ class PacienteForm(forms.ModelForm):
 
     class Meta:
         model = ficha_de_atendimento
-        fields = ['nome_social', 'nome_completo', 'codigo_pacient', 'data_nascimento', 'sexo', 'etnia', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado', 'pais', 'CEP', 'nome_mae',  'tel', 'cartao_sus']
+        fields = ['nome_social', 'codigo_pacient', 'data_nascimento', 'sexo', 'etnia', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado', 'pais', 'CEP', 'nome_mae',  'tel', 'cartao_sus']
 
         widgets = {
             'nome_social': forms.TextInput(attrs={'class': 'form-control '}),
-            'nome_completo': forms.TextInput(attrs={'class': 'form-control '}),
+            #'nome_completo': forms.TextInput(attrs={'class': 'form-control '}),
             'codigo_pacient': forms.TextInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
             'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'DD/MM/AAAA', 'type':'date'}),
             'sexo': forms.Select(attrs={'class': 'form-select '}),

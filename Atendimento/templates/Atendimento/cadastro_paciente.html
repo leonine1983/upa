@@ -69,13 +69,19 @@
 
 {% endblock css %}  
 {% block body_login %}
-<div class='menu-local-top' style='margin-top:-3%'>
-    <ul>
-        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i></a></li>
-        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>-->Cadastro</a></li>                
-        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>
-    </ul> 
-</div>  
+<div class='menu-local-top' style='margin-top:-3rem'>
+    <ul class='d-flex'>
+        <li class="col fs-6"><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-solid fa-users"></i> Listagem</a></li>
+        <li class="col fs-6"> <a href=" {% url 'Atendimento:registro-paciente' %} "><i class="fa-solid fa-user-plus"></i> Cadastro</a></li>
+        {% for dados_pessoais in db  %} 
+        <li class="col-5 btn btn-sm btn-primary fs-6"> 
+            <a  href=" {% url 'Atendimento:envio_paciente_a_triagem_2' dados_pessoais.pk %} ">
+            <i class="fa-solid fa-angles-right"></i> Enviar {{dados_pessoais.nome_social}}  para a fila de triagem  <i class=" fa-solid fa-people-arrows fa-1x "></i>
+            </a>
+        </li>   
+        {% endfor %}
+    </ul>            
+</div>
 <p>&nbsp;</p>
 <p>    
 </p>
@@ -83,17 +89,37 @@
 {% if not licenca_ativa == None %}
 <form action="" method='POST' class='pt-4' style='background:#dbecdb'>
     {% if dados %}
+            <div class="d-flex justify-content-end mt-2" style='margin-bottom:-5rem'>
+                <a href="{% url 'Atendimento:perfil-paciente' object.pk   %}"  title="Editar" class="text-center border border-primary"> 
+                    <i class="fs-2 m-3 fa-solid fa-user"></i>
+                    <span class="d-block">Perfil</span>
+                </a>
+            </div>
             <div class="border-bottom border-dark fs-3  d-flex m-3 w-75" >
                 <i class="fa-duotone fa-pen-nib"></i>
                 <i id="fa-hospital-user" class="fa-duotone fa-hospital-user m-1"></i> 
-                Revisão e atualização das informações do paciente.
+                <div>
+                    Revisão e atualização das informações do paciente.
+                    {% if object.nome_recepcionista %}
+                        <div class='d-flex'>
+                            <span class='p-1 d-block fs-6 '>Profissional responsável pelo registro das atuais informações: </span>
+                            <span class='fs-5 text-danger text-capitalize'>{{object.nome_recepcionista}}</span>
+                            <span class='fs-6  d-block mt-1'>, em: {{object.data_update}}</span>  
+                        </div>
+                    {% endif %}
+                </div>
+                
+                
             </div>
     {% else %}
         <div class="border-bottom border-dark fs-3  d-flex m-3 w-75" >
             <i id="fa-hospital-user" class="fa-duotone fa-hospital-user m-1"></i> 
             Cadastro de pacientes
+            
         </div>
+        <!--
         <div class='me-5 p-3 d-block'>
+            
             {% if paciente_existe %}
             <ul class="me-5 list-group"></ul>
                 <h2 class='fs-4'>Paciente encontrado</h2>
@@ -109,7 +135,8 @@
                {% endfor %} 
             </ul>
             {% endif %}
-        </div>
+            
+        </div>-->
     {% endif %}    
     <!-- Form para cadastrar os pacientes-->    
     {% include "Atendimento/partes_cadastro_pacientes/parte_form_cadastra_paciente.html" %}

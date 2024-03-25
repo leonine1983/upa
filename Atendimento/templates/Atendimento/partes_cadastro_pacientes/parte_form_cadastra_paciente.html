@@ -1,17 +1,25 @@
-<div class="row row-cols-5 mb-5 p-3   g-4 justify-content-center">        
-    {% csrf_token %}  
+<div class="row row-cols-3 mb-5 p-3   g-4 justify-content-center">        
+    {% csrf_token %}
+    <!--  
     <div class="col-9 row row-cols-2 m-3 mx-0 p-3 bg-primary-subtle shadow shadow-sm " >
         <div class="col form-group">
             {{ form.nome_social.label_tag }}
             {{ form.nome_social }}
             {{ form.nome_social.errors }}
         </div>
+        
         <div class="col form-group">
             {{ form.nome_completo.label_tag }}
             {{ form.nome_completo }}
             {{ form.nome_completo.errors }}
         </div>
-    </div>              
+       
+    </div>  --> 
+    <div class="col-4 form-group">
+        {{ form.nome_social.label_tag }}
+        {{ form.nome_social }}
+        {{ form.nome_social.errors }}
+    </div>            
     <div class=" col form-group">
         {{ form.codigo_pacient.label_tag }}
         {{ form.codigo_pacient }}
@@ -99,7 +107,8 @@
         {{ form.cartao_sus.errors }}
     </div>       
 </div>  
-<div class="w-100 p-2 text-center">
-    <button class='btn btn-sm btn-primary' type="submit" onclick="limpaDados()">Salvar</button>    
+<div class="w-100 p-2 text-center row row-cols-2 gap-4 justify-content-center">
+    <button type="reset" class='col-5 btn btn-sm btn-secondary' ><i class="fa-solid fa-broom"></i> Limpar o formulário</button>   
+    <button class='col-5 btn btn-sm btn-primary' type="submit" onclick="limpaDados()"><i class="fa-solid fa-floppy-disk"></i> Salvar Registro</button>    
 </div>
 </form>
