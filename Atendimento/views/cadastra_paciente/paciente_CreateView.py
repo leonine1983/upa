@@ -91,10 +91,13 @@ class paciente_cadastro(LoginRequiredMixin, CreateView):
         self.object = form.save()
         return super().form_valid(form)
     """
-    def get_success_url(self):
-        url = reverse_lazy('Atendimento:envio_paciente_a_triagem_2', args=[self.object.pk])
-        #print('ID do objeto criado:', self.object.pk)
-        return url
+    def form_valid(self, form):
+        if self.request.user.first_name:
+            form.instance.nome_recepcionista =f'{self.request.user.first_name} {self.request.user.last_name}'
+        else:
+            form.instance.nome_recepcionista = self.request.user.username
+        return super().form_valid(form)
+    
     
     #Se o usuario nao estiver logado
     login_url = reverse_lazy('Access_Login:access_login_page')

@@ -63,13 +63,10 @@
 <p>&nbsp;</p>   
 <div class='flex'>
 
-    <div class="style-tabela">       
-        <div class="top-info">
-            Na tabela abaixo, está listado todos os pacientes cadastrados nesse sistema. 
-            Caso não esteja visualizando o nome do paciente desejando, utilize o sistema de busca acima
-             para encontar o nome dele, bastando somente digitar o nome é clicar em pesquisar. 
-             Se desejar ter mais informações sobre o paciente, basta clicar sobre o nome desejado que 
-             imediatamente que página contendo todas as informações desse paciente é aberto.
+    <div class="style-tabela" style='margin-top:-2rem'>       
+        <div class="top-inf fs-1">
+            <h1 class='h2 border-bottom border-1 border-dark'>Pacientes</h1>
+            <i class="fa-solid fa-notes-medical"></i> Histórico Hospitalar
         </div>
        <p>&nbsp;</p>
        <div class="controle_tabela">
@@ -82,14 +79,14 @@
         {% endif %}
     </div>
         <table id="tabela-listar" border="0" cellpadding="0" cellspacing="0" width="100%">                
-                <thead>
+                <thead class=''>
                     <tr>
-                    <td class="top center"><strong>Nome</strong></td>
-                    <td class="top center"><strong>Telefone</strong></td>
-                    <td class="top center"><strong>Bairro</strong></td>
-                    <td class="top center"><strong>Data de Cadastro</strong></td>
-                    <td class="top center"><strong>Resp. pelo cadastro</strong></td>
-                    <td class="top center" colspan="2" ><strong>Ações</strong></td>
+                    <td class="top center fs-6 bg-secondary">Nome</td>
+                    <td class="top center fs-6 bg-secondary">Telefone</td>
+                    <td class="top center fs-6 bg-secondary">Bairro</td>
+                    <td class="top center fs-6 bg-secondary">Data de Cadastro</td>
+                    <td class="top center fs-6 bg-secondary">Resp. pelo cadastro</td>
+                    <td class="top center fs-6 bg-secondary" colspan="1" >Ações</td>
                    
                     </tr>
                 </thead>       
@@ -97,14 +94,12 @@
 
                     {% for campo in object_list %}  
                     <tr> 
-                        <td><a class="link-color" href="{% url 'Medicos:perfil_completo_paciente_menu_lateral' campo.pk %}"><span>{{campo.nome_social}}</span></a></td>                                                        
-                        <td align="center" href="">{{campo.tel}}</td>
-                        <td align="center">{{campo.bairro}}</td>
-                        <td align="center">{{campo.data_cadastro}}</td>
-                        <td align="center"><span class="uppercase"></span></td>                    
-                        <td align="center"> <a href="" class="editar fa fa-check-circle" title="Editar"></a> </td>
-                        <td align="center"> <a href="" class="deletar fa fa-times-circle" title="Deletar"></a> </td>                  
-                        
+                        <td class='fs-7'><a class="link-color" href="{% url 'Medicos:perfil_completo_paciente_menu_lateral' campo.pk %}"><span>{{campo.nome_social}}</span></a></td>                                                        
+                        <td class='fs-7' align="center" href="">{{campo.tel}}</td>
+                        <td class='fs-7' align="center">{{campo.bairro}}</td>
+                        <td class='fs-7' align="center">{{campo.data_cadastro}}</td>
+                        <td class='fs-7' align="center"><span class="uppercase">{{campo.nome_recepcionista}}</span></td>                    
+                        <td class='fs-7' align="center"> <a href="" class="editar fa fa-check-circle" title="Editar"></a> </td>
                     </tr>       
                     
                     {% empty%}
