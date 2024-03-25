@@ -1,7 +1,7 @@
 {% if not t.preescrever_medicamento_medico == 'Preescreva o medicamento para o paciente' %} 
-                                   {% if not t.preescrever_medicamento_medico == "" %}
-                                          <li class='prescricao border-radius'><a href="#tab1">&nbsp;&nbsp;Preescrever Medicamento <i class="fa-solid fa-capsules"></i>&nbsp;&nbsp;</a></li>
-                                   {% endif %}   
+                            {% if not t.preescrever_medicamento_medico == "" %}
+                                   <li class='prescricao border-radius'><a href="#tab1">&nbsp;&nbsp;Preescrever Medicamento <i class="fa-solid fa-capsules"></i>&nbsp;&nbsp;</a></li>
+                            {% endif %}   
                             {% endif %} 
                             {% if not t.encaminhamento == 'Digite o encaminhamento do paciente' %} 
                                    <li class='encaminhamento'><a href="#tab2">&nbsp;&nbsp;Encaminhamentos <i class="fa-regular fa-paste"></i>&nbsp;&nbsp;</a></li>                            
@@ -13,6 +13,6 @@
                             {% endif %}
                             {% if not t.atestado == 'Digite a quantidade de dias que o paciente irá ficar de repouso' %}
                                    {% if not t.atestado == '0'  %}
-                                          <li class='atestado'><a href="#tab4">&nbsp;&nbsp;Atestados <i class="fa-solid fa-file-contract"></i></i>&nbsp;&nbsp;</a></li>
+                                          <li class='atestado'><a href="#tab_atestado">&nbsp;&nbsp;Atestados <i class="fa-solid fa-file-contract"></i></i>&nbsp;&nbsp;</a></li>
                                    {% endif %}
                             {% endif %}    

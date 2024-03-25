@@ -1,14 +1,12 @@
 {% load static %}
-{% if t.exames.all %} 
+{% if triagem_now.exames.all %} 
 <section class='exames' id="tab3">      
-       <nav class="menu-vertical-medico w-100">
-              <ul>                                          
-                     <li><a class='btn btn-sm btn-secondary  w-25 right mx-4 mt-1'  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarPDF_exame(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
-                     <li><a class='btn btn-sm btn-primary w-25 right mx-4 mt-1' href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
-              </ul>
-       </nav>                                     
+                                            
        <!--Exames-->
-       <div id="tab33" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
+       <div >
+              <a class='fs-5 btn btn-sm btn-primary link-light w-100 right text-decoration-none p-2 mt-1'  href="{% url 'Medicos:geraPdf' triagem_now.id %}" onclick="gerarPDF_exame(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a>
+       </div>
+       <div id="tab33" style='width:600px; height:20.5rem; margin:auto; margin-top:1rem;
        box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
        -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
        -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
@@ -18,87 +16,92 @@
                             <div style='padding:0.5rem;border: 0.1rem solid #000;'><img src="{% static "sesab.png" %}" width='100' alt=""></div>
                             <div style='text-align: center;width: 100%;padding: 0.5rem; border: 0.1rem solid #000;'>SOLICITAÇÃO DE EXAMES OU PROCEDIMENTOS</div>
                      </div>
+                    
                      <div style="display: flex;">
                             <div style="border:0.1rem solid #000;width:70%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">NOME DO PACIENTE</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong>{{t}}</strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">NOME DO PACIENTE:</div>
+                                   <div style='font-size:0.8rem; text-align: center; text-transform:capitalize'><span>{{triagem_now}}</span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:30%">
-                                   <div style="font-size: 0.7rem;padding: 0.2rem;" >DOC. IDENTIDADE</div>
+                                   <div style="font-size: 0.6rem;padding: 0.2rem;" >DOC. IDENTIDADE:</div>
                                    <div style="font-size: 0.8rem; text-align: center;width: 100%;">
-                                          {{t.paciente_triagem.paciente_envio_triagem.RG}}
+                                          {{triagem_now.paciente_triagem.paciente_envio_triagem.RG}}
                                    </div>
                             </div>
                      </div>
                      <div style="display: flex;">
                             <div style="border:0.1rem solid #000;width:60%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">ENDEREÇO DO PACIENTE</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong>
-                                          {{t.paciente_triagem.paciente_envio_triagem.rua}}, 
-                                          {{t.paciente_triagem.paciente_envio_triagem.bairro}}, 
-                                          {{t.paciente_triagem.paciente_envio_triagem.cidade}}, 
-                                          {{t.paciente_triagem.paciente_envio_triagem.estado}},
-                                          {{t.paciente_triagem.paciente_envio_triagem.CEP}},
-                                          {{t.paciente_triagem.paciente_envio_triagem.pais}}
-                                   </strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">ENDEREÇO DO PACIENTE:</div>
+                                   <div style='font-size:0.8rem; text-align: center; text-transform:capitalize'><span>
+                                          {{triagem_now.paciente_triagem.paciente_envio_triagem.rua}}, 
+                                          {{triagem_now.paciente_triagem.paciente_envio_triagem.bairro}}, 
+                                          {{triagem_now.paciente_triagem.paciente_envio_triagem.cidade}}, 
+                                          {{triagem_now.paciente_triagem.paciente_envio_triagem.estado}},
+                                          {{triagem_now.paciente_triagem.paciente_envio_triagem.CEP}},
+                                          {{triagem_now.paciente_triagem.paciente_envio_triagem.pais}}
+                                   </span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:10%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">IDADE</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong>{{t.paciente_triagem.paciente_envio_triagem.idade}} anos</strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">IDADE:</div>
+                                   <div style='font-size:0.8rem; text-align: center'><span>{{triagem_now.paciente_triagem.paciente_envio_triagem.idade}} anos</span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:30%">
-                                   <div style="font-size: 0.7rem;padding: 0.2rem;" >DATA DE NASCIMENTO</div>
+                                   <div style="font-size: 0.7rem;padding: 0.2rem;" >DATA DE NASCIMENTO:</div>
                                    <div style="font-size:0.8rem; text-align: center;width: 100%;">
-                                          <strong>{{t.paciente_triagem.paciente_envio_triagem.data_nascimento}}</strong>
+                                          <span>{{triagem_now.paciente_triagem.paciente_envio_triagem.data_nascimento}}</span>
                                    </div>
                             </div>
                      </div>
                      <div style="display: flex;">
                             <div style="border:0.1rem solid #000;width:40%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">MOTIVO DA SOLICITAÇÃO</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong></strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">MOTIVO DA SOLICITAÇÃO:</div>
+                                   <div style='font-size:0.8rem; text-align: center'><span></span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:30%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">DATA:</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong>{{t.data_triagem}}</strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">DATA:</div>
+                                   <div style='font-size:0.8rem; text-align: center'><span>{{triagem_now.data_triagem}}</span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:30%">
-                                   <div style="font-size: 0.7rem;padding: 0.2rem;" >TELEFONE</div>
+                                   <div style="font-size: 0.6rem;padding: 0.2rem;" >TELEFONE:</div>
                                    <div style="font-size: 0.8rem; text-align: center;width: 100%;">
-                                          <strong>{{t.paciente_triagem.paciente_envio_triagem.tel}}</strong>
+                                          <span>{{triagem_now.paciente_triagem.paciente_envio_triagem.tel}}</span>
                                    </div>
                             </div>
                      </div>
                      <div style="display: flex;">
                             <div style="border:0.1rem solid #000;width:50%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">EXAME OU PROCEDIMENTO SOLICITADO</div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">EXAME OU PROCEDIMENTO SOLICITADO:</div>
                                    <div style='font-size:0.8rem; text-align: center'>
-                                          {% for ex in  t.exames.all %}                                                        
-                                                 <strong>{{ex.nome_exame}}</strong>,
+                                          {% for ex in  triagem_now.exames.all %}                                                        
+                                                 <span>{{ex.nome_exame}}</span>,
                                           {% endfor %}
                                    </div>
                             </div>
                             <div style="border:0.1rem solid #000;width:20%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">CPF</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong>{{t.paciente_triagem.paciente_envio_triagem.CPF}}</strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">CPF:</div>
+                                   <div style='font-size:0.8rem; text-align: center'><span>{{triagem_now.paciente_triagem.paciente_envio_triagem.CPF}}</span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:30%">
-                                   <div style="font-size: 0.7rem;padding: 0.2rem;" >CÓDIGO</div>
-                                   <div style="font-size: 0.8rem; text-align: center;width: 100%;"></div>
+                                   <div style="font-size: 0.7rem;padding: 0.2rem;" >CÓDIGO:</div>
+                                   <div style="font-size: 0.8rem; text-align: center;width: 100%;">
+                                          {% if triagem_now.paciente_triagem.cod_triagem  %}
+                                          {{triagem_now.paciente_triagem.cod_triagem}}
+                                          {% endif %}
+                                   </div>
                             </div>
                      </div>
                      <div style="display: flex;">
                             <div style="border:0.1rem solid #000;width:45%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">PROFISSIONAL SOLICITANTE</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong>Dr.(a) {{request.user.first_name}} {{request.user.last_name}}</strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">PROFISSIONAL SOLICITANTE:</div>
+                                   <div style='font-size:0.8rem; text-align: center; text-transform:capitalize'><span>Dr.(a) {% if request.user.first_name %} {{request.user.first_name}} {{requestriagem_now.user.last_name}}{% else %}{{request.user}}{% endif %}</span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:25%;">
-                                   <div style="font-size: 0.7rem; padding: 0.2rem">AUTORIZAÇÃO</div>
-                                   <div style='font-size:0.8rem; text-align: center'><strong></strong></div>
+                                   <div style="font-size: 0.6rem; padding: 0.2rem">AUTORIZAÇÃO:</div>
+                                   <div style='font-size:0.8rem; text-align: center'><span></span></div>
                             </div>
                             <div style="border:0.1rem solid #000;width:30%">
-                                   <div style="font-size: 0.7rem;padding: 0.2rem;" >CNS</div>
-                                   <div style="font-size: 0.8rem; text-align: center;width: 100%;"><strong>{{t.paciente_triagem.paciente_envio_triagem.cartao_sus}}</strong></div>
+                                   <div style="font-size: 0.6rem;padding: 0.2rem;" >CNS:</div>
+                                   <div style="font-size: 0.8rem; text-align: center;width: 100%;"><span>{{triagem_now.paciente_triagem.paciente_envio_triagem.cartao_sus}}</span></div>
                             </div>
                      </div>
               </div>

@@ -39,9 +39,13 @@
               <!-- Relatório do atendimento -->   
               {% include "Medicos/arquivos_partes_preescrever-medicamento/relatorio_atendimento.html" %}             
        </div>
-       <div class='col'> 
-              <div class="border border-dark p-4">
-                     <h1 class="h4 ml-3 w-75 bg-secondary-subtle p-3 rounded-top-1 fw-bold">Se precisar emitir documentos para o paciente, utilize as guias abaixo e clique em "Continuar".</h1>
+       <div class='col' > 
+              <div class="border border-dark p-4" style='margin-top:-3rem!important'>
+                     <h1 class="h4 ml-3 w-75 bg-secondary-subtle p-3 fw-bolder border-bottom border-dark border-1">
+                            <i class="fa-regular fa-file"></i> Emitir documentos para o paciente
+                     </h1>
+                     <span class='mx-4'>Se precisar emitir documentos para o paciente, utilize as guias abaixo e clique em "Continuar".</span>
+                    
                      <hr>          
                      <form  method="post">                     
                             {% csrf_token %}    

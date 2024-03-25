@@ -1,0 +1,37 @@
+<div class='m-3 p-2'>
+    <div class="card w-100">
+           <h5 class="card-header">Finalização de atendimento</h5>
+           <div class="card-body">
+                  
+                         <form method='POST' action="{% url "Medicos:final_medico_concluida" triagem_now.id %}">
+                         {% csrf_token %}              
+                                <div class='bg-danger-subtle
+                                shadow-sm p-3 text-center'> 
+                                       <label  for="id_final_triagem">
+                                              Completado o atendimento ao paciente <strong class='text-uppercase'>{{triagem}}</strong>.
+                                              <p class="fs-6">Confirmo que todos os procedimentos necessários foram realizados de acordo com os padrões estabelecidos.
+                                              O paciente foi devidamente assistido e encontra-se pronto para seguir sua próxima etapa de cuidados médicos, se necessário.</p>
+                                              
+                                       </label>
+                                       <div class='m-2 p-2 btn btn-secondary'>Clique no quadrado à direita para confirmar: 
+                                              <input  style="scale:5" type="checkbox" name="final_medico_atendimento" value="1" maxlength="3" required="" id="id_final_medico_atendimento"> 
+                                       </div>                             
+                                </div> 
+                                <div class=' m-5 fs-5'>
+                                       <div >
+                                              <p class='fs-5'><strong>Observação:</strong></p>
+                                              <p class='fs-6'>
+                                              Após confirmar a conclusão do atendimento ao paciente <span class="text-uppercase fw-bold">{{triagem}}</span>, o nome deste paciente será removido da seção 
+                                              <strong>Pacientes Aguardando Atendimento</strong>.
+                                              
+                                              Para reintegrar o nome do paciente à lista de espera, será necessário que ele passe novamente pela 
+                                              <strong>Fila de Espera</strong> e, em seguida, pela <strong>Classificação</strong>.
+                                              </p>
+                                       </div>
+                                <button class='btn btn-sm btn-primary w-100 m-auto p-2 fs-5' type="submit">Finalizar atendimento</button>
+                                </div>
+                         </form> 
+                 
+           </div>
+    </div>
+</div>   

@@ -1,53 +1,51 @@
 {% load static %}
-{% if not t.atestado == '0' %}                                    
-                                          <section class='atestado' id="tab4">
-                                                 <nav class="menu-vertical-medico w-100">
-                                                        <ul>                                          
-                                                               <li><a class='btn btn-sm btn-secondary  w-25 right mx-4 mt-1'  href="{% url 'Medicos:geraPdf' t.id %}" onclick="gerarAtestPDF(); return false;" ><i class="fa-solid fa-print" ></i> Imprimir/PDF</a></li>
-                                                               <li><a class='btn btn-sm btn-primary w-25 right mx-4 mt-1' href="{% url 'Medicos:final_medico_concluida' t.id %}"><i class="fa-solid fa-arrow-right-to-bracket"></i>  FINALIZAR ATENDIMENTO </a></li>
-                                                        </ul>
-                                                 </nav> 
-                                                 <!--Imprimir Atestados-->
-                                                 <div id="tab44" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
-                                                 box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                                 -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
-                                                 -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
-                                                        <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
-                                                        <div class='card-medico' style="              
-                                                               position: relative;
-                                                               z-index: 10;
-                                                               top: -45rem;
-                                                               padding: 2rem;
-                                                               padding-bottom:0.1rem;
-                                                               height:42rem">                 
-                                                               <h3>ATESTADO MÉDICO</h3>
-                                                               <p>&nbsp;</p> 
-                                                               <div style='margin: 2rem; font-size:0.8rem; height:9.7rem; max-height:9.7rem' class='uppercase'>Atesto para os devidos fins que <strong style='font-size:1rem'>{{t}}</strong> esteve sob
-                                                               tratamento médico nesta unidade de saúde, no dia <strong style='font-size:1rem'>{{t.data_triagem}}</strong>, necessitando de <strong style='font-size:1rem'>{{t.atestado}}</strong> dias de afastamento a partir desta data,
-                                                        por motivo de doença. </div>                                                 
-                                                               <div style='margin-left:2rem;margin-top: -3rem;  height:7rem'>
-                                                                      <p>CID 10: <p>
-                                                                      <div style='margin:1rem auto; width:30rem; font-size:0.8rem;' class='grid'>     
-                                                                             {% for t in cid10  %}                                                       
-                                                                                    <div style='margin-right:2rem; padding:0.1rem'><b><i class="fa-solid fa-check"></i> {{t.classificacao_internacional_doenca_CID}} </b></div>
-                                                                             {% endfor %}
-                                                                      </div>                                                        
-                                                               </div>                                                
-                                                               <div style='margin-left:2rem; margin:3rem auto; text-align: right;'>     
-                                                                      <span style='text-align:right'>Vera Cruz, {{t.data_triagem}}</span>
-                                                               </div>                                                
-                                                               <div style='text-align:center; width: 100%; '>                                          
-                                                                      <span >Dr.(a) {{request.user}}</span><br>
-                                                                      <hr style="width: 75%;margin: auto;">
-                                                                      Médico que fez o atendimento
-                                                               </div>
-                                                        <div style='font-size:0.6rem; margin-top:6.6rem'>
-                                                               <b>UPA VERA CRUZ</b>
-                                                               <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
-                                                               <BR/>Tel.: (71) 3633-2286\
-                                                               <BR/>Email: servicosocial.upaveracruz@gmail.com
-                                                        </div>                                       
-                                                 </div>                                    
-                                                 <!--fim Imprimir Atestados-->
-                                          </section>
-                                   {% endif %}
+{% if triagem_now.atestado %}
+<section class='atestado' id="tab4">
+
+    <!--Imprimir Atestados-->
+    <div>
+        <a class='fs-5 btn btn-sm btn-primary link-light w-100 right text-decoration-none p-2 mt-1' href="{% url 'Medicos:geraPdf' triagem_now.id %}" onclick="gerarAtestPDF(); return false;"><i class="fa-solid fa-print"></i> Imprimir/PDF</a>
+    </div>
+    <div id="tab44" style='width:600px; height:848.41px; margin:auto; margin-top:1rem;
+        box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+        -webkit-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);
+        -moz-box-shadow: 0px -1px 10px 4px rgba(41, 41, 41, 1);'>
+        <img style='width:100%; margin-top:-1rem; margin-left:0.2rem' src="{% static 'sus.svg' %}  " alt=""/>
+        <div class='card-medico' style="              
+            position: relative;
+            z-index: 10;
+            top: -45rem;
+            padding: 2rem;
+            padding-bottom:0.1rem;
+            height:42rem">                 
+            <h3>ATESTADO MÉDICO</h3>
+            <p>&nbsp;</p> 
+            <div style='margin: 2rem; font-size:0.8rem; height:9.7rem; max-height:9.7rem' class='uppercase'>Atesto para os devidos fins que <b style='font-size:0.9rem'>{{ triagem_now.paciente_triagem.paciente_envio_triagem.nome_social }}</b> esteve sob
+                tratamento médico nesta unidade de saúde, no dia <strong style='font-size:1rem'>{{ triagem_now.data_triagem }}</strong>, necessitando de <strong style='font-size:1rem'>{{ triagem_now.atestado }}</strong> dias de afastamento a partir desta data,
+                por motivo de doença. </div>                                                 
+            <div style='margin-left:2rem;margin-top: -3rem;  height:7rem'>
+                <p>CID 10: <p>
+                <div style='margin:1rem auto; width:30rem; font-size:0.8rem;' class='grid'>     
+                    {% for cid in cid10  %}                                                       
+                    <div style='margin-right:2rem; padding:0.1rem'><b><i class="fa-solid fa-check"></i> {{ cid.classificacao_internacional_doenca_CID }} </b></div>
+                    {% endfor %}
+                </div>                                                        
+            </div>                                                
+            <div style='margin-left:2rem; margin:3rem auto; text-align: right;'>     
+                <span style='text-align:right'>Vera Cruz, {{ triagem_now.data_triagem }}</span>
+            </div>                                                
+            <div style='text-align:center; width: 100%; '>                                          
+                <span >Dr.(a) {{ request.user }}</span><br>
+                <hr style="width: 75%;margin: auto;">
+                Médico que fez o atendimento
+            </div>
+            <div style='font-size:0.6rem; margin-top:6.6rem'>
+                <b>UPA VERA CRUZ</b>
+                <BR/>Av. Juvenal João Vinagre, 175, Centro, Vera Cruz - Ba
+                <BR/>Tel.: (71) 3633-2286\
+                <BR/>Email: servicosocial.upaveracruz@gmail.com
+            </div>                                       
+        </div>                                    
+        <!--fim Imprimir Atestados-->
+    </section> 
+{% endif %}

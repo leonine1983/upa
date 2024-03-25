@@ -260,6 +260,7 @@ class Salas_Atendimento(models.Model):
 
 
 class Salva_modelo_exame(models.Model):
+    
     nome = models.CharField(max_length=40, null=False, default='Ex: Nome do modelo')
     exame = models.ManyToManyField(Exames_Model)
     conteudo = models.TextField(max_length=500, null=False, default='Ex: Solicito os seguintes exames ...')
