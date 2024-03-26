@@ -43,23 +43,36 @@ padding: 0.5rem;
 
 <!--Inicio do perfil-->
 {% block body_login %} 
-<div class="perfil-user">     
+<div class="w-75 m-auto shadow shadow-sm bg-light p-4 pt-0">     
     <div class='flex ' style='height:2.8rem; background:#d0d1d3; margin: -2rem -2rem 1rem;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; ' >
         <div style='background:#d0d1d3; height:3rem; padding: 1rem; width: 80%;transform:skew(-10deg); text-align:center; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'><i class="fa-solid fa-person-breastfeeding"></i> Dados Pessoais do paciente</div>
         <div style='background:#bfbfbf; border-bottom: 0.5rem solid #d0d1d3; height:3rem; padding: 1rem; width: 30%;transform:skew(-10deg);text-align:center; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;'class='uppercase' >
             {% if pkK == 0 %}
                 <a href=""><i class="fa-solid fa-hospital-user"></i>  Ainda não tem histórico</a></div>
             {% else %}
-                <a href="{% url 'Medicos:perfil_completo_segunda_parte' pkK %}"><i class="fa-solid fa-hospital-user"></i> Histórico Hospitalar</a></div>
+                <a href="{% url 'Medicos:perfil_completo_segunda_parte' pkK %}" class='link-light'><i class="fa-solid fa-hospital-user"></i> Histórico Hospitalar</a></div>
             {% endif %}
     </div>
+
     <p>&nbsp;</p>   
     <div class="dados-pessoais">
+        <div class="d-flex justify-content-end" style='margin-bottom:-3rem'>
+            <a href="{% url 'Medicos:perfil_completo_segunda_parte' pkK %}"  title="Editar" class="text-center border border-primary pe-1 px-1 mx-2 shadow shadow-sm"> 
+                <i class="fs-2 m-3 fa-solid fa-hospital-user"></i>
+                <span class="d-block">Histórico</span>
+                <span class="d-block fs-7">Hospitalar</span>
+            </a>
+            <a href="{% url 'Atendimento:atualizar-paciente' pkK   %}"  title="Editar" class="text-center border border-primary shadow shadow-sm"> 
+                <i class="fs-2 m-3 fa-solid fa-user-pen"></i>
+                <span class="d-block">Editar</span>
+                <span class="d-block fs-7">Dados</span>
+            </a>
+        </div>
         <div class="info-pessoal">
             <div>
-                <h1 class="h1 uppercase display-4">{{paciente_nome}}</h1>
+                <h1 class="h4 uppercase">{{paciente_nome}}</h1>
                 <p>&nbsp</p>
-                <p><b>Idade: </b> {{paciente_idade}} anos </p>
+                <p><b>Idade: </b> {{paciente_idade}} anos  </p>
                 <p><b>Data de Nascimento: </b>{{paciente_nascimento}}</p>
                 <p><b>Sexo: </b>{{paciente_sexo_str}}</p>
                 <p><b>Nº RG: </b>{{paciente_rg}}</p>
@@ -102,10 +115,10 @@ padding: 0.5rem;
                 {% endfor %}
             </div>                                 
         </div>            
-        <p><b>Data em que foi realizado o cadastro do paciente nesse sistema:</b></p>
-        <p>&nbsp;&nbsp;<i class="fa-regular fa-calendar-check"></i> {{paciente_data_cadast}}  <b>|</b>&nbsp;&nbsp;<i class="fa-regular fa-clock"></i> {{paciente_horari_cadast}}  </p>
-        <p>&nbsp;&nbsp;</p>
     </div>
+    <p>
+        <i class="fa-regular fa-calendar-check"></i><b>Data em que foi realizado o cadastro do paciente nesse sistema:</b> {{paciente_data_cadast}}  <b>|</b>&nbsp;&nbsp;<i class="fa-regular fa-clock"></i> {{paciente_horari_cadast}}  </p>
+    </p>
     <hr>
         
             

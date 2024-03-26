@@ -90,10 +90,17 @@
 <form action="" method='POST' class='pt-4' style='background:#dbecdb'>
     {% if dados %}
             <div class="d-flex justify-content-end mt-2" style='margin-bottom:-5rem'>
-                <a href="{% url 'Atendimento:perfil-paciente' object.pk   %}"  title="Editar" class="text-center border border-primary"> 
-                    <i class="fs-2 m-3 fa-solid fa-user"></i>
-                    <span class="d-block">Perfil</span>
-                </a>
+                {% if  grupo_usuario == 'group_Medicos' or grupo_usuario == 'group_UPA-Admin' %}
+                    <a href="{% url 'Medicos:perfil_completo_paciente' object.pk   %}"  title="Editar" class="text-center border border-primary"> 
+                        <i class="fs-2 m-3 fa-solid fa-user"></i>
+                        <span class="d-block">Perfil</span>
+                    </a>
+                {% else %}
+                    <a href="{% url 'Atendimento:perfil-paciente' object.pk   %}"  title="Editar" class="text-center border border-primary "> 
+                        <i class="fs-2 m-3 fa-solid fa-user"></i>
+                        <span class="d-block">Perfil</span>
+                    </a>
+                {% endif %}
             </div>
             <div class="border-bottom border-dark fs-3  d-flex m-3 w-75" >
                 <i class="fa-duotone fa-pen-nib"></i>

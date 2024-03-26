@@ -74,7 +74,7 @@ padding: 0.5rem;
 {% endblock body_title %}
 <!--Inicio do perfil-->
 {% block body_login %} 
-<div class="perfil-user w-100" style='height: auto;box-shadow:none; margin-top: -3rem; '> 
+<div class="perfil-user w-100 shadow shadow-sm bg-dark-subtle" style='height: auto;box-shadow:none; margin-top: -2rem; '> 
     <div class='flex ' style='height:2.8rem; background:#d0d1d3; margin: -2rem -2rem 2rem;box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; ' >
         <div style='background:#d0d1d3; height:3rem; padding: 1rem; width: 75%;transform:skew(-10deg); text-align:center; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'><i class="fa-solid fa-hospital-user"></i> Histórico Hospitalar</div>
         <div style='background:#bfbfbf; border-bottom: 0.5rem solid #d0d1d3; height:3rem; padding: 1rem; width: 30%;transform:skew(-10deg);text-align:center; box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;'class='' ><a href="{% url 'Medicos:perfil_completo_paciente' pkK %}"><i class="fa-solid fa-person-breastfeeding"></i> Dados Pessoais do paciente</a></div>
@@ -82,16 +82,26 @@ padding: 0.5rem;
     <p>&nbsp;</p>   
     <div class="dados-pessoais">
         {% if link_medico %}
-            <div class="">
+            <div style='margin-top:-2rem'>
                 <div>
-                    <div>
-                        <form action="?" method="GET" class="form-inline">
+                    <div class='w-100 text-center fs-3 p-2'>{% for medico_atendimento in link_medico %}<i class="fa-solid fa-user-injured"></i> {{ medico_atendimento.paciente_medico_atendimento }} {% endfor %}</div>
+                    <div class='d-flex w-75 m-auto'>
+                        <form action="?" method="GET" class="col-12 form-inline">
                             {% csrf_token %}            
                             <div class="search-wrapper">
-                            <input type="text" class="search-input" placeholder="Buscar por paciente" name="busca-paciente">
+                            <input type="text" class="search-input" placeholder="Buscar por históricos" name="busca-paciente">
                             <button class="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
                             </div>
                         </form> 
+                        <!-- link para pagina de perfil do paciente -->
+                        <div class="d-flex justify-content-end" style='margin-bottom:-1rem'>
+                            <a href="{% url 'Medicos:perfil_completo_paciente' pkK %}"  title="Editar" class="text-center border border-primary pe-1 px-1 mx-2 shadow shadow-sm"> 
+                                <i class="fs-2 m-3 fa-solid fa-hospital-user"></i>
+                                <span class="d-block">Perfil</span>
+                                <span class="d-block fs-7">Paciente</span>
+                            </a>
+                        </div>
+                        <!--end link para pagina de perfil do paciente -->
                     </div>
                     <div> 
                         <table class="table table-striped shadow shadow-sm border m-3">
@@ -99,12 +109,12 @@ padding: 0.5rem;
                                 <tr class="{% include 'Medicos/perfis/codicional_cores.html' %} table-secondary">
                                     <th>Data</th>
                                     <th>Classificação de Risco</th>
-                                    <th>Nome do paciente</th>
+                                    <th>Médico que fez o atendimento</th>
                                 </tr>
                             </thead>
                             {% for medico_atendimento in link_medico %}
                             <tbody>
-                                <tr>
+                                <tr class='bg-light'>
                                     <td>
                                         <div>
                                             <label for="toggle-{{ medico_atendimento.pk }}">{{ medico_atendimento.paciente_medico_atendimento.paciente_triagem.data_envio_triagem }}</label>
@@ -116,7 +126,7 @@ padding: 0.5rem;
                                         </div>
                                     </td>
                                     <td>
-                                        {{ medico_atendimento.paciente_medico_atendimento }} 
+                                       Dr. (a) {{ medico_atendimento.medico_nome }} 
                                     </td>
                                 </tr>
                                 <tr>                        
