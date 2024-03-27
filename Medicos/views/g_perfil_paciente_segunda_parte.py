@@ -11,6 +11,7 @@ def paciente_perfil_completo_segunda_parte(request, pk):
 
     #faço uma busca no model triagem
     dados = triagem.objects.filter(id = pk)
+    nome_atendimento = triagem.objects.get(id = pk)
     for d in dados:
         paciente_triagem = d.paciente_triagem_id
         pkk = d.id
@@ -58,6 +59,7 @@ def paciente_perfil_completo_segunda_parte(request, pk):
         
     return render(request, 'Medicos/perfis/perfil-paciente_completo_segunda_parte.html', {
         #Dados da ficha do paciente
+        'nome_atendimento':nome_atendimento,
         'paciente' : dados,
         'paciente_nome': paciente_nome,
         'paciente_sexo' : paciente_sexo,
