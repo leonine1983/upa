@@ -98,8 +98,8 @@
                         <td class='fs-7' align="center" href="">{{campo.tel}}</td>
                         <td class='fs-7' align="center">{{campo.bairro}}</td>
                         <td class='fs-7' align="center">{{campo.data_cadastro}}</td>
-                        <td class='fs-7' align="center"><span class="uppercase">{{campo.nome_recepcionista}}</span></td>                    
-                        <td class='fs-7' align="center"> <a href="" class="editar fa fa-check-circle" title="Editar"></a> </td>
+                        <td class='fs-7' align="center"><span class="uppercase"><span class='text-capitalize'>{% if campo.nome_recepcionista %}{{campo.nome_recepcionista}}{% else %}Não mencionado{% endif %}</span> </td>                    
+                        <td class='fs-7' align="center"> <a href="{% url 'Atendimento:atualizar-paciente' campo.pk   %}" class="text-primary" title="Editar"><i class="fa-solid fa-user-pen"></i> Editar</a> </td>
                     </tr>       
                     
                     {% empty%}

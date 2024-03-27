@@ -62,10 +62,15 @@ padding: 0.5rem;
                 <span class="d-block">Histórico</span>
                 <span class="d-block fs-7">Hospitalar</span>
             </a>
-            <a href="{% url 'Atendimento:atualizar-paciente' pkK   %}"  title="Editar" class="text-center border border-primary shadow shadow-sm"> 
+            <a href="{% url 'Atendimento:atualizar-paciente' pkK   %}"  title="Editar" class="text-center border border-primary shadow shadow-sm pe-1 px-1 "> 
                 <i class="fs-2 m-3 fa-solid fa-user-pen"></i>
                 <span class="d-block">Editar</span>
                 <span class="d-block fs-7">Dados</span>
+            </a>
+            <a href="{% url 'Medicos:lista_paciente_medico'    %}"  title="Editar" class="text-center border border-primary shadow shadow-sm pe-1 px-1 mx-2"> 
+                <i class="fs-2 m-3  fa-solid fa-users-medical"></i>
+                <span class="d-block">Listagem</span>
+                <span class="d-block fs-7">Todos</span>
             </a>
         </div>
         <div class="info-pessoal">

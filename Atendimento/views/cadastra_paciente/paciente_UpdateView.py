@@ -8,6 +8,7 @@ from django.views.generic.edit import UpdateView
 from Atendimento.models import ficha_de_atendimento
 from django.shortcuts import redirect
 from django import forms
+from django.contrib.auth.models import Group
 
 
 class PacienteForm(forms.ModelForm):
@@ -51,7 +52,19 @@ class paciente_atualizar(LoginRequiredMixin, UpdateView):
     form_class = PacienteForm
     #fields = ['nome_social', 'data_nascimento','sexo', 'RG', 'CPF', 'nacionalidade', 'rua', 'bairro', 'cidade', 'estado','CEP', 'nome_mae', 'responsavel', 'tel', 'cartao_sus'] 
     template_name = 'Atendimento/cadastro_paciente.html'    
-    success_url = reverse_lazy("Atendimento:lista-paciente") 
+    def get_success_url(self) :
+        usuario_ativo = self.request.user
+        user_groups = Group.objects.filter(user = usuario_ativo)
+        for item in user_groups:
+            user_groups = item.name
+            if user_groups == 'group_UPA-Admin' or user_groups == 'group_Medicos':
+                success_url = reverse_lazy("Medicos:lista_paciente_medico") 
+            else:
+                success_url = reverse_lazy("Atendimento:lista-paciente") 
+            return success_url
+    
+    
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
