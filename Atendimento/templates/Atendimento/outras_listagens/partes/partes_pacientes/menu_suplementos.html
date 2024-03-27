@@ -12,7 +12,7 @@
     }
 
     .container_nav.expanded {
-        width: 300px;
+        width: 500px;
     }
 
     .content {
@@ -27,19 +27,19 @@
 </style>
 <div class="container_nav bg-dark-subtle shadow" onclick="expandDiv()">
     <span class="fs-3"><i class="fa-solid fa-computer-mouse text-shadow-2"> </i></span>
-    <div class="content rounded-3 p-1 bg-light shadow shadow-sm border">
+    <div class="content rounded-3 p-1 bg-light shadow border border-danger-emphasis">
         <div class="fs-6 m-2 shadow shadow-sm p-1">
             <a href="{% url 'Atendimento:excluir_registros' %}">
                 <i class="fa-solid fa-microphone-slash text-danger-emphasis"></i>
                 Cancelar chamados.
             </a>
         </div>
-        <div class="fs-6 m-2 shadow shadow-sm p-1">
+        <div class="fs-6 m-2 shadow shadow-sm p-1 border border-danger-emphasis">
             <a href=" {% url 'Atendimento:listagem_envio' %} ">
-                <i class="fa fa-solid fa-list-check fa-2x"></i>
+                <i class="fa-thin fa-list text-danger-emphasis"></i>
                 <i class="fa-solid "></i>
-                    <span class="nav-text">
-                        Exibir lista de entrada de pacientes por data
+                    <span class="nav-text ">
+                        Lista de entrada de pacientes por data
                     </span>
                 </a>
         </div>
