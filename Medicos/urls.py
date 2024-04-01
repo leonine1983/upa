@@ -59,7 +59,9 @@ urlpatterns = [
     # importar csv para cid 10
     path('importar_csv/', views.import_csv, name='importa_csv'),
      # Paciente não atendeu ao chamdo
-   path('medico/chama_paciente/n_atende/<int:pk>', views.medico_paciente_nao_atende, name='medio_n_atendeu')
+    path('medico/chama_paciente/n_atende/<int:pk>', views.medico_paciente_nao_atende, name='medio_n_atendeu'),
+    # Conlclui todos atendimentos em aberto
+    path('medico/chama_paciente/conclui_all/', views.conclui_all, name='conclui_atend')
 
 ]
 

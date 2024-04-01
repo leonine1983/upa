@@ -21,3 +21,4 @@ from .vincula_salas import *
 from .criar_medicos import *
 from .chamar_pacientee import *
 from .medicamentos_remedio import *
+from .extras_medico import *
