@@ -1,0 +1,295 @@
+{% extends 'global/template_geral.html' %}
+
+<!-- titulo Web da pagina-->
+{% block title_login %} Pacientes {% endblock title_login %}
+{% load static %}
+
+<!--CSS local-->
+{% block css %} 
+    <!--Tabela-->
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--Menu Local-->
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} ">     
+    <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
+
+    <style>
+ 
+        .container_nav {
+          position: fixed;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          background-color: #f0f0f0;
+          padding: 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded {
+          width: 300px;
+        }
+      
+        .content {
+          display: none;
+          margin-top: 10px;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded .content {
+          display: block;
+        }
+
+
+            /* Estilos para a visualização normal */
+    #envios_triagem {width: 1000px;}
+
+    #envios_triagem table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #envios_triagem th,
+    #envios_triagem td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #envios_triagem th {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para impressão */
+    @media print {
+        #envios_triagem {
+            width: auto;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        #envios_triagem table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #envios_triagem th,
+        #envios_triagem td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #envios_triagem th {
+            background-color: #f2f2f2;
+        }
+    }
+
+      </style>
+{% endblock css %} 
+
+<!--Titulo da Pagina-->
+{% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
+
+{% block body_login %}    
+<div class='menu-local-top' style='margin-top:-3rem'>
+    <ul>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem </a></li>
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>     
+    </ul> 
+</div>   
+<div class='mt-5 pt-5'>   
+    <div class="border-bottom border-dark fs-3 d-flex">
+        <i class="fa-duotone fa-list-ul"></i>
+        Fichas de Relatórios por Data
+    </div>
+    <form class='m-1 row g-4'>
+        {% csrf_token %}
+        <div class="col-auto">
+            <label for="start_date" >::CALENDÁRIO::</label>
+        </div>
+        <div class="col-auto">
+            <input type="date" name='busca_data' class='form-control'>
+        </div>
+        <div class="col-auto">         
+            <button class="btn btn-sm btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+          </svg> Selecionar data</button>
+        </div>
+        <div class="col-auto">
+            <button onclick="imprimir()" class="btn btn-sm btn-secondary">Imprimir <i class="fa-solid fa-print"></i></button>
+        </div>
+    </form>
+
+    <div class="card text-dark bg-light mb-3 w-75 m-auto">
+        <div class="card-header">Informações Gerais</div>
+        <div class="card-body">
+          <h5 class="card-title fs-4">Referência da busca: Horário em que o médico concluiu o atendimento.
+          </h5>
+          <p class="card-text fs-5"><i class="fa-thin fa-arrow-up-1-9"></i> Quantidade de Fichas encontradas: {{object_list|length}} páginas</p>
+        </div>
+      </div>
+
+
+    <div id="envios_triagem" style="width: 1000px;" class="m-auto">
+        <style>
+            @media print {
+                body{font-family: Arial, Helvetica, sans-serif !important;}
+                p{padding: 0rem!important;margin: 0!important;font-size: 0.7rem;}
+                div{font-size: 0.7rem;}
+                #cabecalho div, #cabecalho p{font-size: 0.9rem!important;}
+                h1, h2, h3, h4, h5, h6 {
+                                margin: 0; /* Zera as margens para títulos */
+                                padding: 0; /* Zera o padding para títulos */
+                }
+                h1 {
+                margin: 0; /* Zera as margens para h1 */
+                padding: 0; /* Zera o padding para h1 */
+                background-repeat: repeat-x; /* Repete a imagem horizontalmente */
+                color: #fff; /* Cor do texto para h1 */
+                text-align: center; /* Centraliza o texto no h1 */
+                line-height: 20px; /* Altura da linha para centralizar verticalmente */
+                }
+                
+                h2 {display: flex;width:auto; margin-right: 3%; font-size: 1.4rem !important; font-weight: lighter!important;}
+                .comorbidade{
+                        background-color:hsl(0, 0%, 80%)!important;
+                }
+            }
+    </style>
+    {% for r  in object_list %}
+    <div style='box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    padding: 2%;
+    background-color: #ffffff;
+    padding: 2%;
+    margin:1rem;'>
+        <div style='display:flex'>
+            <div id="cabecalho" style='width: 68%;'>
+                <div style='display:flex'><div style=' margin-right: 1rem;'>UPA VERA CRUZ</div><li>HTMAS</li></div>
+                <p>Av. Juvenal João Vinagre, 175. Centro. Vera Cruz - BA</p>
+                <p>Tel.: (71) 3633 - 2286</p>
+                <p>Email: servicosocial.upaveracruz@gmail.com</p>
+            </div>
+            <div style='display:flex;width:32%; padding-top: 0.1rem;'>
+                <div><img width="50" src="{% static 'brasao-veracruz.png' %}" alt=""></div>
+                <div><img width="160" src="{% static 'upa24.png' %}" alt=""></div>
+            </div>
+        </div>
+        <div style='padding-top: 1.5rem;'><h1 style='font-size: 1.5rem; text-align: center !important;  color:#000'>FICHA DE ATENDIMENTO DE EMERGÊNCIA</h1></div>
+            <hr>
+        
+            <!--Dados Paciente-->
+            {% include "Medicos/arquivos_partes_preescrever-medicamento/partes_relatório_atendimento.html/parte_dados_paciente.html" %}
+            <!--ENFERMAGEM-->
+            {% include "Medicos/arquivos_partes_preescrever-medicamento/partes_relatório_atendimento.html/partes_dados_classificacao.html" %}
+            
+            <!--MÉDICO-->                            
+            <div style="margin-top: 3%;">
+                    <h2 style="display: flex;width:auto; margin-right: 3%; font-size: 1.5rem !important; margin-bottom:-1%">Informações do Atendimento Médico</h2>
+                    <hr>
+                    Data: {{r.data_medico}}hs | <i class="fa-duotone fa-alarm-clock"></i> Hora: {{r.hora_medico}}hs
+                    {% if r.historico_doenca_atual_HDA %}
+                            <div style="margin-left: 2rem; margin-top: 1%">
+                                    <p style="background-color:#ccc; padding: 0.5rem">H.D.A: </p>
+                                    <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
+                                        <style>ul{display:block}</style>
+                                        <div style="margin-bottom: 1rem;">
+                                                {{r.historico_doenca_atual_HDA|safe}}
+                                        </div>
+                                    </div>
+                            </div>
+                    {% endif %}
+                    {% if r.exame_fisico %}
+                            <div style="margin-left: 2rem;">
+                                    <p style="background-color:#ccc; padding: 0.5rem">EXAME FÍSICO: </p>
+                                    <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
+                                        <style>ul{display:block}</style>
+                                        <div style="margin-bottom: 1rem;">
+                                                {{r.exame_fisico|safe}}
+                                        </div>
+                                    </div>
+                            </div>
+                    {% endif %}
+                    {% if r.Diagnostico %}
+                            <div style="margin-left: 2rem;">
+                                    <p style="background-color:#ccc; padding: 0.5rem">DIAGNÓSTICO: </p>
+                                    <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
+                                        <style>ul{display:block}</style>
+                                        <div style="margin-bottom: 1rem;">
+                                                {{r.Diagnostico|safe}}
+                                        </div>
+                                    </div>
+                            </div>
+                    {% endif %}
+                    {% if r.conduta %}
+                            <div style="margin-left: 2rem;">
+                                    <p style="background-color:#ccc; padding: 0.5rem">CONDUTA: </p>
+                                    <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
+                                        <style>ul{display:block}</style>
+                                        <div style="margin-bottom: 1rem;">
+                                                {{r.conduta|safe}}
+                                        </div>
+                                    </div>
+                            </div>
+                    {% endif %}
+                    <div style="margin-left: 2rem; display: flex; margin-top:2%">
+                            <p style="background-color:#ccc; padding: 0.5rem">CID 10: </p>
+                            <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">
+                                    <style>ul{display:block}</style>
+                                    <div style="margin-bottom: 1rem;">
+                                        {{r.classificacao_internacional_doenca_CID|safe}}
+                                    </div>
+                            </div>                                          
+                    </div>
+            </div>
+            <!--EXTRA-->
+            <div style="margin-top: 2%;">
+                    <div style="margin-left: 2rem; margin-bottom:1.5rem; border: 0.1rem solid #ccc">
+                            <p style="background-color:#ccc; padding: 0.5rem">Alergias: {% if not r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.alergias == "0" %}SIM {% else %}NÃO{% endif %}<i></i> </p>
+                            {% if not r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.alergias == "0" %}
+                            <div style="padding: 0.5rem; border: 0.1rem solid #ccc !important;">                                               
+                            
+                            <div style="margin-bottom: 1rem;">
+                                    {{r.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}
+                            </div>
+                            </div>
+                            {% else %}                                          
+                            {% endif %}
+                            
+                    </div>
+                    <div style="margin-left: 2rem">
+                            <p style="border:solid 0.1rem #ccc; padding: 0.9rem; font-weight: 700;">Alta:</p>
+                    </div>
+                    <div style="margin-left: 2rem; ">
+                            <div style="margin-left:50%!important;padding: 1rem; font-weight: 700; text-align: center !important; display:flex"><div>Médico:</div> <div style='width:20rem; border-bottom: 0.1rem solid #000'>{{r.medico_nome}}</div></div>
+                    </div>
+                    <div style="page-break-before: always;"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!--Menu suplementos-->
+{% include "Atendimento/outras_listagens/partes/partes_pacientes/menu_suplementos.html" %}
+<!--Menu suplementos-->
+
+
+
+
+
+<script>
+    // Função para imprimir apenas o conteúdo da div envios_triagem
+    function imprimir() {
+        var conteudoDiv = document.getElementById('envios_triagem').innerHTML;
+        var janelaImprimir = window.open('', '', 'width=800, height=600');
+        janelaImprimir.document.write('<html><head><title>Impressão</title></head><body>');
+        janelaImprimir.document.write(conteudoDiv);
+        janelaImprimir.document.write('</body></html>');
+        janelaImprimir.document.close();
+        janelaImprimir.print();
+    }
+</script>
+{% endblock body_login %}
