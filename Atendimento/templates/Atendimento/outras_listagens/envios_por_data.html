@@ -128,6 +128,8 @@
     </form>
 
 
+    
+
 
   
 
@@ -296,6 +298,85 @@
 <!--Menu suplementos-->
 
 
+
+
+<style>
+    #searchInputContainer {
+        position: fixed;
+        top: 25%;
+        left: 80%;
+        width: 50%;
+        z-index: 1000;
+    }
+    
+    #searchMessage {
+        margin-top: 40px;
+        display: none;
+        text-align: center;
+        color: red;
+        font-weight: bold;
+        position: fixed;
+        top: 27.5%;
+        left: 80%;
+        width: 20%;
+        z-index: 1000;
+        
+    }
+ 
+</style>
+
+<div id="searchInputContainer" class="form-control d-flex">
+    <i class="fa-solid fa-magnifying-glass fs-3 px-2"></i>
+    <input type="text" id="searchInput" placeholder="Buscar paciente..." class="p-2 fs-5 text-uppercaser">
+    
+</div>
+<div id="searchResults" style="background-color: #ddd7d7; margin: 5rem; position: fixed; left: 76%;top: 23.5%; width: 20%; padding:0.5rem 1rem;" class="shadow bg-light rounded-bottom"></div>
+<div id="searchMessage" class="bg-danger text-light ">Nenhum paciente encontrado</div>
+
+<script>
+document.getElementById('searchInput').addEventListener('input', function() {
+  var searchTerm = this.value.trim().toLowerCase();
+  var tableCells = document.querySelectorAll('td[style*="padding"]');
+  var searchResults = document.getElementById('searchResults');
+  var searchMessage = document.getElementById('searchMessage');
+  searchResults.innerHTML = '';
+  searchMessage.style.display = 'none';
+
+  var foundMatch = false;
+
+  tableCells.forEach(function(cell) {
+    var cellText = cell.textContent.trim().toLowerCase();
+    if (cellText.includes(searchTerm)) { // Verifica se o termo de pesquisa está presente na célula
+      var result = document.createElement('div');
+      result.textContent = cellText;
+      searchResults.appendChild(result);
+      cell.closest('div').scrollIntoView({ behavior: 'smooth', block: 'start' }); // Rolamento suave para o início da página
+      foundMatch = true;
+    }
+  });
+
+  if (!foundMatch) {
+    searchMessage.style.display = 'block';
+  }
+});
+
+// Evento de rolagem para manter a barra de pesquisa fixa no topo
+window.addEventListener('scroll', function() {
+  var searchInputContainer = document.getElementById('searchInputContainer');
+  if (window.scrollY > 0) {
+    searchInputContainer.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+  } else {
+    searchInputContainer.style.boxShadow = 'none';
+  }
+});
+
+// Evento para retornar ao topo quando o campo de busca estiver vazio
+document.getElementById('searchInput').addEventListener('input', function() {
+  if (this.value.trim() === '') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
+</script>
 
 
 

@@ -103,16 +103,7 @@
                     </span>
                 </a>
             </li>
-            <li class="has-subnav">
-                <a href=" {% url 'Medicos:medico_signup'  %} ">
-                    <i class="fa-solid "></i>
-                    <i class="fa fa-solid fa-thin fa-user-doctor fa-2x"></i>
-                    <i class="fa-solid "></i>
-                    <span class="nav-text">
-                        Cadastra Medicos
-                    </span>
-                </a>
-            </li>
+           
         {% endif %}
         <hr>
 
@@ -128,6 +119,16 @@
                     </span>
                 </a>              
             </li>-->
+            <li class="has-subnav">
+                <a href=" {% url 'Medicos:medico_signup'  %} ">
+                    <i class="fa-solid "></i>
+                    <i class="fa fa-solid fa-thin fa-user-doctor fa-2x"></i>
+                    <i class="fa-solid "></i>
+                    <span class="nav-text">
+                        Cadastra Medicos
+                    </span>
+                </a>
+            </li>
             <li class="has-subnav">
                 <a href=" {% url 'Atendimento:listagem_envio' %} ">
                 <i class="fa fa-solid fa-list-check fa-2x"></i>
@@ -145,6 +146,15 @@
                 
                     <span class="nav-text">
                         Ficha de atendimentos por data (Em teste)
+                    </span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href=" {% url 'Atendimento:listagem_envio_atendimento' %} ">
+                    {% load static %}
+                <img src="{% static "hist_med.png" %}" alt="" class='w-75 m-1 mt-3 mx-2' srcset="">
+                    <span class="nav-text">
+                        Documentos Médicos do Paciente
                     </span>
                 </a>
             </li>

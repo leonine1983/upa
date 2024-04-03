@@ -1,6 +1,8 @@
 from django.db import models
 # libs executadas para no pos migrate
 from django.db.models.signals import post_migrate, post_save
+from django.db.models import Case, When, Value, BooleanField
+from Atendimento.models import Priority
 from django.dispatch import receiver
 from Atendimento.models import envio_triagem
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, User
@@ -90,9 +92,22 @@ class Tipos_Atendimento(models.Model):
     
     def __str__(self):
         return self.nome
-            
+        
+    
+class TriagemManager(models.Manager):
+    def get_queryset(self):
+        priority_patients = Priority.objects.values_list('nome_priority__id', flat=True)
+        queryset = super().get_queryset().annotate(
+            is_priority = Case(
+                When(paciente_triagem__paciente_envio_triagem__id__in=priority_patients, then=Value(True)),
+                default=Value(False),
+                output_field=BooleanField()
+            )
+        ).order_by('classifica_tipo','is_priority', 'hora_triagem', 'paciente_triagem__paciente_envio_triagem__idade')
 
-# Create your models here.
+        return queryset
+    
+
 class triagem(models.Model):
     paciente_triagem = models.OneToOneField(envio_triagem, related_name='rel_envio_triagem', null=False, on_delete=models.PROTECT)
     passou_por_atend_medico = models.BooleanField(default=False, null=True)
@@ -138,11 +153,26 @@ class triagem(models.Model):
     final_medico_atendimento = models.CharField(max_length=3, null=True, default='')
     nome_da_enfermeira = models.CharField(max_length=50, null=False, default='')    
 
+    objects = TriagemManager()
+
     class Meta:
         ordering = ['classifica_tipo', 'hora_triagem', 'paciente_triagem__paciente_envio_triagem__idade']    
 
     def __str__ (self):
         return '{}'.format(self.paciente_triagem.paciente_envio_triagem.nome_social)
+    
+    def save(self, *args, **kwargs):
+        # Verifica se o registro está sendo atualizado
+        if self.pk is not None:
+            # Verifica se há algum registro em Priority relacionado a este paciente_triagem
+            if Priority.objects.filter(nome_priority=self.paciente_triagem.paciente_envio_triagem).exists():
+                priority_classificacoes = ['Vermelho', 'Laranja', 'Amarelo']
+                # Verifica se a classificação é diferente de 'Vermelho', 'Laranja' ou 'Amarelo'
+                if self.classifica_tipo and self.classifica_tipo.classifica_tipo not in priority_classificacoes:
+                    # Atualiza o campo classifica_tipo para 'Amarelo'
+                    self.classifica_tipo = Classifica_risco_model.objects.get(classifica_tipo='Laranja')
+
+        super().save(*args, **kwargs)
     
 # Aplica ao paciente determinado tipo de atendimento   
 choice = {
@@ -150,6 +180,8 @@ choice = {
     ('Em atendimento', 'Em atendimento'),
     ('Liberado', 'Liberado')
 } 
+
+
 
 class Atendimento_especializado(models.Model):
     tipo_atendimento = models.ForeignKey(Tipos_Atendimento, null=False, on_delete=models.CASCADE)
