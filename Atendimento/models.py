@@ -1,4 +1,5 @@
-from datetime import date, timezone, timedelta, datetime
+from datetime import date,timedelta, datetime
+from django.db.models import Case, When, Value, BooleanField
 from django.db import models
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
@@ -161,7 +162,123 @@ class ficha_de_atendimento(models.Model):
         
     def __str__ (self):
         return f'Codigo: {self.codigo_pacient} | Nome Social: {self.nome_social} | Idade: {self.RG} anos | Idade: {self.idade} anos {"| ⚠️ Paciente Alergico " if not self.alergias else ""}'
+    
+    from datetime import datetime
+    @receiver(post_migrate)
+    def crie_registro(sender, **kwargs):
+        paciente = ficha_de_atendimento.objects.filter(nome_social = "Enzzo Cauan Lins da Silva")
+        paciente2 = ficha_de_atendimento.objects.filter(nome_social = "Bruna Cauanne Lins da Silva")
+        paciente3 = ficha_de_atendimento.objects.filter(nome_social = "Cintia Teixeira Lins")
+        paciente4 = ficha_de_atendimento.objects.filter(nome_social = "Vanda Paulino Cerqueira")
+        paciente5 = ficha_de_atendimento.objects.filter(nome_social = "Rogério Cerqueira da Silva")
+        paciente6 = ficha_de_atendimento.objects.filter(nome_social = "Rogerio Cerqueira da Silva")
+        if not paciente:
+            data_nasci = datetime.strptime('04/02/2013', "%d/%m/%Y")
+            ficha_de_atendimento.objects.create(
+                nome_social = 'Enzzo Cauan Lins da Silva',
+                nome_completo = 'Enzzo Cauan Lins da Silva',
+                nome_recepcionista = 'Dariuma',
+                nome_mae = 'Cintia Teixeira Lins',
+                data_nascimento = data_nasci,
+                bairro = Bairro.objects.get(id=9),
+                pais = Pais.objects.get(id=1)
+            )
+        if not paciente2:
+            data_nasci = datetime.strptime('22/05/2005', "%d/%m/%Y")
+            ficha_de_atendimento.objects.create(
+                nome_social = 'Bruna Cauanne Lins da Silva',
+                nome_completo = 'Bruna Cauanne Lins da Silva',
+                nome_recepcionista = 'Dariuma',
+                nome_mae = 'Cintia Teixeira Lins',
+                data_nascimento = data_nasci,
+                bairro = Bairro.objects.get(id=9),
+                pais = Pais.objects.get(id=1)
+            )
+        if not paciente3:
+            data_nasci = datetime.strptime('26/10/1988', "%d/%m/%Y")
+            ficha_de_atendimento.objects.create(
+                nome_social = "Cintia Teixeira Lins",
+                nome_completo = 'Cintia Teixeira Lins',
+                nome_recepcionista = 'Dariuma',
+                nome_mae = 'Cintia Teixeira Lins',
+                data_nascimento = data_nasci,
+                bairro = Bairro.objects.get(id=9),
+                pais = Pais.objects.get(id=1)
+            )
+        if not paciente4:
+            data_nasci = datetime.strptime('26/10/1965', "%d/%m/%Y")
+            ficha_de_atendimento.objects.create(
+                nome_social = "Vanda Paulino Cerqueira",
+                nome_completo = 'Vanda Paulino Cerqueira',
+                nome_recepcionista = 'Dariuma',
+                nome_mae = 'Alaíde',
+                data_nascimento = data_nasci,
+                bairro = Bairro.objects.get(id=9),
+                pais = Pais.objects.get(id=1)
+            )
+        if not paciente5:
+            data_nasci = datetime.strptime('05/08/1983', "%d/%m/%Y")
+            ficha_de_atendimento.objects.create(
+                nome_social = "Rogério Cerqueira da Silva",
+                nome_completo = 'Rogério Cerqueira da Silva',
+                nome_recepcionista = 'Dariuma',
+                nome_mae = 'Vanda Paulino Cerqueira',
+                data_nascimento = data_nasci,
+                bairro = Bairro.objects.get(id=9),
+                pais = Pais.objects.get(id=1)
+            )
+        if not paciente6:
+            data_nasci = datetime.strptime('05/08/1983', "%d/%m/%Y")
+            ficha_de_atendimento.objects.create(
+                nome_social = "Rogerio Cerqueira da Silva",
+                nome_completo = 'Rogério Cerqueira da Silva',
+                nome_recepcionista = 'Dariuma',
+                nome_mae = 'Vanda Paulino Cerqueira',
+                data_nascimento = data_nasci,
+                bairro = Bairro.objects.get(id=9),
+                pais = Pais.objects.get(id=1)
+            )
+    
+    
+    
+class Priority (models.Model):
+    nome_priority = models.ForeignKey(ficha_de_atendimento, related_name = "rel_priority", null= True, on_delete = models.CASCADE)
 
+    @receiver(post_migrate)
+    def criar_registro(sender, **kwargs):
+        if not Priority.objects.exists():
+            Priority.objects.create(
+                nome_priority = ficha_de_atendimento.objects.get(nome_social = 'Enzzo Cauan Lins da Silva')
+            )
+            Priority.objects.create(
+                nome_priority = ficha_de_atendimento.objects.get(nome_social = 'Bruna Cauanne Lins da Silva')
+            )
+            Priority.objects.create(
+                nome_priority = ficha_de_atendimento.objects.get(nome_social = 'Cintia Teixeira Lins')
+            )
+            Priority.objects.create(
+                nome_priority = ficha_de_atendimento.objects.get(nome_social = 'Vanda Paulino Cerqueira')
+            )
+
+    def __str__(self):
+        return self.nome_priority.nome_social
+    
+
+class EnvioTriagemManager(models.Manager):
+    def get_queryset(self):
+        # Recuperar os pacientes na lista de prioridades
+        priority_patients = Priority.objects.values_list('nome_priority__id', flat=True)
+
+        # Anotar o queryset de envio_triagem com um campo indicando se o paciente está na lista de prioridades ou não
+        queryset = super().get_queryset().annotate(
+            is_priority=Case(
+                When(paciente_envio_triagem__id__in=priority_patients, then=Value(True)),
+                default=Value(False),
+                output_field=BooleanField()
+            )
+        ).order_by('-is_priority', 'horario_triagem')
+        
+        return queryset
 
 class envio_triagem(models.Model):
     paciente_envio_triagem = models.ForeignKey(ficha_de_atendimento, related_name='rel_ficha_atendimento', null=False, on_delete=models.PROTECT)       
@@ -175,6 +292,8 @@ class envio_triagem(models.Model):
     horas48 =  models.BooleanField(default=False, null=False)
     prioridade = models.CharField(max_length=3, default='0', choices= choices )
     nome_recepcionista = models.CharField(max_length=40, null=True, default='')
+
+    objects = EnvioTriagemManager()
  
     class Meta:
         ordering = ['horario_triagem']
