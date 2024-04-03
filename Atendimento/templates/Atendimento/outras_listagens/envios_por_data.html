@@ -253,7 +253,7 @@
                         <tbody>
                             <tr style="text-align: center;background-color:  rgb(243, 238, 238);">
                                 <td style="padding: 0.2rem 0.5rem;">{% if d.cod_triagem %}{{d.cod_triagem}}{% else %}{% endif %}</td>
-                                <td style="padding: 0.2rem 0.5rem;">{{d.paciente_envio_triagem.nome_social}}</td>
+                                <td id="nome_social" style="padding: 0.2rem 0.5rem;">{{d.paciente_envio_triagem.nome_social}}</td>
                                 <td style="padding: 0.2rem 0.5rem;">{{d.data_envio_triagem}}</td>
                                 <td style="padding: 0.2rem 0.5rem;">{{d.horario_triagem}}</td>
                             </tr>
@@ -330,13 +330,14 @@
     <input type="text" id="searchInput" placeholder="Buscar paciente..." class="p-2 fs-5 text-uppercaser">
     
 </div>
-<div id="searchResults" style="background-color: #ddd7d7; margin: 5rem; position: fixed; left: 76%;top: 23.5%; width: 20%; padding:0.5rem 1rem;" class="shadow bg-light rounded-bottom"></div>
+<div id="searchResults" style="background-color: #ddd7d7; margin: 5rem; position: fixed; left: 76%;top: 23.5%; width: 20%; padding:0.5rem 1rem;" class="shadow bg-light rounded-bottom text-uppercase fs-6"></div>
 <div id="searchMessage" class="bg-danger text-light ">Nenhum paciente encontrado</div>
 
 <script>
 document.getElementById('searchInput').addEventListener('input', function() {
   var searchTerm = this.value.trim().toLowerCase();
-  var tableCells = document.querySelectorAll('td[style*="padding"]');
+  var tableCells = document.querySelectorAll('td[id="nome_social"]');
+  
   var searchResults = document.getElementById('searchResults');
   var searchMessage = document.getElementById('searchMessage');
   searchResults.innerHTML = '';
