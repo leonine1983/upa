@@ -18,7 +18,6 @@ class Exibe_documentos_paciente(LoginRequiredMixin, ListView):
         date_today = datetime.today()
         #converte o formato da data
         date_hoje = '{}-{}-{}'.format(date_today.year, date_today.month, date_today.day)
-        print(f'pacient {date_hoje}')
         
         if start_busca_paciente:
             #converte a str objects em date
@@ -36,13 +35,10 @@ class Exibe_documentos_paciente(LoginRequiredMixin, ListView):
             self.object_medic_atendimento  = Medico_atendimento.objects.filter(data_medico = datetime.today())
 
         return self.object_list
+
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        
-        # Adicionar as contagens ao contexto
-        
+        context = super().get_context_data(**kwargs)        
         context['object_list'] = self.object_list,
         context['object_triagem'] = self.object_triagem,
         context['object_medic_atendimento'] = self.object_medic_atendimento

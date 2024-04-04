@@ -147,78 +147,126 @@
         <div class="row mt-5 gap-3">
             <div class="col p-2 border bg-light-subtle shadow shadow-sm">
                 <h1 style='font-size: 1.2rem!important;'>Chegada na recepção</h1>
-                {% for d in object_list %}
-                    {% for d in d %}
-                        <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
-                            
-                            <div style="background-color:#ebe5e5; padding: 0.2rem;">
-                                <div class='fs-6'><b>Nome Social:</b> {{d.paciente_envio_triagem.nome_social}}</div>
-                                <div><b>Data de Entrada na Recepção:</b> {{d.data_envio_triagem}}</div>
-                                <div><b>Horário de Entrada na Recepção:</b> {{d.horario_triagem}}</div>
-                            </div>
+                {% if object_list %}
+                    {% for d in object_list %}
+                        {% for d in d %}
+                            <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
                                 
-                                <div style="padding: 0.2rem;margin-top: 0.5rem;">
-                                    <div style="margin-right: 0.5rem;">
-                                        <div><b>Registro:</b> {% if d.cod_triagem %}{{d.cod_triagem}}{% else %}{% endif %}</div>
-                                       
-                                        <div><b>Idade:</b> {{d.paciente_envio_triagem.idade}}</div>
-                                        <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
-                                        <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
-                                        <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
-                                        <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
-                                    </div>
-                                    <div style="margin-right: 0.5rem;">
-                                        <div><b>Etnia:</b> {{d.paciente_envio_triagem.etnia}}</div>
-                                        <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
-                                        <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
-                                        <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
-                                        <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
-                                    </div>
-                                    <div style="margin-right: 0.5rem;">
-                                        <div><b>Nacionalidade:</b> {{d.paciente_envio_triagem.nacionalidade}}</div>
-                                        <div><b>Cartão do Sus:</b> {{d.paciente_envio_triagem.cartao_sus}}</div>
-                                        <div><b>Rua:</b> {{d.paciente_envio_triagem.rua}}</div>
-                                        <div><b>Bairro:</b> {{d.paciente_envio_triagem.bairro}}</div>
-                                        <div><b>Cidade:</b> {{d.paciente_envio_triagem.cidade}}</div>
-                                        <div><b>Pais:</b> {{d.paciente_envio_triagem.pais}}</div>   
-                                    </div>
-                                    <div>
-                                        <div><b>CEP:</b> {{d.paciente_envio_triagem.CEP}}</div>
-                                        <div><b>Telefone:</b> {{d.paciente_envio_triagem.tel}}</div>
-                                        <div><b>Nome da mãe:</b> {{d.paciente_envio_triagem.nome_mae}}</div>
-                                        <div><b>Responsável (Acompanhante):</b> {{d.paciente_envio_triagem.responsavel}}</div>
-                                    </div>
-                                <div>        
+                                <div style="background-color:#ebe5e5; padding: 0.2rem;">
+                                    <div class='fs-6'><b>Nome Social:</b> {{d.paciente_envio_triagem.nome_social}}</div>
+                                    <div><b>Data de Entrada na Recepção:</b> {{d.data_envio_triagem}}</div>
+                                    <div><b>Horário de Entrada na Recepção:</b> {{d.horario_triagem}}</div>
+                                </div>
+                                    
+                                    <div style="padding: 0.2rem;margin-top: 0.5rem;">
+                                        <div style="margin-right: 0.5rem;">
+                                            <div><b>Registro:</b> {% if d.cod_triagem %}{{d.cod_triagem}}{% else %}{% endif %}</div>
+                                        
+                                            <div><b>Idade:</b> {{d.paciente_envio_triagem.idade}}</div>
+                                            <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
+                                            <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
+                                            <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
+                                            <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
+                                        </div>
+                                        <div style="margin-right: 0.5rem;">
+                                            <div><b>Etnia:</b> {{d.paciente_envio_triagem.etnia}}</div>
+                                            <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
+                                            <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
+                                            <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
+                                            <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
+                                        </div>
+                                        <div style="margin-right: 0.5rem;">
+                                            <div><b>Nacionalidade:</b> {{d.paciente_envio_triagem.nacionalidade}}</div>
+                                            <div><b>Cartão do Sus:</b> {{d.paciente_envio_triagem.cartao_sus}}</div>
+                                            <div><b>Rua:</b> {{d.paciente_envio_triagem.rua}}</div>
+                                            <div><b>Bairro:</b> {{d.paciente_envio_triagem.bairro}}</div>
+                                            <div><b>Cidade:</b> {{d.paciente_envio_triagem.cidade}}</div>
+                                            <div><b>Pais:</b> {{d.paciente_envio_triagem.pais}}</div>   
+                                        </div>
+                                        <div>
+                                            <div><b>CEP:</b> {{d.paciente_envio_triagem.CEP}}</div>
+                                            <div><b>Telefone:</b> {{d.paciente_envio_triagem.tel}}</div>
+                                            <div><b>Nome da mãe:</b> {{d.paciente_envio_triagem.nome_mae}}</div>
+                                            <div><b>Responsável (Acompanhante):</b> {{d.paciente_envio_triagem.responsavel}}</div>
+                                        </div>
+                                    <div>        
+                                </div>
+                            </div>        
                             </div>
-                        </div>        
-                        </div>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}   
+                    {% else %}<div style='margin:5rem auto;border:0.1rem solid gray; padding:1rem; width:80%; text-align:center'>Não há registro desse paciente na recepção para essa data. Verifique senão digitou o nome do paciente com algum erro e tente novamente<br><i class="fa-solid fa-circle-exclamation"></i> </div>
+                {% endif %}   
             </div>
 
             <div class="col p-2 border bg-light-subtle shadow shadow-sm">
                 <h1 style='font-size: 1.2rem!important;'>Passagem pela Classificação</h1>
-                {% for d in object_triagem %}
-                    {% for d in d %}
+                {% if  object_triagem %}
+                    {% for d in object_triagem %}
+                        {% for d in d %}
+                            <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
+                                
+                                <div style="background-color:#ebe5e5; padding: 0.2rem;">
+                                    <div class='fs-6'><b>Nome Social:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
+                                    <div><b>Data da Classificação:</b> {{d.data_triagem}}</div>
+                                    <div><b>Horário da Classificação:</b> {{d.hora_triagem}}</div>
+                                    <div ><b>Respondeu ao Chamado:</b>{% if d.respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
+                                        {% if d.respondeu_ao_chamado %} 
+                                        <div ><b>Quantidade de tentativas de chamar o paciente:</b> {{d.chamadas_contabilizadas}} vezes</div>
+                                        {% endif %}
+                                </div>
+                                    <div style="padding: 0.2rem;margin-top: 0.5rem;">
+                                        <div style="margin-right: 0.5rem;">
+                                            <div><b>Registro:</b> {% if d.paciente_triagem.cod_triagem %}{{d.paciente_triagem.cod_triagem}}{% else %}{% endif %}</div>
+                                            <div><b>Idade:</b> {{d.paciente_triagem.paciente_envio_triagem.idade}}</div>
+                                            <div><b>Nome da mãe:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_mae}}</div>
+                                            <div><b>Telefone:</b> {{d.paciente_triagem.paciente_envio_triagem.tel}}</div>
+                                            <div><b>Classificação:</b>{% if d.classifica_tipo == None %} Não Respondeu {% else %}{{d.classifica_tipo}}{% endif %} </div>
+                                            <div><b>Enfermeira:</b> {{d.nome_da_enfermeira}}</div>
+                                            {% if not d.respondeu_ao_chamado %}
+                                                <div class='p-2 m-1'><b>Sitomas relatados pelo paciente:</b>{{d.observacao|safe}}</div>
+                                            {% endif %}
+                                        </div>
+                                    <div>        
+                                </div>
+                            </div>        
+                            </div>
+                        {% endfor %}
+                    {% endfor %}  
+                    {% else %}
+                        <div style='margin:5rem auto;border:0.1rem solid gray; padding:1rem; width:80%; text-align:center'>Não há registro desse paciente para a classficação nessa data<br><i class="fa-solid fa-circle-exclamation"></i> </div>
+                {% endif %} 
+            </div>
+            <div class="col p-2 border bg-light-subtle shadow shadow-sm ">
+                <h1 style='font-size: 1.2rem!important;'>Passagem pelo atendimento médico</h1>
+                {% if object_medic_atendimento %}
+                    {% for d in object_medic_atendimento %}
+                    {% if d.paciente_medico_atendimento.id %}
+                        <a href="{% url "Medicos:perfil_completo_paciente" d.paciente_medico_atendimento.id %}">
+                            <i class="fa-solid fa-notes-medical"></i> Vê histórico do paciente
+                        </a>
+                        {% else %}
+                        O paciente ainda não possui histórico hospitalar
+                    {% endif %}
+                        
                         <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
-                            
+                                
                             <div style="background-color:#ebe5e5; padding: 0.2rem;">
-                                <div class='fs-6'><b>Nome Social:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
-                                <div><b>Data da Classificação:</b> {{d.data_triagem}}</div>
-                                <div><b>Horário da Classificação:</b> {{d.hora_triagem}}</div>
-                                <div ><b>Respondeu ao Chamado:</b>{% if d.respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
-                                    {% if d.respondeu_ao_chamado %} 
-                                    <div ><b>Quantidade de tentativas de chamar o paciente:</b> {{d.chamadas_contabilizadas}} vezes</div>
+                                <div class='fs-6'><b>Nome Social:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
+                                <div><b>Data da Classificação:</b> {{d.data_medico}}</div>
+                                <div><b>Horário da Classificação:</b> {{d.hora_medico}}</div>
+                                <div ><b>Respondeu ao Chamado:</b>{% if d.paciente_medico_atendimento.medico_respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
+                                    {% if d.paciente_medico_atendimento.medico_respondeu_ao_chamado %} 
+                                    <div ><b>Quantidade de tentativas de chamar o paciente:</b> {{d.paciente_medico_atendimento.medico_respondeu_ao_chamado}} vezes</div>
                                     {% endif %}
                             </div>
                                 <div style="padding: 0.2rem;margin-top: 0.5rem;">
                                     <div style="margin-right: 0.5rem;">
-                                        <div><b>Registro:</b> {% if d.paciente_triagem.cod_triagem %}{{d.paciente_triagem.cod_triagem}}{% else %}{% endif %}</div>
-                                        <div><b>Idade:</b> {{d.paciente_triagem.paciente_envio_triagem.idade}}</div>
-                                        <div><b>Nome da mãe:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_mae}}</div>
-                                        <div><b>Telefone:</b> {{d.paciente_triagem.paciente_envio_triagem.tel}}</div>
-                                        <div><b>Classificação:</b>{% if d.classifica_tipo == None %} Não Respondeu {% else %}{{d.classifica_tipo}}{% endif %} </div>
-                                        <div><b>Enfermeira:</b> {{d.nome_da_enfermeira}}</div>
+                                        <div><b>Registro:</b>{% if d.paciente_medico_atendimento.paciente_triagem.cod_triagem %} {{d.paciente_medico_atendimento.paciente_triagem.cod_triagem}}{% endif %}</div>
+                                        <div><b>Idade:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.idade}}</div>
+                                        <div><b>Nome da mãe:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_mae}}</div>
+                                        <div><b>Telefone:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.tel}}</div>
+                                        <div><b>Médico:</b> Dr.(a) {{d.medico_nome}}</div>
                                         {% if not d.respondeu_ao_chamado %}
                                             <div class='p-2 m-1'><b>Sitomas relatados pelo paciente:</b>{{d.observacao|safe}}</div>
                                         {% endif %}
@@ -227,47 +275,10 @@
                             </div>
                         </div>        
                         </div>
-                    {% endfor %}
-                {% endfor %}   
-            </div>
-            <div class="col p-2 border bg-light-subtle shadow shadow-sm ">
-                <h1 style='font-size: 1.2rem!important;'>Passagem pelo atendimento médico</h1>
-                {% for d in object_medic_atendimento %}
-                {% if d.paciente_medico_atendimento.id %}
-                    <a href="{% url "Medicos:perfil_completo_paciente" d.paciente_medico_atendimento.id %}">
-                        <i class="fa-solid fa-notes-medical"></i> Vê histórico do paciente
-                    </a>
+                    {% endfor %}  
                     {% else %}
-                    O paciente ainda não possui histórico hospitalar
+                    <div style='margin:5rem auto;border:0.1rem solid gray; padding:1rem; width:80%; text-align:center'>Não registro desse paciente em atendimento médico<br><i class="fa-solid fa-circle-exclamation"></i> </div>
                 {% endif %}
-                    
-                    <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
-                            
-                        <div style="background-color:#ebe5e5; padding: 0.2rem;">
-                            <div class='fs-6'><b>Nome Social:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
-                            <div><b>Data da Classificação:</b> {{d.data_medico}}</div>
-                            <div><b>Horário da Classificação:</b> {{d.hora_medico}}</div>
-                            <div ><b>Respondeu ao Chamado:</b>{% if d.paciente_medico_atendimento.medico_respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
-                                {% if d.paciente_medico_atendimento.medico_respondeu_ao_chamado %} 
-                                <div ><b>Quantidade de tentativas de chamar o paciente:</b> {{d.paciente_medico_atendimento.medico_respondeu_ao_chamado}} vezes</div>
-                                {% endif %}
-                        </div>
-                            <div style="padding: 0.2rem;margin-top: 0.5rem;">
-                                <div style="margin-right: 0.5rem;">
-                                    <div><b>Registro:</b>{% if d.paciente_medico_atendimento.paciente_triagem.cod_triagem %} {{d.paciente_medico_atendimento.paciente_triagem.cod_triagem}}{% endif %}</div>
-                                    <div><b>Idade:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.idade}}</div>
-                                    <div><b>Nome da mãe:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_mae}}</div>
-                                    <div><b>Telefone:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.tel}}</div>
-                                    <div><b>Médico:</b> Dr.(a) {{d.medico_nome}}</div>
-                                    {% if not d.respondeu_ao_chamado %}
-                                        <div class='p-2 m-1'><b>Sitomas relatados pelo paciente:</b>{{d.observacao|safe}}</div>
-                                    {% endif %}
-                                </div>
-                            <div>        
-                        </div>
-                    </div>        
-                    </div>
-                {% endfor %}   
             </div>
         </div>
     </div>
