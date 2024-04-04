@@ -57,11 +57,15 @@ padding: 0.5rem;
     <p>&nbsp;</p>   
     <div class="dados-pessoais">
         <div class="d-flex justify-content-end" style='margin-bottom:-3rem'>
-            <a href="{% url 'Medicos:perfil_completo_segunda_parte' pkK %}"  title="Editar" class="text-center border border-primary pe-1 px-1 mx-2 shadow shadow-sm"> 
-                <i class="fs-2 m-3 fa-solid fa-hospital-user"></i>
-                <span class="d-block">Histórico</span>
-                <span class="d-block fs-7">Hospitalar</span>
-            </a>
+            {% if pkK == 0 %}
+                <a href=""><i class="fa-solid fa-hospital-user"></i>  Ainda não tem histórico</a></div>
+            {% else %}
+                <a href="{% url 'Medicos:perfil_completo_segunda_parte' pkK %}"  title="Editar" class="text-center border border-primary pe-1 px-1 mx-2 shadow shadow-sm"> 
+                    <i class="fs-2 m-3 fa-solid fa-hospital-user"></i>
+                    <span class="d-block">Histórico</span>
+                    <span class="d-block fs-7">Hospitalar</span>
+                </a>
+            {% endif %}
             <a href="{% url 'Atendimento:atualizar-paciente' pkK   %}"  title="Editar" class="text-center border border-primary shadow shadow-sm pe-1 px-1 "> 
                 <i class="fs-2 m-3 fa-solid fa-user-pen"></i>
                 <span class="d-block">Editar</span>

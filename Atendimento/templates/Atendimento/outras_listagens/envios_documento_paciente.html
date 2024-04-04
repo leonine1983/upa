@@ -1,0 +1,376 @@
+{% extends 'global/template_geral.html' %}
+
+<!-- titulo Web da pagina-->
+{% block title_login %} Pacientes {% endblock title_login %}
+{% load static %}
+
+<!--CSS local-->
+{% block css %} 
+    <!--Tabela-->
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--Menu Local-->
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} ">     
+    <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
+
+    <style>
+ 
+        .container_nav {
+          position: fixed;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          background-color: #f0f0f0;
+          padding: 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded {
+          width: 300px;
+        }
+      
+        .content {
+          display: none;
+          margin-top: 10px;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded .content {
+          display: block;
+        }
+
+
+            /* Estilos para a visualização normal */
+    #envios_triagem {
+        width: 1000px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        padding: 2%;
+        background-color: #ffffff;
+    }
+
+    #envios_triagem table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #envios_triagem th,
+    #envios_triagem td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #envios_triagem th {
+        background-color: #f2f2f2;
+    }
+
+    /* Estilos para impressão */
+    @media print {
+        #envios_triagem {
+            width: auto;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        #envios_triagem table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #envios_triagem th,
+        #envios_triagem td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #envios_triagem th {
+            background-color: #f2f2f2;
+        }
+    }
+
+      </style>
+{% endblock css %} 
+
+<!--Titulo da Pagina-->
+{% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
+
+{% block body_login %}    
+<div class='menu-local-top' style='margin-top:-3rem'>
+    <ul>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem </a></li>
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>     
+    </ul> 
+</div>   
+<div class='mt-5 pt-5'>   
+    <div class="border-bottom border-dark fs-3 d-flex">
+        Busca por Documentos Médicos do Paciente
+    </div>
+    <form class='m-1 row g-4 p-2 ' style='background:#e1ede0'>
+        {% csrf_token %}
+        <div class="col-auto">
+            <h2 class="fs-3">
+                <img src="{% static "hist_med.png" %}" alt="" sizes="" srcset="" >
+                Pesquisar por paciente::</h2>
+        </div>
+        <div class="col-auto">
+            <input type="date" name='busca_data' class='form-control'>
+        </div>
+        <div class="col-4 d-flex border rounded  bg-light shadow shadow-sm">
+            <input type="text" name='busca_paciente' class='bg-transparent border-0 p-2 fs-4' style="width: 95%">
+            <button class="btn btn-sm " type="submit"><i class="fa-solid fa-magnifying-glass m-2 fs-3"></i></button>
+            
+        </div>
+        <div class="col-auto">
+            <button onclick="imprimir()" class="btn btn-sm btn-secondary">Imprimir <i class="fa-solid fa-print"></i></button>
+        </div>
+    </form>
+
+    <div id="envios_triagem" style="
+        width: 100%;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        padding: 2%;" class="m-auto bg-light shadow">
+        <div style='display:flex'>
+            <div style='display:flex; margin-right:0.5rem'>
+                <img src="{% static "brasao-veracruz.png" %}" alt="" sizes="" srcset="" style='width:4rem'>
+                <div style='font-size:0.75rem; padding:0.5rem 0.5rem 0 0.8rem'>
+                    UPA - Unidade de Pronto Atendimento de Vera Cruz</br>
+                    Av. Juvenal João Vinagre, 175. Centro | Vera Cruz - BA</br>
+                    Tel. (71) 3633 - 2286 | Email: servicossocial.upaveracruz@gmail.com
+                </div>
+            </div>
+            <img src="{% static "upa24.png" %}" alt="" sizes="" srcset="" style='width:9.2rem; margin-left:1rem'>
+        </div>
+
+        <div class="row mt-5 gap-3">
+            <div class="col p-2 border bg-light-subtle shadow shadow-sm">
+                <h1 style='font-size: 1.2rem!important;'>Chegada na recepção</h1>
+                {% for d in object_list %}
+                    {% for d in d %}
+                        <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
+                            
+                            <div style="background-color:#ebe5e5; padding: 0.2rem;">
+                                <div class='fs-6'><b>Nome Social:</b> {{d.paciente_envio_triagem.nome_social}}</div>
+                                <div><b>Data de Entrada na Recepção:</b> {{d.data_envio_triagem}}</div>
+                                <div><b>Horário de Entrada na Recepção:</b> {{d.horario_triagem}}</div>
+                            </div>
+                                
+                                <div style="padding: 0.2rem;margin-top: 0.5rem;">
+                                    <div style="margin-right: 0.5rem;">
+                                        <div><b>Registro:</b> {% if d.cod_triagem %}{{d.cod_triagem}}{% else %}{% endif %}</div>
+                                       
+                                        <div><b>Idade:</b> {{d.paciente_envio_triagem.idade}}</div>
+                                        <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
+                                        <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
+                                        <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
+                                        <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
+                                    </div>
+                                    <div style="margin-right: 0.5rem;">
+                                        <div><b>Etnia:</b> {{d.paciente_envio_triagem.etnia}}</div>
+                                        <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
+                                        <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
+                                        <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
+                                        <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
+                                    </div>
+                                    <div style="margin-right: 0.5rem;">
+                                        <div><b>Nacionalidade:</b> {{d.paciente_envio_triagem.nacionalidade}}</div>
+                                        <div><b>Cartão do Sus:</b> {{d.paciente_envio_triagem.cartao_sus}}</div>
+                                        <div><b>Rua:</b> {{d.paciente_envio_triagem.rua}}</div>
+                                        <div><b>Bairro:</b> {{d.paciente_envio_triagem.bairro}}</div>
+                                        <div><b>Cidade:</b> {{d.paciente_envio_triagem.cidade}}</div>
+                                        <div><b>Pais:</b> {{d.paciente_envio_triagem.pais}}</div>   
+                                    </div>
+                                    <div>
+                                        <div><b>CEP:</b> {{d.paciente_envio_triagem.CEP}}</div>
+                                        <div><b>Telefone:</b> {{d.paciente_envio_triagem.tel}}</div>
+                                        <div><b>Nome da mãe:</b> {{d.paciente_envio_triagem.nome_mae}}</div>
+                                        <div><b>Responsável (Acompanhante):</b> {{d.paciente_envio_triagem.responsavel}}</div>
+                                    </div>
+                                <div>        
+                            </div>
+                        </div>        
+                        </div>
+                    {% endfor %}
+                {% endfor %}   
+            </div>
+
+            <div class="col p-2 border bg-light-subtle shadow shadow-sm">
+                <h1 style='font-size: 1.2rem!important;'>Passagem pela Classificação</h1>
+                {% for d in object_triagem %}
+                    {% for d in d %}
+                        <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
+                            
+                            <div style="background-color:#ebe5e5; padding: 0.2rem;">
+                                <div class='fs-6'><b>Nome Social:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
+                                <div><b>Data da Classificação:</b> {{d.data_triagem}}</div>
+                                <div><b>Horário da Classificação:</b> {{d.hora_triagem}}</div>
+                                <div ><b>Respondeu ao Chamado:</b>{% if d.respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
+                                    {% if d.respondeu_ao_chamado %} 
+                                    <div ><b>Quantidade de tentativas de chamar o paciente:</b> {{d.chamadas_contabilizadas}} vezes</div>
+                                    {% endif %}
+                            </div>
+                                <div style="padding: 0.2rem;margin-top: 0.5rem;">
+                                    <div style="margin-right: 0.5rem;">
+                                        <div><b>Registro:</b> {% if d.paciente_triagem.cod_triagem %}{{d.paciente_triagem.cod_triagem}}{% else %}{% endif %}</div>
+                                        <div><b>Idade:</b> {{d.paciente_triagem.paciente_envio_triagem.idade}}</div>
+                                        <div><b>Nome da mãe:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_mae}}</div>
+                                        <div><b>Telefone:</b> {{d.paciente_triagem.paciente_envio_triagem.tel}}</div>
+                                        <div><b>Classificação:</b>{% if d.classifica_tipo == None %} Não Respondeu {% else %}{{d.classifica_tipo}}{% endif %} </div>
+                                        <div><b>Enfermeira:</b> {{d.nome_da_enfermeira}}</div>
+                                        {% if not d.respondeu_ao_chamado %}
+                                            <div class='p-2 m-1'><b>Sitomas relatados pelo paciente:</b>{{d.observacao|safe}}</div>
+                                        {% endif %}
+                                    </div>
+                                <div>        
+                            </div>
+                        </div>        
+                        </div>
+                    {% endfor %}
+                {% endfor %}   
+            </div>
+            <div class="col p-2 border bg-light-subtle shadow shadow-sm ">
+                <h1 style='font-size: 1.2rem!important;'>Passagem pelo atendimento médico</h1>
+                {% for d in object_medic_atendimento %}
+                {% if d.paciente_medico_atendimento.id %}
+                    <a href="{% url "Medicos:perfil_completo_paciente" d.paciente_medico_atendimento.id %}">
+                        <i class="fa-solid fa-notes-medical"></i> Vê histórico do paciente
+                    </a>
+                    {% else %}
+                    O paciente ainda não possui histórico hospitalar
+                {% endif %}
+                    
+                    <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
+                            
+                        <div style="background-color:#ebe5e5; padding: 0.2rem;">
+                            <div class='fs-6'><b>Nome Social:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
+                            <div><b>Data da Classificação:</b> {{d.data_medico}}</div>
+                            <div><b>Horário da Classificação:</b> {{d.hora_medico}}</div>
+                            <div ><b>Respondeu ao Chamado:</b>{% if d.paciente_medico_atendimento.medico_respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
+                                {% if d.paciente_medico_atendimento.medico_respondeu_ao_chamado %} 
+                                <div ><b>Quantidade de tentativas de chamar o paciente:</b> {{d.paciente_medico_atendimento.medico_respondeu_ao_chamado}} vezes</div>
+                                {% endif %}
+                        </div>
+                            <div style="padding: 0.2rem;margin-top: 0.5rem;">
+                                <div style="margin-right: 0.5rem;">
+                                    <div><b>Registro:</b>{% if d.paciente_medico_atendimento.paciente_triagem.cod_triagem %} {{d.paciente_medico_atendimento.paciente_triagem.cod_triagem}}{% endif %}</div>
+                                    <div><b>Idade:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.idade}}</div>
+                                    <div><b>Nome da mãe:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_mae}}</div>
+                                    <div><b>Telefone:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.tel}}</div>
+                                    <div><b>Médico:</b> Dr.(a) {{d.medico_nome}}</div>
+                                    {% if not d.respondeu_ao_chamado %}
+                                        <div class='p-2 m-1'><b>Sitomas relatados pelo paciente:</b>{{d.observacao|safe}}</div>
+                                    {% endif %}
+                                </div>
+                            <div>        
+                        </div>
+                    </div>        
+                    </div>
+                {% endfor %}   
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Menu suplementos-->
+{% include "Atendimento/outras_listagens/partes/partes_pacientes/menu_suplementos.html" %}
+<!--Menu suplementos-->
+
+
+
+
+<style>
+    #searchInputContainer {
+        position: fixed;
+        top: 25%;
+        left: 80%;
+        width: 50%;
+        z-index: 1000;
+    }
+    
+    #searchMessage {
+        margin-top: 40px;
+        display: none;
+        text-align: center;
+        color: red;
+        font-weight: bold;
+        position: fixed;
+        top: 27.5%;
+        left: 80%;
+        width: 20%;
+        z-index: 1000;
+        
+    }
+ 
+</style>
+
+<div id="searchInputContainer" class="form-control d-flex">
+    <i class="fa-solid fa-magnifying-glass fs-3 px-2"></i>
+    <input type="text" id="searchInput" placeholder="Buscar local..." class="p-2 fs-5 text-uppercaser">
+    
+</div>
+<div id="searchResults" style="background-color: #ddd7d7; margin: 5rem; position: fixed; left: 76%;top: 23.5%; width: 20%; padding:0.5rem 1rem;" class="shadow bg-light rounded-bottom text-uppercase fs-6"></div>
+<div id="searchMessage" class="bg-danger text-light ">Nenhum paciente encontrado</div>
+
+<script>
+document.getElementById('searchInput').addEventListener('input', function() {
+  var searchTerm = this.value.trim().toLowerCase();
+  var tableCells = document.querySelectorAll('td[id="nome_social"]');
+  
+  var searchResults = document.getElementById('searchResults');
+  var searchMessage = document.getElementById('searchMessage');
+  searchResults.innerHTML = '';
+  searchMessage.style.display = 'none';
+
+  var foundMatch = false;
+
+  tableCells.forEach(function(cell) {
+    var cellText = cell.textContent.trim().toLowerCase();
+    if (cellText.includes(searchTerm)) { // Verifica se o termo de pesquisa está presente na célula
+      var result = document.createElement('div');
+      result.textContent = cellText;
+      searchResults.appendChild(result);
+      cell.closest('div').scrollIntoView({ behavior: 'smooth', block: 'start' }); // Rolamento suave para o início da página
+      foundMatch = true;
+    }
+  });
+
+  if (!foundMatch) {
+    searchMessage.style.display = 'block';
+  }
+});
+
+// Evento de rolagem para manter a barra de pesquisa fixa no topo
+window.addEventListener('scroll', function() {
+  var searchInputContainer = document.getElementById('searchInputContainer');
+  if (window.scrollY > 0) {
+    searchInputContainer.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+  } else {
+    searchInputContainer.style.boxShadow = 'none';
+  }
+});
+
+// Evento para retornar ao topo quando o campo de busca estiver vazio
+document.getElementById('searchInput').addEventListener('input', function() {
+  if (this.value.trim() === '') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
+</script>
+
+
+
+<script>
+    // Função para imprimir apenas o conteúdo da div envios_triagem
+    function imprimir() {
+        var conteudoDiv = document.getElementById('envios_triagem').innerHTML;
+        var janelaImprimir = window.open('', '', 'width=800, height=600');
+        janelaImprimir.document.write('<html><head><title>Impressão</title></head><body>');
+        janelaImprimir.document.write(conteudoDiv);
+        janelaImprimir.document.write('</body></html>');
+        janelaImprimir.document.close();
+        janelaImprimir.print();
+    }
+</script>
+{% endblock body_login %}

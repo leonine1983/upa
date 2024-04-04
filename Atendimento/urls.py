@@ -3,7 +3,8 @@ from django.urls import include, path
 from . import views
 from .views import (delete_paciente_a_triagem, envio_paciente_a_triagem,
                     lista_de_paciente_na_triagem, paciente_cadastro,
-                    paciente_lista, Exibe_envios_data, Exibe_envios_data_atendimentos)
+                    paciente_lista, Exibe_envios_data, Exibe_envios_data_atendimentos,
+                    Exibe_documentos_paciente)
 
 
 app_name='Atendimento'
@@ -61,6 +62,7 @@ urlpatterns = [
 
     # Outras listagens
     path('pacient/envios_data', Exibe_envios_data.as_view(), name='listagem_envio' ),
-    path('pacient/envios_data/atendimentos', Exibe_envios_data_atendimentos.as_view(), name='listagem_envio_atendimento' )
+    path('pacient/envios_data/atendimentos', Exibe_envios_data_atendimentos.as_view(), name='listagem_envio_atendimento' ),    
+    path('pacient/envios_data/doucumentos_paciente', Exibe_documentos_paciente.as_view(), name='listagem_documentos_paciente' )
 
 ]
