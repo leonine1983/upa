@@ -134,14 +134,15 @@
   </script>
   <div class='p-1 text-center bg-secondary-subtle' >
     {% if licenca_ativa == None %}
-    <div style='background:#FA8072'>Lincença vencida. Por favor entrar em contato com o Administrador. Tel.: 71 9 86881943</div>     
+    <div style='background:#FA8072'>Lincença vencida. Por favor entrar em contato com o Administrador.</div>     
         <div class="modal fade" id="myModal" data-backdrop="static">
             <div class="modal-dialog">
-              <div class="modal-content" style='width:70vw !important; margin-left:-20vw!important'>
+              <div class="modal-content" style='width:30vw !important; height:27vw !important;'>
                 <div class="modal-header" style='background:#FA8072'>
                     <h4 class="modal-title text-center">A LICENÇA EXPIROU <i class="fa-solid fa-house-medical-circle-exclamation" style="color: #dc1840;"></i></h4>
                 </div>
-                <div class="modal-body p-5">
+                <!--<img src="{% static "expired.png" %}" alt="" sizes="" srcset="" class='w-75 m-auto mb-0'>-->
+                <!--<div class="modal-body p-5">
                     <h2 class='h1 fs-4 mb-3'>Prezado usuário,</h2>
                     <p class='fs-5'>               
                     Informamos que a licença de uso do sistema SG-UPA expirou.
@@ -154,7 +155,7 @@
                     </p>
                     <p class='fs-5 mt-3 text-right'>
                         Equipe de Suporte Técnico
-                    </p>   
+                    </p>   -->
                 <!-- Remova o botão de fechamento -->
               </div>
             </div>

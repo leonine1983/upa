@@ -153,7 +153,7 @@
                             <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
                                 
                                 <div style="background-color:#ebe5e5; padding: 0.2rem;">
-                                    <div class='fs-6'><b>Nome Social:</b> {{d.paciente_envio_triagem.nome_social}}</div>
+                                    <div class="nome_socia fs-6" <b>Nome Social:</b> {{d.paciente_envio_triagem.nome_social}}</div>
                                     <div><b>Data de Entrada na Recepção:</b> {{d.data_envio_triagem}}</div>
                                     <div><b>Horário de Entrada na Recepção:</b> {{d.horario_triagem}}</div>
                                 </div>
@@ -207,7 +207,7 @@
                             <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
                                 
                                 <div style="background-color:#ebe5e5; padding: 0.2rem;">
-                                    <div class='fs-6'><b>Nome Social:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
+                                    <div class="nome_social fs-6"><b>Nome Social:</b> {{d.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
                                     <div><b>Data da Classificação:</b> {{d.data_triagem}}</div>
                                     <div><b>Horário da Classificação:</b> {{d.hora_triagem}}</div>
                                     <div ><b>Respondeu ao Chamado:</b>{% if d.respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
@@ -252,7 +252,7 @@
                         <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
                                 
                             <div style="background-color:#ebe5e5; padding: 0.2rem;">
-                                <div class='fs-6'><b>Nome Social:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
+                                <div class='nome_social fs-6'><b>Nome Social:</b> {{d.paciente_medico_atendimento.paciente_triagem.paciente_envio_triagem.nome_social}}</div>                                
                                 <div><b>Data da Classificação:</b> {{d.data_medico}}</div>
                                 <div><b>Horário da Classificação:</b> {{d.hora_medico}}</div>
                                 <div ><b>Respondeu ao Chamado:</b>{% if d.paciente_medico_atendimento.medico_respondeu_ao_chamado %} Não {% else %} Sim {% endif %}</div>
@@ -327,7 +327,8 @@
 <script>
 document.getElementById('searchInput').addEventListener('input', function() {
   var searchTerm = this.value.trim().toLowerCase();
-  var tableCells = document.querySelectorAll('td[id="nome_social"]');
+  var tableCells = document.querySelectorAll('div[class="nome_social fs-6"]');
+  
   
   var searchResults = document.getElementById('searchResults');
   var searchMessage = document.getElementById('searchMessage');
