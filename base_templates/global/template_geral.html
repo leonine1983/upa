@@ -72,20 +72,49 @@
     {% include 'global/partials_template/menu-lateral/menu-lateral-atend.html' %}
     <!--Fim Menu lateral-->
     <div class="conteiner-body">
-        <div class='barra-titulo-page barra-top flex'>
-            <span>UPA - UNIDADE DE PRONTO ATENDIMENTO</span>            
-            <!--Informações de Login e Senha-->
-            <div class="flex" style="margin-left: 48%;">
-                <div>
-                    <div class="flex">
-                        <i id="wifi_1" class="fa-duotone fa-wifi mt-2"></i>
-                        <a class="link-light d-flex" href="{% url 'Access_Login:logout_upa' %}"> &nbsp;<i id="sair_login" class="fa-duotone fa-arrow-left-to-arc mt-2"></i><i class="fa-solid fa-door-open"  style="padding: 0.5rem; "></i> <span style="padding-top:0.08rem"> Sair </a></span>
-                        <i class="fa-solid fa-user" style="border-radius: 100%; border:solid #fff 0.1rem; padding: 0.5rem; margin-right: 0.25rem;margin-left: 1rem;"></i>&nbsp;
-                        <strong  class="uppercase" style="padding-top:0.25rem">{{request.user}}</strong>
-                    </div>
-                </div>
-            </div>  
+
+
+
+ 
+    
+      <nav class="navbar navbar-expand-lg navbar-dark " aria-label="Tenth navbar example">
+
+        <div class="container-fluid" style="background-color: var(--cor-cidade-primario);">
+          
+          <span class="fs-5 text-light p-1">UPA - UNIDADE DE PRONTO ATENDIMENTO</span>    
+         
+          
+          <div class="collapse navbar-collapse justify-content-end" id="navbarsExample08" style="background-color: var(--cor-cidade-primario);">
+            <ul class="navbar-nav"> 
+              <!--
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>                
+              </li>
+              -->
+              <li class="nav-item">
+                <i id="wifi_1" class="fa-duotone fa-wifi mt-3 fs-5"></i>
+              </li>
+              
+              <li class="nav-item dropdown me-5">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-user" style="border-radius: 100%; border:solid #fff 0.1rem; padding: 0.5rem; margin-right: 0.25rem;margin-left: 1rem;"></i>&nbsp;
+                  <strong  class="uppercase" style="padding-top:0.25rem">{{request.user}}</strong>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item link-secondary d-flex" href="{% url 'Access_Login:logout_upa' %}"> &nbsp;<i id="sair_login" class="fa-duotone fa-arrow-left-to-arc mt-2"></i><i class="fa-solid fa-door-open"  style="padding: 0.5rem; "></i> <span style="padding-top:0.08rem"> Sair </a></span></li>
+                </ul>                
+              </li>             
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+      
     </div> 
 </div>
 
