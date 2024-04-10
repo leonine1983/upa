@@ -240,9 +240,12 @@ svg.bell-con {
                   {% endif %}
                 </a>
                 <ul class="dropdown-menu" style='margin-left:-30rem'>
+                  <h2 class="p-2 border-bottom border-1 bg-secondary-subtle"><i class="fa-solid fa-message-smile"></i> Área de Notificações Sobre o Sistema</h2>
                   {% for n in notification  %}
-                  <li ><a class="dropdown-item" href="#">{{n.description|safe}}</a></li>
-                  {% endfor %}        
+                  <li class="pe-5"><a class="dropdown-item" href="#">{{n.description|safe}}</a></li>
+                  {% endfor %}  
+                  
+                  <li ><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope-open-text"></i> <i class="fa-duotone fa-envelope"></i> {{n.description|safe}}ooooooooooo</a></li>      
                 </ul>     
                 
               </li>
