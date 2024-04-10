@@ -1,0 +1,36 @@
+{% extends 'global/template_geral.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'global/css/form.css' %}">
+<style>
+    img{
+        filter: drop-shadow(11px 7px 4px #9b9a9a);
+    }
+</style>
+{% endblock css %}
+{% block body_login %}
+
+<div style="margin-bottom: -5rem;margin-left: 25rem" class="h2 w-50">"Ops! Parece que algo não está certo - não conseguimos encontrar o que você está procurando."</div>
+<div class="d-flex">
+    <div class="col-8 m-auto mt-5" style="margin-right: -50rem;"><img class="w-50" src="{% static 'error.png' %}" alt=""></div>
+    <div class="col-7 pt-5 px-5" style="margin-left: -50rem;">
+        <div class="card mt-5 mx-5 w-75">
+            <div class="card-header">
+                Que tal uma dica?
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Que tal registrar o que você está procurando para nossa equipe administrativa?</h5>
+              <a href="#" class="btn btn-primary">Editor de texto ainda não disponível </a>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+
+{% endblock body_login %}
+
+
+
+
+

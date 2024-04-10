@@ -87,7 +87,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'Atendimento.context_processors.licenca_context',
-                'configUPA.context_processors.online_users'
+                'configUPA.context_processors.online_users',
+                'configUPA.context_processors.notifications'
+
             ],
         },
     },

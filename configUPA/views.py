@@ -40,4 +40,4 @@ def handler404(request, exception=None):
 
 def handler500(request):
     context = {'error_message': 'Oops! Houve um erro interno no servidor.'}
-    return render(request, 'configUPA/error-404.html', context, status=500)
+    return render(request, 'configUPA/error-500.html', context, status=500)

@@ -42,3 +42,11 @@ class Video_Backgroud_Painel(models.Model):
 
     def __str__(self):
         return self.title
+
+class Notificate_system(models.Model):
+    date = models.DateField(auto_now_add=True)
+    description = models.TextField(max_length=500)
+    visto = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.description
