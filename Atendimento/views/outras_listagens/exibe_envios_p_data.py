@@ -7,46 +7,19 @@ from django.db.models import Count, Case, When, CharField, Value
 
 class Exibe_envios_data(LoginRequiredMixin, ListView):
     model = envio_triagem
-    template_name = template_name = 'Atendimento/outras_listagens/envios_por_data.html'
+    template_name = 'Atendimento/outras_listagens/envios_por_data.html'
 
-    # pesquisa por data
     def get_queryset(self):
-        start_date = self.request.GET.get('busca_data')
-        date_today = datetime.today()
-        #converte o formato da data
-        date_hoje = '{}-{}-{}'.format(date_today.year, date_today.month, date_today.day)
+        # Data de início fornecida pela consulta GET, se não fornecida, use a data de hoje
+        start_date = self.request.GET.get('busca_data', datetime.today().strftime('%Y-%m-%d'))
         
-        if start_date:
-            #converte a str objects em date
-            date = datetime.strptime(start_date, '%Y-%m-%d')        
-            
-            #converte o formato da data
-            date_format = '{}-{}-{}'.format(date.year, date.month, date.day)
-
-            print(date_format)  
-            
-            if date_format:
-                object_list = envio_triagem.objects.filter(data_envio_triagem = date_format) 
-            else:             
-                object_list = envio_triagem.objects.all() & envio_triagem.objects.exclude(triagem_concluida = 1)
-        else:
-            object_list = envio_triagem.objects.filter(data_envio_triagem = date_hoje) & envio_triagem.objects.exclude(triagem_concluida = 1)
-
-        return object_list
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # Processar a queryset para obter contagens
-        pacientes_por_localidade = self.object_list.values('paciente_envio_triagem__bairro__bairro_nome').annotate(total=Count('id')).filter(paciente_envio_triagem__cidade__cidade='Vera Cruz')
-        pacientes_por_cidade = self.object_list.values('paciente_envio_triagem__cidade__cidade').annotate(total=Count('id'))
-        pacientes_por_sexo = self.object_list.values('paciente_envio_triagem__sexo__nome_genero').annotate(total=Count('id'))
+        # Filtrar objetos pelo data_envio_triagem
+        object_list = envio_triagem.objects.filter(data_envio_triagem=start_date)
         
-
         # Casos para calcular faixa etária
         cases = [
             When(paciente_envio_triagem__idade__gte=0, paciente_envio_triagem__idade__lte=1, then=Value('0 a 1 ano')),
-            When(paciente_envio_triagem__idade__gte=1, paciente_envio_triagem__idade__lte=4, then=Value('1 a 4 anos')),
+            When(paciente_envio_triagem__idade__gte=2, paciente_envio_triagem__idade__lte=4, then=Value('2 a 4 anos')),
             When(paciente_envio_triagem__idade__gte=5, paciente_envio_triagem__idade__lte=9, then=Value('5 a 9 anos')),
             When(paciente_envio_triagem__idade__gte=10, paciente_envio_triagem__idade__lte=14, then=Value('10 a 14 anos')),
             When(paciente_envio_triagem__idade__gte=15, paciente_envio_triagem__idade__lte=19, then=Value('15 a 19 anos')),
@@ -60,30 +33,27 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
             When(paciente_envio_triagem__idade__gte=111, then=Value('Maior que 110')),
             When(paciente_envio_triagem__idade__isnull=True, then=Value('Idade não informada'))
         ]
-
-        # Calculando pacientes por faixa etária
-        pacientes_por_idade = self.object_list.annotate(
+        
+        # Anotar objetos com a faixa etária correspondente
+        object_list = object_list.annotate(
             faixa_etaria=Case(*cases, output_field=CharField())
-        ).values('faixa_etaria').annotate(total=Count('id'))
+        )
+        
+        return object_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Processar a queryset para obter contagens
+        pacientes_por_idade = self.object_list.values('faixa_etaria').annotate(total=Count('id'))
 
         total_paciente_dia = self.object_list.count()
-        data_search =self.request.GET.get('busca_data')
-        if not data_search:
-            data_search = datetime.today().date()
-            data = data_search
-        else:
-            data =datetime.strptime(data_search, '%Y-%m-%d')
-            data = datetime.strftime(data, '%d/%m/%Y')
+        data_search = self.request.GET.get('busca_data', datetime.today().strftime('%Y-%m-%d'))
+        data = datetime.strptime(str(data_search), '%Y-%m-%d').strftime('%d/%m/%Y')
 
         # Adicionar as contagens ao contexto
         context['data'] = data
         context['total_paciente'] = total_paciente_dia 
-        context['pacientes_por_localidade'] = pacientes_por_localidade
         context['pacientes_por_idade'] = pacientes_por_idade
-        context['pacientes_por_sexo'] = pacientes_por_sexo
 
         return context
-    
-   
-
-
