@@ -1,6 +1,6 @@
 from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
-from Atendimento.models import envio_triagem, genero_sexual, Bairro, Bairro_Vera_Cruz
+from Atendimento.models import envio_triagem, genero_sexual, Bairro, Cidade
 from django.views.generic.list import ListView
 from datetime import datetime
 from django.db.models import Count, Case, When, CharField, Value
@@ -68,6 +68,7 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
         
         envios_por_genero = defaultdict(dict)
         envio_por_bairro = defaultdict(dict)
+        envio_por_cidade = defaultdict(dict)
 
         # Contagem por Gênero
         generos_sexuais = genero_sexual.objects.all()       
@@ -83,6 +84,13 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
             bairro_contagem = self.envios_day.filter(paciente_envio_triagem__bairro__bairro_nome = b.bairro_nome).count()
             envio_por_bairro [b.bairro_nome] = bairro_contagem    
         context['bairro_contagem'] = envio_por_bairro.items()
+
+        # Contagem por cidade      
+        pacientes_cidade = Cidade.objects.all()
+        for c in pacientes_cidade:
+            cidade_contagem = self.envios_day.filter(paciente_envio_triagem__cidade__cidade = c.cidade).count()
+            envio_por_cidade [c.cidade] = cidade_contagem   
+        context['cidade_contagem'] = envio_por_cidade.items()
 
         total_paciente_dia = self.object_list.count()
         data_search = self.request.GET.get('busca_data', datetime.today().strftime('%Y-%m-%d'))

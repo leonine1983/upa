@@ -179,14 +179,16 @@
         <hr>
         </div>
         
-        <h2 style="font-size: 0.9rem;">Quantidade de atendimentos por bairros de Vera Cruz:</h2>
+        <h2 style="font-size: 0.9rem;">Quantidade de atendimentos por cidade:</h2>
         <div >
             <ul style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto ; gap: 0.1rem; list-style-type: none;">
-                {% for bairro, contagem in bairro_contagem %}
-                <li style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
-                    <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ bairro }}</div>
-                    <div>{{ contagem }}</div>
-                </li>
+                {% for cidade, contagem in cidade_contagem %}
+                    {% if not contagem == 0 %}
+                    <li style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
+                        <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ cidade }}</div>
+                        <div>{{ contagem }}</div>
+                    </li>
+                    {% endif %}
                 {% endfor %}
             </ul>   
         <hr>
