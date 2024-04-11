@@ -153,7 +153,7 @@
         <hr>
         <h2>{{total_paciente}} pacientes em {{data}}</h2>
         <!--Quantidade de paciente por idade-->
-        <h2 style="font-size: 0.9rem;">Quantidade por Faixa Etária:</h2>
+        <h2 style="font-size: 0.8rem;">Quantidade por Faixa Etária:</h2>
         <div >
             <ul style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto; gap: 0.1rem; list-style-type: none;">
             {% for faixa_etaria, quantidade in contagem_por_faixa_etaria.items %}
@@ -164,78 +164,33 @@
             {% endfor %}
             </ul>
         <hr>
-        <!--
-        <h2 style="font-size: 0.9rem;">Quantidade de pacientes por localidade</h2>
-        <div style="display: flex;">
-            {% for item in pacientes_por_localidade %}
-            <div style="border: 0.1rem solid #666;">
-                <div style="text-align: center; background-color:rgb(221, 245, 133); font-size: 0.7rem;padding: 0.15rem; writing-mode: vertical-rl;">
-                    {{ item.paciente_envio_triagem__bairro__bairro_nome }}
-                </div>
-                <div style="text-align: center;  font-size: 0.7rem;">
-                    {{ item.total }}
-                </div>
-            </div>
-            {% endfor %}
-        
-        <h2 style="font-size: 0.9rem;">Quantidade de pacientes por  Gênero Sexual</h2>
-        <div style="display: flex;">
-            {% for item in pacientes_por_sexo %}
-            <div style="border: 0.1rem solid #666;">
-                <div style="text-align: center; background-color:rgb(221, 245, 133); font-size: 0.8rem;padding: 0.15rem">
-                    {{ item.paciente_envio_triagem__sexo__nome_genero }}
-                </div>
-                <div style="text-align: center;  font-size: 0.8rem;">
-                    {{ item.total }}
-                </div>
-            </div>
-            {% endfor %}
+        </div>
 
-            
-        </div> </div> -->
-
-
-
-
-        <!--fim Quantidade de paciente por idade-->
-        <div style="display: flex;gap: 1%;margin-top: 0.3rem;">
-            <div style="width: auto;font-size:0.8rem">
-                <!--Cidades
-                <table>
-                    <thead>
-                        <tr style="text-align: center; background-color:rgb(221, 245, 133);">
-                            <td class="text-center">Cidade</td>
-                            <td class="text-center">Quant.</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in pacientes_por_localidade %}
-                            <tr >
-                                <th style="text-align: center; background-color:rgb(177, 177, 175);">
-                                    {{ item.paciente_envio_triagem__bairro__bairro_nome }}
-                                </th>
-                                <th class="text-center">
-                                    {{ item.total }}
-                                </th>
-                            </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>-->
-            </div>
-
-            <!--Idade-->
-            <div style="width: auto;font-size:0.8rem">
-                           
-            </div>
-
-          
-
-
+        <h2 style="font-size: 0.9rem;">Quantidade por Gênero Sexual:</h2>
+        <div >
+            <ul style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto; gap: 0.1rem; list-style-type: none;">
+                {% for genero, contagem in cont_genero %}
+                <li style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
+                    <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ genero }}</div>
+                    <div>{{ contagem }}</div>
+                </li>
+                {% endfor %}
+            </ul>   
+        <hr>
         </div>
         
-
-
-
+        <h2 style="font-size: 0.9rem;">Quantidade de atendimentos por bairros de Vera Cruz:</h2>
+        <div >
+            <ul style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto ; gap: 0.1rem; list-style-type: none;">
+                {% for bairro, contagem in bairro_contagem %}
+                <li style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
+                    <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ bairro }}</div>
+                    <div>{{ contagem }}</div>
+                </li>
+                {% endfor %}
+            </ul>   
+        <hr>
+        </div>   
         {% for d in object_list %}
             <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
                 
@@ -289,15 +244,11 @@
         {% endfor %}   
 </div>
 
-
 </div>
 
 <!--Menu suplementos-->
 {% include "Atendimento/outras_listagens/partes/partes_pacientes/menu_suplementos.html" %}
 <!--Menu suplementos-->
-
-
-
 
 <style>
     #searchInputContainer {
@@ -322,6 +273,21 @@
         
     }
  
+
+        /* Esconde a div quando a página é impressa */
+        @media print {
+            #searchInputContainer {
+                display: none;
+            }
+
+            h1{
+                font-size: 0.5rem;
+                padding: 0;
+                margin: 0;
+                color: #666;
+            }
+        }
+    
 </style>
 
 <div id="searchInputContainer" class="form-control d-flex">

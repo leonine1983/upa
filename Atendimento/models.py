@@ -21,6 +21,22 @@ class Bairro (models.Model):
     def __str__(self):
         return self.bairro_nome
     
+class Bairro_Vera_Cruz (models.Model):
+    bairro_nome = models.CharField(max_length=30)
+
+    @receiver(post_migrate)
+    def create_bairro(sender, **kwargs):
+        bairro_nome = ['Aratuba', 'Baiacu', 'Barra do Gil', 'Barra do Pote', 'Berlinque', 'Cacha Pregos', 'Catu', 'Conceição', 'Coroa', 'Gameleira', 'Ilhota', 'Jiribatuba', 'Mar Grande', 'Ponta Grossa', 'Riachinho', 'Tairu']
+    
+        if not Bairro.objects.exists():
+            for b in bairro_nome:
+                Bairro.objects.create(
+                    bairro_nome = b
+                )
+
+    def __str__(self):
+        return self.bairro_nome
+    
         
 class Rua(models.Model):
     rua_nome = models.CharField(max_length=100)

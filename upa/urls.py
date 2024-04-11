@@ -4,6 +4,12 @@ from django.urls import path, include
 from django.urls import path, re_path
 from configUPA.views import handler404, handler500
 
+from django.shortcuts import render  # Importe render
+
+def handler500(request, *args, **kwargs):
+    context = {'error_message': 'Oops! Houve um erro interno no servidor.'}
+    return render(request, 'configUPA/error-500.html', context, status=500)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -19,3 +25,4 @@ urlpatterns = [
     re_path(r'^.*/500/$', handler500),
 ]
 
+handler500 = 'configUPA.views.handler500'

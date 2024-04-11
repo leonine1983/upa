@@ -1,9 +1,10 @@
 from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
-from Atendimento.models import envio_triagem
+from Atendimento.models import envio_triagem, genero_sexual, Bairro, Bairro_Vera_Cruz
 from django.views.generic.list import ListView
 from datetime import datetime
 from django.db.models import Count, Case, When, CharField, Value
+from collections import defaultdict
 
 class Exibe_envios_data(LoginRequiredMixin, ListView):
     model = envio_triagem
@@ -15,6 +16,7 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
         
         # Filtrar objetos pelo data_envio_triagem
         object_list = envio_triagem.objects.filter(data_envio_triagem=start_date)
+        self.envios_day = object_list
         
         # Casos para calcular faixa etária
         cases = [
@@ -33,6 +35,8 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
             When(paciente_envio_triagem__idade__gte=111, then=Value('Maior que 110')),
             When(paciente_envio_triagem__idade__isnull=True, then=Value('Idade nao informada'))
         ]
+
+       
         
         # Anotar objetos com a faixa etária correspondente
         object_list = object_list.annotate(faixa_etaria=Case(*cases, output_field=CharField()))
@@ -42,7 +46,7 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        # Processar a queryset para obter contagens
+        # Processar a queryset para obter contagens por faixa etária
         contagem_por_faixa_etaria = {
             '0 a 1': self.object_list.filter(faixa_etaria='0 a 1 ano').count(),
             '2 a 4': self.object_list.filter(faixa_etaria='2 a 4 anos').count(),
@@ -60,6 +64,26 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
             'Idade nao informada': self.object_list.filter(faixa_etaria='Idade nao informada').count()
         }
 
+        
+        
+        envios_por_genero = defaultdict(dict)
+        envio_por_bairro = defaultdict(dict)
+
+        # Contagem por Gênero
+        generos_sexuais = genero_sexual.objects.all()       
+        for g in generos_sexuais:
+            contagem = self.envios_day.filter(paciente_envio_triagem__sexo__nome_genero=g.nome_genero).count()
+            envios_por_genero[g.nome_genero] = contagem
+        context['cont_genero'] = envios_por_genero.items()  
+        
+        # Contagem por bairro        
+        bairro_nome = ['Aratuba', 'Baiacu', 'Barra do Gil', 'Barra do Pote', 'Berlinque', 'Cacha Pregos', 'Catu', 'Conceição', 'Coroa', 'Gameleira', 'Ilhota', 'Jiribatuba', 'Mar Grande', 'Ponta Grossa', 'Riachinho', 'Tairu']
+        pacientes_bairro = Bairro.objects.filter(bairro_nome__in = bairro_nome)
+        for b in pacientes_bairro:
+            bairro_contagem = self.envios_day.filter(paciente_envio_triagem__bairro__bairro_nome = b.bairro_nome).count()
+            envio_por_bairro [b.bairro_nome] = bairro_contagem    
+        context['bairro_contagem'] = envio_por_bairro.items()
+
         total_paciente_dia = self.object_list.count()
         data_search = self.request.GET.get('busca_data', datetime.today().strftime('%Y-%m-%d'))
         data = datetime.strptime(str(data_search), '%Y-%m-%d').strftime('%d/%m/%Y')
@@ -70,3 +94,4 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
         context['contagem_por_faixa_etaria'] = contagem_por_faixa_etaria
 
         return context
+
