@@ -153,19 +153,11 @@
         <hr>
         <h2>{{total_paciente}} pacientes em {{data}}</h2>
         <!--Quantidade de paciente por idade-->
-        <h2 style="font-size: 0.9rem;">Quantidade de pacientes por Idade</h2>
+        <h2 style="font-size: 0.9rem;">Quantidade por Faixa Etária:</h2>
         <div style="display: grid; grid">
-            {% for faixa_etaria in pacientes_por_idade %}
-            <div style="border: 0.1rem solid #666;">
-                <div style="text-align: center; background-color:rgb(221, 245, 133); font-size: 0.7rem;padding: 0.25rem">
-                    {{ faixa_etaria.faixa_etaria }}
-                </div>
-                <div style="text-align: center">
-                    {{ faixa_etaria.total }}
-                </div>
-            </div>
+            {% for faixa_etaria, quantidade in contagem_por_faixa_etaria.items %}
+            <li>{{ faixa_etaria }}: {{ quantidade }}</li>
             {% endfor %}
-        </div> 
         <hr>
         <!--
         <h2 style="font-size: 0.9rem;">Quantidade de pacientes por localidade</h2>
@@ -193,6 +185,8 @@
                 </div>
             </div>
             {% endfor %}
+
+            
         </div> 
 
 
