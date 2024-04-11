@@ -44,18 +44,18 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
         
         # Processar a queryset para obter contagens
         contagem_por_faixa_etaria = {
-            '0 a 1 ano': self.object_list.filter(faixa_etaria='0 a 1 ano').count(),
-            '2 a 4 anos': self.object_list.filter(faixa_etaria='2 a 4 anos').count(),
-            '5 a 9 anos': self.object_list.filter(faixa_etaria='5 a 9 anos').count(),
-            '10 a 14 anos': self.object_list.filter(faixa_etaria='10 a 14 anos').count(),
-            '15 a 19 anos': self.object_list.filter(faixa_etaria='15 a 19 anos').count(),
-            '20 a 29 anos': self.object_list.filter(faixa_etaria='20 a 29 anos').count(),
-            '30 a 39 anos': self.object_list.filter(faixa_etaria='30 a 39 anos').count(),
-            '40 a 49 anos': self.object_list.filter(faixa_etaria='40 a 49 anos').count(),
-            '50 a 59 anos': self.object_list.filter(faixa_etaria='50 a 59 anos').count(),
-            '60 a 69 anos': self.object_list.filter(faixa_etaria='60 a 69 anos').count(),
-            '70 a 79 anos': self.object_list.filter(faixa_etaria='70 a 79 anos').count(),
-            '80 a 110 anos': self.object_list.filter(faixa_etaria='80 a 110 anos').count(),
+            '0 a 1': self.object_list.filter(faixa_etaria='0 a 1 ano').count(),
+            '2 a 4': self.object_list.filter(faixa_etaria='2 a 4 anos').count(),
+            '5 a 9': self.object_list.filter(faixa_etaria='5 a 9 anos').count(),
+            '10 a 14': self.object_list.filter(faixa_etaria='10 a 14 anos').count(),
+            '15 a 19': self.object_list.filter(faixa_etaria='15 a 19 anos').count(),
+            '20 a 29': self.object_list.filter(faixa_etaria='20 a 29 anos').count(),
+            '30 a 39': self.object_list.filter(faixa_etaria='30 a 39 anos').count(),
+            '40 a 49': self.object_list.filter(faixa_etaria='40 a 49 anos').count(),
+            '50 a 59': self.object_list.filter(faixa_etaria='50 a 59 anos').count(),
+            '60 a 69': self.object_list.filter(faixa_etaria='60 a 69 anos').count(),
+            '70 a 79': self.object_list.filter(faixa_etaria='70 a 79 anos').count(),
+            '80 a 110': self.object_list.filter(faixa_etaria='80 a 110 anos').count(),
             'Maior que 110': self.object_list.filter(faixa_etaria='Maior que 110').count(),
             'Idade nao informada': self.object_list.filter(faixa_etaria='Idade nao informada').count()
         }
