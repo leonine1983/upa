@@ -37,10 +37,63 @@ class letreiroCreateView(LoginRequiredMixin, CreateView):
         return context
     
 # CONFIGURA O notificações ---------------------------------------------------------
-class Create_notifica(LoginRequiredMixin, CreateView):
+class Create_notificaf(LoginRequiredMixin, CreateView):
     model = Notificate_system
     fields = '__all__'
     template_name = 'configUPA/notificate_create.html'
+
+class Detail_notifica(LoginRequiredMixin, DetailView):
+    model = Notificate_system
+    fields = '__all__'
+    template_name = 'configUPA/notificate_create.html'
+
+
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.views.generic import View
+from django.contrib.auth.models import Group, User
+from .models import Notificate_system
+
+from django import forms
+from django.contrib.auth.models import Group
+
+class NotificateForm(forms.Form):
+    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Grupo')
+    description = forms.CharField(widget=forms.Textarea)
+
+
+class Create_notifica(LoginRequiredMixin, View):
+    template_name = 'configUPA/notificate_create.html'
+
+    def get(self, request):
+        form = NotificateForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = NotificateForm(request.POST)
+        
+        if form.is_valid():
+            group = form.cleaned_data['group']
+            description = form.cleaned_data['description']
+            
+            if group:
+                users_to_notify = group.user_set.all()
+            else:
+                users_to_notify = User.objects.all()
+
+            for user in users_to_notify:
+                Notificate_system.objects.create(user=user, description=description)
+
+            return redirect('success_notification')
+
+        return render(request, self.template_name, {'form': form})
+
+class SuccessNotificationView(LoginRequiredMixin, View):
+    template_name = 'configUPA/success_notification.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
 
 """
 

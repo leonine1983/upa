@@ -4,36 +4,18 @@
 <link rel="stylesheet" href="{% static 'global/css/form.css' %}">
 {% endblock css %}
 {% block body_login %}
-{% if backgroud_painel %}
-<h1>Escolher vídeo como background</h1>
-<hr>
-Nesta página, você terá a opção de escolher um vídeo para ser
- usado como plano de fundo do painel de espera em um ambiente
-  hospitalar. O painel de espera é a tela que aparece quando o
-   paciente chega ao hospital e aguarda para ser chamado para
-    atendimento. Em vez de exibir uma tela estática, você pode
-     escolher um vídeo adequado para ser exibido em tela cheia
-      enquanto o paciente aguarda. Essa opção pode tornar a espera
-       menos monótona e ajudar a distrair o paciente de suas preocupações,
-        contribuindo para uma experiência mais agradável no hospital. Certifique-se
-         de escolher um vídeo apropriado para o ambiente hospitalar e que possa ser
-          assistido sem som, para não atrapalhar outras pessoas na sala de espera.
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_div}}
-    <button type="submit">Upload</button>
-</form>
-{% endif %}
 
 
-{% if letreiroCreate %}
-<h1>Configuração de exibição do letreiro</h1>
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_div}}
-    <button type="submit">Salvar configuração</button>
-</form>
-{% endif %}
+<h1>Enviar Notificações</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if success %}
+    <p>Notificações enviadas com sucesso!</p>
+    {% endif %}
 
 
 {% endblock body_login %}
