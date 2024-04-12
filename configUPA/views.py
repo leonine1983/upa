@@ -1,12 +1,17 @@
-from django.shortcuts import render, redirect
+
 from .forms import VideoForm
 from django.views.generic import CreateView, UpdateView, DetailView
-from configUPA.models import Notificate_system
-from django.contrib.auth.models import User
 from  .models import config_Marquee
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import View
+from django.contrib.auth.models import Group, User
+from .models import Notificate_system
+
+from django import forms
+from django.contrib.auth.models import Group
 
 
 
@@ -37,31 +42,22 @@ class letreiroCreateView(LoginRequiredMixin, CreateView):
         return context
     
 # CONFIGURA O notificações ---------------------------------------------------------
-class Create_notificaf(LoginRequiredMixin, CreateView):
-    model = Notificate_system
-    fields = '__all__'
-    template_name = 'configUPA/notificate_create.html'
+
 
 class Detail_notifica(LoginRequiredMixin, DetailView):
     model = Notificate_system
     fields = '__all__'
-    template_name = 'configUPA/notificate_create.html'
+    template_name = 'configUPA/notificate_detail.html'
+    context_object_name = 'notifica_detail'
 
 
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views.generic import View
-from django.contrib.auth.models import Group, User
-from .models import Notificate_system
-
-from django import forms
-from django.contrib.auth.models import Group
 
 class NotificateForm(forms.Form):
-    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Grupo')
-    description = forms.CharField(widget=forms.Textarea)
+    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=False, label='Grupo', widget=forms.Select(attrs={'class': 'form-control'}))
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control ckeditor'}))
+    
+
 
 
 class Create_notifica(LoginRequiredMixin, View):

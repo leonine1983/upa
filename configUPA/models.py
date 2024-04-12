@@ -2,6 +2,7 @@ import os
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from ckeditor.fields import RichTextField
 
 
 # Create your models here.
@@ -47,7 +48,9 @@ class Video_Backgroud_Painel(models.Model):
 class Notificate_system(models.Model):
     user = models.ForeignKey (User, related_name='controle_notificacao', on_delete=models.CASCADE, null=True)
     date = models.DateField(auto_now_add=True)
-    description = models.TextField(max_length=500)
+    
+    name = models.TextField(max_length=100, default='Atualização de fim de ano')
+    description = RichTextField(max_length=500, null=False, default='', verbose_name='Descrever a atualização')
     visto = models.BooleanField(default=False)
 
     def __str__(self):

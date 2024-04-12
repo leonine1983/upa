@@ -2,6 +2,8 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'global/css/form.css' %}">
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
 {% endblock css %}
 {% block body_login %}
 
@@ -9,13 +11,19 @@
 <h1>Enviar Notificações</h1>
     <form method="post">
         {% csrf_token %}
+        {{ form.media }}
+        <script>
+            CKEDITOR.replace('id_description');
+        </script>
+        
         {{ form.as_p }}
-        <button type="submit">Enviar</button>
+        <button type="submit" class='btn btn-primary btn-sm  m-auto mt-5 w-50'>Cria notificação</button>
     </form>
 
     {% if success %}
     <p>Notificações enviadas com sucesso!</p>
     {% endif %}
+
 
 
 {% endblock body_login %}
