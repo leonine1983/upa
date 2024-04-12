@@ -4,7 +4,7 @@
 
 {% endblock script %}
 
-<div class="area"></div><nav class="main-menu">
+<div class="area"></div><nav class="main-menu" >
     <ul>
         <li>
             <a href="" style='height: 3.7rem;' class="mt-3 ">
@@ -135,7 +135,7 @@
                 <i class="fa-solid "></i>
                 
                     <span class="nav-text">
-                        Lista de entrada de pacientes por data
+                        Entrada de pacientes por data
                     </span>
                 </a>
             </li>
@@ -145,7 +145,7 @@
                 <i class="fa-solid "></i>
                 
                     <span class="nav-text">
-                        Ficha de atendimentos por data (Em teste)
+                        Atendimentos por data (Em teste)
                     </span>
                 </a>
             </li>
@@ -154,11 +154,19 @@
                     {% load static %}
                 <img src="{% static "hist_med.png" %}" alt="" class='w-75 m-1 mt-3 mx-2' srcset="">
                     <span class="nav-text">
-                        Ferramenta de Verificação de Atendimentos na UPA
+                        Verificação de Atendimentos na UPA
                     </span>
                 </a>
             </li>
-
+            <li class="has-subnav">
+                <a href=" {% url 'Medicos:conclui_atend' %} ">
+                    {% load static %}
+                    <img class="w-75 m-1 mt-3 mx-2 border-success" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjU2IDI1NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8bWV0YWRhdGE+IFN2ZyBWZWN0b3IgSWNvbnMgOiBodHRwOi8vd3d3Lm9ubGluZXdlYmZvbnRzLmNvbS9pY29uIDwvbWV0YWRhdGE+DQo8Zz48Zz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMTI4LDgwLjhjLTIuOCwwLTQuNy0xLjktNC43LTQuN3YtOS40YzAtMi44LDEuOS00LjcsNC43LTQuN3M0LjcsMS45LDQuNyw0Ljd2OS40QzEzMi43LDc4LjksMTMwLjgsODAuOCwxMjgsODAuOHoiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMTQ2LjksODAuOGMtMi44LDAtNC43LTEuOS00LjctNC43di05LjRjMC0yLjgsMS45LTQuNyw0LjctNC43YzIuOCwwLDQuNywxLjksNC43LDQuN3Y5LjRDMTUxLjYsNzguOSwxNDkuNyw4MC44LDE0Ni45LDgwLjh6Ii8+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTEwOS4xLDgwLjhjLTIuOCwwLTQuNy0xLjktNC43LTQuN3YtOS40YzAtMi44LDEuOS00LjcsNC43LTQuN2MyLjgsMCw0LjcsMS45LDQuNyw0Ljd2OS40QzExMy44LDc4LjksMTEyLDgwLjgsMTA5LjEsODAuOHoiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMTc1LjIsMTg5LjRIODAuOGMtOCwwLTE0LjItNi4xLTE0LjItMTQuMlY4MC44YzAtOCw2LjEtMTQuMiwxNC4yLTE0LjJoMTAuNGMyLjgsMCw0LjcsMS45LDQuNyw0LjdjMCwyLjgtMS45LDQuNy00LjcsNC43SDgwLjhjLTIuOCwwLTQuNywxLjktNC43LDQuN3Y5NC40YzAsMi44LDEuOSw0LjcsNC43LDQuN2g5NC40YzIuOCwwLDQuNy0xLjksNC43LTQuN3YtNTEuNGMwLTIuOCwxLjktNC43LDQuNy00LjdzNC43LDEuOSw0LjcsNC43djUxLjRDMTg5LjQsMTgzLjIsMTgzLjIsMTg5LjQsMTc1LjIsMTg5LjR6IE0xODQuNiw4NmMtMi44LDAtNC43LTEuOS00LjctNC43di0wLjVjMC0yLjgtMS45LTQuNy00LjctNC43aC05Yy0yLjgsMC00LjctMS45LTQuNy00LjdjMC0yLjgsMS45LTQuNyw0LjctNC43aDljNy4xLDAsMTIuNyw0LjcsMTMuNywxMS4zYzAsMC41LDAuNSwwLjksMC41LDEuNHYxLjRDMTg5LjQsODMuNiwxODcuNSw4NiwxODQuNiw4NnoiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMTI3LjEsMTU3LjNjLTMuOCwwLTcuMS0xLjQtOS45LTQuMkw5NCwxMjkuNGMtMS45LTEuOS0xLjktNC43LDAtNi42YzEuOS0xLjksNC43LTEuOSw2LjYsMGwyMy4xLDIzLjZjMS45LDEuOSw0LjcsMS45LDYuNiwwTDE3OSw5Ny44YzEuOS0xLjksNC43LTEuOSw2LjYsMGMxLjksMS45LDEuOSw0LjcsMCw2LjZMMTM3LDE1M0MxMzQuNiwxNTUuOCwxMzAuOCwxNTcuMywxMjcuMSwxNTcuM3oiLz48cGF0aCBmaWxsPSIjMDAwMDAwIiBkPSJNMTI4LDI0NmMtNjUuMSwwLTExOC01Mi45LTExOC0xMThDMTAsNjIuOSw2Mi45LDEwLDEyOCwxMGM2NS4xLDAsMTE4LDUyLjksMTE4LDExOEMyNDYsMTkzLjEsMTkzLjEsMjQ2LDEyOCwyNDZ6IE0xMjgsMTkuNEM2OC4xLDE5LjQsMTkuNCw2OC4xLDE5LjQsMTI4YzAsNTkuOSw0OC42LDEwOC42LDEwOC42LDEwOC42YzU5LjksMCwxMDguNi00OC42LDEwOC42LTEwOC42QzIzNi42LDY4LjEsMTg3LjksMTkuNCwxMjgsMTkuNHoiLz48L2c+PC9nPg0KPC9zdmc+" width="32" height="32">
+                    <span class="nav-text">
+                        Concluir  não finalizados
+                    </span>
+                </a>
+            </li>            
         {% endif %}
     </ul>
     <ul class="logout">

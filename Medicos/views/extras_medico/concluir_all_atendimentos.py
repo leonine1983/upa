@@ -1,5 +1,7 @@
 from Medicos.models import Medico_atendimento
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
 def conclui_all(request):
     # Filtrando os objetos Medico_atendimento onde final_medico_atendimento é diferente de '1'
@@ -13,9 +15,8 @@ def conclui_all(request):
             at.paciente_medico_atendimento.final_medico_atendimento = '1'
             # Salva as alterações no objeto triagem
             at.paciente_medico_atendimento.save()
-            print(f'O paciente {at.paciente_medico_atendimento.paciente_triagem} teve o final_medico_atendimento atualizado para: {at.paciente_medico_atendimento.final_medico_atendimento}')
-    
-    return render(request, 'Atendimento:envio_paciente_a_triagem_2')
+            messages.success(request, "Registros de atendimento ao paciente foram concluídos com êxito!")
+    return redirect(reverse_lazy('Medicos:medico_prontuario'))
 
 
 """

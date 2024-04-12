@@ -51,6 +51,7 @@ class Detail_notifica(LoginRequiredMixin, DetailView):
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import View
 from django.contrib.auth.models import Group, User
 from .models import Notificate_system
@@ -85,7 +86,7 @@ class Create_notifica(LoginRequiredMixin, View):
             for user in users_to_notify:
                 Notificate_system.objects.create(user=user, description=description)
 
-            return redirect('success_notification')
+            return redirect(reverse_lazy('configUPA:notifica_create'))
 
         return render(request, self.template_name, {'form': form})
 

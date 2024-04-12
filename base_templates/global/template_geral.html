@@ -200,12 +200,7 @@ svg.bell-con {
     <!--Menu lateral  -->
     {% include 'global/partials_template/menu-lateral/menu-lateral-atend.html' %}
     <!--Fim Menu lateral-->
-    <div class="conteiner-body">
-
-
-
- 
-    
+    <div class="conteiner-body">    
       <nav class="navbar navbar-expand-lg navbar-dark " aria-label="Tenth navbar example">
 
         <div class="container-fluid" style="background-color: var(--cor-cidade-primario);">
@@ -229,8 +224,7 @@ svg.bell-con {
                 </div> 
               </li>
               
-              <li class="nav-item dropdown">             
-                
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle d-flex" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                   {% if not visto %}
                   <div class="notification-bell alarm-notify">                    
@@ -253,11 +247,12 @@ svg.bell-con {
                 <ul class="dropdown-menu" style='margin-left:-30rem'>
                   <h2 class="p-2 border-bottom border-1 bg-secondary-subtle"><i class="fa-solid fa-message-smile"></i> Área de Notificações Sobre o Sistema</h2>
                   {% for n in notification  %}
-                  <li class="pe-5"><a class="dropdown-item" href="{% url 'configUPA:notifica' n.id %}">{{n.description|safe}}</a></li>
-                  <li ><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope-open-text"></i> <i class="fa-duotone fa-envelope"></i> {{n.description|safe}}ooooooooooo</a></li>      
+                  <li class="pe-5"><a class="dropdown-item" href="{% url 'configUPA:notifica' n.id %}"><i class="fa-duotone fa-envelope"></i> {{n.description|safe}}</a></li>  
                   {% endfor %}   
                 </ul>  
               </li>
+
+              
               <!--Notificação desativadas-->
               {% if user.is_superuser %}
               <li class="nav-item mx-2 mt-2 border-left border-right border-1 ">
@@ -389,5 +384,7 @@ svg.bell-con {
         {{licenca_ativa}}
     {% endif %}    
 </div>
+<script src="{% static "global/bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js" %}"></script>
+
 </body>
 </html>
