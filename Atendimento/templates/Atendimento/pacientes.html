@@ -67,12 +67,25 @@
             {% include "Atendimento/partes_pacients/busca_paciente.html" %}
             <!-- end Busca pacientes -->
         </div>
-        <div class="">         
-            <div class='btn btn-sm border'><span class='fs-3'>{{object_list.count}}</span> registros exibido por página | Total de <b class="fs-5">{{quant_registros}}</b> registros no sistema</div>
+        <div class="row">         
+            <div class='btn btn-sm border col-6'><span class='fs-3'>{{object_list.count}}</span> registros exibido por página | Total de <b class="fs-5">{{quant_registros}}</b> registros no sistema</div>
+            <div class='col fs-5 pt-3 bg-primary-subtle'>
+                <i class="fa-thin fa-arrow-up-wide-short"></i>
+                Quantidade parcial para o mês de
+                
+                {% if nome_mes_atual == 'April' %}Abril{% endif %}
+                {% if nome_mes_atual == 'May' %}Maio{% endif %}
+                {% if nome_mes_atual == 'June' %}Junho{% endif %}
+                {% if nome_mes_atual == 'July' %}Julho{% endif %}
+                <span class='fs-4 bolder'>
+                - {{quantidade_registros_por_mes}} atendimentos
+                
+                </span>
+            </div>
             <hr>
             <!-- Tabela com lista de pacinetes -->
             {% include "Atendimento/partes_pacients/lista_de_pacientes.html" %}
-            <!-- End Tabela com lista de pacinetes -->
+            <!-- End Tabela com lista de pacinetes -->           
         </div> 
     </div> 
 </div>

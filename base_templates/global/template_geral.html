@@ -216,9 +216,20 @@ svg.bell-con {
           <div class="collapse navbar-collapse justify-content-end" id="navbarsExample08" style="background-color: var(--cor-cidade-primario);">
             <ul class="navbar-nav"> 
               <!--Noticações ativas-->
+              <li class="nav-item pt-2 col mx-5 text-light">
+                <div class='fs-5'>
+                  <i class="fa-thin fa-arrow-up-wide-short"></i>                  
+                  {% if nome_mes_atual == 'April' %}Abril{% endif %}
+                  {% if nome_mes_atual == 'May' %}Maio{% endif %}
+                  {% if nome_mes_atual == 'June' %}Junho{% endif %}
+                  {% if nome_mes_atual == 'July' %}Julho{% endif %}
+                  <span class='fs-5 bolder'>
+                  - {{quantidade_registros_por_mes}} atendimentos                  
+                  </span>
+                </div> 
+              </li>
               
-              <li class="nav-item dropdown">
-                
+              <li class="nav-item dropdown">             
                 
                 <a class="nav-link dropdown-toggle d-flex" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                   {% if not visto %}
@@ -244,11 +255,8 @@ svg.bell-con {
                   {% for n in notification  %}
                   <li class="pe-5"><a class="dropdown-item" href="{% url 'configUPA:notifica' n.id %}">{{n.description|safe}}</a></li>
                   <li ><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope-open-text"></i> <i class="fa-duotone fa-envelope"></i> {{n.description|safe}}ooooooooooo</a></li>      
-                  {% endfor %}  
-                  
-                  
-                </ul>     
-                
+                  {% endfor %}   
+                </ul>  
               </li>
               <!--Notificação desativadas-->
               {% if user.is_superuser %}
