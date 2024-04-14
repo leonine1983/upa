@@ -28,5 +28,6 @@ def registros_envio_triagem_por_mes(request):
     # Retornar a quantidade e o nome do mês no contexto
     return {
         'quantidade_registros_por_mes': quantidade_registros_por_mes,
-        'nome_mes_atual': nome_mes_atual
+        'nome_mes_atual': nome_mes_atual,
+        'todos_atend': envio_triagem.objects.all().count()
     }
