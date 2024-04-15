@@ -1,6 +1,6 @@
 
 from .forms import VideoForm
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from  .models import config_Marquee
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -46,9 +46,25 @@ class letreiroCreateView(LoginRequiredMixin, CreateView):
 
 class Detail_notifica(LoginRequiredMixin, DetailView):
     model = Notificate_system
-    fields = '__all__'
     template_name = 'configUPA/notificate_detail.html'
     context_object_name = 'notifica_detail'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["detail_view"] = True
+        return context
+    
+
+class All_notifica(LoginRequiredMixin, View):
+    template_name = 'configUPA/notificate_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        notifica_all = Notificate_system.objects.filter(user=self.request.user)
+        context = {
+            'notifica_all': notifica_all,
+            'detail_view': False
+        }
+        return render(request, self.template_name, context)
 
 
 
@@ -91,6 +107,14 @@ class SuccessNotificationView(LoginRequiredMixin, View):
 
     def get(self, request):
         return render(request, self.template_name)
+    
+
+def noti_visto(request, pk):
+    msg = Notificate_system.objects.filter(pk=pk)
+    for m in msg:
+        m.visto = True
+        m.save()
+    return redirect(reverse_lazy('configUPA:notifica', kwargs={'pk':pk}))
 
 """
 

@@ -1,25 +1,40 @@
 {% extends 'global/template_geral.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'global/css/form.css' %}">
 {% endblock css %}
 {% block body_login %}
 
-
+{% if detail_view %}
 <div class="card text-center w-75 w-auto">
     <div class="card-header">
-        {{notifica_detail.name}}
-        
+        {{notifica_detail.name}}        
     </div>
     <div class="card-body">
       <h5 class="card-title">{{notifica_detail.date}}</h5>
       <p class="card-text">{{notifica_detail.description|safe}}</p>
-      <a href="#" class="btn btn-primary">Vê todas as atualizações visualizadas</a>
+      <a href="{% url "configUPA:All_notifica" %}" class="btn btn-primary">Vê todas as atualizações visualizadas</a>
     </div>
     <div class="card-footer text-muted">
         {% if notifica_detail.visto %} Visualizando {% endif %}
     </div>
 </div>
+{% else %}
+    {% for n in notifica_all %}
+        <div class="card text-center w-75 w-auto">
+            <div class="card-header">
+                {{n.name}}        
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">{{n.date}}</h5>
+            <p class="card-text">{{n.description|safe}}</p>
+            <a href="#" class="btn btn-primary">Vê todas as atualizações visualizadas</a>
+            </div>
+            <div class="card-footer text-muted">
+                {% if n.visto %}<i class="fa-duotone fa-envelope-open-text"></i> Visto {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
 
 
 {% endblock body_login %}

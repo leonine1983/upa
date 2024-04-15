@@ -1,12 +1,11 @@
 from configUPA.models import Notificate_system
 
 def notifications(request):
-    notification = Notificate_system.objects.all()
-    visto = True
-    for n in notification:
-        if n.visto == False:
-            visto = False
-            break
+    if request.user.is_authenticated:
+        notification = Notificate_system.objects.filter(user=request.user)
+        visto = all(notif.visto for notif in notification)
+    else:
+        notification = []
+        visto = False
 
-    return {'notification' : notification,
-            'visto': visto}
+    return {'notification': notification, 'visto': visto}
