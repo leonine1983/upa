@@ -234,7 +234,7 @@
                           {% for group in user.groups.all %}
                             {% if n.user == user %}
                             {% if not n.visto %}
-                              <li class="pe-5"><a class="dropdown-item link-primary" href="{% url 'configUPA:notifica_vist' n.id %}"><i class="fa-duotone fa-envelope"></i> {{n.name|safe}}</a></li>  
+                              <li class="pe-5"><a class="dropdown-item link-primary" href="{% url 'configUPA:notifica_vist' n.id %}"><i class="fa-duotone fa-envelope"></i> {{n.name|safe}}dddd</a></li>  
                             {% else %}
                               <li class="pe-5"><a class="dropdown-item link-secondary" href="{% url 'configUPA:notifica_vist' n.id %}"><i class="fa-duotone fa-envelope-open-text"></i> {{n.name|safe}}</a></li>  
                             {% endif %}
