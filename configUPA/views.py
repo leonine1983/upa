@@ -1,6 +1,6 @@
 
 from .forms import VideoForm
-from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView
 from  .models import config_Marquee
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -65,6 +65,7 @@ class All_notifica(LoginRequiredMixin, View):
             'detail_view': False
         }
         return render(request, self.template_name, context)
+    
 
 
 
