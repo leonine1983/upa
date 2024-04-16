@@ -14,9 +14,10 @@ from django.core.serializers import serialize
 from django.utils.safestring import mark_safe
 
 
-
 def chamar_paciente(request):    
-    
+    nome_ultimos_chamado = []
+    nome_ultimos_chamado_all = ''
+
     try:
         # Busca o id do profissional de saúde na primeira chamada de atendimento
         nome_paciente = Chamar_P_para_atendimento.objects.filter(chamado=False).first().nome_paciente    
@@ -26,26 +27,28 @@ def chamar_paciente(request):
 
         nome_paciente_nome = Chamar_P_para_atendimento.objects.first().nome_paciente.paciente_triagem.paciente_envio_triagem.nome_social
         nome_paciente = f'Paciente {nome_paciente}  por favor se dirigir à {sala_do_usuario}'
-        print(f'nome do paciente {nome_paciente}')
 
         data_atual = datetime.now().date()
 
         # Filtra a queryset para incluir apenas registros do dia atual
         nome_paciente_chamado = Chamar_P_para_atendimento.objects.filter(data_chamada__date=data_atual)[:5]
         nome_paciente_chamado_data = {}
+        
         for n in nome_paciente_chamado:
             data_chamada = n.data_chamada
             hora_formato = data_chamada.strftime('%H:%M')
-            data_formato = data_chamada.strftime('%d/%m/%Y')
-            # nome_paciente_chamado_data[n.id] = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} em {data_formato}</li>"
-            nome_paciente_chamado_data = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} em {data_formato}</li>"
-           
-     
-
+            data_formato = data_chamada.strftime('%d/%m/%Y')  # Definindo data_formato dentro do bloco
+            chamado = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} em {data_formato}</li>"
+            nome_ultimos_chamado.append(chamado)
+            
+            nome_ultimos_chamado_all = ''
+            for a in nome_ultimos_chamado:                
+                nome_ultimos_chamado_all += a
+        print(f'{nome_ultimos_chamado_all} paciente chamado')
+        
         sala = Salas_Atendimento.objects.filter(profissionalSaude=profissional_id)
         for s in sala:
-            nome_sala = s.nomeSala.nome_Sala
-    
+            nome_sala = s.nomeSala.nome_Sala    
         
         # Gerar o áudio em memória
         tts = gTTS(text=nome_paciente, lang='pt-br')
@@ -65,9 +68,13 @@ def chamar_paciente(request):
         for n in nome_paciente_chamado:
             data_chamada = n.data_chamada
             hora_formato = data_chamada.strftime('%H:%M')
-            nome_paciente_chamado_data = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} </li> "
-     
-        
+            data_formato = data_chamada.strftime('%d/%m/%Y')  # Definindo data_formato dentro do bloco
+            chamado = f"<li class='fs-5'><i class='fa-thin fa-hospital-user'></i> {n.nome_paciente} - <i class='fa-regular fa-clock'></i> {hora_formato} em {data_formato}</li>"
+            nome_ultimos_chamado.append(chamado)
+            
+            for a in nome_ultimos_chamado:
+                nome_ultimos_chamado_all += a
+            
         nome_paciente_nome = "Atualizando..."
         nome_sala = "Atualizando..."
 
@@ -77,11 +84,10 @@ def chamar_paciente(request):
             audio_content = audio_file.read()
         
         # Converter o audio em base64
-        audio_base64 = base64.b64encode(audio_content).decode('utf-8')
-    
+        audio_base64 = base64.b64encode(audio_content).decode('utf-8')    
 
     response_data = {
-        'nome_paciente_chamado' : mark_safe(nome_paciente_chamado_data),
+        'nome_paciente_chamado' : mark_safe(nome_ultimos_chamado_all),
         'nome_paciente': nome_paciente_nome,
         'nome_paciente2': nome_paciente_nome,
         'nome_sala': nome_sala,
