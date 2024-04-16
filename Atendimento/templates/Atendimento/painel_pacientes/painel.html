@@ -10,22 +10,18 @@
     <!--Menu Local-->
     <link rel="stylesheet" href="{% static 'global/css/footer.css' %}">
     <style>
-        body{}
         .video, #img_back{
           position: fixed;
           z-index: -1;
           width: 100%;
           margin-top:-5%!important;
         }
-        .container{
-            margin: auto;
-            width: 100%;
-        }
+   
         #chamada-paciente, #data-atualizacao{          
           font-size: 1.5rem;
         }
         
-        .container .div-content{
+         .div-content{
             width: 40%;
             padding: 2%;
             margin: 1%;
@@ -52,254 +48,112 @@
           margin:-1rem 0.1rem -2.2rem -2rem;
          
         }
+
+
+        
     </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+        <!--Sider files-->       
+        <link rel="stylesheet" type="text/css" href="{% static 'global/elastic/css/style.css' %}" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:400italic' rel='stylesheet' type='text/css' />
+        <noscript>
+          <link rel="stylesheet" type="text/css" href="{% static 'global/elastic/css/noscript.css' %}" />
+        </noscript>    
 {% endblock css %}   
 <!--Titulo da Pagina-->
 {% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
 {% block body_login %}
-{% if videoUpa %}
-<video controls autoplay loop class="video">
-  <source src="{% static  videoUpa  %}">
-</video>
-{% else %}
-<!--<video controls autoplay loop muted class="video" >
-  <source src="{% static 'videos/comunica.mp4'  %}">
-  <source src="{% static 'videos/Risco.mp4'  %}">
-  <source src="{% static 'videos/enfermeira_orando.mp4'  %}">
-</video>-->
-<img id="img_back" src="{% static 'front.jpg' %}" alt="" width="100%" srcset="">
-{% endif %}
-<div class="container">     
-    
-    {% for cf in configUpa %}
-      {% if cf.letreiro_ativa %}
-    <marquee behavior="scroll" direction="" class='rounded-bottom-5'>   
-      <!--MARQUEEE-->       
-      <div class='fs-6'>        
-        <span> 
-          
-          {% if cf.gif_Ze_gotina %}
-          <img src="{% static 'animar/ze-gotinha-gotinha atento.gif' %}" alt="">
-          {% endif %}  
-          {% if cf.bem_vindo_ativa_coracao %}        
-            <i class="fa-solid fa-heart-pulse fa-beat-fade"></i> 
-          {% endif %}
-          {% if cf.bem_vindo_ativa %}
-           {{cf.bem_vindo_msg}}
-          {% endif %}
-          {% if cf.bem_vindo_ativa_coracao %}
-            <i class="fa-solid fa-heart-pulse fa-beat-fade"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-          {% endif %}
-        </span>    
-        {% if cf.data_ativa %} 
-        <span>
-          <i class="fa-solid fa-calendar-days fa-bounce"></i>
-          {{ now|naturalday }} - {{now|date:"F j, Y"}}
-        </span>
-        {% endif %}
-        {% if cf.hora_ativa %} 
-        <span style='font-size:3rem'>
-          <i class="fa-regular fa-clock fa-shake"></i>
-          {{now|time:"H:i"}}        
-        </span>
-        {% endif %}
-        {% if cf.gif_Ze_gotina %}
-          <span>
-            <img src="{% static 'animar/ze-gotinha-gotinha.gif' %}" alt="">
-          </span>
-        {% endif %}
-        {% if cf.gif_enfermera %}
-          <span>
-            <img src="{% static 'animar/enfermeira-alcool-unscreen.gif' %}" alt="">
-          </span> 
-          <span>
-            <img src="{% static 'animar/enfermeria-pc.gif' %}" alt="">
-          </span>
-        {% endif %}        
-        <span> 
-          {% if cf.gif_Ze_gotina %}
-            <img src="{% static 'animar/ze-gotinha-gotinha atento.gif' %}" alt="">
-          {% endif %}
-          {% if cf.bem_vindo_ativa_coracao %}
-            <i class="fa-solid fa-heart-pulse fa-beat-fade"></i> 
-          {% endif %}
-          {% if cf.bem_vindo_ativa %}
-           {{cf.bem_vindo_msg}}
-          {% endif %}
-          {% if cf.bem_vindo_ativa_coracao %}
-          <i class="fa-solid fa-heart-pulse fa-beat-fade"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-          {% endif %}
-        </span>   
-        {% if cf.data_ativa %}        
-        <span>
-          <i class="fa-solid fa-calendar-days fa-bounce"></i>
-          {{ now|naturalday }} - {{now|date:"F j, Y"}}
-        </span>
-        {% endif %}
-        {% if cf.hora_ativa %} 
-        <span style='font-size:3rem'>
-          <i class="fa-regular fa-clock fa-shake"></i>
-          {{now|time:"H:i"}}        
-        </span> 
-        {% endif %}
-        {% if cf.gif_enfermera %}   
-          <span>
-            <img src="{% static 'animar/enfermeira-unscreen.gif' %}" alt="">
-          </span> 
-          <span>
-            <i class="fa-solid fa-quote-left"></i>{{cf.mensagem}}<i class="fa-solid fa-quote-right"></i>
-          </span>
-        {% endif %}
-        {%if cf.gif_medico  %}   
-          <span>
-            <img src="{% static 'animar/medico-danca.gif' %}" alt="">
-          </span>         
-          <span>
-            <img src="{% static 'animar/medico-assopra.gif' %}" alt="">
-          </span> 
-        {%endif%}
-       
-        {%if cf.gif_medico %}  
-        <span>
-          <img src="{% static 'animar/medico.gif' %}" alt="">
-        </span> 
-        {%endif%}
-        {% if cf.gif_Ze_gotina %}
-          <span>
-            <img src="{% static 'animar/sus-z-gotinha-unscreen-livro.gif' %}" alt="">
-          </span>
-        {% endif %}
-        {% if cf.mensagem_ativa %}
-        <span>          
-          <i class="fa-solid fa-quote-left"></i>{{cf.mensagem}}<i class="fa-solid fa-quote-right"></i>
-        </span>  
-        {% endif %}
-        {% if cf.gif_Ze_gotina %}
-          <span>
-            <img src="{% static 'animar/sus-zégotinha-legal.gif' %}" alt="">
-          </span>
-          <span>
-            <img src="{% static 'animar/ze-gotinha-gotinha-triste.gif' %}" alt="">
-          </span>
-          <span>
-            <img src="{% static 'animar/ze-gotinha-gotinha-conpanheiro.gif' %}" alt="">
-          </span>
-          <span>
-            <img src="{% static 'animar/ze-gotinha-gotinha hangloose.gif' %}" alt="">
-          </span>
-        {% endif %}
-        {% if cf.gif_Ze_gotina %}
-          <span>
-            <img src="{% static 'animar/sus-z-gotinha-unscreen-livro.gif' %}" alt="">
-            <img src="{% static 'animar/sus-zégotinha-legal.gif' %}" alt="">
-            <img src="{% static 'animar/ze-gotinha-gotinha-triste.gif' %}" alt="">
-            <img src="{% static 'animar/ze-gotinha-gotinha-conpanheiro.gif' %}" alt="">
-            <img src="{% static 'animar/ze-gotinha-gotinha hangloose.gif' %}" alt="">
-          </span> 
-        {% endif %}
-      </div>      
-      <!--FIM MARQUEEE-->   
-    </marquee>
-    <div >
-      <a style='display:block; text-align:center; font-size:2rem; margin: auto 1rem;' href='{% url 'Atendimento:pagina-inicial' %}'><i style='color:#fff; text-shadow: var(--shadow);' class="fa-solid fa-house-user"></i></a>
-      <a class="uppercase" style='display:block; text-align:center; font-size:1rem; margin: auto 1rem; color:#fff; text-shadow: var(--shadow);' href='{% url 'Atendimento:pagina-inicial' %}'>Página Inicial</a>    
-    </div>
-    {% endif %}
-    {% endfor %} 
-    <img src="{% static 'vera cruz.png' %}" style="position: absolute; right: 0;top: 10;">
-    <div class="div-content" style='display:block;  font-size:2rem; margin:1rem; margin-left: -10%;width: 50%;'>
-      <div><span style='font-size:1.2rem'>ATENDIMENTO:</span> <span class='fs-5' id='sala'></span></div>
-      <hr>
-      <div>              
-        <div id="chamada-paciente">
-          <p><h1 class='uppercase' style='font-size:2.5rem' id="nome-paciente"></h1></p>
-          <p style='font-size:1.5rem; color:rgb(157, 19, 170)'>Por favor se dirigir à sala de <span class='uppercase' id='sala_sala'></span></p>
-          <hr>
-          <p style="font-weight: bold ;font-size:1.2rem" id='hora-ultima'></p>
-          <p style='font-size:1.2rem' id="data-atualizacao"></p>          
-          <audio id="audio-player" controls autoplay style='width:80%; margin:2rem; background-color: transparent;'>
-            <source  id="audio-source"  type="audio/mpeg" >
-          </audio>
-        </div>
-        <div class='p-2 bg-secondary rounded-2 shadow shadow-sm'>
-          <h1 class="fs-5 p-1 border-bottom bg-dark-subtle">Últimos pacientes chamados </h1>
-         
-          {% for n in nome_paciente_chamado %}
-            {{n}}
-          {% endfor %}
-          <div id='ultimo_chamado'></div>    
-        </div>
-      </div>
-    </div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>...
-      <script>
-      var audio = $('#audio-player')[0]; // seleciona o elemento de áudio
-      var audioSource = $('#audio-source'); // seleciona o elemento source do áudio
-      var audioBase64Anterior = ''; // variável para armazenar o áudio da chamada anterior
-      var audioRepeticoes = 0; // contador para controlar as repetições do áudio 
-      function atualizarDadosChamada(data) {
-        $('#nome-paciente').text('' + data.nome_paciente2); 
-        $('#sala').text('' + data.nome_sala); 
-        $('#sala_sala').text('' + data.nome_sala); 
-        $('#ultimo_chamado').html('' + data.nome_paciente_chamado)
+
+
+
+<div class="container_2" style='background:#000; margin-left:0!important' >
+    <div class="wrapper">
+        <div id="ei-slider" class="ei-slider" >
+            <ul class="ei-slider-large" >
+                <li>
+                    <img src="{% static 'front.jpg' %}" alt="image06"/>
+                    <div class="ei-title">
+                        <h2>Passionate</h2>
+                        <h3>Seeker</h3>
+                    </div>
+                </li>
+                <li>
+                    <img src="{% static 'global/elastic/images/large/1.jpeg' %}" alt="image01" />
+                    <div class="ei-title">
+                        <h2>Creative</h2>
+                        <h3>Duet</h3>
+                    </div>
+                </li>
+                <li>
+                  <img src="{% static 'global/elastic/images/large/2.jpeg' %}" alt="image01" />
+                    <div class="ei-title">
+                        <h2>Friendly</h2>
+                        <h3>Devil</h3>
+                    </div>
+                </li>
+                <li>
+                  <img src="{% static 'global/elastic/images/large/3.jpeg' %}" alt="image01" />
+                    <div class="ei-title">
+                        <h2>Tranquilent</h2>
+                        <h3>Compatriot</h3>
+                    </div>
+                </li>
+                <li>
+                  <img src="{% static 'global/elastic/images/large/4.jpeg' %}" alt="image01" />
+                    <div class="ei-title">
+                        <h2>Insecure</h2>
+                        <h3>Hussler</h3>
+                    </div>
+                </li>
+                <li>
+                  <img src="{% static 'global/elastic/images/large/5.jpeg' %}" alt="image01" />
+                    <div class="ei-title">
+                        <h2>Loving</h2>
+                        <h3>Rebel</h3>
+                    </div>
+                </li>
+                <li>
+                  <img src="{% static 'global/elastic/images/large/7.jpeg' %}" alt="image01" />
+                    <div class="ei-title">
+                        <h2>Crazy</h2>
+                        <h3>Friend</h3>
+                    </div>
+                </li>
+            </ul><!-- ei-slider-large -->
+            <ul class="ei-slider-thumbs">
+                <li class="ei-slider-element">Current</li>                      
+                <li><a href="#">Slide 1</a><img src="{% static 'global/elastic/images/thumbs/1.jpeg' %}" alt="thumb01" /></li>
+                <li><a href="#">Slide 1</a><img src="{% static 'global/elastic/images/thumbs/2.jpeg' %}" alt="thumb01" /></li>
+                <li><a href="#">Slide 1</a><img src="{% static 'global/elastic/images/thumbs/3.jpeg' %}" alt="thumb01" /></li>
+                <li><a href="#">Slide 1</a><img src="{% static 'global/elastic/images/thumbs/4.jpeg' %}" alt="thumb01" /></li>
+                <li><a href="#">Slide 1</a><img src="{% static 'global/elastic/images/thumbs/5.jpeg' %}" alt="thumb01" /></li>
+                <li><a href="#">Slide 1</a><img src="{% static 'global/elastic/images/thumbs/6.jpeg' %}" alt="thumb01" /></li>
+                <li><a href="#">Slide 1</a><img src="{% static 'global/elastic/images/thumbs/7.jpeg' %}" alt="thumb01" /></li>
+            </ul><!-- ei-slider-thumbs -->
+        </div><!-- ei-slider -->
+    </div><!-- wrapper -->
+    {% include "Atendimento/painel_pacientes/partial_painel/painel_chama.html" %}
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'global/elastic/js/jquery.eislideshow.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/elastic/js/jquery.easing.1.3.js' %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#ei-slider').eislideshow({
+  animation			: 'center',
+  autoplay			: true,
+  slideshow_interval	: 30000,
+  titlesFactor		: 0
+        });
+    });
+</script>            
+
+
+
+  
+
         
-        //var dataChamada = moment(data.data_chamada)
-        //$('#data-chamada').text('Data de Criação:' + dataChamada.format('HH:mm:ss'))
-        //$('#data-chamada').text('Data de Chamada: ' + new Date(data.data_chamada).toLocaleString());
-        $('#data-criacao').text('Data de Criação: ' + data.data_criacao);
-        var dataChamada = moment(data.data_chamada)
-        console.log(dataChamada)
-        //$('#data-atualizacao').text('Data de Atualização: ' + new Date(data.data_chamada).toLocaleDateString('pt-BR'));
-        $('#data-atualizacao').text('Data de Atualização: ' + dataChamada.format('DD/MM/YY'));
-        $('#hora-ultima').text('Última chamada: ' + dataChamada.format('HH:mm') + 'h')
-      
-        // verifica se os dados da chamada atual são diferentes da anterior
-        var audioBase64 = data.audio_base64;
-        if (audioBase64 !== audioBase64Anterior) {
-          audioSource.attr('src', 'data:audio/mpeg;base64,' + audioBase64); // atualiza o áudio do source                  
-          audio.load(); // carrega o novo áudio
-          audio.play(); // inicia a reprodução
-          audioRepeticoes = 1; // reseta o contador de repetições
-          audioBase64Anterior = audioBase64; // armazena o áudio da chamada atual para a próxima verificação
-        }
-      }
-      
-      $(document).ready(function() {
-        // obtém os dados da primeira chamada ao iniciar a página
-        $.ajax({
-          url: '{% url 'Atendimento:chamar_paciente' %}',
-          dataType: 'json',
-          success: function(data) {
-            atualizarDadosChamada(data); // atualiza os dados da primeira chamada
-          }
-        });
-      
-        // atualiza os dados a cada 20 segundos
-        setInterval(function() {
-          $.ajax({
-            url: '{% url 'Atendimento:chamar_paciente' %}',
-            dataType: 'json',
-            success: function(data) {
-              atualizarDadosChamada(data); // atualiza os dados a cada chamada
-            }
-          });
-        }, 15000);
-      
-        // adiciona evento de escuta para fim da reprodução do áudio
-        audio.addEventListener('ended', function() {
-          if (audioRepeticoes < 1) { // se não alcançou o limite de repetições
-            setTimeout(function() {
-              audio.play(); // inicia a reprodução novamente
-            }, 3000); // espera 2 segundos
-            audioRepeticoes++; // incrementa o contador de repetições
-          }
-        });
-      });
-      
-      </script>
-    
-    </div>              
+
+
 {% endblock body_login %}

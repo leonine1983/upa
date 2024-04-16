@@ -1,0 +1,142 @@
+{% load static %}
+{% load humanize %}
+{% for cf in configUpa %}
+{% if cf.letreiro_ativa %}
+<marquee behavior="scroll" direction="" class='fs-5'>   
+<!--MARQUEEE-->       
+  <div class='fs-6'>        
+    <span>       
+      {% if cf.gif_Ze_gotina %}
+      <img src="{% static 'animar/ze-gotinha-gotinha atento.gif' %}" alt="">
+      {% endif %}  
+      {% if cf.bem_vindo_ativa_coracao %}        
+        <i class="fa-solid fa-heart-pulse fa-beat-fade"></i> 
+      {% endif %}
+      {% if cf.bem_vindo_ativa %}
+      {{cf.bem_vindo_msg}}
+      {% endif %}
+      {% if cf.bem_vindo_ativa_coracao %}
+        <i class="fa-solid fa-heart-pulse fa-beat-fade"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+      {% endif %}
+    </span>    
+    {% if cf.data_ativa %} 
+    <span>
+      <i class="fa-solid fa-calendar-days fa-bounce"></i>
+      {{ now|naturalday }} - {{now|date:"F j, Y"}}
+    </span>
+    {% endif %}
+    {% if cf.hora_ativa %} 
+    <span style='font-size:3rem'>
+      <i class="fa-regular fa-clock fa-shake"></i>
+      {{now|time:"H:i"}}        
+    </span>
+    {% endif %}
+    {% if cf.gif_Ze_gotina %}
+      <span>
+        <img src="{% static 'animar/ze-gotinha-gotinha.gif' %}" alt="">
+      </span>
+    {% endif %}
+    <!--
+    {% if cf.gif_enfermera %}
+      <span>
+        <img src="{% static 'animar/enfermeira-alcool-unscreen.gif' %}" alt="">
+      </span> 
+      <span>
+        <img src="{% static 'animar/enfermeria-pc.gif' %}" alt="">
+      </span>
+    {% endif %}        
+    <span> 
+      {% if cf.gif_Ze_gotina %}
+        <img src="{% static 'animar/ze-gotinha-gotinha atento.gif' %}" alt="">
+      {% endif %}
+      {% if cf.bem_vindo_ativa_coracao %}
+        <i class="fa-solid fa-heart-pulse fa-beat-fade"></i> 
+      {% endif %}
+      {% if cf.bem_vindo_ativa %}
+      {{cf.bem_vindo_msg}}
+      {% endif %}
+      {% if cf.bem_vindo_ativa_coracao %}
+      <i class="fa-solid fa-heart-pulse fa-beat-fade"></i>&nbsp;&nbsp;&nbsp;&nbsp;
+      {% endif %}
+    </span>
+    -->
+    {% if cf.data_ativa %}        
+    <span>
+      <i class="fa-solid fa-calendar-days fa-bounce"></i>
+      {{ now|naturalday }} - {{now|date:"F j, Y"}}
+    </span>
+    {% endif %}
+    {% if cf.hora_ativa %} 
+    <span style='font-size:3rem'>
+      <i class="fa-regular fa-clock fa-shake"></i>
+      {{now|time:"H:i"}}        
+    </span> 
+    {% endif %}
+    <!--
+    {% if cf.gif_enfermera %}   
+      <span>
+        <img src="{% static 'animar/enfermeira-unscreen.gif' %}" alt="">
+      </span> 
+      <span>
+        <i class="fa-solid fa-quote-left"></i>{{cf.mensagem}}<i class="fa-solid fa-quote-right"></i>
+      </span>
+    {% endif %}
+    {%if cf.gif_medico  %}   
+      <span>
+        <img src="{% static 'animar/medico-danca.gif' %}" alt="">
+      </span>         
+      <span>
+        <img src="{% static 'animar/medico-assopra.gif' %}" alt="">
+      </span> 
+    {%endif%}
+    
+  
+    {%if cf.gif_medico %}  
+    <span>
+      <img src="{% static 'animar/medico.gif' %}" alt="">
+    </span> 
+    {%endif%}
+    {% if cf.gif_Ze_gotina %}
+      <span>
+        <img src="{% static 'animar/sus-z-gotinha-unscreen-livro.gif' %}" alt="">
+      </span>
+    {% endif %}
+    
+    {% if cf.mensagem_ativa %}
+    <span>          
+      <i class="fa-solid fa-quote-left"></i>{{cf.mensagem}}<i class="fa-solid fa-quote-right"></i>
+    </span>  
+    {% endif %}
+    {% if cf.gif_Ze_gotina %}
+      <span>
+        <img src="{% static 'animar/sus-zégotinha-legal.gif' %}" alt="">
+      </span>
+      <span>
+        <img src="{% static 'animar/ze-gotinha-gotinha-triste.gif' %}" alt="">
+      </span>
+      <span>
+        <img src="{% static 'animar/ze-gotinha-gotinha-conpanheiro.gif' %}" alt="">
+      </span>
+      <span>
+        <img src="{% static 'animar/ze-gotinha-gotinha hangloose.gif' %}" alt="">
+      </span>
+    {% endif %}
+    {% if cf.gif_Ze_gotina %}
+      <span>
+        <img src="{% static 'animar/sus-z-gotinha-unscreen-livro.gif' %}" alt="">
+        <img src="{% static 'animar/sus-zégotinha-legal.gif' %}" alt="">
+        <img src="{% static 'animar/ze-gotinha-gotinha-triste.gif' %}" alt="">
+        <img src="{% static 'animar/ze-gotinha-gotinha-conpanheiro.gif' %}" alt="">
+        <img src="{% static 'animar/ze-gotinha-gotinha hangloose.gif' %}" alt="">
+      </span> 
+    {% endif %}
+    -->
+  </div>      
+<!--FIM MARQUEEE-->   
+</marquee>
+<div >
+  <a style='display:block; text-align:center; font-size:2rem; margin: auto 1rem;' href='{% url 'Atendimento:pagina-inicial' %}'><i style='color:#fff; text-shadow: var(--shadow);' class="fa-solid fa-house-user"></i></a>
+  <a class="uppercase" style='display:block; text-align:center; font-size:1rem; margin: auto 1rem; color:#fff; text-shadow: var(--shadow);' href='{% url 'Atendimento:pagina-inicial' %}'>Página Inicial</a>    
+</div>
+{% endif %}
+{% endfor %} 
