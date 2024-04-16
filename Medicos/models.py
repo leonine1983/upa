@@ -169,7 +169,7 @@ class Chamar_P_para_atendimento(models.Model):
     # Define o modelo "Chamar_P_para_atendimento" com três campos: "nome_paciente", "profissionalSaude" e "data_chamada"
     nome_paciente = models.ForeignKey(triagem, null=True, on_delete=models.CASCADE)
     profissionalSaude_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-    data_chamada = models.DateTimeField(auto_now=True, null=True)
+    data_chamada = models.DateTimeField(auto_now_add=True, null=True)
     data_criacao = models.DateTimeField(default=timezone.now)
     data_atualizacao = models.DateTimeField(default=timezone.now)
     chamado = models.BooleanField(default=False)
@@ -179,16 +179,16 @@ class Chamar_P_para_atendimento(models.Model):
         super(Chamar_P_para_atendimento, self).__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
-
         if self.request and self.request.user:
             # Define a data e hora de criação do registro
             self.data_criacao = timezone.now()
             self.profissionalSaude_id = self.request.user
-
-            # Exclui os últimos 5 registros criados pelo usuário
-            Chamar_P_para_atendimento.objects.all().delete()            
-
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
+            # Verifica se há mais de 5 registros e exclui os excedentes
+            registros_excedentes = Chamar_P_para_atendimento.objects.order_by('-id')[10:]
+            registros_excedentes.delete()
+        else:
+            super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-id']

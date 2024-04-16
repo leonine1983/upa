@@ -44,7 +44,6 @@ def chamar_paciente(request):
             nome_ultimos_chamado_all = ''
             for a in nome_ultimos_chamado:                
                 nome_ultimos_chamado_all += a
-        print(f'{nome_ultimos_chamado_all} paciente chamado')
         
         sala = Salas_Atendimento.objects.filter(profissionalSaude=profissional_id)
         for s in sala:
