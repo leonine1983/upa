@@ -3,7 +3,7 @@
 <div style='position:absolute; z-index: 10; top: 4rem; left: 0;''>      
     {% include "Atendimento/painel_pacientes/partial_painel/marquee.html" %}
     <img src="{% static 'vera cruz.png' %}" style="position: absolute; right: 0;top: 10;">
-    <div class="div-content" style='display:block;  font-size:2rem; margin:1rem;width: 40%; margin-top:-3rem'>
+    <div class="div-content" style='display:block;  font-size:2rem; margin:1rem;width: 50%; margin-top:-3rem'>
       <div><span style='font-size:1.2rem'>ATENDIMENTO:</span> <span class='fs-5' id='sala'></span></div>
       <hr>
       <div>              
@@ -90,7 +90,6 @@
           }
         });
       });      
-      </script>    
-
-    
+      </script>      
   </div>  
+{% include "global/partials_template/footer/footer.html" %}

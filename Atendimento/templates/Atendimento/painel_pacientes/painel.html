@@ -15,12 +15,10 @@
           z-index: -1;
           width: 100%;
           margin-top:-5%!important;
-        }
-   
+        }   
         #chamada-paciente, #data-atualizacao{          
           font-size: 1.5rem;
-        }
-        
+        }        
          .div-content{
             width: 40%;
             padding: 2%;
@@ -29,7 +27,6 @@
             background-color: rgba(240, 245, 242, 0.8);
             box-shadow: var(--shadow);
         }
-
         marquee{
           padding: 1rem;   box-shadow: var(--shadow);
           background: var(--principal);
@@ -47,10 +44,10 @@
           height:8rem;
           margin:-1rem 0.1rem -2.2rem -2rem;
          
-        }
-
-
-        
+        }    
+        footer{
+          margin-top:0!important
+        }    
     </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -64,10 +61,7 @@
 <!--Titulo da Pagina-->
 {% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
 {% block body_login %}
-
-
-
-<div class="container_2" style='background:#000; margin-left:0!important' >
+<div class="container_2" style='background-color: rgba(161, 194, 160, 0.8); margin-left:0!important; height:90Vh' >
     <div class="wrapper">
         <div id="ei-slider" class="ei-slider" >
             <ul class="ei-slider-large" >
