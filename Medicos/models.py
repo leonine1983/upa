@@ -140,6 +140,7 @@ class Medico_atendimento (models.Model):
     respondeu_ao_chamado = models.BooleanField(default=True, null=True)
     chamadas_contabilizadas = models.IntegerField(default=0, null=True)
     # Fim Cotabilização de chamadas -------------------------------------
+    relatorio_impresso = models.BooleanField(default=False, null=True)
     
     class Meta:
         permissions = [('Acesso_permitido_Admin', 'Acesso permitido ao admin do sistema na UPA'),\

@@ -61,7 +61,9 @@ urlpatterns = [
      # Paciente não atendeu ao chamdo
     path('medico/chama_paciente/n_atende/<int:pk>', views.medico_paciente_nao_atende, name='medio_n_atendeu'),
     # Conlclui todos atendimentos em aberto
-    path('medico/chama_paciente/conclui_all/', views.conclui_all, name='conclui_atend')
+    path('medico/chama_paciente/conclui_all/', views.conclui_all, name='conclui_atend'),
+    # Atualizar o campo relatorio de Medico atendimento para True
+    path('medico/imprime/<int:pk>', views.atualizar_relatorio, name='atualiza_relatorio')
 
 ]
 
