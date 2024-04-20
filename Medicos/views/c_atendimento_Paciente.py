@@ -61,8 +61,7 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         self.object = form.save(commit=False)
         
         # Define os campos do objeto Medico_atendimento
-        self.object.paciente_medico_atendimento_id = self.kwargs['pk']
-        self.object.medico_nome = self.request.user
+        self.object.paciente_medico_atendimento_id = self.kwargs['pk']        
         
         medico_id = self.request.user.id
         medico_group_id = None  # Valor padrão caso não haja resultado no filtro
@@ -71,18 +70,20 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         for med in medico_group:
             medico_group_id = med.grupo_id
             crm = med.crm
+            print(f'esse é o crm do medio {crm}{medico_group}')
         
         medico_group = Group.objects.filter(id=medico_group_id)
+
         
         for med in medico_group:
             medico_group = med.name
             
             if medico_group == "group_Medicos":
-                medico_group = "Medico"
-            
-            #self.object.medico_nome += f' | {medico_group} | CRM nº: {crm}'
-            #self.object.medico_nome = self.request.user.username  
+                self.object.medico_nome = f'{self.request.user.first_name} {self.request.user.last_name} | CRM nº {crm}'
+            else:
+                self.object.medico_nome = self.request.user.username
         
+        self.object.paciente_medico_atendimento = True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
     

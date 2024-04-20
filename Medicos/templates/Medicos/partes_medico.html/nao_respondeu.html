@@ -15,9 +15,10 @@
     <thead>
         <tr class="bg-dark-subtle ">
             <td class="top text-center">Nome</td>
-            <td class="top text-center">Data e Horário de chegada</td>
+            <td class="top text-center">Data e Horário de chegada</td>            
             <td class="top text-center">Classificação</td>
             <td class="top text-center">nº de chamadas pelo médico</td>
+            <td class="top text-center">Médico</td>
             <td class="top text-center">Atendimento</td>
         </tr>
     </thead>       
@@ -62,7 +63,14 @@
                                                             {% else %}
                                                                 bg-secondary                                                            
                                                         {% endif %}' href=""> {{campo.classifica_tipo}}</td>  
-                            <td class='text-center'><b class='fs-5'>{{campo.medico_chamadas_contabilizadas}}</b> tentativa(s)</td>
+                            <td class='text-center'><b class='fs-5'>{{campo.medico_chamadas_contabilizadas}}</b> tentativa(s)</td>                            
+                            <td class='text-center'><b class='fs-7'>
+                                {% if campo.nome_medico_respondeu_ao_chamado is not None %}
+                                    Dr. (a) {{campo.nome_medico_respondeu_ao_chamado}}
+                                    {% elif campo.nome_medico_respondeu_ao_chamado == '' %}
+                                    {% else %}
+                                {% endif %}
+                            </b></td>None
                                                         
                             <td align="center" href="" {% if campo.paciente_triagem.prioridade == '1'  %} style="border-right:0.13rem solid #800080 !important;"  {% endif %}><a href="{% url 'Medicos:medico_atendimento' campo.pk %}"> {{campo.paciente_envio_triagem_id}}<span class='shadow shadow-sm prosseguir  
                                 {% if campo.classifica_tipo.classifica_tipo == "Vermelho" %}

@@ -4,9 +4,7 @@
 {% load humanize %}
 <link rel="stylesheet" href="{% static 'global/tabela/css/style.css' %}">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css" />
-
 <link rel="stylesheet" href="{% static 'global/css/abas_especiais_pcss3t.css' %}">
-
 <link rel="{% static 'global/dist/css/bootstrap.min.css' %}" href="style.css">
 <style>
     main{
@@ -95,8 +93,6 @@
             </li>
         </ul>
     </div>
-    <!--/ tabs -->
-
 
     <!-- tabs -->
     <div class="pcss3t pcss3t-effect-scale pcss3t-theme-7 border shadow bg-dark-subtle p-2">
@@ -125,22 +121,10 @@
             
         </ul>
     </div>
-    <!--/ tabs -->
-
-
-
-
-
-            
+    <!--/ tabs -->            
         </div>
     </div>
 
 </div>
-<script>
-    function exibe_info(){
-        var div_info = document.getElementById('info');
-        var disp = div_info.style.display;
-        div_info.style.display = disp === 'none' ? 'block' : 'none';
-    }
-</script>
+
 {% endblock body_login %}

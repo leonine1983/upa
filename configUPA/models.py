@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from ckeditor.fields import RichTextField
+from django.contrib import admin
+from Medicos.models import Medico_atendimento
 
 
 # Create your models here.
@@ -58,3 +60,10 @@ class Notificate_system(models.Model):
 
     def __str__(self):
         return self.description
+
+
+# Criar campos de busca no admin
+class Admin_busca_paciente_atndiment(admin.ModelAdmin):
+    search_fields= ['paciente_medico_atendimento__paciente_triagem__paciente_envio_triagem__nome_social']
+
+
