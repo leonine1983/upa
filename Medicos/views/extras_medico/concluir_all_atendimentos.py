@@ -2,10 +2,12 @@ from Medicos.models import Medico_atendimento
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from datetime import date
 
 def conclui_all(request):
     # Filtrando os objetos Medico_atendimento onde final_medico_atendimento é diferente de '1'
-    atend = Medico_atendimento.objects.exclude(paciente_medico_atendimento__final_medico_atendimento='1')
+    atend_all = Medico_atendimento.objects.exclude(paciente_medico_atendimento__final_medico_atendimento='1')
+    atend = atend_all.exclude(data_medico = date.today())
 
     # Verifica se há objetos encontrados
     if atend:

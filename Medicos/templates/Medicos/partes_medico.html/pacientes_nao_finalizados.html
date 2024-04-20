@@ -26,7 +26,8 @@
         <tr class="text-center bg-secondary-subtle">
             <th scope="col" style='padding:0.5rem;  font-weight: normal !important'>Nome do paciente</th>
             <th scope="col" style='padding:0.5rem;  font-weight: normal !important'>Classificação de Risco</th>
-            <th scope="col" style='padding:0.5rem; font-weight: normal !important'>Médico Responsável</th>
+            <th scope="col" style='padding:0.5rem; font-weight: normal !important'>Médico Responsável</th>            
+            <td class="top text-center">Data e Horário</td>         
             <th scope="col" style='padding:0.5rem;  font-weight: normal !important; width: 35%' >Ação</th>
         </tr>
     </thead>
@@ -46,7 +47,9 @@
                     {% elif ated_espec.classifica_tipo.classifica_tipo == "Azul"  %}
                     prosseguir-azul
                 {% endif %}'
-                        >{{ated_espec.classifica_tipo}} <i class="fa-thin fa-alarm-clock"></i></div> {{ated_espec.hora_medico}}</td>          
+
+                >{{ated_espec.classifica_tipo}} <i class="fa-thin fa-alarm-clock"></i></div></td>          
+                    <td scope="row" style='text-align:center'>{{ated_espec.medico_atendimento.data_medico}}</td>
                     <td scope="row" style='text-align:center'>Dr.(a) {{ated_espec.medico_atendimento.medico_nome}}</td>
                     <th scope="col" style='text-align:center'><a href="{% url 'Medicos:dados_do_paciente_atualiza' ated_espec.medico_atendimento.id %}" style=' font-weight: normal;'>Finalizar atendimento<i class="fa-regular fa-paper-plane"></i>  </a></th>
                     
