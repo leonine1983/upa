@@ -268,18 +268,3 @@ class Salva_modelo_exame(models.Model):
 
     def __init__(self):
         return self.nome
-    
-
-
-    
-
-
-
-
-
-
-   
-
-
-    
-

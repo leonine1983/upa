@@ -1,5 +1,4 @@
 from django.db import models
-# libs executadas para no pos migrate
 from django.db.models.signals import post_migrate, post_save
 from django.db.models import Case, When, Value, BooleanField
 from Atendimento.models import Priority
@@ -47,7 +46,6 @@ class Classifica_risco_model(models.Model):
         return self.classifica_tipo
     
 
-# EXAMES
 class Exames_Model(models.Model):
     # procedimento = models.IntegerField(max_length=5, null=True)
     # classificacao = models.CharField(max_length=12, null=True)
@@ -185,7 +183,6 @@ choice = {
 } 
 
 
-
 class Atendimento_especializado(models.Model):
     tipo_atendimento = models.ForeignKey(Tipos_Atendimento, null=False, on_delete=models.CASCADE)
     situacao = models.CharField(choices=choice, max_length=30, null=True, default='Aguardando')
@@ -321,9 +318,4 @@ class CustomUserTriagem(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-
-#MODEL DO RAIO X -------------------------------------------------------
-"""class RaioX_Model(models.Model):
     
-    situacao = models.CharField"""

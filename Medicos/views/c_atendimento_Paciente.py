@@ -1,16 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import Group, User
+from django.contrib.auth.models import Group
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.http import  HttpResponseRedirect
 from django.urls import reverse
 from django.views.generic import CreateView
-#from Medicos.forms import Form_medico_atendimento
 from Medicos.models import CustomUser, Medico_atendimento, Chamar_P_para_atendimento
 from Triagem.models import triagem
-from Medicos.models import CustomUser
 from datetime import datetime
-
 
 
 class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
@@ -19,9 +16,6 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
     fields = ['paciente_medico_atendimento', 'historico_doenca_atual_HDA', 'exame_fisico', 'Diagnostico','medicamento', 'conduta','classificacao_internacional_doenca_CID']
     template_name = 'Medicos/medico_atendimento_atendimento.html'   
     success_message = 'Avaliação médica feita com sucesso'
-
-    #messages.success(self.request, 'A mensagem que você deseja exibir quando exibe_b for verdadeiro.')
-     
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
@@ -37,11 +31,8 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
             exibe_id = chamado.pk
 
         except AttributeError:
-            # Tratamento de erros: Informar ao medico a inexistencia de chamado de paciente
             messages.add_message(self.request, messages.DEBUG, f"Nenhuma chamada foi encontrada para o paciente {self.kwargs['pk']} na data de hoje")
-
-
-        # Se exibe_b for True, mostrar uma mensagem
+     
         if exibe_b:
             pass
         else:
@@ -52,10 +43,8 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         context['chamado'] = chamado
         context['exibe_b'] = exibe_b  
         context['atendimento'] = 'atendimento'     
-        context['exibe_id'] = exibe_id   
-           
+        context['exibe_id'] = exibe_id              
         return context
-
     
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -64,16 +53,14 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
         self.object.paciente_medico_atendimento_id = self.kwargs['pk']        
         
         medico_id = self.request.user.id
-        medico_group_id = None  # Valor padrão caso não haja resultado no filtro
+        medico_group_id = None 
         medico_group = CustomUser.objects.filter(user_id=medico_id)
         
         for med in medico_group:
             medico_group_id = med.grupo_id
             crm = med.crm
-            print(f'esse é o crm do medio {crm}{medico_group}')
-        
+            print(f'esse é o crm do medio {crm}{medico_group}')        
         medico_group = Group.objects.filter(id=medico_group_id)
-
         
         for med in medico_group:
             medico_group = med.name
@@ -81,14 +68,10 @@ class atendimento_medico_createView(SuccessMessageMixin, LoginRequiredMixin, Cre
             if medico_group == "group_Medicos":
                 self.object.medico_nome = f'{self.request.user.first_name} {self.request.user.last_name} | CRM nº {crm}'
             else:
-                self.object.medico_nome = self.request.user.username
-        
+                self.object.medico_nome = self.request.user.username        
         self.object.paciente_medico_atendimento = True
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
     
-    #success_url = reverse_lazy('Medicos:dados do paciente_medicamentos self.kwargs['pk']')
-    def get_success_url(self):
-        
+    def get_success_url(self):        
         return reverse('Medicos:dados_do_paciente_medicamentos', kwargs={'pk':self.kwargs['pk']})
-        #return reverse('Medicos:medico_avisa_paciente_pos_atendimento', kwargs={'pk':self.kwargs['pk']})

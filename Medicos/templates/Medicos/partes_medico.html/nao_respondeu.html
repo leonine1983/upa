@@ -1,5 +1,4 @@
 {% load custom_filters %}
-<!--<h3 class='fs-4 rounded-top-3 border-bottom mb-2'>Aguardando atendimento: <b>0{{object_list|length}}</b> pacientes.</h3>-->
 <div class="row gap-0 row ">
     <h1 class='fs-4 m-0'><i class="fa-solid fa-comment-slash"></i> Pacientes que não responderam ao chamado para atendimento médico</h1>
     <p class='fs-6  m-5 mt-0 mb-3 '><b>Obs.: </b>Aguarde um momento e tente chamar o paciente novamente. Caso os paciente não atendam ao chamado, finalize-os usando NR (Não respondeu) nos campos de avaliação médica.</p>
@@ -86,9 +85,7 @@
                                     {% else %}
                                         bg-secondary  
                                 {% endif %}'
-                            > Seguir com o atendimento <i class="fa-regular fa-paper-plane "></i> </span></a></td>   
-                                            
-                    
+                            > Seguir com o atendimento <i class="fa-regular fa-paper-plane "></i> </span></a></td>       
                         </tr> 
                     {% endif %}
                 {% endif %}

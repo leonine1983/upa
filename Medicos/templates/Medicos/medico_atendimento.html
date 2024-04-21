@@ -29,8 +29,6 @@
               margin-left:2.5rem }
       
 </style>
-
-
 {% endblock css %}  
 {% block title_login %}ÁREA MÉDICA {% endblock title_login %}
 {% block titulo_ %} 
@@ -38,7 +36,6 @@
        {% for dados in ficha_atendimento  %}       
               {{dados.nome_social}}
        {% endfor %}
-
 {% endblock titulo_ %} 
 {% block body_title %}
        ÁREA MÉDICA - Paciente:
@@ -94,7 +91,7 @@
                                           {% endfor %}
                                    </ul>
                             </li> 
-                     </ul>                   
+                     </ul>                  
                      
                      </div>
                      <div class="row">
@@ -110,16 +107,16 @@
                      </div> 
                      {% if  dados.paciente_triagem.paciente_envio_triagem.alergias == '1' %} 
 								<div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Paciente Alérgico:
-										<div class='ml-3 p-2  w-100 fs-5'>
-												{{dados.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}                          
-										</div>
+                                                               <div class='ml-3 p-2  w-100 fs-5'>
+                                                                             {{dados.paciente_triagem.paciente_envio_triagem.conteudo_alergia}}                          
+                                                               </div>
 								</div>
 						{% endif %} 
 						{% if dados.data_triagem.paciente_envio_triagem.comorbidades == '1'  %} 
 								<div class='fs-7 m-2 bg-danger-subtle p-2 h-auto rounded-1'>Comorbidades:
-										<div class='ml-3 p-2  w-100 fs-5'>
-												{{dados.paciente_triagem.paciente_envio_triagem.conteudo_comorbidades}} 
-										</div>
+                                                               <div class='ml-3 p-2  w-100 fs-5'>
+                                                                             {{dados.paciente_triagem.paciente_envio_triagem.conteudo_comorbidades}} 
+                                                               </div> 
 								</div>
 						{% endif %} 
               </div>
@@ -136,10 +133,6 @@
               {% elif dados.classifica_tipo.classifica_tipo == "Azul"  %}
               prosseguir-azul
           {% endif %}'> Iniciar o atendimento <i class="fa-regular fa-paper-plane"></i> </span></a>
-
           {% endfor %}
-
 </div>
-
-
 {% endblock body_login %}

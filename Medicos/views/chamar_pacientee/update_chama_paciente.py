@@ -15,4 +15,3 @@ def Update_chama_usuarioo(request, pk):
         
         
     return redirect('Medicos:dados do paciente', pk=pk_id)
-    #return redirect('Medicos:dados do paciente', kwargs={'pk':pk_id})
