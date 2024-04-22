@@ -11,7 +11,9 @@
     <!--Menu Local-->
     <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} ">     
     <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
-    <link rel="stylesheet" href=" {% static 'Atendimento/css/menu_admin.css' %} "> 
+    <!--excluir <link rel="stylesheet" href=" {% static 'Atendimento/css/menu_admin.css' %} "> -->
+    <link rel="stylesheet" href="{% static 'global/css/abas_especiais_pcss3t.css' %}">
+    <link rel="{% static 'global/dist/css/bootstrap.min.css' %}" href="style.css">
 
     <style>
  
@@ -65,6 +67,9 @@
     #envios_triagem th {
         background-color: #f2f2f2;
     }
+    .pcss3t, .pcss3t #tab-content, .tab-content{
+        min-height: 120vh!important;
+    }
 
     /* Estilos para impressão */
     @media print {
@@ -106,13 +111,13 @@
     </ul> 
 </div>   
 <div class='mt-5 pt-5'>   
-    <div class="border-bottom border-dark fs-3 row">
+     <div class="border-bottom border-dark fs-3 row">
         <div class='col'>
             <i class="fa-duotone fa-list-ul"></i>
             Lista de Envios à Fila, Ordenados por Data
         </div>
-        <div class='col flex-row-reverse justify-content-center fs-6'>
-            <!--Menu Admin-->
+        <!--excluir<div class='col flex-row-reverse justify-content-center fs-6'>
+          
             <div class="navigation shadow">
                 <ul>
                     <li class="list active">
@@ -157,140 +162,169 @@
                     </li>
                     <div class="indicator"></div>
                 </ul>
-            </div>
-            <!--\ Menu Admin-->    
-        </div>
-    </div>
-    <form class='m-1 row g-4'>
-        {% csrf_token %}
-        <div class="col-auto">
-            <label for="start_date" >::CALENDÁRIO::</label>
-        </div>
-        <div class="col-auto">
-            <input type="date" name='busca_data' class='form-control'>
-        </div>
-        <div class="col-auto">         
-            <button class="btn btn-sm btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-          </svg> Selecionar data</button>
-        </div>
-        <div class="col-auto">
-            <button onclick="imprimir()" class="btn btn-sm btn-secondary">Imprimir <i class="fa-solid fa-print"></i></button>
-        </div>
-    </form>
-    <div id="envios_triagem" style="
-        width: 1000px;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-        padding: 2%;" class="m-auto bg-light shadow">
-        <div style='display:flex'>
-            <div style='display:flex; margin-right:0.5rem'>
-                <img src="{% static "brasao-veracruz.png" %}" alt="" sizes="" srcset="" style='width:4rem'>
-                <div style='font-size:0.75rem; padding:0.5rem 0.5rem 0 0.8rem'>
-                    UPA - Unidade de Pronto Atendimento de Vera Cruz</br>
-                    Av. Juvenal João Vinagre, 175. Centro | Vera Cruz - BA</br>
-                    Tel. (71) 3633 - 2286 | Email: servicossocial.upaveracruz@gmail.com
-                </div>
-            </div>
-            <img src="{% static "upa24.png" %}" alt="" sizes="" srcset="" style='width:9.2rem; margin-left:1rem'>
-        </div>
+            </div>-->    
+        </div>    
 
-        <h1 style='font-size:1.2rem; margin-top:2rem'>Relatório de Ingresso de Pacientes (Recepção) </h1>
-        <hr>
-        <h2>{{total_paciente}} pacientes em {{data}}</h2>
-        <!--Quantidade de paciente por idade-->
-        <h2 style="font-size: 0.8rem;">Quantidade por Faixa Etária:</h2>
-        <div >
-            <ul style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto; gap: 0.1rem; list-style-type: none;">
-            {% for faixa_etaria, quantidade in contagem_por_faixa_etaria.items %}
-            <li style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
-                <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ faixa_etaria }}</div>
-                <div>{{ quantidade }}</div>
-            </li>
-            {% endfor %}
-            </ul>
-        <hr>
-        </div>
+    <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 border shadow bg-dark-subtle p-2">
+        <input type="radio" name="pcss3t" {% if checked5 %}{% else %}checked{% endif %}  id="tab1"class="tab-content-first">
+        <label for="tab1"><i class="icon-bolt"></i>Aguardando Atendimento</label>
 
-        <h2 style="font-size: 0.9rem;">Quantidade por Gênero Sexual:</h2>
-        <div >
-            <ul style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto; gap: 0.1rem; list-style-type: none;">
-                {% for genero, contagem in cont_genero %}
-                <li style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
-                    <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ genero }}</div>
-                    <div>{{ contagem }}</div>
-                </li>
-                {% endfor %}
-            </ul>   
-        <hr>
-        </div>
+        <input type="radio" name="pcss3t"   id="tab7"class="tab-content-7 ">
+        <label for="tab7" class='bg-success-subtle text-dark'><i class="icon-bolt"></i>Em Atendimento</label>
+
         
-        <h2 style="font-size: 0.9rem;">Quantidade de atendimentos por cidade:</h2>
-        <div >
-            <ul style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto ; gap: 0.1rem; list-style-type: none;">
-                {% for cidade, contagem in cidade_contagem %}
-                    {% if not contagem == 0 %}
-                    <li style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
-                        <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ cidade }}</div>
-                        <div>{{ contagem }}</div>
-                    </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>   
-        <hr>
-        </div>   
-        {% for d in object_list %}
-            <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
-                
-                <div style="background-color: gray; padding: 0.2rem;"><b>Informações Pessoais do Paciente</b></div>
-                    <Table style="font-size: 0.7rem!important;">
-                        <thead>
-                            <tr style="text-align: center; background-color:rgb(243, 238, 238);">
-                                <th style="padding: 0.2rem 0.5rem;">Registro</th>
-                                <th style="padding: 0.2rem 0.5rem;">Nome Social</th>
-                                <th style="padding: 0.2rem 0.5rem;">Data do Atendimento</th>
-                                <th style="padding: 0.2rem 0.5rem;">Horário do Atendimento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr style="text-align: center;background-color:  rgb(243, 238, 238);">
-                                <td style="padding: 0.2rem 0.5rem;">{% if d.cod_triagem %}{{d.cod_triagem}}{% else %}{% endif %}</td>
-                                <td id="nome_social" style="padding: 0.2rem 0.5rem;">{{d.paciente_envio_triagem.nome_social}}</td>
-                                <td style="padding: 0.2rem 0.5rem;">{{d.data_envio_triagem}}</td>
-                                <td style="padding: 0.2rem 0.5rem;">{{d.horario_triagem}}</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    <div style="padding: 0.2rem;display: flex;margin-top: 0.5rem;">
-                        <div style="margin-right: 0.5rem;">
-                            <div><b>Idade:</b> {{d.paciente_envio_triagem.idade}}</div>
-                            <div><b>Etnia:</b> {{d.paciente_envio_triagem.etnia}}</div>
-                            <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
-                            <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
-                            <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
-                            <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
-                            
-                        </div>
-                        <div style="margin-right: 0.5rem;">
-                            <div><b>Nacionalidade:</b> {{d.paciente_envio_triagem.nacionalidade}}</div>
-                            <div><b>Cartão do Sus:</b> {{d.paciente_envio_triagem.cartao_sus}}</div>
-                            <div><b>Rua:</b> {{d.paciente_envio_triagem.rua}}</div>
-                            <div><b>Bairro:</b> {{d.paciente_envio_triagem.bairro}}</div>
-                            <div><b>Cidade:</b> {{d.paciente_envio_triagem.cidade}}</div>
-                            <div><b>Pais:</b> {{d.paciente_envio_triagem.pais}}</div>   
-                        </div>
-                        <div>
-                            <div><b>CEP:</b> {{d.paciente_envio_triagem.CEP}}</div>
-                            <div><b>Telefone:</b> {{d.paciente_envio_triagem.tel}}</div>
-                            <div><b>Nome da mãe:</b> {{d.paciente_envio_triagem.nome_mae}}</div>
-                            <div><b>Responsável (Acompanhante):</b> {{d.paciente_envio_triagem.responsavel}}</div>
-                        </div>
-                    <div>        
-                </div>
-            </div>        
-            </div>
-        {% endfor %}   
-</div>
+        <input type="radio" name="pcss3t"   id="tab8"class="tab-content-8 ">
+        <label for="tab8" class='bg-brown'><i class="fa-solid fa-comment-slash"></i> NR Médico (Não Respondeu)</label>
+        
+        <input type="radio" name="pcss3t"   id="tab9"class="tab-content-9 ">
+        <label for="tab9" class='bg-brown-subtle'><i class="fa-solid fa-comment-slash"></i><i class="fa-solid fa-user-nurse"></i> NR Classificação (Não Respondeu)</label>
+        <!--
+        <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+        <label for="tab2" class="text-dark"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
+        -->
 
+        <input type="radio" name="pcss3t" id="tab3" class="tab-content-3 ">
+        <label for="tab3" class='bg-primary-subtle text-dark'><i class="icon-cogs"></i>Atendimentos Finalizados </label>
+        
+        <ul id="tab-content">
+            <li class="tab-content tab-content-first typography ">
+                <form class='m-1 row g-4 mb-5'>
+                    {% csrf_token %}
+                    <div class="col-auto">
+                        <label for="start_date" >::CALENDÁRIO::</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" name='busca_data' class='form-control' required>
+                    </div>
+                    <div class="col-auto">         
+                        <button class="btn btn-sm btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                      </svg> Selecionar data</button>
+                    </div>
+                    <div class="col-auto">
+                        <button onclick="imprimir()" class="btn btn-sm btn-secondary">Imprimir <i class="fa-solid fa-print"></i></button>
+                    </div>
+                </form>
+                <div id="envios_triagem" style="
+                    width: 1000px;
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+                    padding: 2%;" class="m-auto bg-light shadow">
+                    <div style='display:flex'>
+                        <div style='display:flex; margin-right:0.5rem'>
+                            <img src="{% static "brasao-veracruz.png" %}" alt="" sizes="" srcset="" style='width:4rem'>
+                            <div style='font-size:0.75rem; padding:0.5rem 0.5rem 0 0.8rem'>
+                                UPA - Unidade de Pronto Atendimento de Vera Cruz</br>
+                                Av. Juvenal João Vinagre, 175. Centro | Vera Cruz - BA</br>
+                                Tel. (71) 3633 - 2286 | Email: servicossocial.upaveracruz@gmail.com
+                            </div>
+                        </div>
+                        <img src="{% static "upa24.png" %}" alt="" sizes="" srcset="" style='width:9.2rem; margin-left:1rem'>
+                    </div>
+            
+                    <h1 style='font-size:1.2rem; margin-top:2rem'>Relatório de Ingresso de Pacientes (Recepção) </h1>
+                    <hr>
+                    <h2 class="m-0">{{total_paciente}} pacientes em {{data}}</h2>
+                    <!--Quantidade de paciente por idade-->
+                    <h2 style="font-size: 0.8rem;"class="m-0">Quantidade por Faixa Etária:</h2>
+                    <div >
+                        <div style="display: grid; grid-template-columns: repeat(14, auto); gap: 0.1rem; list-style-type: none;">
+                            {% for faixa_etaria, quantidade in contagem_por_faixa_etaria.items %}
+                            <div style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
+                                <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ faixa_etaria }}</div>
+                                <div>{{ quantidade }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <hr>
+                    </div>
+            
+                    <h2 style="font-size: 0.9rem;"class="m-0">Quantidade por Gênero Sexual:</h2>
+                    <div >
+                        <div style="display: grid; grid-template-columns: repeat(14, auto); gap: 0.1rem; ">
+                            {% for genero, contagem in cont_genero %}
+                            <div style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle; list-style-type: none !important;">
+                                <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ genero }}</div>
+                                <div>{{ contagem }}</div>
+                            </div>
+                            {% endfor %}
+                        </div>   
+                        <hr>
+                    </div>
+                    
+                    <h2 style="font-size: 0.9rem;" class="m-0">Quantidade de atendimentos por cidade:</h2>
+                    <div >
+                        <div style="display: grid; grid-template-columns: repeat(11, auto) ; gap: 0.1rem; list-style-type: none;">
+                            {% for cidade, contagem in cidade_contagem %}
+                                {% if not contagem == 0 %}
+                                <div style="border:0.1rem solid saddlebrown ; font-size: 0.7rem;text-align: center;vertical-align: middle;">
+                                    <div style="background-color: #666; color: #ddd7d7; padding: 0.1rem;">{{ cidade }}</div>
+                                    <div>{{ contagem }}</div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>   
+                    <hr>
+                    </div>   
+                    {% for d in object_list %}
+                    <div style="padding: 0.3rem; margin: 0.5rem; border: 0.1rem solid gray; font-size: 0.7rem!important;">
+                        
+                        <div style="background-color: gray; padding: 0.2rem;"><b>Informações Pessoais do Paciente</b></div>
+                            <Table style="font-size: 0.7rem!important;">
+                                <thead>
+                                    <tr style="text-align: center; background-color:rgb(243, 238, 238);">
+                                        <th style="padding: 0.2rem 0.5rem;">Registro</th>
+                                        <th style="padding: 0.2rem 0.5rem;">Nome Social</th>
+                                        <th style="padding: 0.2rem 0.5rem;">Data do Atendimento</th>
+                                        <th style="padding: 0.2rem 0.5rem;">Horário do Atendimento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align: center;background-color:  rgb(243, 238, 238);">
+                                        <td style="padding: 0.2rem 0.5rem;">{% if d.cod_triagem %}{{d.cod_triagem}}{% else %}{% endif %}</td>
+                                        <td id="nome_social" style="padding: 0.2rem 0.5rem;">{{d.paciente_envio_triagem.nome_social}}</td>
+                                        <td style="padding: 0.2rem 0.5rem;">{{d.data_envio_triagem}}</td>
+                                        <td style="padding: 0.2rem 0.5rem;">{{d.horario_triagem}}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+            
+                            <div style="padding: 0.2rem;display: flex;margin-top: 0.5rem;">
+                                <div style="margin-right: 0.5rem;">
+                                    <div><b>Idade:</b> {{d.paciente_envio_triagem.idade}}</div>
+                                    <div><b>Etnia:</b> {{d.paciente_envio_triagem.etnia}}</div>
+                                    <div><b>Data de Nascimento:</b> {{d.paciente_envio_triagem.data_nascimento}}</div>
+                                    <div><b>Sexo:</b> {{d.paciente_envio_triagem.sexo}}</div>
+                                    <div><b>RG (Documento de identidade):</b> {{d.paciente_envio_triagem.RG}}</div>
+                                    <div><b>CPF (Certidão de pessoa física):</b> {{d.paciente_envio_triagem.CPF}}</div>
+                                    
+                                </div>
+                                <div style="margin-right: 0.5rem;">
+                                    <div><b>Nacionalidade:</b> {{d.paciente_envio_triagem.nacionalidade}}</div>
+                                    <div><b>Cartão do Sus:</b> {{d.paciente_envio_triagem.cartao_sus}}</div>
+                                    <div><b>Rua:</b> {{d.paciente_envio_triagem.rua}}</div>
+                                    <div><b>Bairro:</b> {{d.paciente_envio_triagem.bairro}}</div>
+                                    <div><b>Cidade:</b> {{d.paciente_envio_triagem.cidade}}</div>
+                                    <div><b>Pais:</b> {{d.paciente_envio_triagem.pais}}</div>   
+                                </div>
+                                <div>
+                                    <div><b>CEP:</b> {{d.paciente_envio_triagem.CEP}}</div>
+                                    <div><b>Telefone:</b> {{d.paciente_envio_triagem.tel}}</div>
+                                    <div><b>Nome da mãe:</b> {{d.paciente_envio_triagem.nome_mae}}</div>
+                                    <div><b>Responsável (Acompanhante):</b> {{d.paciente_envio_triagem.responsavel}}</div>
+                                </div>
+                            <div>             
+                        </div>
+                    </div>  
+                </div>
+                    {% endfor %}   
+                </div>
+
+            </li>
+            <li class="tab-content tab-content-7 typography bg-success-subtle"></li>
+            <li class="tab-content tab-content-8 typography bg-brown"></li>
+            <li class="tab-content tab-content-9 typography bg-brown-subtle"></li>
+        </ul>
+    </div>    
 </div>
 
 <!--Menu suplementos-->
