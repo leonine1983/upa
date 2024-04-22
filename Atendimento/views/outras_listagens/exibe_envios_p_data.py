@@ -24,7 +24,9 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
             if start_date and rm_classifica and rm_medico:
                 pass
             elif start_date and rm_classifica:
-                object_list = envio_triagem.objects.filter(data_envio_triagem=start_date)
+                #object_list = envio_triagem.objects.filter(data_envio_triagem=start_date)
+                object_list = envio_triagem.objects.filter(data_envio_triagem=start_date, triagem__classifica_tipo=1)
+             
             elif start_date and rm_medico:
                 pass
             else:
