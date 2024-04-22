@@ -16,8 +16,20 @@ class Exibe_envios_data(LoginRequiredMixin, ListView):
         # Data de início fornecida pela consulta GET, se não fornecida, use a data de hoje
         try:
             start_date = self.request.GET.get('busca_data', datetime.today().strftime('%Y-%m-%d'))    
-            # Filtrar objetos pelo data_envio_triagem
-            object_list = envio_triagem.objects.filter(data_envio_triagem=start_date)
+            rm_classifica = self.request.GET.get('rm_classifica') 
+            rm_medico = self.request.GET.get('rm_medico')   
+            print(f'rm_medico : {rm_medico}')
+            print(f'rm_classifica : {rm_classifica}')
+
+            if start_date and rm_classifica and rm_medico:
+                pass
+            elif start_date and rm_classifica:
+                object_list = envio_triagem.objects.filter(data_envio_triagem=start_date)
+            elif start_date and rm_medico:
+                pass
+            else:
+                object_list = envio_triagem.objects.filter(data_envio_triagem=start_date)  
+            
             self.envios_day = object_list
             
             # Casos para calcular faixa etária

@@ -188,7 +188,7 @@
         
         <ul id="tab-content">
             <li class="tab-content tab-content-first typography ">
-                <form class='m-1 row g-4 mb-5'>
+                <form class='m-1 row g-4 mb-5 border p-3'>                    
                     {% csrf_token %}
                     <div class="col-auto">
                         <label for="start_date" >::CALENDÁRIO::</label>
@@ -196,6 +196,7 @@
                     <div class="col-auto">
                         <input type="date" name='busca_data' class='form-control' required>
                     </div>
+
                     <div class="col-auto">         
                         <button class="btn btn-sm btn-primary" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
                         <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
@@ -203,6 +204,16 @@
                     </div>
                     <div class="col-auto">
                         <button onclick="imprimir()" class="btn btn-sm btn-secondary">Imprimir <i class="fa-solid fa-print"></i></button>
+                    </div>
+                    <div class="m-2 border col-5 row">                        
+                        <div class="col m-3 text-center">
+                            <input type="checkbox" id="opcao1" name="rm_classifica" value="Nao_Respondeu">
+                            <label for="opcao1">Não respondeu ao chamado para a Classificação</label>
+                        </div>
+                        <div class="col m-3 text-center">
+                            <input type="checkbox" id="opcao2" name="rm_medico" value="opcao2">
+                            <label for="opcao2">Não respondeu ao chamado do Médico</label>
+                        </div>
                     </div>
                 </form>
                 <div id="envios_triagem" style="
