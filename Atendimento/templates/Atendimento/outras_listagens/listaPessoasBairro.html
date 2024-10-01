@@ -1,0 +1,425 @@
+{% extends 'global/template_geral.html' %}
+
+<!-- titulo Web da pagina-->
+{% block title_login %} Pacientes {% endblock title_login %}
+{% load static %}
+
+<!--CSS local-->
+{% block css %} 
+    <!--Tabela-->
+    <link rel="stylesheet" href=" {% static 'global/tabela/css/style.css' %} "> 
+    <!--Menu Local-->
+    <link rel="stylesheet" href=" {% static 'global/css/menu/menu-local.css' %} ">     
+    <link rel="stylesheet" href=" {% static 'global/css/search.css' %} "> 
+    <!--excluir <link rel="stylesheet" href=" {% static 'Atendimento/css/menu_admin.css' %} "> -->
+    <link rel="stylesheet" href="{% static 'global/css/abas_especiais_pcss3t.css' %}">
+    <link rel="{% static 'global/dist/css/bootstrap.min.css' %}" href="style.css">
+
+    <style>
+ 
+        .container_nav {
+          position: fixed;
+          top: 50%;
+          right: 0;
+          transform: translateY(-50%);
+          background-color: #f0f0f0;
+          padding: 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded {
+          width: 300px;
+        }
+      
+        .content {
+          display: none;
+          margin-top: 10px;
+          transition: all 0.5s ease;
+        }
+      
+        .container_nav.expanded .content {
+          display: block;
+        }
+
+
+            /* Estilos para a visualização normal */
+    #envios_triagem {
+        width: 1000px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        padding: 2%;
+        background-color: #ffffff;
+    }
+
+    #envios_triagem table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #envios_triagem th,
+    #envios_triagem td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #envios_triagem th {
+        background-color: #f2f2f2;
+    }
+    .pcss3t, .pcss3t #tab-content, .tab-content{
+        min-height: 120vh!important;
+    }
+
+    /* Estilos para impressão */
+    @media print {
+        #envios_triagem {
+            width: auto;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        #envios_triagem table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #envios_triagem th,
+        #envios_triagem td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #envios_triagem th {
+            background-color: #f2f2f2;
+        }
+    }
+
+      </style>
+{% endblock css %} 
+
+<!--Titulo da Pagina-->
+{% block body_title %}PACIENTES: Relação de Pacientes Cadastrados no Sistema::.  {% endblock body_title %}
+
+{% block body_login %}    
+<div class='menu-local-top' style='margin-top:-3rem'>
+    <ul>
+        <li><a href="{% url 'Atendimento:lista-paciente' %}"><i class="fa-duotone fa-list-ul"></i> Listagem </a></li>
+        <li > <a href=" {% url 'Atendimento:registro-paciente' %} "><i id="fa-hospital-user" class="fa-duotone fa-hospital-user fa-beat"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Cadastro</a></li>                
+        <li > <a  href=" {% url 'Atendimento:lista_de_paciente_na_triagem' %} "><i class="fa-thin fa-diagram-successor"></i><!--<i id="fa-address-card" class="fa-regular fa-address-card"></i>--> Ir para <b>Fila de Espera</b></a></li>     
+    </ul> 
+</div>   
+<div class='mt-5 pt-5'>   
+     <div class="border-bottom border-dark fs-3 row">
+        <div class='col'>
+            <i class="fa-duotone fa-list-ul"></i>
+            Lista de Pessoas por Bairro/Vera Cruz
+        </div>
+        <!--excluir<div class='col flex-row-reverse justify-content-center fs-6'>
+          
+            <div class="navigation shadow">
+                <ul>
+                    <li class="list active">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="home-outline"></ion-icon>
+                            </span>
+                            <span class="text">Home</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="person-outline"></ion-icon>
+                            </span>
+                            <span class="text">Profile</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="chatbubble-outline"></ion-icon>
+                            </span>
+                            <span class="text">Message</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="image-outline"></ion-icon>
+                            </span>
+                            <span class="text">Photos</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="#">
+                            <span class="icon">
+                                <ion-icon name="settings-outline"></ion-icon>
+                            </span>
+                            <span class="text">Settings</span>
+                        </a>
+                    </li>
+                    <div class="indicator"></div>
+                </ul>
+            </div>-->    
+        </div>    
+
+    <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1 border shadow bg-dark-subtle p-2">
+        <input type="radio" name="pcss3t" {% if checked5 %}{% else %}checked{% endif %}  id="tab1"class="tab-content-first">
+        <label for="tab1"><i class="icon-bolt"></i>Vera Cruz |  {{pessoas|length}} pessoas</label>
+<!--
+        <input type="radio" name="pcss3t"   id="tab7"class="tab-content-7 ">
+        <label for="tab7" class='bg-success-subtle text-dark'><i class="icon-bolt"></i>Em Atendimento</label>
+
+        
+        <input type="radio" name="pcss3t"   id="tab8"class="tab-content-8 ">
+        <label for="tab8" class='bg-brown'><i class="fa-solid fa-comment-slash"></i> NR Médico (Não Respondeu)</label>
+        
+        <input type="radio" name="pcss3t"   id="tab9"class="tab-content-9 ">
+        <label for="tab9" class='bg-brown-subtle'><i class="fa-solid fa-comment-slash"></i><i class="fa-solid fa-user-nurse"></i> NR Classificação (Não Respondeu)</label>
+        
+        <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+        <label for="tab2" class="text-dark"><i class="fa-thin fa-asterisk"></i> Encaminhamentos Médicos</label>  
+       
+        <input type="radio" name="pcss3t" id="tab3" class="tab-content-3 ">
+        <label for="tab3" class='bg-primary-subtle text-dark'><i class="icon-cogs"></i>Atendimentos Finalizados </label> -->
+        <style>
+            /* Estilo geral da tabela */
+            .table-win11 {
+                width: 100%;
+                border-collapse: collapse;
+                border: 1px solid #d3d3d3;
+                font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+        
+            /* Cabeçalho da tabela */
+            .table-win11 thead {
+                background-color: #e1e4e8;
+                color: #333;
+                font-weight: bold;
+                text-align: left;
+            }
+        
+            .table-win11 thead th {
+                padding: 10px 15px;
+                border-bottom: 1px solid #d3d3d3;
+            }
+        
+            /* Corpo da tabela */
+            .table-win11 tbody tr {
+                transition: background-color 0.3s ease;
+            }
+        
+            .table-win11 tbody tr:nth-child(even) {
+                background-color: #f3f3f3;
+            }
+        
+            .table-win11 tbody tr:hover {
+                background-color: #eaeaea;
+            }
+        
+            .table-win11 td {
+                padding: 10px 15px;
+                border-bottom: 1px solid #e1e4e8;
+            }
+        
+            /* Estilo para impressão */
+            @media print {
+                .table-win11 {
+                    width: 100%;
+                    border: 1px solid #000;
+                    box-shadow: none;
+                    background-color: #fff;
+                    font-size: 12pt;
+                }
+        
+                .table-win11 thead {
+                    background-color: #e1e4e8;
+                    -webkit-print-color-adjust: exact;
+                    color-adjust: exact;
+                }
+        
+                .table-win11 thead th {
+                    color: #000;
+                    font-weight: bold;
+                }
+        
+                .table-win11 tbody tr {
+                    background-color: #fff !important;
+                    -webkit-print-color-adjust: exact;
+                    color-adjust: exact;
+                }
+        
+                .table-win11 tbody tr:nth-child(even) {
+                    background-color: #f3f3f3 !important;
+                    -webkit-print-color-adjust: exact;
+                    color-adjust: exact;
+                }
+        
+                .table-win11 td {
+                    padding: 10px;
+                    border-bottom: 1px solid #000;
+                }
+            }
+        </style>
+        
+       
+        
+
+        
+        <ul id="tab-content">
+            <li class="tab-content tab-content-first typography ">
+                <table class="table-win11">
+                    <thead>
+                        <tr>
+                            <th>Nome Completo</th>
+                            <th>Bairro</th>
+                            <th>Telefone</th>
+                            <th>Idade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in pessoas %}
+                        <tr>
+                            <td>{{ p.nome_social }}</td>
+                            <td>{{ p.bairro }}</td>
+                            <td>{{ p.tel }}</td>
+                            <td>{{ p.idade }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </li>
+            <!--
+                <li class="tab-content tab-content-7 typography bg-success-subtle"></li>
+                <li class="tab-content tab-content-8 typography bg-brown"></li>
+                <li class="tab-content tab-content-9 typography bg-brown-subtle"></li>
+            -->
+        </ul>
+    </div>    
+</div>
+
+<!--Menu suplementos-->
+{% include "Atendimento/outras_listagens/partes/partes_pacientes/menu_suplementos.html" %}
+<!--Menu suplementos-->
+
+<style>
+    #searchInputContainer {
+        position: fixed;
+        top: 25%;
+        left: 80%;
+        width: 50%;
+        z-index: 1000;
+    }
+    
+    #searchMessage {
+        margin-top: 40px;
+        display: none;
+        text-align: center;
+        color: red;
+        font-weight: bold;
+        position: fixed;
+        top: 27.5%;
+        left: 80%;
+        width: 20%;
+        z-index: 1000;
+        
+    }
+ 
+
+        /* Esconde a div quando a página é impressa */
+        @media print {
+            #searchInputContainer {
+                display: none;
+            }
+
+            h1{
+                font-size: 0.5rem;
+                padding: 0;
+                margin: 0;
+                color: #666;
+            }
+        }
+    
+</style>
+
+<div id="searchInputContainer" class="form-control d-flex">
+    <i class="fa-solid fa-magnifying-glass fs-3 px-2"></i>
+    <input type="text" id="searchInput" placeholder="Buscar paciente..." class="p-2 fs-5 text-uppercaser">
+    
+</div>
+<div id="searchResults" style="background-color: #ddd7d7; margin: 5rem; position: fixed; left: 76%;top: 23.5%; width: 20%; padding:0.5rem 1rem;" class="shadow bg-light rounded-bottom text-uppercase fs-6"></div>
+<div id="searchMessage" class="bg-danger text-light ">Nenhum paciente encontrado</div>
+
+<script>
+document.getElementById('searchInput').addEventListener('input', function() {
+  var searchTerm = this.value.trim().toLowerCase();
+  var tableCells = document.querySelectorAll('td[id="nome_social"]');
+  
+  var searchResults = document.getElementById('searchResults');
+  var searchMessage = document.getElementById('searchMessage');
+  searchResults.innerHTML = '';
+  searchMessage.style.display = 'none';
+
+  var foundMatch = false;
+
+  tableCells.forEach(function(cell) {
+    var cellText = cell.textContent.trim().toLowerCase();
+    if (cellText.includes(searchTerm)) { // Verifica se o termo de pesquisa está presente na célula
+      var result = document.createElement('div');
+      result.textContent = cellText;
+      searchResults.appendChild(result);
+      cell.closest('div').scrollIntoView({ behavior: 'smooth', block: 'start' }); // Rolamento suave para o início da página
+      foundMatch = true;
+    }
+  });
+
+  if (!foundMatch) {
+    searchMessage.style.display = 'block';
+  }
+});
+
+// Evento de rolagem para manter a barra de pesquisa fixa no topo
+window.addEventListener('scroll', function() {
+  var searchInputContainer = document.getElementById('searchInputContainer');
+  if (window.scrollY > 0) {
+    searchInputContainer.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+  } else {
+    searchInputContainer.style.boxShadow = 'none';
+  }
+});
+
+// Evento para retornar ao topo quando o campo de busca estiver vazio
+document.getElementById('searchInput').addEventListener('input', function() {
+  if (this.value.trim() === '') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
+</script>
+
+
+
+<script>
+    // Função para imprimir apenas o conteúdo da div envios_triagem
+    function imprimir() {
+        var conteudoDiv = document.getElementById('envios_triagem').innerHTML;
+        var janelaImprimir = window.open('', '', 'width=800, height=600');
+        janelaImprimir.document.write('<html><head><title>Impressão</title></head><body>');
+        janelaImprimir.document.write(conteudoDiv);
+        janelaImprimir.document.write('</body></html>');
+        janelaImprimir.document.close();
+        janelaImprimir.print();
+    }
+</script>
+<script  src="{% static 'Atendimento/js/menu_admin.js' %}"></script>
+
+<script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
+<script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>
+
+{% endblock body_login %}
